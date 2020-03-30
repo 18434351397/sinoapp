@@ -1,6 +1,7 @@
 const api = {
   loginUrl: '/admin/login/ajax',
-  loginOutUrl: '/loginOutUrl',
-  getInfoUrl: '/app/admin/user/getUserAll'
+  loginOutUrl: '/logout',
+  getInfoUrl: '/app/admin/user/getUserAll',
+  smsSendUrl: '/sms/send'
 }
 export default api

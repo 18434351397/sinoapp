@@ -22,3 +22,10 @@ export function getInfo (data) {
     params: data
   })
 }
+export function smsSend (data) {
+  return request({
+    url: api.smsSendUrl,
+    method: 'post',
+    params: data
+  })
+}

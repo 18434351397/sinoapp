@@ -33,7 +33,7 @@
                   </div>
                 </li>
                 <li>
-                  <span class="forget_pwd" onclick="forgetpwd()">忘记密码</span>
+                  <span class="forget_pwd" @click="forgetpwd()">忘记密码</span>
                 </li>
                 <li>
                   <!--<input class="login_btn" type="button" id="btnSubmit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">-->
@@ -97,7 +97,8 @@ export default {
     return {
       userAccount: '',
       password: '',
-      errMsg: ''
+      errMsg: '',
+      status: 'edit'
     }
   },
   methods: {
@@ -119,7 +120,8 @@ export default {
                 forbidClick: true,
                 message: res.bizResultMessage,
                 onClose: () => {
-                  this.$router.push('/index')
+                  this.$store.dispatch('getInfo')
+                  this.$router.push('/approval')
                 }
               })
             } else {
@@ -135,10 +137,14 @@ export default {
       } else {
         this.errMsg = '用户名不能为空'
       }
+    },
+    forgetpwd () {
+      this.$router.push({ name: 'forgetPassword', params: { status: this.status ? this.status : 'forget', statu1: '1' } })
     }
   }
 }
 </script>
+<style  src="../../assets/css/Login.css" scoped></style>
 <style scoped>
   @import '../../assets/css/Login.css';
   /*@import '@/assets/css/Login.css';*/

@@ -5,7 +5,7 @@ const serve = axios.create({
     'content-type': 'application/json; charset=utf-8'
   },
   // baseURL: process.env.VUE_APP_BASE_API,
-  baseURL: 'http://172.169.100.126:8082',
+  // baseURL: 'http://172.169.100.126:8082',
   timeout: 5000
 })
 

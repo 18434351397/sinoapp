@@ -2,12 +2,26 @@
   <div style="height: 100%;background-color: #f8f8f8;">
     <NavBar/>
     <div style="padding: 10px 15px;text-align: center;">{{title}}</div>
-    <van-form @submit="onSubmit">
+    <van-form id='editPwdForm' @submit="onSubmit">
       <van-field
-        v-model="OriginalPassword"
+        v-model="username"
+        type="text"
+        label="用户名"
+        name="userName"
+        disabled
+      />
+      <van-field
+        v-model="userId"
+        type="text"
+        label="用户名"
+        name="userId"
+        style="display: none;"
+      />
+      <van-field
+        v-model="oldPwd"
         type="password"
         label="原密码"
-        name="OriginalPassword"
+        name="oldPwd"
         placeholder="请输入原密码"
         :rules="[{ required: true, message: '请输入原密码' }]"
       />
@@ -15,7 +29,7 @@
         v-model="password"
         type="password"
         label="密码"
-        name="password"
+        name="userToken"
         placeholder="请输入密码"
         :rules="[{ required: true, message: '请输入密码' }]"
       />
@@ -23,7 +37,7 @@
         v-model="repassword"
         type="password"
         label="确认密码"
-        name="repassword"
+        name="confirmPwd"
         placeholder="请输入确认密码"
         :rules="[{ required: true, message: '请再次输入密码' }]"
       />
@@ -41,6 +55,8 @@
 
 <script>
 import NavBar from '@/components/Navbar'
+import { editPswd, checkOldPwd } from '../../api/user'
+import { Dialog } from 'vant'
 
 export default {
   name: 'index',
@@ -49,35 +65,64 @@ export default {
   },
   data () {
     return {
+      username: JSON.parse(sessionStorage.getItem('userinfo')).userName,
+      userId: JSON.parse(sessionStorage.getItem('userinfo')).id,
       phone: '',
       code: '',
       password: '',
       repassword: '',
-      OriginalPassword: '',
+      oldPwd: '',
       status: this.$route.params.status,
-      title: this.$route.params.status === 'forget' ? '忘记密码' : '修改密码'
+      title: this.$route.params.status === 'forget' ? '忘记密码' : '修改密码',
+      ischeckPwd: false
     }
   },
   created () {
   },
   methods: {
     onSubmit (values) {
-      // let params = {}
-      // if (this.status === 'forget') {
-      //   params = {
-      //     phone: this.phone,
-      //     code: this.code,
-      //     password: this.password,
-      //     repassword: this.repassword
-      //   }
-      // } else {
-      //   params = {
-      //     OriginalPassword: this.OriginalPassword,
-      //     password: this.password,
-      //     repassword: this.repassword
-      //   }
-      // }
+      checkOldPwd({ oldPwd: this.oldPwd }).then(res => {
+        if (res.data === '1') {
+          this.ischeckPwd = true
+          this.submit(values)
+        } else {
+          this.$toast('原始密码不正确')
+          this.ischeckPwd = false
+        }
+      })
       console.log(values)
+    },
+    submit (values) {
+      if (this.ischeckPwd === true) {
+        if (values.userToken === values.confirmPwd) {
+          if (values.userToken !== values.oldPwd) {
+            Dialog.confirm({
+              message: '你确定要提交吗？'
+            }).then(() => {
+              editPswd(values).then(res => {
+                if (res.resultCode === '200') {
+                  this.$toast.loading({
+                    duration: 1000,
+                    loadingType: 'spinner',
+                    type: 'success',
+                    forbidClick: true,
+                    message: '修改成功',
+                    onClose: () => {
+                      // this.$store.dispatch('getInfo')
+                      this.$router.push('/')
+                    }
+                  })
+                }
+              })
+            }).catch(() => {
+            })
+          } else {
+            this.$toast('新密码不能与旧密码相同')
+          }
+        } else {
+          this.$toast('两次密码不一致')
+        }
+      }
     },
     sendSms () {
       if (this.phone) {

@@ -22,10 +22,31 @@ export function getInfo (data) {
     params: data
   })
 }
+export function getUserInfo (data) {
+  return request({
+    url: api.getUserInfoUrl,
+    method: 'get',
+    params: data
+  })
+}
 export function smsSend (data) {
   return request({
     url: api.smsSendUrl,
     method: 'post',
     params: data
+  })
+}
+export function editPswd (data) {
+  return request({
+    url: api.editPasswordUrl,
+    method: 'post',
+    data
+  })
+}
+export function checkOldPwd (data) {
+  return request({
+    url: api.checkOldPwd,
+    method: 'post',
+    data
   })
 }

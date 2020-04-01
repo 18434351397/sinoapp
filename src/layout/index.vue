@@ -1,8 +1,10 @@
 <template>
   <div style="height: 100%;background-color: #f8f8f8;">
+    <van-sticky offset-top="0">
       <NavBar />
+    </van-sticky>
       <router-view />
-      <TabBar />
+    <TabBar />
   </div>
 </template>
 

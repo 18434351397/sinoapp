@@ -33,7 +33,7 @@ export function smsSend (data) {
   return request({
     url: api.smsSendUrl,
     method: 'post',
-    params: data
+    data
   })
 }
 export function editPswd (data) {

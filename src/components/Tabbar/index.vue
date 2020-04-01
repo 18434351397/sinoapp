@@ -32,5 +32,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .van-tabbar--fixed{
+        z-index: 999
+    }
 </style>

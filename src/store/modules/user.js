@@ -1,8 +1,6 @@
 import { getInfo, LoginOut } from '../../api/user'
 import { setSession, removeSession } from '../../utils/auth'
-import Vue from 'vue'
-import Router from 'vue-router'
-Vue.use(Router)
+import router from '../../router'
 const state = {
   userinfo: {}
 }
@@ -10,6 +8,7 @@ const mutations = {
   SET_USERINFO: (state, userinfo) => {
     state.userinfo = userinfo
     setSession('userinfo', userinfo.data)
+    router.push('/approval')
   },
   CLEAR_SESSION: (state) => {
     removeSession('userinfo')
@@ -38,7 +37,6 @@ const actions = {
     })
   },
   loginout ({ commit }) {
-    console.log(111)
     return new Promise((resolve, reject) => {
       LoginOut().then(() => {
         commit('CLEAR_SESSION')

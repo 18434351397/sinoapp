@@ -121,7 +121,6 @@ export default {
                 message: res.bizResultMessage,
                 onClose: () => {
                   this.$store.dispatch('getInfo')
-                  this.$router.push('/approval')
                 }
               })
             } else {

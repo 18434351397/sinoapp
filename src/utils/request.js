@@ -1,12 +1,17 @@
 import axios from 'axios'
+import router from '../router'
 // import qs from 'qs'
 const serve = axios.create({
   headers: {
-    'content-type': 'application/json; charset=utf-8'
+    contentType: 'application/json; charset=utf-8',
+    AccessControlAllowOrigin: 'http://172.169.100.126:8082',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Credentials': true
   },
   // baseURL: process.env.VUE_APP_BASE_API,
   // baseURL: 'http://172.169.100.126:8082',
-  timeout: 5000
+  baseURL: '',
+  timeout: 60000
 })
 
 const instance = axios.create({
@@ -17,6 +22,12 @@ serve.interceptors.request.use(
     if (config.method === 'post') {
       // config.data = qs.stringify(config.data)
     }
+    if (config.method === 'get') {
+      // config.data = qs.stringify(config.data)
+    }
+    if (config.method === 'put') {
+      // config.data = qs.stringify(config.data)
+    }
     return config
   },
   error => {
@@ -25,6 +36,13 @@ serve.interceptors.request.use(
 )
 serve.interceptors.response.use(
   response => {
+    if (typeof response.data === 'string') {
+      if (response.data.includes('login')) {
+        router.push('/')
+        return
+      }
+    }
+    // config.data = qs.stringify(config.data)
     const res = response.data
     if (res.code === 200) {
       alert(res.message)
@@ -33,6 +51,9 @@ serve.interceptors.response.use(
     }
   },
   error => {
+    // if (error) {
+    //   router.push('/')
+    // }
     Promise.reject(error)
   }
 )

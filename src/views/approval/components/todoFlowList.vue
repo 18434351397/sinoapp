@@ -1,24 +1,27 @@
 <template>
   <div>
-    <div class="todoListBox" v-if="dataList.length" >
-      <div class="titleBox" :key="index" v-for="(item, index) in dataList">
+    <div class="todoListBox" v-show="dataList.length" >
+      <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
           <div class="titleBox_content_title" style="">{{item.formTitle}}</div>
-          <div>审批中</div>
+          <div>{{item.statusDes}}</div>
         </div>
         <div class="flowMessage">
           <div class="flowMessage_box">流程标题: <span>{{item.currFlowName}}</span></div>
-          <div class="flowMessage_box" style="padding: 10px 0 0;">当前节点: <span>报销发起</span></div>
-          <div class="flowMessage_box" style="padding: 10px 0 0;margin-right: 20px;">当前办理人: <span>陈景硕</span></div>
-          <div class="flowMessage_box" style="padding: 10px 0 0;margin-bottom:10px;">发起人: <span>报销发起</span></div>
+          <div class="flowMessage_box" style="padding: 10px 0 0;">当前节点: <span>{{item.currTaskDefinitionName}}</span></div>
+          <div class="flowMessage_box" style="padding: 10px 0 0;margin-right: 20px;">当前办理人: <span>{{item.currUserName}}</span></div>
+          <div class="flowMessage_box" style="padding: 10px 0 0;margin-bottom:10px;">发起人: <span>{{item.userName}}</span></div>
         </div>
         <div class="timeBox">
-          <div><span>2020-02-28 02:07:13</span></div>
-          <div><span>2020-02-28 02:07:13</span></div>
+          <div><span>{{item.createdDate}}</span></div>
+          <div><span>{{item.lastModifiedDate}}</span></div>
         </div>
       </div>
+      <div style="text-align: center;padding: 10px 0;" v-if="loading">
+        <van-loading color="#1989fa" size="24px"></van-loading>
+      </div>
     </div>
-    <div style="height: 100%;" v-else>
+    <div style="height: 100%;" v-show="!dataList.length">
       <NoData/>
     </div>
   </div>
@@ -34,38 +37,84 @@ export default {
     NoData
   },
   created () {
-    const data = {
-      asc: false,
-      current: 1,
-      openSort: true,
-      searchCount: true,
-      size: 10,
-      condition: {
-        searchType: '1',
-        currUseerId: this.id
-      }
-    }
-    getTodoList(data).then(res => {
-      if (res) {
-        if (res.data) {
-          this.dataList = res.data.records ? res.data.records : []
-        }
-      }
-    })
+    this.loadData()
+    window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
   },
   data () {
     return {
-      dataList: [
-        {
-          id: 1
-        }
-      ],
+      dataList: [],
+      searchType: '1',
+      currentPage: 1,
+      totalPage: null,
+      loading: false,
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }
   },
   methods: {
     loadData () {
+      const data = {
+        asc: false,
+        current: this.currentPage,
+        openSort: true,
+        searchCount: true,
+        size: 10,
+        condition: {
+          searchType: this.searchType,
+          currUseerId: this.id
+        }
+      }
+      this.loading = true
+      getTodoList(data).then(res => {
+        this.loading = false
+        if (res) {
+          if (res.data) {
+            if (res.data.current === '1') {
+              this.dataList = res.data.records ? res.data.records : []
+              this.totalPage = res.data.pages
+              this.currentPage = res.data.current
+            } else {
+              this.dataList = [
+                ...this.dataList,
+                ...res.data.records ? res.data.records : []
+              ]
+            }
+            ++this.currentPage
+            this.dataList.forEach(item => {
+              item.createdDate = item.createdDate.split('.')[0]
+              item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
+            })
+          }
+        }
+      }).catch(err => {
+        console.log(err)
+        this.$toast('网络出了一点小差~~~')
+      })
+    },
+    handleScroll: function () {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      var windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+      var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+      // 是否滚动到底部的判断
+      if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
+        if (this.currentPage <= this.totalPage) {
+          this.loadData()
+        }
+      }
+    },
+    toDetail (data) {
+      data.searchType = this.searchType
+      const path = data.url.split('/')[3]
+      if (path) {
+        this.$router.push({
+          name: path,
+          query: data
+        })
+      }
     }
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
   }
 }
 </script>
@@ -87,6 +136,7 @@ export default {
     background: #fff;
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 10px;
 
     .titleBox_content {
       display: flex;

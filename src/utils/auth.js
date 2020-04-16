@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-
+import Vue from 'vue'
 const userinfo = 'userinfo'
 
 export function setToken (token) {
@@ -25,5 +25,29 @@ export function getSession (key) {
 export function removeSession (key) {
   if (key) {
     sessionStorage.removeItem(key)
+  }
+}
+Vue.prototype.ththrottle = function (func, delay) {
+  let timer = null
+  let startTime = Date.now()
+  return function () {
+    const curTime = Date.now()
+    const remaining = delay - (curTime - startTime)
+    const context = this
+    const args = arguments
+    clearTimeout(timer)
+    if (remaining <= 0) {
+      func.apply(context, args)
+      startTime = Date.now()
+    } else {
+      timer = setTimeout(func, remaining)
+    }
+  }
+}
+Vue.prototype.debounce = function debounce (fn, wait) {
+  var timeout = null
+  return function () {
+    if (timeout !== null)clearTimeout(timeout)
+    timeout = setTimeout(fn, wait)
   }
 }

@@ -30,6 +30,18 @@ const routes = [
         children: []
       },
       {
+        path: '/detail',
+        component: () => import('../views/detail'),
+        name: 'detail',
+        children: [
+          {
+            path: '/bizcustinfoform',
+            component: () => import('../views/addCustomer'),
+            name: 'bizcustinfoform'
+          }
+        ]
+      },
+      {
         path: '/personCenter',
         component: () => import('../views/personCenter'),
         name: 'personCenter'

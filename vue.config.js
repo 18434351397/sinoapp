@@ -30,8 +30,10 @@ module.exports = {
     open: true, // 配置自动启动浏览器
     proxy: { // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
       '/admin': {
-        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.100.126:8082',
+        target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
+        // target: 'http://192.168.18.39:8095',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -39,23 +41,29 @@ module.exports = {
         // }
       },
       '/app': {
+        target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
-        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.18.39:8095',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
+        target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
-        target: 'http://172.169.100.126:8082',
+        // target: 'http://192.168.18.39:8095',
+        // target: 'http://172.169.100.126:8082',
+        // ws: true,
+        changeOrigin: true
+      },
+      '/toLogin': {
+        target: 'http://172.169.200.207:8082',
+        // target: 'http://192.168.18.39:8095',
+        // target: 'http://172.169.2.235:8095',
+        // target: 'http://172.169.100.126:8082',
         // ws: true,
         changeOrigin: true
       }
-      // '/toLogin': {
-      //   // target: 'http://172.169.2.235:8095',
-      //   target: 'http://172.169.100.126:8082',
-      //   // ws: true,
-      //   changeOrigin: true
-      // }
     }
   },
   pluginOptions: {// 第三方插件配置

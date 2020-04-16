@@ -1,12 +1,14 @@
 import axios from 'axios'
 import router from '../router'
+import { removeSession } from './auth'
 // import qs from 'qs'
 const serve = axios.create({
   headers: {
     contentType: 'application/json; charset=utf-8',
-    AccessControlAllowOrigin: 'http://172.169.100.126:8082',
+    // AccessControlAllowOrigin: 'http://172.169.100.126:8082',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Credentials': true
+    'Access-Control-Allow-Credentials': true,
+    'x-requested-with': 'XMLHttpRequest'
   },
   // baseURL: process.env.VUE_APP_BASE_API,
   // baseURL: 'http://172.169.100.126:8082',
@@ -36,16 +38,23 @@ serve.interceptors.request.use(
 )
 serve.interceptors.response.use(
   response => {
-    if (typeof response.data === 'string') {
-      if (response.data.includes('login')) {
-        router.push('/')
-        return
-      }
+    if (response.data.code) {
+      router.push('/')
+      removeSession('userinfo')
+      return
+    }
+    // if (typeof response.data === 'string') {
+    //   if (response.data.includes('login')) {
+    //     router.push('/')
+    //     return
+    //   }
+    // }
+    if (response.data.resultCode === 500) {
+      this.$toast(response.data.resultMessage)
     }
     // config.data = qs.stringify(config.data)
     const res = response.data
     if (res.code === 200) {
-      alert(res.message)
     } else {
       return res
     }

@@ -21,3 +21,10 @@ export async function flowForm (data) {
     method: 'get'
   })
 }
+export async function flowFormUpdate (data) {
+  return request({
+    url: data.url,
+    method: 'post',
+    data: data.data
+  })
+}

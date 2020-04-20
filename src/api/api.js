@@ -9,7 +9,8 @@ const api = {
   todoListUrl: '/app/flo/flowform/list',
   searchUrl: '/app/flo/flowform/mobileList',
   flowFormUrl: '/app/flo/flowform/detail',
-  customerList: '/app/form/bizcustinfoform/detail'
+  customerList: '/app/form/bizcustinfoform/detail',
+  supplierList: '/app/form/bizsupplierinfoform/detail'
 }
 
 export default api

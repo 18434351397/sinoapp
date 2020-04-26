@@ -7,7 +7,7 @@
     <div>
       <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">供应商信息</div>
       <van-field
-        name="username"
+        name="name"
         v-model="custList.name"
         type="text"
         label="供应商名称:"
@@ -149,22 +149,14 @@
       <div>
         <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">合作信息</div>
         <el-table
+          border
           :data="cooperativeList"
           style="width: 100%">
-          <el-table-column type="expand">
-            <template slot-scope="props">
-              <el-form label-position="left" inline class="demo-table-expand">
-                <el-form-item label="合作产品">
-                  <span>{{ props.row.product }}</span>
-                </el-form-item>
-                <el-form-item label="代理级别">
-                  <span>{{ props.row.agentLevel }}</span>
-                </el-form-item>
-                <el-form-item label="采购合同金额">
-                  <span>{{ props.row.contractAmount }}</span>
-                </el-form-item>
-              </el-form>
-            </template>
+          <el-table-column
+          type="index"
+          label="序号"
+          width="50"
+          :index="indexMethods">
           </el-table-column>
           <el-table-column
             label="合作产品"
@@ -183,43 +175,14 @@
       <div>
         <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">资质详情</div>
         <el-table
+          border
           :data="qualificationsList"
           style="width: 100%">
-          <el-table-column type="expand">
-            <template slot-scope="props">
-              <el-form label-position="left" inline class="demo-table-expand">
-                <el-form-item label="资质名称">
-                  <span>{{ props.row.qualificaName }}</span>
-                </el-form-item>
-                <el-form-item label="代理类型">
-                  <span>{{ props.row.agenttypeDesc }}</span>
-                </el-form-item>
-                <el-form-item label="代理产品">
-                  <span>{{ props.row.agentgoods }}</span>
-                </el-form-item>
-                <el-form-item label="代理商级别">
-                  <span>{{ props.row.agentlevelDesc }}</span>
-                </el-form-item>
-                <el-form-item label="联系人">
-                  <span>{{ props.row.linkman }}</span>
-                </el-form-item>
-                <el-form-item label="电话">
-                  <span>{{ props.row.phone }}</span>
-                </el-form-item>
-                <el-form-item label="邮箱">
-                  <span>{{ props.row.email }}</span>
-                </el-form-item>
-                <el-form-item label="合作次数">
-                  <span>{{ props.row.count }}</span>
-                </el-form-item>
-                <el-form-item label="账期">
-                  <span>{{ props.row.cycle }}</span>
-                </el-form-item>
-                <el-form-item label="资质有效截止日期">
-                  <span>{{ props.row.endDate }}</span>
-                </el-form-item>
-              </el-form>
-            </template>
+          <el-table-column
+            type="index"
+            label="序号"
+            width="50"
+            :index="indexMethods">
           </el-table-column>
           <el-table-column
             label="资质名称"
@@ -230,14 +193,71 @@
             prop="agenttypeDesc">
           </el-table-column>
           <el-table-column
+            label="代理产品"
+            prop="agentgoods">
+          </el-table-column>
+          <el-table-column
             label="代理商级别"
             prop="agentlevelDesc">
+          </el-table-column>
+          <el-table-column
+            label="联系人"
+            prop="linkman">
+          </el-table-column>
+          <el-table-column
+            label="电话"
+            prop="phone">
+          </el-table-column>
+          <el-table-column
+            label="邮箱"
+            prop="email">
+          </el-table-column>
+          <el-table-column
+            label="合作次数"
+            prop="count">
+          </el-table-column>
+          <el-table-column
+            label="账期"
+            prop="cycle">
+          </el-table-column>
+          <el-table-column
+            label="资质有效截止日期"
+            prop="endDate">
           </el-table-column>
         </el-table>
       </div>
       <div>
         <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">附件列表</div>
-
+        <el-table
+          border
+          :data="attachmentVOList"
+          style="width: 100%">
+          <el-table-column
+            type="index"
+            label="序号"
+            width="50"
+            :index="indexMethods">
+          </el-table-column>
+          <el-table-column
+            label="附件名称"
+            prop="attname">
+          </el-table-column>
+          <el-table-column
+            label="大小"
+            width="80">
+            <template slot-scope="scope">
+              {{(scope.row.attsize/1024).toFixed(2) + 'KB'}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="50">
+            <template slot-scope="scope">
+              <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
 </template>
@@ -249,6 +269,8 @@ export default {
   name: 'bizcustinfoform',
   data () {
     return {
+      fileList: [],
+      attachmentVOList: [],
       custList: [],
       cooperativeList: [],
       qualificationsList: [],
@@ -271,9 +293,28 @@ export default {
       this.custList = res.data
       this.qualificationsList = res.data.qualificationsList
       this.cooperativeList = res.data.cooperativeList
+      this.attachmentVOList = res.data.attachmentVOList
+      this.fileList = res.data.attachmentVOList
+      this.fileList = this.fileList.map(item => {
+        return JSON.stringify({
+          url: item.atturl,
+          fileName: item.attname,
+          filePath: item.attdir,
+          fileSize: item.attsize,
+          fileId: item.id,
+          bizid: item.bizid
+        })
+      })
     })
   },
   methods: {
+    indexMethods (index) {
+      return index + 1
+    },
+    // 下载调用方法
+    handleClick (data) {
+      console.log(data)
+    }
   }
 }
 </script>

@@ -10,7 +10,8 @@ const api = {
   searchUrl: '/app/flo/flowform/mobileList',
   flowFormUrl: '/app/flo/flowform/detail',
   customerList: '/app/form/bizcustinfoform/detail',
-  supplierList: '/app/form/bizsupplierinfoform/detail'
+  supplierList: '/app/form/bizsupplierinfoform/detail',
+  orgTree: '/app/admin/user/mobileOrgUserTree'
 }
 
 export default api

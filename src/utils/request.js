@@ -1,26 +1,37 @@
 import axios from 'axios'
 import router from '../router'
 import { removeSession } from './auth'
+import { Toast } from 'vant'
 // import qs from 'qs'
 const serve = axios.create({
   headers: {
-    contentType: 'application/json; charset=utf-8',
-    // AccessControlAllowOrigin: 'http://172.169.100.126:8082',
+    // contentType: 'application/json; charset=utf-8',
+    // AccessControlAllowOrigin: '*',
+    // 'Access-Control-Allow-Headers': 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderField, Origin',
+    'Access-Control-Allow-Origin': 'http://localhost:8080/',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Credentials': true,
     'x-requested-with': 'XMLHttpRequest'
   },
+  withCredentials: true,
   // baseURL: process.env.VUE_APP_BASE_API,
-  // baseURL: 'http://172.169.100.126:8082',
-  baseURL: '',
-  timeout: 60000
+  baseURL: 'http://192.168.18.28:8095',
+  // baseURL: '/admin',
+  timeout: 200000
 })
-
+// serve.defaults.withCredentials = true
+// serve.defaults.crossDomain = true
+// serve.defaults.headers.common.Authorization = ''
+// serve.defaults.headers.post.ContentType = 'application/json; charset=utf-8'
 const instance = axios.create({
   headers: { 'content-type': 'multipart/form-data' }
 })
 serve.interceptors.request.use(
   config => {
+    Toast.loading({
+      message: '加载中...',
+      forbidClick: true
+    })
     if (config.method === 'post') {
       // config.data = qs.stringify(config.data)
     }
@@ -38,6 +49,7 @@ serve.interceptors.request.use(
 )
 serve.interceptors.response.use(
   response => {
+    Toast.clear()
     if (response.data.code) {
       router.push('/')
       removeSession('userinfo')
@@ -60,6 +72,7 @@ serve.interceptors.response.use(
     }
   },
   error => {
+    Toast.clear()
     // if (error) {
     //   router.push('/')
     // }

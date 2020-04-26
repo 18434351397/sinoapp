@@ -4,7 +4,7 @@ import api from './api'
 export async function getTodoList (data) {
   return request({
     url: api.todoListUrl,
-    method: 'put',
+    method: 'post',
     data
   })
 }
@@ -18,6 +18,12 @@ export async function search (data) {
 export async function flowForm (data) {
   return request({
     url: api.flowFormUrl + '/' + data,
+    method: 'get'
+  })
+}
+export async function getOrgTree (data) {
+  return request({
+    url: api.orgTree,
     method: 'get'
   })
 }

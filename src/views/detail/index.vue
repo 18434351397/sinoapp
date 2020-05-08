@@ -123,8 +123,8 @@
               placeholder="请输入办理意见"
               show-word-limit
             />
-            <el-select style="width: 100%;" @change="pullSelect" v-model="region" placeholder="请选择步骤" >
-              <el-option :value="item" :label="item.text" :key="index" v-for="(item, index) in nextSelectOpts">{{item.text}}</el-option>
+            <el-select style="width: 100%;" @change="pullSelect" v-model="region.id" placeholder="请选择步骤" >
+              <el-option :value="item.id" :label="item.text" :key="index" v-for="(item, index) in nextSelectOpts"></el-option>
             </el-select>
           </div>
           <div class="submitBox">
@@ -157,7 +157,9 @@ export default {
     return {
       treeList: [],
       show: false,
-      region: {},
+      region: {
+        id: ''
+      },
       flowList: [],
       url: '',
       dataList: this.$route.query,
@@ -205,7 +207,9 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'label'
-      }
+      },
+      hasProcessByBusiAnalysis: false,
+      backSelectOpts: []
     }
   },
   created () {
@@ -217,6 +221,7 @@ export default {
         this.url = res.data.url
         this.historyList = res.data.historyList
         this.handleNextSelectOpts(res.data)
+        this.handleBackSelectOpts(res.data)
         this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
       }
     })
@@ -266,23 +271,23 @@ export default {
     },
     // 点击提交按钮要进行的操作
     onSubmit (values) {
+      console.log(this.region)
       delete values.radio
       delete values.undefined
-      if (this.region === true) {
-        values.submitTask = this.region.text
-        values.content = values.content + ' >>>>' + this.region.text
+      values.submitTask = this.region.id ? this.region.id : '【下一步】'
+      if (values.submitTask !== '【下一步】') {
+        values.content = values.content + ' >>>>' + document.querySelector('.el-select').children[0].children[0].value
       } else {
         values.content = values.content + ' >>>>' + '【下一步】'
-        values.submitTask = '【下一步】'
       }
-      this.url = this.url.slice(0, -11) + '/app/form/bizsupplierinfoform/update'
+      this.url = this.url.slice(0, -11) + '/updateVOs'
       values.file = this.$refs.detail.fileList
       const data = {
         url: this.url,
         data: values
       }
       console.log(data)
-      this.submit(data)
+      // this.submit(data)
     },
     // 提交方法-->调接口进行提交
     submit (values) {
@@ -305,6 +310,7 @@ export default {
       //   this.message = '不同意'
       // }
     },
+    //  处理下一步节点的方法
     handleNextSelectOpts (data) {
       data.nextTaskList.forEach(item => {
         if (data.nextTaskList.length === 1 || !data.nextTaskIsBranch || data.nextTaskIsBranch === false) {
@@ -341,6 +347,43 @@ export default {
         }
         this.nextSelectOpts.push(item)
       }
+    },
+    handleBackSelectOpts (data) {
+      if (data.currTaskDefinitionKey !== 'AcceptBack' && data.currTaskDefinitionKey !== 'Todo') {
+        for (var i = 0; i < data.historyList.length; i++) {
+          if (data.historyList[i].status !== 3 && data.historyList[i].status !== -1 && data.historyList[i].taskDefinitionKey !== 'AcceptBack') {
+            // 回退列表中只展现同一流程实例的历史审批，避免主、子流程间退回异常的问题
+            if (data.processInstanceId === data.historyList[i].processInstanceId || data.historyList[i].taskDefinitionKey === 'Accept') {
+              if (data.historyList[i].taskDefinitionKey !== data.currTaskDefinitionKey) {
+                // 判断是否是合同存档 同时节点是不是库管 不能退回
+                if (data.currFlowId === 'ContractFileApprove' && data.currTaskDefinitionKey === 'DepotManager') {
+                  continue
+                } else {
+                  // 非会签、回退办理人，展示到回退列表中
+                  var item = {
+                    id: 'back_' + data.historyList[i].taskDefinitionKey + '_' + data.historyList[i].createdBy,
+                    text: ('【退回】' + data.historyList[i].taskName + '-' + data.historyList[i].userName)
+                  }
+                  this.backSelectOpts.push(item)
+                  this.backSelectOpts = Array.from(new Set(this.backSelectOpts))
+                }
+              } else {
+                // 如果历史审批中出现当前节点则说明目前处于退回后提交，则后续审批意见是在当前节点之后，不能展示在退回列表中
+                break
+              }
+            }
+            //
+            if (data.historyList[i].taskDefinitionKey === 'BusiAnalysis') {
+              this.hasProcessByBusiAnalysis = true
+            }
+          } else if (data.historyList[i].status === -1) {
+            // 回显暂存数据
+            // $('#flowContent').val(data.historyList[i].remark);
+          }
+        }
+      } else {
+      }
+      this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
     },
     handleContent (data) {
     },

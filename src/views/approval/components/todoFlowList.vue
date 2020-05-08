@@ -108,6 +108,8 @@ export default {
         this.$router.push({
           name: path,
           query: data
+        }).catch(err => {
+          console.log(err)
         })
       }
     }

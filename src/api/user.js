@@ -11,7 +11,7 @@ export function Login (data) {
 export function LoginOut (data) {
   return request({
     url: api.loginOutUrl,
-    method: 'post',
+    method: 'get',
     data
   })
 }

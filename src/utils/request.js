@@ -8,14 +8,18 @@ const serve = axios.create({
     // contentType: 'application/json; charset=utf-8',
     // AccessControlAllowOrigin: '*',
     // 'Access-Control-Allow-Headers': 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderField, Origin',
-    'Access-Control-Allow-Origin': 'http://localhost:8080/',
+    'Access-Control-Allow-Origin': 'http://172.169.200.207:8082',
+    // 'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Credentials': true,
     'x-requested-with': 'XMLHttpRequest'
   },
   withCredentials: true,
   // baseURL: process.env.VUE_APP_BASE_API,
-  baseURL: 'http://192.168.18.28:8095',
+  // baseURL: 'http://192.168.18.28:8095',
+  // baseURL: 'http://172.169.2.235:8095',
+  // baseURL: 'http://192.168.162.128:88',
+  // baseURL: 'http://172.169.200.207:8082',
   // baseURL: '/admin',
   timeout: 200000
 })
@@ -49,18 +53,20 @@ serve.interceptors.request.use(
 )
 serve.interceptors.response.use(
   response => {
+    // 下载处理
+    const headers = response.headers
+    if (headers['content-type'] === 'application/octet-stream;charset=utf-8') {
+      return response.data
+    }
+    // 清理loading
     Toast.clear()
+    // 删除session信息
     if (response.data.code) {
       router.push('/')
       removeSession('userinfo')
       return
     }
-    // if (typeof response.data === 'string') {
-    //   if (response.data.includes('login')) {
-    //     router.push('/')
-    //     return
-    //   }
-    // }
+    // 返回错误信息
     if (response.data.resultCode === 500) {
       this.$toast(response.data.resultMessage)
     }

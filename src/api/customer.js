@@ -13,3 +13,9 @@ export async function supplierList (data) {
     method: 'get'
   })
 }
+export async function List (data) {
+  return request({
+    url: data.url + '/' + data.data,
+    method: 'get'
+  })
+}

@@ -4,7 +4,7 @@ import api from './api'
 export async function getTodoList (data) {
   return request({
     url: api.todoListUrl,
-    method: 'post',
+    method: 'put',
     data
   })
 }
@@ -32,5 +32,14 @@ export async function flowFormUpdate (data) {
     url: data.url,
     method: 'post',
     data: data.data
+  })
+}// 公共下载方法
+export async function downLoad (data) {
+  return request({
+    url: api.downLoadUrl,
+    method: 'post',
+    data,
+    responseType: 'blob',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' }
   })
 }

@@ -8,7 +8,7 @@
         style="margin: 0;"
       >
         <div slot="desc" style="width: 100%;margin: 0;">
-          <div style="margin: 0;width: 100%;display: flex;justify-content: space-between;align-items: center;margin: 0;">
+          <div style="margin: 0;width: 100%;display: flex;justify-content: space-between;align-items: center;">
             <div><span>账号: </span>{{userinfo.userAccount}}</div><van-icon name="arrow" />
           </div>
         </div>
@@ -20,7 +20,7 @@
       </van-card>
       <div style="padding: 10px;">
         <van-dialog id="van-dialog" />
-        <van-button @click="editPassword" round type="default" style="width: 100%;margin-bottom: 450px;">修改密码</van-button>
+        <van-button @click="editPassword" round type="default" style="width: 100%;margin-bottom: 20px;">修改密码</van-button>
         <van-button @click="loginout" round id="loginout" type="default" style="width: 100%;">退出</van-button>
       </div>
 

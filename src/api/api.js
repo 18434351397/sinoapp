@@ -1,6 +1,6 @@
 const api = {
   loginUrl: '/admin/login/ajax',
-  loginOutUrl: '/logout',
+  loginOutUrl: '/logout?clientType=pc',
   getInfoUrl: '/app/admin/user/getUserAll',
   smsSendUrl: '/sms/send',
   editPasswordUrl: '/app/admin/user/changePswd',
@@ -11,7 +11,9 @@ const api = {
   flowFormUrl: '/app/flo/flowform/detail',
   customerList: '/app/form/bizcustinfoform/detail',
   supplierList: '/app/form/bizsupplierinfoform/detail',
-  orgTree: '/app/admin/user/mobileOrgUserTree'
+  projptenderrecordList: '/app/form/projptenderrecord/detail',
+  orgTree: '/app/admin/user/mobileOrgUserTree',
+  downLoadUrl: '/app/file/download'
 }
 
 export default api

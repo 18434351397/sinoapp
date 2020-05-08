@@ -240,13 +240,13 @@
           </el-table-column>
           <el-table-column
             label="附件名称"
-            prop="attname">
+            prop="fileName">
           </el-table-column>
           <el-table-column
             label="大小"
             width="80">
             <template slot-scope="scope">
-              {{(scope.row.attsize/1024).toFixed(2) + 'KB'}}
+              {{(scope.row.fileSize/1024).toFixed(2) + 'KB'}}
             </template>
           </el-table-column>
           <el-table-column
@@ -264,6 +264,7 @@
 
 <script>
 import { supplierList } from '../../api/customer'
+// import { downLoad } from '../../api/flowfrom'
 
 export default {
   name: 'bizcustinfoform',
@@ -290,30 +291,43 @@ export default {
   },
   created () {
     supplierList(this.dataList.dataId).then(res => {
-      this.custList = res.data
-      this.qualificationsList = res.data.qualificationsList
-      this.cooperativeList = res.data.cooperativeList
-      this.attachmentVOList = res.data.attachmentVOList
-      this.fileList = res.data.attachmentVOList
-      this.fileList = this.fileList.map(item => {
-        return JSON.stringify({
-          url: item.atturl,
-          fileName: item.attname,
-          filePath: item.attdir,
-          fileSize: item.attsize,
-          fileId: item.id,
-          bizid: item.bizid
+      if (res.data) {
+        this.custList = res.data
+        this.qualificationsList = res.data.qualificationsList
+        this.cooperativeList = res.data.cooperativeList
+        this.fileList = res.data.attachmentVOList
+        this.attachmentVOList = res.data.attachmentVOList
+        this.fileList = this.fileList.map(item => {
+          return JSON.stringify({
+            url: item.atturl,
+            fileName: item.attname,
+            filePath: item.attdir,
+            fileSize: item.attsize,
+            fileId: item.id,
+            bizid: item.bizid
+          })
         })
-      })
+        this.attachmentVOList = this.attachmentVOList.map(item => {
+          return {
+            url: item.atturl,
+            fileName: item.attname,
+            filePath: item.attdir,
+            fileSize: item.attsize,
+            fileId: item.id,
+            bizid: item.bizid
+          }
+        })
+      }
     })
   },
   methods: {
+    // 处理序号
     indexMethods (index) {
       return index + 1
     },
     // 下载调用方法
     handleClick (data) {
-      console.log(data)
+      this.downLoad(data)
     }
   }
 }

@@ -10,7 +10,7 @@
 
 <script>
 
-import { setToken } from '../utils/auth'
+// import { setToken } from '../utils/auth'
 import TabBar from '../components/Tabbar'
 import NavBar from '../components/Navbar'
 export default {
@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      a: 1,
+      a: 1
     }
   },
   methods: {},

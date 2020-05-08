@@ -66,6 +66,11 @@ const routes = [
         path: '/projptenderrecord',
         component: () => import('../views/projptenderrecord'),
         name: 'projptenderrecord'
+      },
+      {
+        path: '/projpcontractreview',
+        component: () => import('../views/projpcontractreview'),
+        name: 'projpcontractreview'
       }
     ]
   }

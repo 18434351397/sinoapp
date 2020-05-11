@@ -27,3 +27,12 @@ export async function projpcontractreviewList (data) {
     method: 'get'
   })
 }
+
+// 客户属性
+
+export async function custPro() {
+  return request({
+    url: api.custPro + '?subCodes=custPro-&_=1589012445450',
+    method: 'get'
+  })
+}

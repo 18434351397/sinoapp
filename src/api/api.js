@@ -14,7 +14,8 @@ const api = {
   projptenderrecordList: '/app/form/projptenderrecord/detail',
   orgTree: '/app/admin/user/mobileOrgUserTree',
   downLoadUrl: '/app/file/download',
-  projpcontractreviewList: '/app/form/projpcontractreview/detail'
+  projpcontractreviewList: '/app/form/projpcontractreview/detail',
+  custPro: '/app/admin/dictionary/getBySubCodes'
 }
 
 export default api

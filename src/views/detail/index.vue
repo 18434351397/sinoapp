@@ -1,201 +1,203 @@
 /** *@author CheYongJi *@date 2020/4/15 12:51 *@title index */
 <template>
-    <div style="height: 100%;">
-      <van-sticky>
+  <div style="height: 100%;">
+    <van-sticky>
       <NavBar/>
-      </van-sticky>
-      <div style="background-color: #f8f8f8;">
-        <van-dialog v-model="show" @confirm="confirmCounterSign" title="会签" show-cancel-button>
-          <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
-            <el-input
-              placeholder="输入关键字进行过滤"
-              v-model="filterText">
-            </el-input>
-            <el-tree
-              accordion
-              check-on-click-node
-              check-strictly
-              node-key="id"
-              @check-change="handleCheckChange"
-              @current-change="handleCurrentChange"
-              show-checkbox
-              style="margin: 0;"
-              class="filter-tree"
-              :data="treeList"
-              :props="defaultProps"
-              :filter-node-method="filterNode"
-              ref="tree">
-            </el-tree>
+    </van-sticky>
+    <div style="background-color: #f8f8f8;">
+      <van-dialog v-model="show" @confirm="confirmCounterSign" title="会签" show-cancel-button>
+        <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
+          <el-input
+            placeholder="输入关键字进行过滤"
+            v-model="filterText">
+          </el-input>
+          <el-tree
+            accordion
+            check-on-click-node
+            check-strictly
+            node-key="id"
+            @check-change="handleCheckChange"
+            @current-change="handleCurrentChange"
+            show-checkbox
+            style="margin: 0;"
+            class="filter-tree"
+            :data="treeList"
+            :props="defaultProps"
+            :filter-node-method="filterNode"
+            ref="tree">
+          </el-tree>
+        </div>
+      </van-dialog>
+      <van-form id='editPwdForm' @submit="onSubmit">
+        <van-field
+          name="formTitle"
+          v-model="flowList.formTitle"
+          type="text"
+          label="流程标题:"
+          readonly
+        />
+        <van-field
+          v-model="flowList.currFlowName"
+          type="text"
+          label="流程名称:"
+          readonly
+        />
+        <van-field
+          style="display: none;"
+          name="commitType"
+          v-model="commitType"
+          type="text"
+          readonly
+        />
+        <van-field
+          style="display: none;"
+          name="objName"
+          v-model="flowList.objName"
+          type="text"
+          readonly
+        />
+        <van-field
+          style="display: none;"
+          name="currTaskDefinitionKey"
+          v-model="flowList.currTaskDefinitionKey"
+          type="text"
+          readonly
+        />
+        <van-field
+          v-model="flowList.statusDes"
+          type="text"
+          label="流程状态:"
+          readonly
+        />
+        <van-field
+          v-model="flowList.currTaskDefinitionName"
+          type="text"
+          label="当前节点:"
+          readonly
+        />
+        <van-field
+          v-model="flowList.currUserName"
+          type="text"
+          label="当前处理人:"
+          readonly
+        />
+        <van-field
+          v-model="flowList.userName"
+          type="text"
+          label="发起人:"
+          readonly
+        />
+        <van-field
+          v-model="flowList.createdDate"
+          type="text"
+          label="发起时间:"
+          readonly
+        />
+        <!--审批流程详情部分开始-->
+        <router-view ref="detail"/>
+        <!--审批流程详情部分结束-->
+        <div style="margin-bottom: 10px;">
+          <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">
+            历史办理详情
           </div>
-        </van-dialog>
-        <van-form id='editPwdForm' @submit="onSubmit">
-          <van-field
-            name="formTitle"
-            v-model="flowList.formTitle"
-            type="text"
-            label="流程标题:"
-            readonly
-          />
-          <van-field
-            v-model="flowList.currFlowName"
-            type="text"
-            label="流程名称:"
-            readonly
-          />
-          <van-field
-            style="display: none;"
-            name="commitType"
-            v-model="commitType"
-            type="text"
-            readonly
-          />
-          <van-field
-            style="display: none;"
-            name="objName"
-            v-model="flowList.objName"
-            type="text"
-            readonly
-          />
-          <van-field
-            style="display: none;"
-            name="currTaskDefinitionKey"
-            v-model="flowList.currTaskDefinitionKey"
-            type="text"
-            readonly
-          />
-          <van-field
-            v-model="flowList.statusDes"
-            type="text"
-            label="流程状态:"
-            readonly
-          />
-          <van-field
-            v-model="flowList.currTaskDefinitionName"
-            type="text"
-            label="当前节点:"
-            readonly
-          />
-          <van-field
-            v-model="flowList.currUserName"
-            type="text"
-            label="当前处理人:"
-            readonly
-          />
-          <van-field
-            v-model="flowList.userName"
-            type="text"
-            label="发起人:"
-            readonly
-          />
-          <van-field
-            v-model="flowList.createdDate"
-            type="text"
-            label="发起时间:"
-            readonly
-          />
-          <!--审批流程详情部分开始-->
-          <router-view ref="detail" />
-          <!--审批流程详情部分结束-->
-          <div style="margin-bottom: 10px;">
-            <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">历史办理详情</div>
-            <van-steps direction="vertical" :active="historyList.length-1" active-color="#409EFF">
-              <van-step :key="index" v-for="(item, index) in historyList">
+          <van-steps direction="vertical" :active="historyList.length-1" active-color="#409EFF">
+            <van-step :key="index" v-for="(item, index) in historyList">
               <h5>
                 【{{ item.taskName }}】
                 <div v-if="!item.porxy">
                   {{ item.userName}}
-                   <p>{{ item.remark}} </p>
+                  <p>{{ item.remark}} </p>
                 </div>
                 <span v-else>{{ item.proxyUserName }}(待办)</span>
               </h5>
               <span>{{ item.createdDate }}</span>
             </van-step>
-            </van-steps>
+          </van-steps>
+        </div>
+        <div style="margin-bottom: 70px;">
+          <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">审批
           </div>
-          <div style="margin-bottom: 70px;">
-            <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">审批</div>
-            <van-field name="radio" label="审批结果">
-              <template #input>
-                <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
-                  <van-radio name="1">同意</van-radio>
-                  <van-radio name="2">不同意</van-radio>
-                </van-radio-group>
-              </template>
-            </van-field>
-            <van-field
-              name="content"
-              v-model="message"
-              rows="2"
-              autosize
-              label="办理意见"
-              type="textarea"
-              maxlength="50"
-              placeholder="请输入办理意见"
-              show-word-limit
-            />
-            <el-select style="width: 100%;" @change="pullSelect" v-model="region.id" placeholder="请选择步骤" >
-              <el-option :value="item.id" :label="item.text" :key="index" v-for="(item, index) in nextSelectOpts"></el-option>
-            </el-select>
-          </div>
-          <div class="submitBox">
-            <van-button style="width: 30%" round block  type="info" native-type="submit">
-              提交
-            </van-button>
-            <van-button style="width: 30%" @click="counterSign" round block type="default" native-type="submit">
-              会签
-            </van-button>
-            <van-button style="width: 30%" @click="back" round block type="default" native-type="button">
-              取消
-            </van-button>
-          </div>
-        </van-form>
-      </div>
+          <van-field name="radio" label="审批结果">
+            <template #input>
+              <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
+                <van-radio name="1">同意</van-radio>
+                <van-radio name="2">不同意</van-radio>
+              </van-radio-group>
+            </template>
+          </van-field>
+          <van-field
+            name="content"
+            v-model="message"
+            rows="2"
+            autosize
+            label="办理意见"
+            type="textarea"
+            maxlength="50"
+            placeholder="请输入办理意见"
+            show-word-limit
+          />
+          <el-select style="width: 100%;" @change="pullSelect" v-model="region.id" placeholder="请选择步骤">
+            <el-option :value="item.id" :label="item.text" :key="index"
+                       v-for="(item, index) in nextSelectOpts"></el-option>
+          </el-select>
+        </div>
+        <div class="submitBox">
+          <van-button style="width: 30%" round block type="info" native-type="submit">
+            提交
+          </van-button>
+          <van-button style="width: 30%" @click="counterSign" round block type="default" native-type="submit">
+            会签
+          </van-button>
+          <van-button style="width: 30%" @click="back" round block type="default" native-type="button">
+            取消
+          </van-button>
+        </div>
+      </van-form>
     </div>
+  </div>
 </template>
-
-
 <script>
-import { flowForm, flowFormUpdate, getOrgTree } from "../../api/flowfrom";
-import NavBar from "@/components/Navbar";
-import { Dialog, Notify } from "vant";
+import { flowForm, flowFormUpdate, getOrgTree } from '../../api/flowfrom'
+import NavBar from '@/components/Navbar'
+import { Dialog, Notify } from 'vant'
 
 export default {
-  name: "index",
+  name: 'index',
   components: {
     NavBar
   },
-  data() {
+  data () {
     return {
       commitType: '',
       treeList: [],
       show: false,
       region: {
-        id: ""
+        id: ''
       },
       flowList: [],
-      url: "",
+      url: '',
       dataList: this.$route.query,
       historyList: [],
-      radio: "1",
-      message: "",
+      radio: '1',
+      message: '',
       nextSelectOpts: [],
-      filterText: "",
+      filterText: '',
       data: [
         {
           id: 1,
-          label: "一级 1",
+          label: '一级 1',
           children: [
             {
               id: 4,
-              label: "二级 1-1",
+              label: '二级 1-1',
               children: [
                 {
                   id: 9,
-                  label: "车永基"
+                  label: '车永基'
                 },
                 {
                   id: 10,
-                  label: "田冬慧"
+                  label: '田冬慧'
                 }
               ]
             }
@@ -203,119 +205,118 @@ export default {
         },
         {
           id: 2,
-          label: "一级 2",
+          label: '一级 2',
           children: [
             {
               id: 5,
-              label: "二级 2-1"
+              label: '二级 2-1'
             },
             {
               id: 6,
-              label: "二级 2-2"
+              label: '二级 2-2'
             }
           ]
         },
         {
           id: 3,
-          label: "一级 3",
+          label: '一级 3',
           children: [
             {
               id: 7,
-              label: "二级 3-1"
+              label: '二级 3-1'
             },
             {
               id: 8,
-              label: "二级 3-2"
+              label: '二级 3-2'
             }
           ]
         }
       ],
       defaultProps: {
-        children: "children",
-        label: "label"
+        children: 'children',
+        label: 'label'
       },
       hasProcessByBusiAnalysis: false,
       backSelectOpts: []
-    };
+    }
   },
-  created() {
-    this.message = this.radio === "1" ? "同意" : "不同意";
-    const url = "/" + this.dataList.searchType + "/" + this.dataList.id;
+  created () {
+    this.message = this.radio === '1' ? '同意' : '不同意'
+    const url = '/' + this.dataList.searchType + '/' + this.dataList.id
     flowForm(url).then(res => {
       if (res) {
-        this.flowList = res.data;
-        this.url = res.data.url;
-        this.historyList = res.data.historyList;
-        this.handleNextSelectOpts(res.data);
-        this.handleBackSelectOpts(res.data);
-        this.flowList.createdDate = this.flowList.createdDate.split(".")[0];
-    console.log(this.historyList)
-
+        this.flowList = res.data
+        this.url = res.data.url
+        this.historyList = res.data.historyList
+        this.handleNextSelectOpts(res.data)
+        this.handleBackSelectOpts(res.data)
+        this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
+        console.log(this.historyList)
       }
-    });
+    })
     getOrgTree().then(res => {
       if (res) {
-        this.treeList = res.data ? res.data : [];
+        this.treeList = res.data ? res.data : []
       }
       // this.treeList = this.toTree(res.data)
-    });
+    })
   },
   watch: {
-    filterText(val) {
-      this.$refs.tree.filter(val);
+    filterText (val) {
+      this.$refs.tree.filter(val)
     },
-    show(val) {
+    show (val) {
       if (!val) {
-        this.$refs.tree.setCheckedKeys([]);
+        this.$refs.tree.setCheckedKeys([])
       }
     }
   },
   methods: {
     // 处理树的数据
-    toTree(data) {
+    toTree (data) {
       // 删除 所有 children,以防止多次调用
-      data.forEach(function(item) {
-        delete item.children;
-      });
+      data.forEach(function (item) {
+        delete item.children
+      })
       // 将数据存储为 以 id 为 KEY 的 map 索引数据列
-      var map = {};
-      data.forEach(function(item) {
-        map[item.id] = item;
-      });
-      var val = [];
-      data.forEach(function(item) {
-        item.label = item.text;
+      var map = {}
+      data.forEach(function (item) {
+        map[item.id] = item
+      })
+      var val = []
+      data.forEach(function (item) {
+        item.label = item.text
         // 以当前遍历项，的pid,去map对象中找到索引的id
-        var parent = map[item.parent];
+        var parent = map[item.parent]
         // 好绕啊，如果找到索引，那么说明此项不在顶级当中,那么需要把此项添加到，他对应的父级中
         if (parent) {
-          (parent.children || (parent.children = [])).push(item);
+          (parent.children || (parent.children = [])).push(item)
         } else {
           // 如果没有在map中找到对应的索引ID,那么直接把 当前的item添加到 val结果集中，作为顶级
-          val.push(item);
+          val.push(item)
         }
-      });
-      return val;
+      })
+      return val
     },
     // 点击提交按钮要进行的操作
-    onSubmit(values) {
-      console.log(this.region);
-      delete values.radio;
-      delete values.undefined;
-      values.submitTask = this.region.id ? this.region.id : "【下一步】";
-      if (values.submitTask !== "【下一步】") {
+    onSubmit (values) {
+      console.log(this.region)
+      delete values.radio
+      delete values.undefined
+      values.submitTask = this.region.id ? this.region.id : '【下一步】'
+      if (values.submitTask !== '【下一步】') {
         values.content =
           values.content +
-          " >>>>" +
-          document.querySelector(".el-select").children[0].children[0].value;
+          ' >>>>' +
+          document.querySelector('.el-select').children[0].children[0].value
       } else {
-        values.content = values.content + " >>>>" + "【下一步】";
+        values.content = values.content + ' >>>>' + '【下一步】'
       }
       // 接口调用
       // this.url = this.url.slice(0, -11) + 'updateVOs'
 
       // 调用接口判断方法
-      this.specialFun(values);
+      this.specialFun(values)
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
       if (values.file.length <= 0) {
         delete values.file
@@ -323,50 +324,57 @@ export default {
       const data = {
         url: this.url,
         data: values
-      };
-      console.log(data);
-      this.submit(data);
+      }
+      console.log(data)
+      this.submit(data)
     },
     // 提交方法-->调接口进行提交
-    submit(values) {
+    submit (values) {
       Dialog.confirm({
-        message: "你确定要提交吗？"
+        message: '你确定要提交吗？'
       })
         .then(() => {
           flowFormUpdate(values).then(res => {
-            if (res.resultCode === "200") {
-              Notify({ type: 'success', message: '提交成功' });
-              this.$router.push("/approval");
+            if (res.resultCode === '200') {
+              Notify({
+                type: 'success',
+                message: '提交成功'
+              })
+              this.$router.push('/approval')
             } else {
-              Notify({ type: 'danger', message: res.resultMessage });
+              Notify({
+                type: 'danger',
+                message: res.resultMessage
+              })
             }
-          });
+          })
         })
-        .catch(() => {});
+        .catch(() => {
+        })
     },
-    specialFun(values) {
-      let user = this.dataList;
+    specialFun (values) {
+      const user = this.dataList
       if (
-        user.currTaskDefinitionName === "运营管理部" &&
-        user.currUserName === "李月平" &&
-        user.currTaskDefinitionKey === "BusiAnalysis"
+        user.currTaskDefinitionName === '运营管理部' &&
+        user.currUserName === '李月平' &&
+        user.currTaskDefinitionKey === 'BusiAnalysis'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
         console.log(this.url, '李月平')
       } else if (
-        user.currTaskDefinitionName === "运营管理部经理" &&
-        user.currTaskDefinitionKey === "BusiAnalysisManager"
+        user.currTaskDefinitionName === '运营管理部经理' &&
+        user.currTaskDefinitionKey === 'BusiAnalysisManager'
       ) {
-        this.url = this.url.slice(0,29) + "/busiAnalysisManagerApproval";
-        console.log(this.url,'经理')
+        this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+        console.log(this.url, '经理')
       } else {
         // this.url = this.url.slice(0, -11) + "/updateVOs";
-        this.url = this.url.slice(0, -12) + "/update/task";
-        console.log(this.url,'通用')
+        this.url = this.url.slice(0, -12) + '/update/task'
+        console.log(this.url, '通用')
       }
     },
-    onchange() {
-      this.message = this.radio === "1" ? "同意" : "不同意";
+    onchange () {
+      this.message = this.radio === '1' ? '同意' : '不同意'
       // if (this.radio === '1') {
       //   this.message = '同意'
       // } else {
@@ -374,7 +382,7 @@ export default {
       // }
     },
     //  处理下一步节点的方法
-    handleNextSelectOpts(data) {
+    handleNextSelectOpts (data) {
       data.nextTaskList.forEach(item => {
         if (
           data.nextTaskList.length === 1 ||
@@ -382,68 +390,68 @@ export default {
           data.nextTaskIsBranch === false
         ) {
           const arr = {
-            id: "next__" + item.userId,
-            text: "【下一步】" + item.nextTaskName + "-" + item.nextUserName
-          };
-          this.nextSelectOpts.push(arr);
-        } else if (item.userId !== "emptyuser") {
+            id: 'next__' + item.userId,
+            text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName
+          }
+          this.nextSelectOpts.push(arr)
+        } else if (item.userId !== 'emptyuser') {
           const arr = {
-            id: "next_" + item.nextTaskDefinitionKey + "_" + item.userId,
-            text: "【下一步】" + item.nextTaskName + "-" + item.nextUserName
-          };
-          this.nextSelectOpts.push(arr);
+            id: 'next_' + item.nextTaskDefinitionKey + '_' + item.userId,
+            text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName
+          }
+          this.nextSelectOpts.push(arr)
         }
-      });
+      })
       if (
         this.nextSelectOpts.length > 0 ||
-        this.flowList.currTaskDefinitionKey === "Todo"
+        this.flowList.currTaskDefinitionKey === 'Todo'
       ) {
       } else {
         var item = {
-          id: "",
-          text: "【下一步】"
-        };
+          id: '',
+          text: '【下一步】'
+        }
         if (data.nextTaskList.length > 0) {
           for (var i = 0; i < data.nextTaskList.length; i++) {
             if (
               i === data.nextTaskList.length - 1 ||
-              data.nextTaskList[i].nextTaskDefinitionKey === "CauseGroup"
+              data.nextTaskList[i].nextTaskDefinitionKey === 'CauseGroup'
             ) {
               item = {
                 id:
-                  "next_" +
+                  'next_' +
                   data.nextTaskList[i].nextTaskDefinitionKey +
-                  "_" +
+                  '_' +
                   data.nextTaskList[i].userId,
                 text:
-                  "【下一步】" +
+                  '【下一步】' +
                   data.nextTaskList[i].nextTaskName +
-                  "-" +
+                  '-' +
                   data.nextTaskList[i].nextUserName
-              };
-              break;
+              }
+              break
             }
           }
         }
-        this.nextSelectOpts.push(item);
+        this.nextSelectOpts.push(item)
       }
     },
-    handleBackSelectOpts(data) {
+    handleBackSelectOpts (data) {
       if (
-        data.currTaskDefinitionKey !== "AcceptBack" &&
-        data.currTaskDefinitionKey !== "Todo"
+        data.currTaskDefinitionKey !== 'AcceptBack' &&
+        data.currTaskDefinitionKey !== 'Todo'
       ) {
         for (var i = 0; i < data.historyList.length; i++) {
           if (
             data.historyList[i].status !== 3 &&
             data.historyList[i].status !== -1 &&
-            data.historyList[i].taskDefinitionKey !== "AcceptBack"
+            data.historyList[i].taskDefinitionKey !== 'AcceptBack'
           ) {
             // 回退列表中只展现同一流程实例的历史审批，避免主、子流程间退回异常的问题
             if (
               data.processInstanceId ===
-                data.historyList[i].processInstanceId ||
-              data.historyList[i].taskDefinitionKey === "Accept"
+              data.historyList[i].processInstanceId ||
+              data.historyList[i].taskDefinitionKey === 'Accept'
             ) {
               if (
                 data.historyList[i].taskDefinitionKey !==
@@ -451,37 +459,37 @@ export default {
               ) {
                 // 判断是否是合同存档 同时节点是不是库管 不能退回
                 if (
-                  data.currFlowId === "ContractFileApprove" &&
-                  data.currTaskDefinitionKey === "DepotManager"
+                  data.currFlowId === 'ContractFileApprove' &&
+                  data.currTaskDefinitionKey === 'DepotManager'
                 ) {
-                  continue;
+                  continue
                 } else {
                   // 非会签、回退办理人，展示到回退列表中
                   var item = {
                     id:
-                      "back_" +
+                      'back_' +
                       data.historyList[i].taskDefinitionKey +
-                      "_" +
+                      '_' +
                       data.historyList[i].createdBy,
                     text:
-                      "【退回】" +
+                      '【退回】' +
                       data.historyList[i].taskName +
-                      "-" +
+                      '-' +
                       data.historyList[i].userName
-                  };
-                  this.backSelectOpts.push(item);
+                  }
+                  this.backSelectOpts.push(item)
                   this.backSelectOpts = Array.from(
                     new Set(this.backSelectOpts)
-                  );
+                  )
                 }
               } else {
                 // 如果历史审批中出现当前节点则说明目前处于退回后提交，则后续审批意见是在当前节点之后，不能展示在退回列表中
-                break;
+                break
               }
             }
             //
-            if (data.historyList[i].taskDefinitionKey === "BusiAnalysis") {
-              this.hasProcessByBusiAnalysis = true;
+            if (data.historyList[i].taskDefinitionKey === 'BusiAnalysis') {
+              this.hasProcessByBusiAnalysis = true
             }
           } else if (data.historyList[i].status === -1) {
             // 回显暂存数据
@@ -516,53 +524,59 @@ export default {
       console.log(this.$refs.tree.getCheckedNodes())
       console.log('会签提交')
     },
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
+    filterNode (value, data) {
+      if (!value) return true
+      return data.label.indexOf(value) !== -1
     },
-    handleCheckChange(data, checked, indeterminate) {
-      console.log(checked);
+    handleCheckChange (data, checked, indeterminate) {
+      console.log(checked)
     },
-    handleCurrentChange(data, node) {},
-    back() {
-      this.$router.go(-1);
+    handleCurrentChange (data, node) {
+    },
+    back () {
+      this.$router.go(-1)
     }
   }
-};
+}
 </script>
 
 <style scoped>
-.submitBox {
-  z-index: 999;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  background: #fff;
-}
-.van-radio-group--horizontal {
-  margin: 0;
-}
-.el-tree-node__content {
-  margin: 0;
-}
->>> .el-tree-node__label {
-  margin: 0;
-}
->>> .el-tree-node__content > .el-tree-node__expand-icon {
-  margin: 0;
-}
->>> .el-tree-node__content > label.el-checkbox {
-  margin: 0 8px 0;
-}
+  .submitBox {
+    z-index: 999;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background: #fff;
+  }
+
+  .van-radio-group--horizontal {
+    margin: 0;
+  }
+
+  .el-tree-node__content {
+    margin: 0;
+  }
+
+  >>> .el-tree-node__label {
+    margin: 0;
+  }
+
+  >>> .el-tree-node__content > .el-tree-node__expand-icon {
+    margin: 0;
+  }
+
+  >>> .el-tree-node__content > label.el-checkbox {
+    margin: 0 8px 0;
+  }
 </style>
 <style lang="less">
-div.public-title {
-  .van-cell:not(:last-child)::after {
-    border-bottom: none;
+  div.public-title {
+    .van-cell:not(:last-child)::after {
+      border-bottom: none;
+    }
   }
-}
 </style>

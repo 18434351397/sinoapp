@@ -15,9 +15,9 @@ const biddingRouter = [
     name: 'projptenderrecord'
   },
   {
-    path: '/projpcontractreview',
-    component: () => import('../views/projpcontractreview'),
-    name: 'projpcontractreview'
+    path: '/projptenderquote',
+    component: () => import('../views/projptenderquote'),
+    name: 'projptenderquote'
   }
 ]
 export default biddingRouter

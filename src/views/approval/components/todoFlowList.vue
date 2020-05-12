@@ -21,7 +21,10 @@
         <van-loading color="#1989fa" size="24px"></van-loading>
       </div>
     </div>
-    <div style="height: 100%;" v-show="!dataList.length">
+    <div style="height: 100%;" v-show="!dataList.length && loading">
+      <Loading/>
+    </div>
+    <div style="height: 100%;" v-show="!dataList.length && !loading">
       <NoData/>
     </div>
   </div>
@@ -29,12 +32,14 @@
 
 <script>
 import NoData from './NoDataShow'
+import Loading from './loading'
 import { getTodoList } from '../../../api/flowfrom'
 
 export default {
   name: 'todoFlowList',
   components: {
-    NoData
+    NoData,
+    Loading
   },
   created () {
     this.loadData()

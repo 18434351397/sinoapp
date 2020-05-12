@@ -13,7 +13,9 @@ const api = {
   supplierList: '/app/form/bizsupplierinfoform/detail',
   projptenderrecordList: '/app/form/projptenderrecord/detail',
   orgTree: '/app/admin/user/mobileOrgUserTree',
-  downLoadUrl: '/app/file/download'
+  downLoadUrl: '/app/file/download',
+  projpcontractreviewList: '/app/form/projpcontractreview/detail',
+  custPro: '/app/admin/dictionary/getBySubCodes'
 }
 
 export default api

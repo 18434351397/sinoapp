@@ -13,6 +13,11 @@ const biddingRouter = [
     path: '/projptenderrecord',
     component: () => import('../views/projptenderrecord'),
     name: 'projptenderrecord'
+  },
+  {
+    path: '/projpcontractreview',
+    component: () => import('../views/projpcontractreview'),
+    name: 'projpcontractreview'
   }
 ]
 export default biddingRouter

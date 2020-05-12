@@ -604,7 +604,7 @@
     />
     <div style="padding: 8px 36px 16px;
     background: #fff;" v-if="isCustPro">
-      <van-button round block type="primary" @click="taxes(contractList.tax)">
+      <van-button round block type="primary"  @click="taxes($event,contractList.tax)">
         计算
       </van-button>
     </div>
@@ -953,7 +953,8 @@ export default {
       this.showPicker = false;
     },
     // 税金
-    taxes(value){
+    taxes(e,value){
+      e.preventDefault();
       const rate = this.contractList
       console.log(value);
       // 税前毛利润率

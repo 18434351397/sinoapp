@@ -52,6 +52,8 @@ export default {
   },
   created () {
     this.loadData()
+  },
+  mounted () {
     window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
   },
   methods: {

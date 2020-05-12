@@ -12,12 +12,15 @@ export default {
   name: 'index',
   data () {
     return {
-      active: 0
+      active: 0,
+      path: this.$route.path
     }
   },
   methods: {
     onChange () {
-      // console.log(this.active)
+      if (this.path === '/my') {
+        window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
+      }
     }
   },
   mounted () {

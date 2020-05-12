@@ -15,13 +15,6 @@
       />
       <van-field
         style="display: none;"
-        name="commitType"
-        v-model="custList.commitType"
-        type="text"
-        readonly
-      />
-      <van-field
-        style="display: none;"
         name="meetingUsers"
         v-model="custList.meetingUsers"
         type="text"

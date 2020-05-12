@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import { Toast } from 'vant'
-
+import RouterList from './concat'
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,28 +51,7 @@ const routes = [
     path: '/detail',
     component: () => import('../views/detail'),
     name: 'detail',
-    children: [
-      {
-        path: '/bizcustinfoform',
-        component: () => import('../views/addCustomer'),
-        name: 'bizcustinfoform'
-      },
-      {
-        path: '/bizsupplierinfoform',
-        component: () => import('../views/bizsupplierinfoform'),
-        name: 'bizsupplierinfoform'
-      },
-      {
-        path: '/projptenderrecord',
-        component: () => import('../views/projptenderrecord'),
-        name: 'projptenderrecord'
-      },
-      {
-        path: '/projpcontractreview',
-        component: () => import('../views/projpcontractreview'),
-        name: 'projpcontractreview'
-      }
-    ]
+    children: RouterList
   }
 ]
 

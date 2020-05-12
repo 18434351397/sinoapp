@@ -1,112 +1,105 @@
 /** *@author CheYongJi *@date 2020/4/15 12:51 *@title index */
 <template>
-  <div style="height: 100%;">
-    <van-sticky>
-      <NavBar />
-    </van-sticky>
-    <div style="background-color: #f8f8f8;">
-      <van-dialog
-        v-model="show"
-        @confirm="confirmCounterSign"
-        title="会签"
-        show-cancel-button
-      >
-        <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
-          <el-input placeholder="输入关键字进行过滤" v-model="filterText">
-          </el-input>
-          <el-tree
-            accordion
-            check-on-click-node
-            check-strictly
-            node-key="id"
-            @check-change="handleCheckChange"
-            @current-change="handleCurrentChange"
-            show-checkbox
-            style="margin: 0;"
-            class="filter-tree"
-            :data="treeList"
-            :props="defaultProps"
-            :filter-node-method="filterNode"
-            ref="tree"
-          >
-          </el-tree>
-        </div>
-      </van-dialog>
-      <van-form id="editPwdForm" @submit="onSubmit">
-        <div class="public-title">
-        <van-field
-          name="formTitle"
-          v-model="flowList.formTitle"
-          type="text"
-          label="流程标题:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.currFlowName"
-          type="text"
-          label="流程名称:"
-          readonly
-        />
-        <van-field
-          style="display: none;"
-          name="objName"
-          v-model="flowList.objName"
-          type="text"
-          readonly
-        />
-        <van-field
-          style="display: none;"
-          name="currTaskDefinitionKey"
-          v-model="flowList.currTaskDefinitionKey"
-          type="text"
-          readonly
-        />
-        <van-field
-          v-model="flowList.statusDes"
-          type="text"
-          label="流程状态:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.currTaskDefinitionName"
-          type="text"
-          label="当前节点:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.currUserName"
-          type="text"
-          label="当前处理人:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.userName"
-          type="text"
-          label="发起人:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.createdDate"
-          type="text"
-          label="发起时间:"
-          readonly
-        />
-        </div>
-        <!--审批流程详情部分开始-->
-        <router-view ref="detail" />
-        <!--审批流程详情部分结束-->
-        <div style="margin-bottom: 10px;">
-          <div
-            style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-          >
-            历史办理详情
+    <div style="height: 100%;">
+      <van-sticky>
+      <NavBar/>
+      </van-sticky>
+      <div style="background-color: #f8f8f8;">
+        <van-dialog v-model="show" @confirm="confirmCounterSign" title="会签" show-cancel-button>
+          <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
+            <el-input
+              placeholder="输入关键字进行过滤"
+              v-model="filterText">
+            </el-input>
+            <el-tree
+              accordion
+              check-on-click-node
+              check-strictly
+              node-key="id"
+              @check-change="handleCheckChange"
+              @current-change="handleCurrentChange"
+              show-checkbox
+              style="margin: 0;"
+              class="filter-tree"
+              :data="treeList"
+              :props="defaultProps"
+              :filter-node-method="filterNode"
+              ref="tree">
+            </el-tree>
           </div>
-          <van-steps
-            direction="vertical"
-            :active="historyList.length - 1"
-            active-color="#409EFF"
-          >
-            <van-step :key="index" v-for="(item, index) in historyList">
+        </van-dialog>
+        <van-form id='editPwdForm' @submit="onSubmit">
+          <van-field
+            name="formTitle"
+            v-model="flowList.formTitle"
+            type="text"
+            label="流程标题:"
+            readonly
+          />
+          <van-field
+            v-model="flowList.currFlowName"
+            type="text"
+            label="流程名称:"
+            readonly
+          />
+          <van-field
+            style="display: none;"
+            name="commitType"
+            v-model="commitType"
+            type="text"
+            readonly
+          />
+          <van-field
+            style="display: none;"
+            name="objName"
+            v-model="flowList.objName"
+            type="text"
+            readonly
+          />
+          <van-field
+            style="display: none;"
+            name="currTaskDefinitionKey"
+            v-model="flowList.currTaskDefinitionKey"
+            type="text"
+            readonly
+          />
+          <van-field
+            v-model="flowList.statusDes"
+            type="text"
+            label="流程状态:"
+            readonly
+          />
+          <van-field
+            v-model="flowList.currTaskDefinitionName"
+            type="text"
+            label="当前节点:"
+            readonly
+          />
+          <van-field
+            v-model="flowList.currUserName"
+            type="text"
+            label="当前处理人:"
+            readonly
+          />
+          <van-field
+            v-model="flowList.userName"
+            type="text"
+            label="发起人:"
+            readonly
+          />
+          <van-field
+            v-model="flowList.createdDate"
+            type="text"
+            label="发起时间:"
+            readonly
+          />
+          <!--审批流程详情部分开始-->
+          <router-view ref="detail" />
+          <!--审批流程详情部分结束-->
+          <div style="margin-bottom: 10px;">
+            <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">历史办理详情</div>
+            <van-steps direction="vertical" :active="historyList.length-1" active-color="#409EFF">
+              <van-step :key="index" v-for="(item, index) in historyList">
               <h5>
                 【{{ item.taskName }}】
                 <div v-if="!item.porxy">
@@ -117,88 +110,49 @@
               </h5>
               <span>{{ item.createdDate }}</span>
             </van-step>
-          </van-steps>
-        </div>
-        <div style="margin-bottom: 70px;">
-          <div
-            style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-          >
-            审批
+            </van-steps>
           </div>
-          <div class="public-title">
+          <div style="margin-bottom: 70px;">
+            <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">审批</div>
             <van-field name="radio" label="审批结果">
-            <template #input>
-              <van-radio-group
-                @change="onchange"
-                v-model="radio"
-                direction="horizontal"
-              >
-                <van-radio name="1">同意</van-radio>
-                <van-radio name="2">不同意</van-radio>
-              </van-radio-group>
-            </template>
-          </van-field>
-          <van-field
-            name="content"
-            v-model="message"
-            rows="2"
-            autosize
-            label="办理意见"
-            type="textarea"
-            maxlength="50"
-            placeholder="请输入办理意见"
-            show-word-limit
-          />
+              <template #input>
+                <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
+                  <van-radio name="1">同意</van-radio>
+                  <van-radio name="2">不同意</van-radio>
+                </van-radio-group>
+              </template>
+            </van-field>
+            <van-field
+              name="content"
+              v-model="message"
+              rows="2"
+              autosize
+              label="办理意见"
+              type="textarea"
+              maxlength="50"
+              placeholder="请输入办理意见"
+              show-word-limit
+            />
+            <el-select style="width: 100%;" @change="pullSelect" v-model="region.id" placeholder="请选择步骤" >
+              <el-option :value="item.id" :label="item.text" :key="index" v-for="(item, index) in nextSelectOpts"></el-option>
+            </el-select>
           </div>
-          <el-select
-            style="width: 100%;"
-            @change="pullSelect"
-            v-model="region.id"
-            placeholder="请选择步骤"
-          >
-            <el-option
-              :value="item.id"
-              :label="item.text"
-              :key="index"
-              v-for="(item, index) in nextSelectOpts"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="submitBox">
-          <van-button
-            style="width: 30%"
-            round
-            block
-            type="info"
-            native-type="submit"
-          >
-            提交
-          </van-button>
-          <van-button
-            style="width: 30%"
-            @click="counterSign"
-            round
-            block
-            type="default"
-            native-type="button"
-          >
-            会签
-          </van-button>
-          <van-button
-            style="width: 30%"
-            @click="back"
-            round
-            block
-            type="default"
-            native-type="button"
-          >
-            取消
-          </van-button>
-        </div>
-      </van-form>
+          <div class="submitBox">
+            <van-button style="width: 30%" round block  type="info" native-type="submit">
+              提交
+            </van-button>
+            <van-button style="width: 30%" @click="counterSign" round block type="default" native-type="submit">
+              会签
+            </van-button>
+            <van-button style="width: 30%" @click="back" round block type="default" native-type="button">
+              取消
+            </van-button>
+          </div>
+        </van-form>
+      </div>
     </div>
-  </div>
 </template>
+
 
 <script>
 import { flowForm, flowFormUpdate, getOrgTree } from "../../api/flowfrom";
@@ -212,6 +166,7 @@ export default {
   },
   data() {
     return {
+      commitType: '',
       treeList: [],
       show: false,
       region: {
@@ -356,21 +311,15 @@ export default {
       } else {
         values.content = values.content + " >>>>" + "【下一步】";
       }
+      // 接口调用
+      // this.url = this.url.slice(0, -11) + 'updateVOs'
 
       // 调用接口判断方法
       this.specialFun(values);
-
-      // // 判断是回退 还是 下一步
-      // let commitType = values.content.split('【');
-      // commitType = commitType[1].slice(0,2)
-      // if(commitType === '退回') {
-      //   values.commitType = 'return'
-      // } else {
-      //   values.commitType = values.commitType
-      // }
-
-      values.file = this.$refs.detail.fileList; // 附件信息
-
+      values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
+      if (values.file.length <= 0) {
+        delete values.file
+      }
       const data = {
         url: this.url,
         data: values
@@ -412,7 +361,7 @@ export default {
         console.log(this.url,'经理')
       } else {
         // this.url = this.url.slice(0, -11) + "/updateVOs";
-        this.url = this.url.slice(0, -11) + "/update/task";
+        this.url = this.url.slice(0, -12) + "/update/task";
         console.log(this.url,'通用')
       }
     },
@@ -541,20 +490,31 @@ export default {
         }
       } else {
       }
-      this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts);
+      this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
     },
-    handleContent(data) {},
-    pullSelect(data) {
-      console.log(this.region);
+    handleContent (data) {
     },
-    counterSign() {
-      this.show = true;
-      console.log("huiqian");
+    // 下拉框选择值发生变化时，调用方法
+    pullSelect (data) {
+      if (this.region.id.includes('back')) {
+        this.commitType = 'return'
+      } else {
+        this.commitType = ''
+      }
     },
-    confirmCounterSign() {
-      console.log(this.$refs.tree.getCheckedKeys());
-      console.log(this.$refs.tree.getCheckedNodes());
-      console.log("会签提交");
+    // 会签弹框显示
+    counterSign (data) {
+      this.show = true
+      if (this.show) {
+        this.commitType = 'meeting'
+      }
+      console.log('huiqian')
+    },
+    // 会签方法提交
+    confirmCounterSign () {
+      console.log(this.$refs.tree.getCheckedKeys())
+      console.log(this.$refs.tree.getCheckedNodes())
+      console.log('会签提交')
     },
     filterNode(value, data) {
       if (!value) return true;

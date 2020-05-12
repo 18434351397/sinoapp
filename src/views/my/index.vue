@@ -60,6 +60,9 @@ export default {
       }).catch(() => {
         // on close
       })
+    },
+    beforeDestroy () {
+      window.removeEventListener('scroll')
     }
   }
 }

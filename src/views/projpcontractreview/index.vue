@@ -26,13 +26,6 @@
     />
     <van-field
       style="display: none;"
-      name="commitType"
-      v-model="contractList.commitType"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
       v-if="isCustPro"
       name="occupy"
       v-model="contractList.occupy"

@@ -37,7 +37,7 @@
                 </li>
                 <li>
                   <!--<input class="login_btn" type="button" id="btnSubmit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">-->
-                  <span class="login_btn" id="btnSubmit" @click="login()">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</span>
+                  <span class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</span>
                 </li>
               </ul>
             </div>
@@ -98,8 +98,15 @@ export default {
       userAccount: '',
       password: '',
       errMsg: '',
-      status: 'edit'
+      status: 'edit',
+      isLogin: false
     }
+  },
+  created () {
+    this.enterKeyup()
+  },
+  destroyed () {
+    this.enterKeyupDestroyed()
   },
   methods: {
     login () {
@@ -139,6 +146,28 @@ export default {
     },
     forgetpwd () {
       this.$router.push({ name: 'forgetPassword', params: { status: this.status ? this.status : 'forget', statu1: '1' } })
+    },
+    // 监听键盘事件--回车键
+    enterKey (event) {
+      const componentName = this.$options.name
+      if (componentName === 'Login') {
+        const code = event.keyCode
+          ? event.keyCode
+          : event.which
+            ? event.which
+            : event.charCode
+        if (code === 13) {
+          this.login()
+        }
+      }
+    },
+    // 登陆成功后，摧毁监听事件
+    enterKeyupDestroyed () {
+      document.removeEventListener('keyup', this.enterKey)
+    },
+    // 调用监听事件
+    enterKeyup () {
+      document.addEventListener('keyup', this.enterKey)
     }
   }
 }

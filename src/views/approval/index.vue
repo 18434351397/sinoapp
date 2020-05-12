@@ -117,6 +117,9 @@ export default {
       if (this.searchValue) {
         this.searchValue = ''
       }
+    },
+    beforeDestroy () {
+      window.removeEventListener('scroll')
     }
   }
 }

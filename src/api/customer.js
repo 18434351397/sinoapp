@@ -28,8 +28,15 @@ export async function projpcontractreviewList (data) {
   })
 }
 
-// 客户属性
+// 投标报价
+export async function projptenderquoteList (data) {
+  return request({
+    url: api.projptenderquoteList + '/' + data,
+    method: 'get'
+  })
+}
 
+// 客户属性
 export async function custPro() {
   return request({
     url: api.custPro + '?subCodes=custPro-&_=1589012445450',

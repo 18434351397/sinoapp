@@ -12,10 +12,16 @@
     <van-field
       name="radio"
       label="是否已投标备案"
-      v-model="contractList.isRecord=== '0' ? '否': '是'"
-      readonly 
+      v-model="contractList.isRecord"
+      readonly
       colon
     >
+      <template #input>
+        <div v-if="contractList.isRecord === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
     </van-field>
     <van-field
       v-model="contractList.chanceId"
@@ -103,10 +109,20 @@
       colon
       readonly
     />
-    <van-field name="radio" label="是否关联交易"  
-    v-model="contractList.isRelated === '0' ? '否': '是'"
-    readonly 
-    colon /> 
+    <van-field
+      name="radio"
+      label="是否关联交易"
+      v-model="contractList.isRelated"
+      readonly
+      colon
+    >
+      <template #input>
+        <div v-if="contractList.isRelated === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
     <van-field
       v-model="contractList.contractTypeDesc"
       type="text"
@@ -279,30 +295,58 @@
         >
         </el-table-column>
         <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
-        <el-table-column label="预计收/付款时间" prop="paymentDate"> </el-table-column>
-        <el-table-column label="采购合同号" prop="purchaseNo"> </el-table-column>
-        <el-table-column label="预计收/付款金额" prop="paymentAmount"> </el-table-column>
+        <el-table-column label="预计收/付款时间" prop="paymentDate">
+        </el-table-column>
+        <el-table-column label="采购合同号" prop="purchaseNo">
+        </el-table-column>
+        <el-table-column label="预计收/付款金额" prop="paymentAmount">
+        </el-table-column>
         <el-table-column label="税率" prop="paymentRate"> </el-table-column>
-        <el-table-column label="对方单位" prop="opposingUnit"> </el-table-column>
+        <el-table-column label="对方单位" prop="opposingUnit">
+        </el-table-column>
         <el-table-column label="我方单位" prop="ourUnit"></el-table-column>
-        <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
-        <el-table-column label="计入科目" prop="accountSubject"></el-table-column>
-        <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
-        <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
-        <el-table-column label="是否有验收报告" prop="hasReport"></el-table-column>
-        <el-table-column label="预计验收报告时间" prop="reportDate"></el-table-column>
+        <el-table-column
+          label="预计收/付款条件"
+          prop="paymentCondition"
+        ></el-table-column>
+        <el-table-column
+          label="计入科目"
+          prop="accountSubject"
+        ></el-table-column>
+        <el-table-column
+          label="验收报告名称"
+          prop="reportName"
+        ></el-table-column>
+        <el-table-column
+          label="现金流量金额"
+          prop="confirmAmount"
+        ></el-table-column>
+        <el-table-column
+          label="是否有验收报告"
+          prop="hasReport"
+        ></el-table-column>
+        <el-table-column
+          label="预计验收报告时间"
+          prop="reportDate"
+        ></el-table-column>
         <el-table-column label="款项名称" prop="paymentName"></el-table-column>
-        <el-table-column label="资金占用时间" prop="occupyTime"></el-table-column>
-        <el-table-column label="资金占用成本" prop="occupyAmount"></el-table-column>
+        <el-table-column
+          label="资金占用时间"
+          prop="occupyTime"
+        ></el-table-column>
+        <el-table-column
+          label="资金占用成本"
+          prop="occupyAmount"
+        ></el-table-column>
         <el-table-column label="备注" prop="remark"> </el-table-column>
       </el-table>
       <van-field
-      type="text"
-      v-model="contractList.occupy"
-      label="资金占用情况"
-      colon
-      readonly
-    />
+        type="text"
+        v-model="contractList.occupy"
+        label="资金占用情况"
+        colon
+        readonly
+      />
     </div>
 
     <div class="title">金额计算</div>
@@ -392,7 +436,6 @@
       colon
       readonly
     />
-
     <van-field
       type="text"
       v-if="isCustPro"
@@ -512,11 +555,21 @@
       colon
       readonly
     />
-    <van-field name="radio" label="是否有项目"
-    v-model="contractList.hasProject === '0'? '否': '是'" 
-    readonly colon 
-    />
-  <!-- <van-field name="radio" v-if="isCustPro" class="tax" label="是否有项目">
+    <van-field
+      name="radio"
+      label="是否有项目"
+      v-model="contractList.hasProject"
+      readonly
+      colon
+    >
+      <template #input>
+        <div v-if="contractList.hasProject === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
+    <!-- <van-field name="radio" v-if="isCustPro" class="tax" label="是否有项目">
   <template #input>
     <van-radio-group v-model="contractList.hasProject" direction="horizontal">
       <van-radio name="0">否</van-radio>
@@ -602,9 +655,17 @@
       colon
       readonly
     />
-    <div style="padding: 8px 36px 16px;
-    background: #fff;" v-if="isCustPro">
-      <van-button round block type="primary"  @click="taxes($event,contractList.tax)">
+    <div
+      style="padding: 8px 36px 16px;
+    background: #fff;"
+      v-if="isCustPro"
+    >
+      <van-button
+        round
+        block
+        type="primary"
+        @click="taxes($event, contractList.tax)"
+      >
         计算
       </van-button>
     </div>
@@ -623,38 +684,94 @@
       colon
       readonly
     />
-    <van-field name="radio" label="是否有销售合同文件"  
-    v-model="contractList.hasContract === '0'? '否': contractList.hasContract === '1' ? '是' : '暂无' " 
-    readonly
-    colon />
-    <van-field name="radio" label="是否为最终客户"
-     v-model="contractList.isEndCust === '0'? '否': '是'" 
-    readonly
-    colon />
-      
-    <van-field name="radio" label="是否签订合同"
-     colon 
-     v-model="contractList.isContract === '0'? '否': '是'" 
-    readonly />
+    <van-field
+      name="radio"
+      label="是否有销售合同文件"
+      v-model="contractList.hasContract"
+      readonly
+      colon
+    >
+      <template #input>
+        <div v-if="contractList.hasContract === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else-if="contractList.hasContract === '0'" style="margin: 0;">
+          否
+        </div>
+        <div v-else style="margin: 0;">暂无</div>
+      </template>
+    </van-field>
+    <van-field
+      name="radio"
+      label="是否为最终客户"
+      v-model="contractList.isEndCust"
+      readonly
+      colon
+    >
+      <template #input>
+        <div v-if="contractList.isEndCust === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
+
+    <van-field
+      name="radio"
+      label="是否签订合同"
+      colon
+      v-model="contractList.isContract"
+      readonly
+    >
+      <template #input>
+        <div v-if="contractList.isContract === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
     <van-field
       name="radio"
       label="是否是涉税合同（包含混合销售，技术开发，自有软件类合同）"
       colon
-     v-model="contractList.isMixed=== '0'? '否': '是'" 
-    readonly
-    />
-    <van-field 
-    name="radio" 
-    label="是否提前下单" 
-    colon 
-    v-model="contractList.hasAdvanceOrder === '0'? '否': '是'" 
-    readonly />
-    <van-field 
-    name="radio" 
-    label="是否提前发货" 
-    colon 
-    v-model="contractList.hasAdvanceSend === '0'? '否': '是'" 
-    readonly />
+      v-model="contractList.isMixed"
+      readonly
+    >
+      <template #input>
+        <div v-if="contractList.isMixed === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
+    <van-field
+      name="radio"
+      label="是否提前下单"
+      colon
+      v-model="contractList.hasAdvanceOrder"
+      readonly
+    >
+      <template #input>
+        <div v-if="contractList.hasAdvanceOrder === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
+    <van-field
+      name="radio"
+      label="是否提前发货"
+      colon
+      v-model="contractList.hasAdvanceSend"
+      readonly
+    >
+      <template #input>
+        <div v-if="contractList.hasAdvanceSend === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
     <van-field
       v-if="isCustPro"
       readonly
@@ -682,14 +799,21 @@
       colon
       v-model="contractList.custProDesc"
     />
-    <van-field name="radio" 
-    label="是否合作项目" 
-    colon 
-    v-model="contractList.hasCooperation === '0'? '否': '是'" 
-    readonly
+    <van-field
+      name="radio"
+      label="是否合作项目"
+      colon
+      v-model="contractList.hasCooperation"
+      readonly
     >
+      <template #input>
+        <div v-if="contractList.hasCooperation === '1'" style="margin: 0;">
+          是
+        </div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
     </van-field>
-    <van-field  
+    <van-field
       type="text"
       v-model="contractList.signDate"
       label="预计签订时间"
@@ -720,7 +844,7 @@
         <el-table-column label="附件名称" prop="fileName"> </el-table-column>
         <el-table-column label="大小" width="80">
           <template slot-scope="scope">
-            {{ (scope.row.fileSize / 1024).toFixed(2) + "KB" }}
+            {{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="50">
@@ -747,7 +871,7 @@
         <el-table-column label="附件名称" prop="fileName"> </el-table-column>
         <el-table-column label="大小" width="80">
           <template slot-scope="scope">
-            {{ (scope.row.fileSize / 1024).toFixed(2) + "KB" }}
+            {{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="50">
@@ -782,7 +906,7 @@
         <el-table-column label="附件名称" prop="fileName"> </el-table-column>
         <el-table-column label="大小" width="80">
           <template slot-scope="scope">
-            {{ (scope.row.fileSize / 1024).toFixed(2) + "KB" }}
+            {{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="50">
@@ -809,7 +933,7 @@
         <el-table-column label="附件名称" prop="fileName"> </el-table-column>
         <el-table-column label="大小" width="80">
           <template slot-scope="scope">
-            {{ (scope.row.fileSize / 1024).toFixed(2) + "KB" }}
+            {{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="50">
@@ -825,10 +949,10 @@
 </template>
 
 <script>
-import { projpcontractreviewList, custPro } from "../../api/customer";
+import { projpcontractreviewList, custPro } from '../../api/customer'
 
 export default {
-  name: "index",
+  name: 'index',
   data() {
     return {
       isCustPro: false, // 默认不显示客户选择属性 -- 部门
@@ -837,7 +961,7 @@ export default {
       showPicker: false,
       custProList: [],
       dataList: this.$route.query,
-      title: "合同评审信息表编辑",
+      title: '合同评审信息表编辑',
       contractList: [], // 整体信息
       incomeList: [], // 收入
       costList: [], // 成本
@@ -848,27 +972,27 @@ export default {
       noSignFileList: [], // 不签名合同说明
       explainFileList: [], // 未签合同说明
       fileConcat: [], // 整合所有的 file
-      fileList: [] // 提交 file 处理 ,去除 null , 最后的结果
-    };
+      fileList: [], // 提交 file 处理 ,去除 null , 最后的结果
+    }
   },
   created() {
     projpcontractreviewList(this.dataList.dataId).then(res => {
       if (res.data) {
-        const resData = res.data.projpContractFeesList;
-        this.contractList = res.data; // 合同信息
-        this.achievementList = res.data.projpContractAchievementList; // 业绩切分
-        this.paymentCondition = res.data.paymentCondition; // 预计现金流量表
-        this.contractFileList = res.data.contractFileList;
-        this.projectScoringFileList = res.data.projectScoringFileList;
-        this.noSignFileList = res.data.noSignFileList;
-        this.explainFileList = res.data.explainFileList;
-        this.value = res.data.custProDesc;
+        const resData = res.data.projpContractFeesList
+        this.contractList = res.data // 合同信息
+        this.achievementList = res.data.projpContractAchievementList // 业绩切分
+        this.paymentCondition = res.data.paymentCondition // 预计现金流量表
+        this.contractFileList = res.data.contractFileList
+        this.projectScoringFileList = res.data.projectScoringFileList
+        this.noSignFileList = res.data.noSignFileList
+        this.explainFileList = res.data.explainFileList
+        this.value = res.data.custProDesc
         this.fileConcat = this.fileConcat.concat(
           res.data.contractFileList,
           res.data.projectScoringFileList,
           res.data.noSignFileList,
           res.data.explainFileList
-        );
+        )
         for (const file of this.fileConcat) {
           if (file) {
             this.fileList = this.fileList.concat(
@@ -876,36 +1000,38 @@ export default {
                 fileName: file.fileName,
                 url: file.url,
                 fileSize: file.fileSize,
-                fileId: file.fileId
+                fileId: file.fileId,
               })
-            );
-          } else {  }
+            )
+          } else {
+          }
         }
         if (resData) {
           for (const i in resData) {
-            if (resData[i].pRType === "r") {
-              this.incomeList = this.incomeList.concat(resData[i]);
-            } else if (resData[i].pRType === "c") {
-              this.costList = this.costList.concat(resData[i]);
+            if (resData[i].pRType === 'r') {
+              this.incomeList = this.incomeList.concat(resData[i])
+            } else if (resData[i].pRType === 'c') {
+              this.costList = this.costList.concat(resData[i])
             } else {
-              return {};
+              return {}
             }
           }
         } else {
-          return {};
+          return {}
         }
       } else {
-        throw new "数据异常"();
+        throw new '数据异常'()
       }
-    });
+    })
     // 特殊处理
-    let user = this.dataList;
+    let user = this.dataList
     if (
-      user.currTaskDefinitionName === "运营管理部" &&
-      user.currUserName === "李月平" &&
-      user.currTaskDefinitionKey === "BusiAnalysis"
+      user.currTaskDefinitionName === '运营管理部' &&
+      user.currUserName === '李月平' &&
+      user.currTaskDefinitionKey === 'BusiAnalysis' &&
+      user.currFlowId === 'ContrReviewApprove'
     ) {
-      this.isCustPro = true;
+      this.isCustPro = true
       custPro().then(res => {
         this.custProList = res.data.custPro.map(item => {
           return {
@@ -924,64 +1050,83 @@ export default {
             nameEng: item.nameEng,
             rank: item.rank,
             serialNo: item.serialNo,
-            upState: item.upState
-          };
-        });
-      });
+            upState: item.upState,
+          }
+        })
+      })
     } else if (
-      user.currTaskDefinitionName === "运营管理部经理" &&
-      user.currTaskDefinitionKey === "BusiAnalysisManager"
+      user.currTaskDefinitionName === '运营管理部经理' &&
+      user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+      user.currFlowId === 'ContrReviewApprove'
     ) {
-      this.isCustProShow = true;
+      this.isCustProShow = true
     } else {
-      return;
+      return
     }
   },
   methods: {
     // 处理序号
     indexMethods(index) {
-      return index + 1;
+      return index + 1
     },
     // 下载调用方法
     handleClick(data) {
-      console.log(data.url);
-      this.downLoad(data);
+      console.log(data.url)
+      this.downLoad(data)
     },
     onConfirm(value) {
-      this.value = value.text;
-      this.contractList.custPro = value.custPro;
-      this.showPicker = false;
+      this.value = value.text
+      this.contractList.custPro = value.custPro
+      this.showPicker = false
     },
     // 税金
-    taxes(e,value){
-      e.preventDefault();
+    taxes(e, value) {
+      e.preventDefault()
       const rate = this.contractList
       // 税前毛利润率
-      rate.pretaxGrossProfitRate = ((Number(rate.contractAmount) - Number(rate.costTotalAmount)) /  Number(rate.receiveTotalAmount) * 100).toFixed(2);
-      // 税后毛利润率                              // 收入                           // 成本                  // 税金             // 收入 
-      rate.aftertaxGrossProfitRate = ((Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)) / Number(rate.receiveTotalAmount) * 100).toFixed(2)
+      rate.pretaxGrossProfitRate = (
+        ((Number(rate.contractAmount) - Number(rate.costTotalAmount)) /
+          Number(rate.receiveTotalAmount)) *
+        100
+      ).toFixed(2)
+      // 税后毛利润率                              // 收入                           // 成本                  // 税金             // 收入
+      rate.aftertaxGrossProfitRate = (
+        ((Number(rate.contractAmount) -
+          Number(rate.costTotalAmount) -
+          Number(value)) /
+          Number(rate.receiveTotalAmount)) *
+        100
+      ).toFixed(2)
       // 毛利润                      // 收入                           // 成本                  // 税金
-      rate.grossProfit = (Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)).toFixed(2)
+      rate.grossProfit = (
+        Number(rate.contractAmount) -
+        Number(rate.costTotalAmount) -
+        Number(value)
+      ).toFixed(2)
       // 净利润                     // 收入                           // 成本                  // 税金
-      rate.netProfit =  (Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)).toFixed(2)
-    }
-  }
-};
+      rate.netProfit = (
+        Number(rate.contractAmount) -
+        Number(rate.costTotalAmount) -
+        Number(value)
+      ).toFixed(2)
+    },
+  },
+}
 </script>
 
 <style lang="less">
 div.projpcontractre {
   background-color: #f8f8f8;
   div.title {
-  font-size: 14px;
-  padding: 10px 15px;
+    font-size: 14px;
+    padding: 10px 15px;
   }
   div.table-title {
-  font-size: 14px;
-  border-top: 1px dashed #f8f8f8;
-  padding: 10px 15px;
-  text-align: left;
-  background-color: #fff;
+    font-size: 14px;
+    border-top: 1px dashed #f8f8f8;
+    padding: 10px 15px;
+    text-align: left;
+    background-color: #fff;
   }
 }
 </style>

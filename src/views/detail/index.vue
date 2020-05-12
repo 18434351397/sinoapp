@@ -252,7 +252,6 @@ export default {
         this.handleNextSelectOpts(res.data)
         this.handleBackSelectOpts(res.data)
         this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
-        console.log(this.historyList)
       }
     })
     getOrgTree().then(res => {
@@ -301,7 +300,6 @@ export default {
     },
     // 点击提交按钮要进行的操作
     onSubmit (values) {
-      console.log(this.region)
       delete values.radio
       delete values.undefined
       values.submitTask = this.region.id ? this.region.id : '【下一步】'
@@ -326,7 +324,6 @@ export default {
         url: this.url,
         data: values
       }
-      console.log(data)
       this.submit(data)
     },
     // 提交方法-->调接口进行提交
@@ -363,17 +360,14 @@ export default {
         user.currTaskDefinitionKey === 'BusiAnalysis'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
-        console.log(this.url, '李月平')
       } else if (
         user.currTaskDefinitionName === '运营管理部经理' &&
         user.currTaskDefinitionKey === 'BusiAnalysisManager'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
-        console.log(this.url, '经理')
       } else {
         // this.url = this.url.slice(0, -11) + "/updateVOs";
         this.url = this.url.slice(0, -12) + '/update/task'
-        console.log(this.url, '通用')
       }
     },
     onchange () {
@@ -519,13 +513,11 @@ export default {
       if (this.show) {
         this.commitType = 'meeting'
       }
-      console.log('huiqian')
     },
     // 会签方法提交
     confirmCounterSign () {
       console.log(this.$refs.tree.getCheckedKeys())
       console.log(this.$refs.tree.getCheckedNodes())
-      console.log('会签提交')
     },
     filterNode (value, data) {
       if (!value) return true

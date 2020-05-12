@@ -5,15 +5,9 @@
       <NavBar />
     </van-sticky>
     <div style="background-color: #f8f8f8;">
-      <van-dialog
-        v-model="show"
-        @confirm="confirmCounterSign"
-        title="会签"
-        show-cancel-button
-      >
+      <van-dialog v-model="show" @confirm="confirmCounterSign" title="会签" show-cancel-button>
         <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
-          <el-input placeholder="输入关键字进行过滤" v-model="filterText">
-          </el-input>
+          <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
           <el-tree
             accordion
             check-on-click-node
@@ -28,8 +22,7 @@
             :props="defaultProps"
             :filter-node-method="filterNode"
             ref="tree"
-          >
-          </el-tree>
+          ></el-tree>
         </div>
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit">
@@ -40,12 +33,7 @@
           label="流程标题:"
           readonly
         />
-        <van-field
-          v-model="flowList.currFlowName"
-          type="text"
-          label="流程名称:"
-          readonly
-        />
+        <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly />
         <van-field
           style="display: none;"
           name="commitType"
@@ -67,50 +55,19 @@
           type="text"
           readonly
         />
-        <van-field
-          v-model="flowList.statusDes"
-          type="text"
-          label="流程状态:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.currTaskDefinitionName"
-          type="text"
-          label="当前节点:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.currUserName"
-          type="text"
-          label="当前处理人:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.userName"
-          type="text"
-          label="发起人:"
-          readonly
-        />
-        <van-field
-          v-model="flowList.createdDate"
-          type="text"
-          label="发起时间:"
-          readonly
-        />
+        <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly />
+        <van-field v-model="flowList.currTaskDefinitionName" type="text" label="当前节点:" readonly />
+        <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly />
+        <van-field v-model="flowList.userName" type="text" label="发起人:" readonly />
+        <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly />
         <!--审批流程详情部分开始-->
         <router-view ref="detail" />
         <!--审批流程详情部分结束-->
         <div style="margin-bottom: 10px;">
           <div
             style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-          >
-            历史办理详情
-          </div>
-          <van-steps
-            direction="vertical"
-            :active="historyList.length - 1"
-            active-color="#409EFF"
-          >
+          >历史办理详情</div>
+          <van-steps direction="vertical" :active="historyList.length - 1" active-color="#409EFF">
             <van-step :key="index" v-for="(item, index) in historyList">
               <h5>
                 【{{ item.taskName }}】
@@ -127,16 +84,10 @@
         <div style="margin-bottom: 70px;">
           <div
             style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-          >
-            审批
-          </div>
+          >审批</div>
           <van-field name="radio" label="审批结果">
             <template #input>
-              <van-radio-group
-                @change="onchange"
-                v-model="radio"
-                direction="horizontal"
-              >
+              <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
                 <van-radio name="1">同意</van-radio>
                 <van-radio name="2">不同意</van-radio>
               </van-radio-group>
@@ -168,15 +119,7 @@
           </el-select>
         </div>
         <div class="submitBox">
-          <van-button
-            style="width: 30%"
-            round
-            block
-            type="info"
-            native-type="submit"
-          >
-            提交
-          </van-button>
+          <van-button style="width: 30%" round block type="info" native-type="submit">提交</van-button>
           <van-button
             style="width: 30%"
             @click="counterSign"
@@ -184,9 +127,7 @@
             block
             type="default"
             native-type="submit"
-          >
-            会签
-          </van-button>
+          >会签</van-button>
           <van-button
             style="width: 30%"
             @click="back"
@@ -194,9 +135,7 @@
             block
             type="default"
             native-type="button"
-          >
-            取消
-          </van-button>
+          >取消</van-button>
         </div>
       </van-form>
     </div>
@@ -211,15 +150,15 @@ import { Dialog, Toast } from 'vant'
 export default {
   name: 'index',
   components: {
-    NavBar,
+    NavBar
   },
-  data() {
+  data () {
     return {
       commitType: '',
       treeList: [],
       show: false,
       region: {
-        id: '',
+        id: ''
       },
       flowList: [],
       url: '',
@@ -240,15 +179,15 @@ export default {
               children: [
                 {
                   id: 9,
-                  label: '车永基',
+                  label: '车永基'
                 },
                 {
                   id: 10,
-                  label: '田冬慧',
-                },
-              ],
-            },
-          ],
+                  label: '田冬慧'
+                }
+              ]
+            }
+          ]
         },
         {
           id: 2,
@@ -256,13 +195,13 @@ export default {
           children: [
             {
               id: 5,
-              label: '二级 2-1',
+              label: '二级 2-1'
             },
             {
               id: 6,
-              label: '二级 2-2',
-            },
-          ],
+              label: '二级 2-2'
+            }
+          ]
         },
         {
           id: 3,
@@ -270,27 +209,27 @@ export default {
           children: [
             {
               id: 7,
-              label: '二级 3-1',
+              label: '二级 3-1'
             },
             {
               id: 8,
-              label: '二级 3-2',
-            },
-          ],
-        },
+              label: '二级 3-2'
+            }
+          ]
+        }
       ],
       defaultProps: {
         children: 'children',
-        label: 'label',
+        label: 'label'
       },
       hasProcessByBusiAnalysis: false,
-      backSelectOpts: [],
+      backSelectOpts: []
     }
   },
-  created() {
+  created () {
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
-    flowForm(url).then(res => {
+    flowForm(url).then((res) => {
       if (res) {
         this.flowList = res.data
         this.url = res.data.url
@@ -300,7 +239,7 @@ export default {
         this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
       }
     })
-    getOrgTree().then(res => {
+    getOrgTree().then((res) => {
       if (res) {
         this.treeList = res.data ? res.data : []
       }
@@ -308,35 +247,35 @@ export default {
     })
   },
   watch: {
-    filterText(val) {
+    filterText (val) {
       this.$refs.tree.filter(val)
     },
-    show(val) {
+    show (val) {
       if (!val) {
         this.$refs.tree.setCheckedKeys([])
       }
-    },
+    }
   },
   methods: {
     // 处理树的数据
-    toTree(data) {
+    toTree (data) {
       // 删除 所有 children,以防止多次调用
-      data.forEach(function(item) {
+      data.forEach(function (item) {
         delete item.children
       })
       // 将数据存储为 以 id 为 KEY 的 map 索引数据列
       var map = {}
-      data.forEach(function(item) {
+      data.forEach(function (item) {
         map[item.id] = item
       })
       var val = []
-      data.forEach(function(item) {
+      data.forEach(function (item) {
         item.label = item.text
         // 以当前遍历项，的pid,去map对象中找到索引的id
         var parent = map[item.parent]
         // 好绕啊，如果找到索引，那么说明此项不在顶级当中,那么需要把此项添加到，他对应的父级中
         if (parent) {
-          ;(parent.children || (parent.children = [])).push(item)
+          ; (parent.children || (parent.children = [])).push(item)
         } else {
           // 如果没有在map中找到对应的索引ID,那么直接把 当前的item添加到 val结果集中，作为顶级
           val.push(item)
@@ -345,7 +284,7 @@ export default {
       return val
     },
     // 点击提交按钮要进行的操作
-    onSubmit(values) {
+    onSubmit (values) {
       delete values.radio
       delete values.undefined
       values.submitTask = this.region.id ? this.region.id : '【下一步】'
@@ -368,18 +307,18 @@ export default {
       }
       const data = {
         url: this.url,
-        data: values,
+        data: values
       }
       console.log(data)
       this.submit(data)
     },
     // 提交方法-->调接口进行提交
-    submit(values) {
+    submit (values) {
       Dialog.confirm({
-        message: '你确定要提交吗？',
+        message: '你确定要提交吗？'
       })
         .then(() => {
-          flowFormUpdate(values).then(res => {
+          flowFormUpdate(values).then((res) => {
             if (res.resultCode === '200') {
               Toast.loading({
                 duration: 1000,
@@ -389,16 +328,16 @@ export default {
                 message: res.resultMessage,
                 onClose: () => {
                   this.$router.push('/approval')
-                },
+                }
               })
             } else {
               Toast.fail(res.resultMessage)
             }
           })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
-    specialFun(values) {
+    specialFun (values) {
       const user = this.dataList
       if (
         user.currTaskDefinitionName === '运营管理部' &&
@@ -419,7 +358,7 @@ export default {
         this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口
       }
     },
-    onchange() {
+    onchange () {
       this.message = this.radio === '1' ? '同意' : '不同意'
       // if (this.radio === '1') {
       //   this.message = '同意'
@@ -428,8 +367,8 @@ export default {
       // }
     },
     //  处理下一步节点的方法
-    handleNextSelectOpts(data) {
-      data.nextTaskList.forEach(item => {
+    handleNextSelectOpts (data) {
+      data.nextTaskList.forEach((item) => {
         if (
           data.nextTaskList.length === 1 ||
           !data.nextTaskIsBranch ||
@@ -437,13 +376,13 @@ export default {
         ) {
           const arr = {
             id: 'next__' + item.userId,
-            text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName,
+            text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName
           }
           this.nextSelectOpts.push(arr)
         } else if (item.userId !== 'emptyuser') {
           const arr = {
             id: 'next_' + item.nextTaskDefinitionKey + '_' + item.userId,
-            text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName,
+            text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName
           }
           this.nextSelectOpts.push(arr)
         }
@@ -455,7 +394,7 @@ export default {
       } else {
         var item = {
           id: '',
-          text: '【下一步】',
+          text: '【下一步】'
         }
         if (data.nextTaskList.length > 0) {
           for (var i = 0; i < data.nextTaskList.length; i++) {
@@ -473,7 +412,7 @@ export default {
                   '【下一步】' +
                   data.nextTaskList[i].nextTaskName +
                   '-' +
-                  data.nextTaskList[i].nextUserName,
+                  data.nextTaskList[i].nextUserName
               }
               break
             }
@@ -482,7 +421,7 @@ export default {
         this.nextSelectOpts.push(item)
       }
     },
-    handleBackSelectOpts(data) {
+    handleBackSelectOpts (data) {
       if (
         data.currTaskDefinitionKey !== 'AcceptBack' &&
         data.currTaskDefinitionKey !== 'Todo'
@@ -496,7 +435,7 @@ export default {
             // 回退列表中只展现同一流程实例的历史审批，避免主、子流程间退回异常的问题
             if (
               data.processInstanceId ===
-                data.historyList[i].processInstanceId ||
+              data.historyList[i].processInstanceId ||
               data.historyList[i].taskDefinitionKey === 'Accept'
             ) {
               if (
@@ -521,7 +460,7 @@ export default {
                       '【退回】' +
                       data.historyList[i].taskName +
                       '-' +
-                      data.historyList[i].userName,
+                      data.historyList[i].userName
                   }
                   this.backSelectOpts.push(item)
                   this.backSelectOpts = Array.from(new Set(this.backSelectOpts))
@@ -544,9 +483,9 @@ export default {
       }
       this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
     },
-    handleContent(data) {},
+    handleContent (data) { },
     // 下拉框选择值发生变化时，调用方法
-    pullSelect(data) {
+    pullSelect (data) {
       if (this.region.id.includes('back')) {
         this.commitType = 'return'
       } else {
@@ -554,29 +493,29 @@ export default {
       }
     },
     // 会签弹框显示
-    counterSign(data) {
+    counterSign (data) {
       this.show = true
       if (this.show) {
         this.commitType = 'meeting'
       }
     },
     // 会签方法提交
-    confirmCounterSign() {
+    confirmCounterSign () {
       console.log(this.$refs.tree.getCheckedKeys())
       console.log(this.$refs.tree.getCheckedNodes())
     },
-    filterNode(value, data) {
+    filterNode (value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     },
-    handleCheckChange(data, checked, indeterminate) {
+    handleCheckChange (data, checked, indeterminate) {
       console.log(checked)
     },
-    handleCurrentChange(data, node) {},
-    back() {
+    handleCurrentChange (data, node) { },
+    back () {
       this.$router.go(-1)
-    },
-  },
+    }
+  }
 }
 </script>
 

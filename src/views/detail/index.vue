@@ -154,12 +154,13 @@
         </div>
       </van-form>
     </div>
+     <van-toast id="van-toast" />
   </div>
 </template>
 <script>
 import { flowForm, flowFormUpdate, getOrgTree } from '../../api/flowfrom'
 import NavBar from '@/components/Navbar'
-import { Dialog, Notify } from 'vant'
+import { Dialog,  Toast } from 'vant'
 
 export default {
   name: 'index',
@@ -336,16 +337,18 @@ export default {
         .then(() => {
           flowFormUpdate(values).then(res => {
             if (res.resultCode === '200') {
-              Notify({
+              Toast.loading({
+                duration: 1000,
+                loadingType: 'spinner',
                 type: 'success',
-                message: '提交成功'
+                forbidClick: true,
+                message: res.resultMessage,
+                onClose: () => {
+                this.$router.push('/approval')
+                }
               })
-              this.$router.push('/approval')
             } else {
-              Notify({
-                type: 'danger',
-                message: res.resultMessage
-              })
+              Toast.fail(res.resultMessage);
             }
           })
         })

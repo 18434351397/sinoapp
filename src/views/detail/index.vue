@@ -108,10 +108,12 @@
           >
             <van-step :key="index" v-for="(item, index) in historyList">
               <h5>
-                【{{ item.taskName }}】<span v-if="!item.porxy">{{
-                  item.userName + ":" + item.remark
-                }}</span
-                ><span v-else>{{ item.proxyUserName }}(待办)</span>
+                【{{ item.taskName }}】
+                <div v-if="!item.porxy">
+                  {{ item.userName}}
+                   <p>{{ item.remark}} </p>
+                </div>
+                <span v-else>{{ item.proxyUserName }}(待办)</span>
               </h5>
               <span>{{ item.createdDate }}</span>
             </van-step>
@@ -201,7 +203,7 @@
 <script>
 import { flowForm, flowFormUpdate, getOrgTree } from "../../api/flowfrom";
 import NavBar from "@/components/Navbar";
-import { Dialog } from "vant";
+import { Dialog, Notify } from "vant";
 
 export default {
   name: "index",
@@ -354,18 +356,18 @@ export default {
       } else {
         values.content = values.content + " >>>>" + "【下一步】";
       }
-      // this.url = this.url.slice(0, -11) + "/updateVOs";
-      // this.url = this.url.slice(0, -11) + "/update/task";
 
-      // 判断是回退 还是 下一步
-      let commitType = values.content.split('【');
-      commitType = commitType[1].slice(0,2)
+      // 调用接口判断方法
       this.specialFun(values);
-      if(commitType === '退回') {
-        values.commitType = 'return'
-      } else {
-        values.commitType = values.commitType
-      }
+
+      // // 判断是回退 还是 下一步
+      // let commitType = values.content.split('【');
+      // commitType = commitType[1].slice(0,2)
+      // if(commitType === '退回') {
+      //   values.commitType = 'return'
+      // } else {
+      //   values.commitType = values.commitType
+      // }
 
       values.file = this.$refs.detail.fileList; // 附件信息
 
@@ -373,9 +375,8 @@ export default {
         url: this.url,
         data: values
       };
-
       console.log(data);
-      // this.submit(data);
+      this.submit(data);
     },
     // 提交方法-->调接口进行提交
     submit(values) {
@@ -388,7 +389,7 @@ export default {
               Notify({ type: 'success', message: '提交成功' });
               this.$router.push("/approval");
             } else {
-              Notify({ type: 'danger', message: '提交失败' });
+              Notify({ type: 'danger', message: res.resultMessage });
             }
           });
         })

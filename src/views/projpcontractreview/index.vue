@@ -11,9 +11,10 @@
     />
     <van-field
       name="radio"
-      colon
       label="是否已投标备案"
-      v-model="contractList.isRecord"
+      v-model="contractList.isRecord=== '0' ? '否': '是'"
+      readonly 
+      colon
     >
     </van-field>
     <van-field
@@ -271,6 +272,46 @@
         </el-table-column>
       </el-table>
     </div>
+
+    <div>
+      <div class="table-title">
+        预计现金流量表（收/付款情况）
+      </div>
+      <el-table border :data="paymentCondition" style="width: 100%">
+        <el-table-column
+          type="index"
+          label="序号"
+          width="50"
+          :index="indexMethods"
+        >
+        </el-table-column>
+        <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
+        <el-table-column label="预计收/付款时间" prop="paymentDate"> </el-table-column>
+        <el-table-column label="采购合同号" prop="purchaseNo"> </el-table-column>
+        <el-table-column label="预计收/付款金额" prop="paymentAmount"> </el-table-column>
+        <el-table-column label="税率" prop="paymentRate"> </el-table-column>
+        <el-table-column label="对方单位" prop="opposingUnit"> </el-table-column>
+        <el-table-column label="我方单位" prop="ourUnit"></el-table-column>
+        <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
+        <el-table-column label="计入科目" prop="accountSubject"></el-table-column>
+        <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
+        <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
+        <el-table-column label="是否有验收报告" prop="hasReport"></el-table-column>
+        <el-table-column label="预计验收报告时间" prop="reportDate"></el-table-column>
+        <el-table-column label="款项名称" prop="paymentName"></el-table-column>
+        <el-table-column label="资金占用时间" prop="occupyTime"></el-table-column>
+        <el-table-column label="资金占用成本" prop="occupyAmount"></el-table-column>
+        <el-table-column label="备注" prop="remark"> </el-table-column>
+      </el-table>
+      <van-field
+      type="text"
+      v-model="contractList.occupy"
+      label="资金占用情况"
+      colon
+      readonly
+    />
+    </div>
+
     <div class="title">金额计算</div>
     <van-field
       type="text"
@@ -478,10 +519,18 @@
       colon
       readonly
     />
-    <van-field name="radio" label="是否有项目" 
+    <van-field name="radio" label="是否有项目"
     v-model="contractList.hasProject === '0'? '否': '是'" 
     readonly colon 
-    /> 
+    />
+  <!-- <van-field name="radio" v-if="isCustPro" class="tax" label="是否有项目">
+  <template #input>
+    <van-radio-group v-model="contractList.hasProject" direction="horizontal">
+      <van-radio name="0">否</van-radio>
+      <van-radio name="1">是</van-radio>
+    </van-radio-group>
+  </template>
+  </van-field> -->
     <van-field
       type="text"
       v-if="isCustPro"
@@ -562,7 +611,7 @@
     />
     <div style="padding: 8px 36px 16px;
     background: #fff;" v-if="isCustPro">
-      <van-button round block type="primary" >
+      <van-button round block type="primary" @click="taxes(contractList.tax)">
         计算
       </van-button>
     </div>
@@ -796,10 +845,11 @@ export default {
       custProList: [],
       dataList: this.$route.query,
       title: "合同评审信息表编辑",
-      contractList: [],
+      contractList: [], // 整体信息
       incomeList: [], // 收入
       costList: [], // 成本
       achievementList: [], // 业绩
+      paymentCondition: [], // 预计现金流量表
       contractFileList: [], // 销售合同上传
       projectScoringFileList: [], // 项目评分
       noSignFileList: [], // 不签名合同说明
@@ -814,6 +864,7 @@ export default {
         const resData = res.data.projpContractFeesList;
         this.contractList = res.data; // 合同信息
         this.achievementList = res.data.projpContractAchievementList; // 业绩切分
+        this.paymentCondition = res.data.paymentCondition; // 预计现金流量表
         this.contractFileList = res.data.contractFileList;
         this.projectScoringFileList = res.data.projectScoringFileList;
         this.noSignFileList = res.data.noSignFileList;
@@ -835,9 +886,7 @@ export default {
                 fileId: file.fileId
               })
             );
-          } else {
-            return file;
-          }
+          } else {  }
         }
         if (resData) {
           for (const i in resData) {
@@ -909,6 +958,19 @@ export default {
       this.value = value.text;
       this.contractList.custPro = value.custPro;
       this.showPicker = false;
+    },
+    // 税金
+    taxes(value){
+      const rate = this.contractList
+      console.log(value);
+      // 税前毛利润率
+      rate.pretaxGrossProfitRate = ((Number(rate.contractAmount) - Number(rate.costTotalAmount)) /  Number(rate.receiveTotalAmount) * 100).toFixed(2);
+      // 税后毛利润率                              // 收入                           // 成本                  // 税金             // 收入 
+      rate.aftertaxGrossProfitRate = ((Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)) / Number(rate.receiveTotalAmount) * 100).toFixed(2)
+      // 毛利润                      // 收入                           // 成本                  // 税金
+      rate.grossProfit = (Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)).toFixed(2)
+      // 净利润                     // 收入                           // 成本                  // 税金
+      rate.netProfit =  (Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)).toFixed(2)
     }
   }
 };

@@ -956,7 +956,6 @@ export default {
     taxes(e,value){
       e.preventDefault();
       const rate = this.contractList
-      console.log(value);
       // 税前毛利润率
       rate.pretaxGrossProfitRate = ((Number(rate.contractAmount) - Number(rate.costTotalAmount)) /  Number(rate.receiveTotalAmount) * 100).toFixed(2);
       // 税后毛利润率                              // 收入                           // 成本                  // 税金             // 收入 

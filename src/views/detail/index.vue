@@ -48,6 +48,13 @@
           />
           <van-field
             style="display: none;"
+            name="commitType"
+            v-model="commitType"
+            type="text"
+            readonly
+          />
+          <van-field
+            style="display: none;"
             name="objName"
             v-model="flowList.objName"
             type="text"
@@ -131,7 +138,7 @@
             <van-button style="width: 30%" round block  type="info" native-type="submit">
               提交
             </van-button>
-            <van-button style="width: 30%" @click="counterSign" round block type="default" native-type="button">
+            <van-button style="width: 30%" @click="counterSign" round block type="default" native-type="submit">
               会签
             </van-button>
             <van-button style="width: 30%" @click="back" round block type="default" native-type="button">
@@ -155,6 +162,7 @@ export default {
   },
   data () {
     return {
+      commitType: '',
       treeList: [],
       show: false,
       region: {
@@ -280,8 +288,11 @@ export default {
       } else {
         values.content = values.content + ' >>>>' + '【下一步】'
       }
-      this.url = this.url.slice(0, -11) + '/updateVOs'
-      values.file = this.$refs.detail.fileList
+      this.url = this.url.slice(0, -11) + 'updateVOs'
+      values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
+      if (values.file.length <= 0) {
+        delete values.file
+      }
       const data = {
         url: this.url,
         data: values
@@ -387,13 +398,23 @@ export default {
     },
     handleContent (data) {
     },
+    // 下拉框选择值发生变化时，调用方法
     pullSelect (data) {
-      console.log(this.region)
+      if (this.region.id.includes('back')) {
+        this.commitType = 'return'
+      } else {
+        this.commitType = ''
+      }
     },
-    counterSign () {
+    // 会签弹框显示
+    counterSign (data) {
       this.show = true
+      if (this.show) {
+        this.commitType = 'meeting'
+      }
       console.log('huiqian')
     },
+    // 会签方法提交
     confirmCounterSign () {
       console.log(this.$refs.tree.getCheckedKeys())
       console.log(this.$refs.tree.getCheckedNodes())

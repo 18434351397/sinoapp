@@ -7,7 +7,6 @@
   <div>
     <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">投标备案信息</div>
     <van-field
-      name="bizId"
       v-model="custList.bizId"
       type="text"
       label="备案编号:"
@@ -15,8 +14,56 @@
     />
     <van-field
       style="display: none;"
-      name="commitType"
-      v-model="custList.commitType"
+      name="company"
+      v-model="custList.company"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="bidType"
+      v-model="custList.bidType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="exeType"
+      v-model="custList.exeType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="status"
+      v-model="custList.status"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="hasCommit"
+      v-model="custList.hasCommit"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="salesMan"
+      v-model="custList.salesMan"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="salesManOrg"
+      v-model="custList.salesManOrg"
+      type="text"
+      readonly
+    /><van-field
+      style="display: none;"
+      name="ownDeptId"
+      v-model="custList.ownDeptId"
       type="text"
       readonly
     />
@@ -56,19 +103,17 @@
       readonly
     />
     <van-field
-      name="custName"
       v-model="custList.custName"
       type="text"
       label="客户名称:"
       readonly
     />
-    <van-field
-      name="hasBidNo"
-      v-model="custList.hasBidNo"
-      type="text"
-      label="是否有招标编号:"
-      readonly
-    />
+    <van-field name="hasBidNo" v-model="custList.hasBidNo" label="是否有招标编号:">
+      <template #input>
+        <div v-if="custList.hasBidNo === '1'" style="margin: 0;">是</div>
+        <div v-if="custList.hasBidNo === '0'" style="margin: 0;">否</div>
+      </template>
+    </van-field>
     <van-field
       name="bidNo"
       v-model="custList.bidNo"
@@ -77,14 +122,12 @@
       readonly
     />
     <van-field
-      name="companyText"
       v-model="custList.companyText"
       type="text"
       label="投标公司:"
       readonly
     />
     <van-field
-      name="exeTypeText"
       v-model="custList.exeTypeText"
       type="text"
       label="项目执行方式:"
@@ -98,40 +141,35 @@
       readonly
     />
     <van-field
-      name="bidTypeText"
       v-model="custList.bidTypeText"
       type="text"
       label="投标类型:"
       readonly
     />
     <van-field
-      name="salesManName"
       v-model="custList.salesManName"
       type="text"
       label="销售人:"
       readonly
     />
     <van-field
-      name="salesManOrgName"
       v-model="custList.salesManOrgName"
       type="text"
       label="销售人员二级部门:"
       readonly
     />
     <van-field
-      name="leadOrgName"
       v-model="custList.leadOrgName"
       type="text"
       label="主导部门:"
       readonly
     />
-    <van-field
-      name="hasBond"
-      v-model="custList.hasBond"
-      type="text"
-      label="是否有投标保证金:"
-      readonly
-    />
+    <van-field name="hasBond"  v-model="custList.hasBond" label="是否有投标保证金:">
+      <template #input >
+        <div v-if="custList.hasBond === '1'" style="margin: 0;">是</div>
+        <div v-else style="margin: 0;">否</div>
+      </template>
+    </van-field>
     <van-field
       name="remark"
       v-model="custList.remark"
@@ -197,6 +235,7 @@ export default {
       custList: [],
       cooperativeList: [],
       situation: [],
+      situationList: [],
       dataList: this.$route.query,
       tableData: [
         {
@@ -219,10 +258,10 @@ export default {
     List(data).then(res => {
       if (res.data) {
         this.custList = res.data
-        this.situation = res.data.situation
-        this.cooperativeList = res.data.cooperativeList
-        this.fileList = res.data.attachmentVOList
-        this.attachmentVOList = res.data.attachmentVOList
+        this.custList.status = this.custList.status ? this.custList.status : ''
+        this.situation = res.data.situation ? res.data.situation : []
+        this.situationList = res.data.situation ? res.data.situation : []
+        this.fileList = res.data.attachmentVOList ? res.data.attachmentVOList : []
         this.fileList = this.fileList.map(item => {
           return JSON.stringify({
             url: item.atturl,
@@ -233,16 +272,18 @@ export default {
             bizid: item.bizid
           })
         })
-        this.attachmentVOList = this.attachmentVOList.map(item => {
-          return {
-            url: item.atturl,
-            fileName: item.attname,
-            filePath: item.attdir,
-            fileSize: item.attsize,
-            fileId: item.id,
-            bizid: item.bizid
-          }
-        })
+        if (res.data.situation) {
+          this.situationList = this.situationList.map(item => {
+            return {
+              url: item.atturl,
+              fileName: item.attname,
+              filePath: item.attdir,
+              fileSize: item.attsize,
+              fileId: item.id,
+              bizid: item.bizid
+            }
+          })
+        }
       }
     })
   },

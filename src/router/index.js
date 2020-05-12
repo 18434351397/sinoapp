@@ -2,9 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import { Toast } from 'vant'
-import biddingRouter from './biddingManagement'
-import contractRouter from './contractRouter'
-
+import RouterList from './concat'
 Vue.use(VueRouter)
 
 const routes = [
@@ -53,7 +51,7 @@ const routes = [
     path: '/detail',
     component: () => import('../views/detail'),
     name: 'detail',
-    children: biddingRouter.concat(contractRouter)
+    children: RouterList
   }
 ]
 

@@ -1,6 +1,6 @@
 <template>
   <div class="sealpreservation">
-    <div class="title">投标报价信息表详情</div>
+    <div class="title">详情</div>
     <van-field
       style="display: none;"
       name="depositoryId"

@@ -352,10 +352,21 @@ export default {
         user.currFlowId === 'ContrReviewApprove'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+      } else if (
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.currFlowId === 'FinanceApprove'
+      ) {
+        this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
+        console.log(this.url)
       } else {
         // this.url = this.url.slice(0, -11) + "/updateVOs";
         // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-        this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
+        // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口
+        if (this.url.includes('cashier')) {
+          this.url = this.url.slice(0, -12) + 'update'
+        } else {
+          this.url = this.url.slice(0, -11) + 'update' // 投标保证金 接口
+        }
       }
     },
     onchange () {

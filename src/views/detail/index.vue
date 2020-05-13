@@ -384,8 +384,8 @@ export default {
         } else {
           // this.url = this.url.slice(0, -11) + "/updateVOs";
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
-          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口
+          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口
+          // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口
         }
       }
     },

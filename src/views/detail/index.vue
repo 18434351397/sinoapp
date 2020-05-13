@@ -302,9 +302,20 @@ export default {
       // 调用接口判断方法
       this.specialFun(values)
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
+      // 判断是否是印章保管登记
+      if (this.dataList.currFlowId === 'SealKeepApprove') {
+        values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
+      } else { }
+      // 判断印章管理员
+      if (this.dataList.currFlowId === 'SealKeepApprove' &&
+        this.dataList.currUserName === '白建平' &&
+        this.dataList.currTaskDefinitionKey === 'SealManager' &&
+        this.dataList.currTaskDefinitionName === '印章管理员') {
+        values.sealTypes = this.$refs.detail.sealTypes ? this.$refs.detail.sealTypes : []
+      } else { }
       if (values.file.length <= 0) {
         delete values.file
-      }
+      } else { }
       const data = {
         url: this.url,
         data: values
@@ -352,6 +363,14 @@ export default {
         user.currFlowId === 'ContrReviewApprove'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+      } else if (this.dataList.currFlowId === 'SealKeepApprove' &&
+        this.dataList.currUserName === '白建平' &&
+        this.dataList.currTaskDefinitionKey === 'SealManager' &&
+        this.dataList.currTaskDefinitionName === '印章管理员') {
+        this.url = this.url.slice(0, -10) + '/update' // 白建平并且是印章保管流程
+      } else if (this.dataList.currTaskDefinitionName === '受理退回' &&
+        (this.dataList.currUserName === this.dataList.userName)) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
+        this.url = this.url.slice(0, -10) + '/update'
       } else if (
         user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
         user.currFlowId === 'FinanceApprove'
@@ -359,13 +378,14 @@ export default {
         this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
         console.log(this.url)
       } else {
-        // this.url = this.url.slice(0, -11) + "/updateVOs";
-        // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-        // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口
+        // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) {
           this.url = this.url.slice(0, -12) + 'update'
         } else {
-          this.url = this.url.slice(0, -11) + 'update' // 投标保证金 接口
+          // this.url = this.url.slice(0, -11) + "/updateVOs";
+          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
+          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
+          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口
         }
       }
     },

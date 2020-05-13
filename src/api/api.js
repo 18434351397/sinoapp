@@ -17,8 +17,7 @@ const api = {
   projpcontractreviewList: '/app/form/projpcontractreview/detail',
   projptenderpreqList: '/app/form/projptenderpreq/detail',
   custPro: '/app/admin/dictionary/getBySubCodes', // 客户属性
-  projptenderquoteList: '/app/form/projptenderquote/detail', // 投标报价
-  sealapproveformList: '/app/form/sealapproveform/detail' // 印信使用审批
+  projptenderquoteList: '/app/form/projptenderquote/detail' // 投标报价
 }
 
 export default api

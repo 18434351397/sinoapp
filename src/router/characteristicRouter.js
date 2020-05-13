@@ -5,6 +5,11 @@ const characteristicRouter = [
     path: '/sealapproveform',
     component: () => import('../views/sealapproveform'),
     name: 'sealapproveform'
+  },
+  {
+    path: '/sealpreservationform',
+    component: () => import('../views/sealpreservationform'),
+    name: 'sealpreservationform'
   }
 ]
 // 导出router，方便在index里引用

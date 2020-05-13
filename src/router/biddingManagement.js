@@ -28,6 +28,11 @@ const biddingRouter = [
     path: '/projptenderquote',
     component: () => import('../views/projptenderquote'),
     name: 'projptenderquote'
+  },
+  {
+    path: '/projptenderletter',
+    component: () => import('../views/projptenderletter'),
+    name: 'projptenderletter'
   }
 ]
 export default biddingRouter

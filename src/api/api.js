@@ -15,7 +15,6 @@ const api = {
   orgTree: '/app/admin/user/mobileOrgUserTree',
   downLoadUrl: '/app/file/download',
   projpcontractreviewList: '/app/form/projpcontractreview/detail',
-  projptenderpreqList: '/app/form/projptenderpreq/detail',
   custPro: '/app/admin/dictionary/getBySubCodes', // 客户属性
   projptenderquoteList: '/app/form/projptenderquote/detail' // 投标报价
 }

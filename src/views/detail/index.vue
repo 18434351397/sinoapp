@@ -371,11 +371,22 @@ export default {
       } else if (this.dataList.currTaskDefinitionName === '受理退回' &&
         (this.dataList.currUserName === this.dataList.userName)) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
         this.url = this.url.slice(0, -10) + '/update'
+      } else if (
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.currFlowId === 'FinanceApprove'
+      ) {
+        this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
+        console.log(this.url)
       } else {
-        // this.url = this.url.slice(0, -11) + "/updateVOs";
-        // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-        // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
-        this.url = this.url.slice(0, -12) + '/update' // 印章保管流程
+        // 投标保证金接口的特殊处理
+        if (this.url.includes('cashier')) {
+          this.url = this.url.slice(0, -12) + 'update'
+        } else {
+          // this.url = this.url.slice(0, -11) + "/updateVOs";
+          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
+          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
+          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口
+        }
       }
     },
     onchange () {

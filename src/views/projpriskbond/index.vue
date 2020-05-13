@@ -1,113 +1,87 @@
-/** *@author XuJinTao *@date 2020/5/13 9:03 *@title index */
+/** *@author XuJinTao *@date 2020/5/13 16:10 *@title index */
 <template>
-  <div class="sealapproveform">
-    <div class="title">投标报价信息表详情</div>
-    <van-field style="display: none;" name="id" v-model="useApprovalList.id" type="text" readonly />
+  <div class="bizcompanychangeform">
+    <div class="title">详情</div>
+    <van-field
+      style="display: none;"
+      name="id"
+      v-model="projpriskbondList.id"
+      type="text"
+      readonly
+    />
     <van-field
       style="display: none;"
       name="meetingUsers"
-      v-model="useApprovalList.meetingUsers"
+      v-model="projpriskbondList.meetingUsers"
       type="text"
       readonly
     />
     <van-field
       type="text"
-      name="applicantName"
-      v-model="useApprovalList.applicantName"
-      label="申请人"
+      name="contractNo"
+      v-model="projpriskbondList.contractNo"
+      label="合同号"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="applicantDeptName"
-      v-model="useApprovalList.applicantDeptName"
-      label="申请人部门"
+      name="contractName"
+      v-model="projpriskbondList.contractName"
+      label="合同名称"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="applicationCategoryDesc"
-      v-model="useApprovalList.applicationCategoryDesc"
-      label="申请类别"
+      name="ownDeptName"
+      v-model="projpriskbondList.ownDeptName"
+      label="合同主导部门"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="usagemode"
-      v-model="useApprovalList.usagemode"
-      label="使用方式"
+      name="ownUserName"
+      v-model="projpriskbondList.ownUserName"
+      label="主导部门负责人"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="sealcompanyDesc"
-      v-model="useApprovalList.sealcompanyDesc"
-      label="印信公司"
+      name="frozenAmount"
+      v-model="projpriskbondList.frozenAmount"
+      label="冻结金额"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="othersealcompany"
-      v-model="useApprovalList.othersealcompany"
-      label="印信公司其它"
+      name="startFrozenTime"
+      v-model="projpriskbondList.startFrozenTime"
+      label="开始冻结时间"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="sealnameDesc"
-      v-model="useApprovalList.sealnameDesc"
-      label="印信名称"
-      colon
-      readonly
-    />
-    <van-field
-      type="text"
-      name="othersealname"
-      v-model="useApprovalList.othersealname"
-      label="印信名称其它"
-      colon
-      readonly
-    />
-    <van-field
-      type="text"
-      name="applicationDate"
-      v-model="useApprovalList.applicationDate"
-      label="申请日期"
-      colon
-      readonly
-    />
-    <van-field
-      type="text"
-      name="items"
-      v-model="useApprovalList.items"
-      label="申请事项"
-      colon
-      readonly
-    />
-    <van-field
-      type="text"
-      name="detail"
-      v-model="useApprovalList.detail"
-      label="盖章资料明细"
+      name="riskTypeText"
+      v-model="projpriskbondList.riskTypeText"
+      label="风险类型"
       colon
       readonly
     />
     <van-field
       type="text"
       name="remark"
-      v-model="useApprovalList.remark"
+      v-model="projpriskbondList.remark"
       label="备注"
       colon
       readonly
     />
     <div>
-      <div class="table-title">附件列表</div>
+      <div class="table-title">其他</div>
       <el-table border :data="files" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="附件名称" prop="fileName"></el-table-column>
@@ -125,22 +99,22 @@
 </template>
 
 <script>
-import { sealapproveformList } from '../../api/characteristic'
+import { projpriskbondList } from '../../api/bidManagement'
 
 export default {
   name: 'index',
   data () {
     return {
       dataList: this.$route.query,
-      useApprovalList: [], // 印信使用审批数据
       fileList: [],
-      files: []
+      files: [], // 循环列表
+      projpriskbondList: [] // 风险保证金
     }
   },
   created () {
-    sealapproveformList(this.dataList.dataId).then(res => {
+    projpriskbondList(this.dataList.dataId).then(res => {
       if (res.data) {
-        this.useApprovalList = res.data
+        this.projpriskbondList = res.data
         this.files = res.data.fileList ? res.data.fileList : []
         this.fileList = res.data.fileList.map(item => {
           return JSON.stringify({
@@ -170,7 +144,7 @@ export default {
 </script>
 
 <style lang="less">
-div.sealapproveform {
+div.bizcompanychangeform {
   background-color: #f8f8f8;
   div.title {
     font-size: 14px;
@@ -184,9 +158,7 @@ div.sealapproveform {
     background-color: #fff;
   }
 }
-</style>
-<style lang="less">
-div.sealapproveform {
+div.bizcompanychangeform {
   div.tax.van-cell:not(:last-child)::after {
     border-bottom: 1px solid #6c6c6c;
   }

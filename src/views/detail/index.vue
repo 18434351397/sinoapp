@@ -302,9 +302,20 @@ export default {
       // 调用接口判断方法
       this.specialFun(values)
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
+      // 判断是否是印章保管登记
+      if (this.dataList.currFlowId === 'SealKeepApprove') {
+        values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
+      } else { }
+      // 判断印章管理员
+      if (this.dataList.currFlowId === 'SealKeepApprove' &&
+        this.dataList.currUserName === '白建平' &&
+        this.dataList.currTaskDefinitionKey === 'SealManager' &&
+        this.dataList.currTaskDefinitionName === '印章管理员') {
+        values.sealTypes = this.$refs.detail.sealTypes ? this.$refs.detail.sealTypes : []
+      } else { }
       if (values.file.length <= 0) {
         delete values.file
-      }
+      } else { }
       const data = {
         url: this.url,
         data: values
@@ -352,10 +363,20 @@ export default {
         user.currFlowId === 'ContrReviewApprove'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+      } else if (this.dataList.currFlowId === 'SealKeepApprove' &&
+        this.dataList.currUserName === '白建平' &&
+        this.dataList.currTaskDefinitionKey === 'SealManager' &&
+        this.dataList.currTaskDefinitionName === '印章管理员') {
+        this.url = this.url.slice(0, -10) + '/update' // 白建平并且是印章保管流程
+      } else if (this.dataList.currFlowId === 'SealKeepApprove' && this.dataList.currTaskDefinitionKey === 'President') {
+        this.url = this.url.slice(0, -12) + '/update' // 总裁并且是印章保管流程
+      } else if (this.dataList.currFlowId === 'SealKeepApprove') {
+        this.url = this.url.slice(0, -10) + '/update'
       } else {
         // this.url = this.url.slice(0, -11) + "/updateVOs";
         // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-        this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
+        // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
+        this.url = this.url.slice(0, -12) + '/update' // 印章保管登记
       }
     },
     onchange () {

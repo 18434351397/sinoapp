@@ -1,64 +1,23 @@
 /**
 *@author CheYongJi
-*@date 2020/5/7 9:13
+*@date 2020/5/12 15:50
 *@title index
 */
 <template>
   <div>
-    <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">投标备案信息</div>
+    <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">投标保证金信息</div>
     <van-field
-      v-model="custList.bizId"
+      v-model="custList.recordno"
       type="text"
       label="备案编号:"
       readonly
     />
     <van-field
-      style="display: none;"
-      v-model="custList.company"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      v-model="custList.bidType"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      v-model="custList.exeType"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      v-model="custList.status"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      v-model="custList.hasCommit"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      v-model="custList.salesMan"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      v-model="custList.salesManOrg"
-      type="text"
-      readonly
-    /><van-field
-      style="display: none;"
-      v-model="custList.ownDeptId"
-      type="text"
-      readonly
-    />
+    style="display: none;"
+    v-model="custList.ownDeptId"
+    type="text"
+    readonly
+  />
     <van-field
       style="display: none;"
       name="meetingUsers"
@@ -80,69 +39,27 @@
       readonly
     />
     <van-field
-      v-model="custList.projectName"
+      v-model="custList.exeuserName"
       type="text"
-      label="项目名称:"
+      label="经办人:"
       readonly
     />
     <van-field
-      v-model="custList.tenderCompany"
+      v-model="custList.deptName"
       type="text"
-      label="招标公司:"
+      label="经办人部门:"
       readonly
     />
     <van-field
-      v-model="custList.custName"
+      v-model="custList.reqdate"
       type="text"
-      label="客户名称:"
-      readonly
-    />
-    <van-field label="是否有招标编号:">
-      <template #input>
-        <div v-if="custList.hasBidNo === '1'" style="margin: 0;">是</div>
-        <div v-if="custList.hasBidNo === '0'" style="margin: 0;">否</div>
-      </template>
-    </van-field>
-    <van-field
-      v-model="custList.bidNo"
-      type="text"
-      label="招标编号:"
+      label="申请日期:"
       readonly
     />
     <van-field
-      v-model="custList.companyText"
+      v-model="custList.tenderdate"
       type="text"
-      label="投标公司:"
-      readonly
-    />
-    <van-field
-      v-model="custList.exeTypeText"
-      type="text"
-      label="项目执行方式:"
-      readonly
-    />
-    <van-field
-      v-model="custList.bidTime"
-      type="text"
-      label="投标时间:"
-      readonly
-    />
-    <van-field
-      v-model="custList.bidTypeText"
-      type="text"
-      label="投标类型:"
-      readonly
-    />
-    <van-field
-      v-model="custList.salesManName"
-      type="text"
-      label="销售人:"
-      readonly
-    />
-    <van-field
-      v-model="custList.salesManOrgName"
-      type="text"
-      label="销售人员二级部门:"
+      label="投标日期:"
       readonly
     />
     <van-field
@@ -151,12 +68,72 @@
       label="主导部门:"
       readonly
     />
-    <van-field label="是否有投标保证金:">
-      <template #input >
-        <div v-if="custList.hasBond === '1'" style="margin: 0;">是</div>
-        <div v-else style="margin: 0;">否</div>
-      </template>
-    </van-field>
+    <van-field
+      v-model="custList.paytimeid"
+      type="text"
+      label="保证金付款时间:"
+      readonly
+    />
+    <van-field
+      v-model="custList.reqPaytimeId"
+      type="text"
+      label="保证金类型/对方单位:"
+      readonly
+    />
+    <van-field
+      v-model="custList.reqtypeName"
+      type="text"
+      label="申请性质:"
+      readonly
+    />
+    <van-field
+      v-model="custList.amount"
+      type="text"
+      label="金额(元):"
+      readonly
+    />
+    <van-field
+      v-model="custList.paycompanyName"
+      type="text"
+      label="支出公司:"
+      readonly
+    />
+    <van-field
+      v-model="custList.paytypeName"
+      type="text"
+      label="支出形式:"
+      readonly
+    />
+    <van-field
+      v-model="custList.projectname"
+      type="text"
+      label="项目名称:"
+      readonly
+    />
+    <van-field
+      v-model="custList.payeename"
+      type="text"
+      label="开户名称:"
+      readonly
+    />
+    <van-field
+      v-model="custList.payeebank"
+      type="text"
+      label="开户银行:"
+      readonly
+    />
+    <van-field
+      v-model="custList.payeeaccount"
+      type="text"
+      label="账号:"
+      readonly
+    />
+    <van-field
+      v-model="custList.returndate"
+      type="text"
+      label="退回日期:"
+      readonly
+    />
     <van-field
       name="remark"
       v-model="custList.remark"
@@ -164,11 +141,17 @@
       label="备注:"
       readonly
     />
+    <van-field
+      v-model="custList.amountWords"
+      type="text"
+      label="金额大写:"
+      readonly
+    />
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">保证金收付情况</div>
+      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">附件列表</div>
       <el-table
         border
-        :data="situation"
+        :data="projptenderList"
         style="width: 100%">
         <el-table-column
           type="index"
@@ -177,32 +160,23 @@
           :index="indexMethods">
         </el-table-column>
         <el-table-column
-          label="预计收款日期">
+          label="附件名称"
+          prop="fileName">
+        </el-table-column>
+        <el-table-column
+          label="大小"
+          width="80">
           <template slot-scope="scope">
-            {{scope.row.receivDate.split(' ')[0]}}
+            {{(scope.row.fileSize/1024).toFixed(2) + 'KB'}}
           </template>
         </el-table-column>
         <el-table-column
-          label="预计付款时间">
+          fixed="right"
+          label="操作"
+          width="50">
           <template slot-scope="scope">
-            {{scope.row.paytime.split(' ')[0]}}
+            <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-        <el-table-column
-          label="对方单位"
-          prop="payer">
-        </el-table-column>
-        <el-table-column
-          label="保证金金额"
-          prop="bailamount">
-        </el-table-column>
-        <el-table-column
-          label="保证金类型"
-          prop="bondTypeDesc">
-        </el-table-column>
-        <el-table-column
-          label="是否是投标保函"
-          prop="isTenderLetter">
         </el-table-column>
       </el-table>
     </div>
@@ -210,7 +184,7 @@
 </template>
 
 <script>
-import { List } from '../../api/customer'
+import { projptenderpreqList } from '../../api/bidManagement'
 // import { downLoad } from '../../api/flowfrom'
 
 export default {
@@ -218,7 +192,7 @@ export default {
   data () {
     return {
       fileList: [],
-      attachmentVOList: [],
+      projptenderList: [],
       custList: [],
       cooperativeList: [],
       situation: [],
@@ -238,16 +212,14 @@ export default {
     }
   },
   created () {
-    const data = {
-      data: this.dataList.dataId,
-      url: '/app/form/projptenderrecord/detail'
-    }
-    List(data).then(res => {
+    projptenderpreqList(this.dataList.dataId).then(res => {
       if (res.data) {
         this.custList = res.data
-        this.custList.status = this.custList.status ? this.custList.status : ''
+        this.custList.amountWords = this.intToChinese(this.custList.amount)
+        this.custList.reqdate = this.custList.reqdate ? this.custList.reqdate.split(' ')[0] : ''
+        this.custList.tenderdate = this.custList.tenderdate ? this.custList.tenderdate.split(' ')[0] : ''
         this.situation = res.data.situation ? res.data.situation : []
-        this.situationList = res.data.situation ? res.data.situation : []
+        this.projptenderList = res.data.fileList ? res.data.fileList : []
         this.fileList = res.data.attachmentVOList ? res.data.attachmentVOList : []
         this.fileList = this.fileList.map(item => {
           return JSON.stringify({

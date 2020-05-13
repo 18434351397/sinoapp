@@ -1,7 +1,7 @@
 /** *@author XuJinTao *@date 2020/5/13 9:03 *@title index */
 <template>
   <div class="sealapproveform">
-    <div class="title">投标报价信息表详情</div>
+    <div class="title">详情</div>
     <van-field style="display: none;" name="id" v-model="useApprovalList.id" type="text" readonly />
     <van-field
       style="display: none;"

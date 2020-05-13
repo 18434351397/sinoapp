@@ -302,6 +302,7 @@ export default {
       // 调用接口判断方法
       this.specialFun(values)
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
+      values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
       // 判断是否是印章保管登记
       if (this.dataList.currFlowId === 'SealKeepApprove') {
         values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
@@ -403,7 +404,7 @@ export default {
         if (
           data.nextTaskList.length === 1 ||
           !data.nextTaskIsBranch ||
-          data.nextTaskIsBranch === false
+          data.nextTaskIsBranch === 'false'
         ) {
           const arr = {
             id: 'next__' + item.userId,

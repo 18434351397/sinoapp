@@ -37,7 +37,7 @@ export async function projptenderquoteList (data) {
 }
 
 // 客户属性
-export async function custPro() {
+export async function custPro () {
   return request({
     url: api.custPro + '?subCodes=custPro-&_=1589012445450',
     method: 'get'

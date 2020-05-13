@@ -368,15 +368,14 @@ export default {
         this.dataList.currTaskDefinitionKey === 'SealManager' &&
         this.dataList.currTaskDefinitionName === '印章管理员') {
         this.url = this.url.slice(0, -10) + '/update' // 白建平并且是印章保管流程
-      } else if (this.dataList.currFlowId === 'SealKeepApprove' && this.dataList.currTaskDefinitionKey === 'President') {
-        this.url = this.url.slice(0, -12) + '/update' // 总裁并且是印章保管流程
-      } else if (this.dataList.currFlowId === 'SealKeepApprove') {
+      } else if (this.dataList.currTaskDefinitionName === '受理退回' &&
+        (this.dataList.currUserName === this.dataList.userName)) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
         this.url = this.url.slice(0, -10) + '/update'
       } else {
         // this.url = this.url.slice(0, -11) + "/updateVOs";
         // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
         // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口
-        this.url = this.url.slice(0, -12) + '/update' // 印章保管登记
+        this.url = this.url.slice(0, -12) + '/update' // 印章保管流程
       }
     },
     onchange () {

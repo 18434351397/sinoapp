@@ -16,7 +16,8 @@ const api = {
   downLoadUrl: '/app/file/download',
   projpcontractreviewList: '/app/form/projpcontractreview/detail', // 销售合同
   custPro: '/app/admin/dictionary/getBySubCodes', // 客户属性
-  projptenderquoteList: '/app/form/projptenderquote/detail' // 投标报价
+  projptenderquoteList: '/app/form/projptenderquote/detail', // 投标报价
+  sealapproveformList: '/app/form/sealapproveform/detail' // 印信使用审批
 }
 
 export default api

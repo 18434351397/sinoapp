@@ -2,32 +2,11 @@
 <template>
   <div class="projpcontractre">
     <div class="title">投标报价信息表详情</div>
-    <van-field
-      style="display: none;"
-      name="cbxAchievementFlow"
-      type="text"
-      readonly
-    />
+    <van-field style="display: none;" name="cbxAchievementFlow" type="text" readonly />
     <van-field style="display: none;" name="cbxCashFlow" type="text" readonly />
-    <van-field
-      style="display: none;"
-      name="cbxCostDetail"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="cbxIncomeDetail"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="id"
-      v-model="tenderOfferList.id"
-      type="text"
-      readonly
-    />
+    <van-field style="display: none;" name="cbxCostDetail" type="text" readonly />
+    <van-field style="display: none;" name="cbxIncomeDetail" type="text" readonly />
+    <van-field style="display: none;" name="id" v-model="tenderOfferList.id" type="text" readonly />
     <van-field
       style="display: none;"
       name="meetingUsers"
@@ -84,9 +63,7 @@
       readonly
     >
       <template #input>
-        <div v-if="tenderOfferList.isCooperate === '1'" style="margin: 0;">
-          是
-        </div>
+        <div v-if="tenderOfferList.isCooperate === '1'" style="margin: 0;">是</div>
         <div v-else style="margin: 0;">否</div>
       </template>
     </van-field>
@@ -123,113 +100,54 @@
       readonly
     />
     <div>
-      <div class="table-title">
-        收入明细
-      </div>
+      <div class="table-title">收入明细</div>
       <el-table border :data="incomeList" style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods"
-        >
-        </el-table-column>
-        <el-table-column label="收入类型" prop="feesTypeText">
-        </el-table-column>
-        <el-table-column label="名称" prop="name"> </el-table-column>
-        <el-table-column label="数量" prop="num"> </el-table-column>
-        <el-table-column label="单价" prop="price"> </el-table-column>
-        <el-table-column label="金额" prop="amount"> </el-table-column>
-        <el-table-column label="税率" prop="taxRateText"> </el-table-column>
-        <el-table-column label="缴税类型" prop="invoiceTypeText">
-        </el-table-column>
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="收入类型" prop="feesTypeText"></el-table-column>
+        <el-table-column label="名称" prop="name"></el-table-column>
+        <el-table-column label="数量" prop="num"></el-table-column>
+        <el-table-column label="单价" prop="price"></el-table-column>
+        <el-table-column label="金额" prop="amount"></el-table-column>
+        <el-table-column label="税率" prop="taxRateText"></el-table-column>
+        <el-table-column label="缴税类型" prop="invoiceTypeText"></el-table-column>
       </el-table>
     </div>
     <div>
-      <div class="table-title">
-        成本明细
-      </div>
+      <div class="table-title">成本明细</div>
       <el-table border :data="costList" style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods"
-        >
-        </el-table-column>
-        <el-table-column label="成本明细" prop="costFeesTypeText">
-        </el-table-column>
-        <el-table-column label="名称" prop="name"> </el-table-column>
-        <el-table-column label="金额" prop="amount"> </el-table-column>
-        <el-table-column label="税率" prop="taxRateText"> </el-table-column>
-        <el-table-column label="缴税类型" prop="costInvoiceTypeText">
-        </el-table-column>
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="成本明细" prop="costFeesTypeText"></el-table-column>
+        <el-table-column label="名称" prop="name"></el-table-column>
+        <el-table-column label="金额" prop="amount"></el-table-column>
+        <el-table-column label="税率" prop="taxRateText"></el-table-column>
+        <el-table-column label="缴税类型" prop="costInvoiceTypeText"></el-table-column>
       </el-table>
     </div>
     <div>
-      <div class="table-title">
-        业绩切分
-      </div>
+      <div class="table-title">业绩切分</div>
       <el-table border :data="achievementList" style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods"
-        >
-        </el-table-column>
-        <el-table-column label="切分部门" prop="segmentDeptText">
-        </el-table-column>
-        <el-table-column label="负责人" prop="leadUserText"> </el-table-column>
-        <el-table-column label="切分比例" prop="segmentP"> </el-table-column>
-        <el-table-column label="切分金额" prop="segmentAmount">
-        </el-table-column>
-        <el-table-column label="部门类型" prop="deptTypeDesc">
-        </el-table-column>
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="切分部门" prop="segmentDeptText"></el-table-column>
+        <el-table-column label="负责人" prop="leadUserText"></el-table-column>
+        <el-table-column label="切分比例" prop="segmentP"></el-table-column>
+        <el-table-column label="切分金额" prop="segmentAmount"></el-table-column>
+        <el-table-column label="部门类型" prop="deptTypeDesc"></el-table-column>
       </el-table>
     </div>
     <div>
-      <div class="table-title">
-        预计现金流量表（收/付款情况）
-      </div>
+      <div class="table-title">预计现金流量表（收/付款情况）</div>
       <el-table border :data="projpContractPaymentList" style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods"
-        >
-        </el-table-column>
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
-        <el-table-column label="预计收/付款时间" prop="paymentDate">
-        </el-table-column>
-        <el-table-column label="预计收/付款金额" prop="paymentAmount">
-        </el-table-column>
-        <el-table-column
-          label="预计收/付款条件"
-          prop="paymentCondition"
-        ></el-table-column>
-        <el-table-column
-          label="计入科目"
-          prop="accountSubject"
-        ></el-table-column>
-        <el-table-column
-          label="验收报告名称"
-          prop="reportName"
-        ></el-table-column>
-        <el-table-column
-          label="现金流量金额"
-          prop="confirmAmount"
-        ></el-table-column>
+        <el-table-column label="预计收/付款时间" prop="paymentDate"></el-table-column>
+        <el-table-column label="预计收/付款金额" prop="paymentAmount"></el-table-column>
+        <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
+        <el-table-column label="计入科目" prop="accountSubject"></el-table-column>
+        <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
+        <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
         <el-table-column label="款项名称" prop="paymentName"></el-table-column>
-        <el-table-column
-          label="资金占用时间"
-          prop="occupyTime"
-        ></el-table-column>
-        <el-table-column
-          label="资金占用成本"
-          prop="occupyAmount"
-        ></el-table-column>
+        <el-table-column label="资金占用时间" prop="occupyTime"></el-table-column>
+        <el-table-column label="资金占用成本" prop="occupyAmount"></el-table-column>
       </el-table>
       <van-field
         type="text"
@@ -348,24 +266,14 @@
     <div>
       <div class="table-title">其他</div>
       <el-table border :data="fileList" style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods"
-        >
-        </el-table-column>
-        <el-table-column label="附件名称" prop="fileName"> </el-table-column>
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="附件名称" prop="fileName"></el-table-column>
         <el-table-column label="大小" width="80">
-          <template slot-scope="scope">
-            {{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}
-          </template>
+          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="50">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small"
-              >下载</el-button
-            >
+            <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -378,7 +286,7 @@ import { projptenderquoteList } from '../../api/customer'
 
 export default {
   name: 'index',
-  data() {
+  data () {
     return {
       dataList: this.$route.query,
       incomeList: [], // 收入
@@ -386,10 +294,10 @@ export default {
       tenderOfferList: [], // 投标数据
       projpContractPaymentList: [], // 预计现金流量表
       achievementList: [], // 业绩
-      fileList: [],
+      fileList: []
     }
   },
-  created() {
+  created () {
     projptenderquoteList(this.dataList.dataId).then(res => {
       if (res.data) {
         const resData = res.data.projpContractFeesList
@@ -417,12 +325,12 @@ export default {
   },
   methods: {
     // 下载调用方法
-    handleClick(data) {
+    handleClick (data) {
       console.log(data.url)
       this.downLoad(data)
     },
     // 处理序号
-    indexMethods(index) {
+    indexMethods (index) {
       return index + 1
     }
   }

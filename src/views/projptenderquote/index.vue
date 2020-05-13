@@ -265,7 +265,7 @@
     />
     <div>
       <div class="table-title">其他</div>
-      <el-table border :data="fileList" style="width: 100%">
+      <el-table border :data="files" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="附件名称" prop="fileName"></el-table-column>
         <el-table-column label="大小" width="80">
@@ -294,7 +294,8 @@ export default {
       tenderOfferList: [], // 投标数据
       projpContractPaymentList: [], // 预计现金流量表
       achievementList: [], // 业绩
-      fileList: []
+      fileList: [],
+      files: []
     }
   },
   created () {
@@ -304,7 +305,15 @@ export default {
         this.tenderOfferList = res.data
         this.achievementList = res.data.projpContractAchievementList // 业绩切分
         this.projpContractPaymentList = res.data.projpContractPaymentList // 预计现金流量表
-        this.fileList = res.data.fileList
+        this.files = res.data.fileList ? res.data.fileList : []
+        this.fileList = res.data.fileList.map(item => {
+          return JSON.stringify({
+            fileName: item.fileName,
+            url: item.url,
+            fileSize: item.fileSize,
+            fileId: item.fileId
+          })
+        })
         if (resData) {
           for (const i in resData) {
             if (resData[i].pRType === 'r') {

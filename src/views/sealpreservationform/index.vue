@@ -125,7 +125,7 @@
     />
     <div>
       <div class="table-title">附件列表</div>
-      <el-table border :data="fileList" style="width: 100%">
+      <el-table border :data="files" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="附件名称" prop="fileName"></el-table-column>
         <el-table-column label="大小" width="80">
@@ -151,6 +151,7 @@ export default {
       dataList: this.$route.query,
       sealpreservationList: [], // 印信使用审批数据
       fileList: [],
+      files: [],
       fileIdList: [], // 附件编号
       sealTypes: [] // 印章类型
     }
@@ -166,8 +167,12 @@ export default {
       if (res.data) {
         this.sealpreservationList = res.data
         this.sealTypes = res.data.sealTypes
-        this.fileList = res.data.fileList.map(item => {
+        this.files = res.data.fileList ? res.data.fileList : []
+        // 传输附件id字段
+        res.data.fileList.map(item => {
           this.fileIdList = this.fileIdList.concat(item.fileId)
+        })
+        this.fileList = res.data.fileList.map(item => {
           return JSON.stringify({
             fileName: item.fileName,
             url: item.url,

@@ -306,7 +306,7 @@ export default {
         this.achievementList = res.data.projpContractAchievementList // 业绩切分
         this.projpContractPaymentList = res.data.projpContractPaymentList // 预计现金流量表
         this.files = res.data.fileList ? res.data.fileList : []
-        this.fileList = res.data.fileList.map(item => {
+        this.fileList = this.files.map(item => {
           return JSON.stringify({
             fileName: item.fileName,
             url: item.url,

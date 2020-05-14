@@ -7,53 +7,63 @@
   <div>
     <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">投标备案信息</div>
     <van-field
+      name="bizId"
       v-model="custList.bizId"
       type="text"
       label="备案编号:"
       readonly
     />
     <van-field
+      name="company"
       style="display: none;"
       v-model="custList.company"
       type="text"
       readonly
     />
     <van-field
+      name="bidType"
       style="display: none;"
       v-model="custList.bidType"
       type="text"
       readonly
     />
     <van-field
+      name="exeType"
       style="display: none;"
       v-model="custList.exeType"
       type="text"
       readonly
     />
     <van-field
+      name="status"
       style="display: none;"
       v-model="custList.status"
       type="text"
       readonly
     />
     <van-field
+      name="hasCommit"
       style="display: none;"
       v-model="custList.hasCommit"
       type="text"
       readonly
     />
     <van-field
+      name="salesMan"
       style="display: none;"
       v-model="custList.salesMan"
       type="text"
       readonly
     />
     <van-field
+      name="salesManOrg"
       style="display: none;"
       v-model="custList.salesManOrg"
       type="text"
       readonly
-    /><van-field
+    />
+    <van-field
+      name="ownDeptId"
       style="display: none;"
       v-model="custList.ownDeptId"
       type="text"
@@ -80,78 +90,89 @@
       readonly
     />
     <van-field
+      name="projectName"
       v-model="custList.projectName"
       type="text"
       label="项目名称:"
       readonly
     />
     <van-field
+      name="tenderCompany"
       v-model="custList.tenderCompany"
       type="text"
       label="招标公司:"
       readonly
     />
     <van-field
+      name="custName"
       v-model="custList.custName"
       type="text"
       label="客户名称:"
       readonly
     />
-    <van-field label="是否有招标编号:">
+    <van-field label="是否有招标编号:" name="hasBidNo" v-model="custList.hasBidNo">
       <template #input>
         <div v-if="custList.hasBidNo === '1'" style="margin: 0;">是</div>
         <div v-if="custList.hasBidNo === '0'" style="margin: 0;">否</div>
       </template>
     </van-field>
     <van-field
+      name="bidNo"
       v-model="custList.bidNo"
       type="text"
       label="招标编号:"
       readonly
     />
     <van-field
+      name="companyText"
       v-model="custList.companyText"
       type="text"
       label="投标公司:"
       readonly
     />
     <van-field
+      name="exeTypeText"
       v-model="custList.exeTypeText"
       type="text"
       label="项目执行方式:"
       readonly
     />
     <van-field
+      name="bidTime"
       v-model="custList.bidTime"
       type="text"
       label="投标时间:"
       readonly
     />
     <van-field
+      name="bidTypeText"
       v-model="custList.bidTypeText"
       type="text"
       label="投标类型:"
       readonly
     />
     <van-field
+      name="salesManName"
       v-model="custList.salesManName"
       type="text"
       label="销售人:"
       readonly
     />
     <van-field
+      name="salesManOrgName"
       v-model="custList.salesManOrgName"
       type="text"
       label="销售人员二级部门:"
       readonly
     />
     <van-field
+      name="leadOrgName"
       v-model="custList.leadOrgName"
       type="text"
       label="主导部门:"
       readonly
     />
-    <van-field label="是否有投标保证金:">
+    <van-field label="是否有投标保证金:" name="hasBond" v-model="custList.hasBond">
       <template #input >
         <div v-if="custList.hasBond === '1'" style="margin: 0;">是</div>
         <div v-else style="margin: 0;">否</div>
@@ -247,6 +268,7 @@ export default {
         this.custList = res.data
         this.custList.status = this.custList.status ? this.custList.status : ''
         this.situation = res.data.situation ? res.data.situation : []
+        this.custList.bidTime = this.custList.bidTime ? this.custList.bidTime.split(' ')[0] : ''
         this.situationList = res.data.situation ? res.data.situation : []
         this.fileList = res.data.attachmentVOList ? res.data.attachmentVOList : []
         this.fileList = this.fileList.map(item => {

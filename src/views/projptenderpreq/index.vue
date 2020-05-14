@@ -7,21 +7,100 @@
   <div>
     <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">投标保证金信息</div>
     <van-field
+      name="recordno"
       v-model="custList.recordno"
       type="text"
       label="备案编号:"
       readonly
     />
     <van-field
-    style="display: none;"
-    v-model="custList.ownDeptId"
-    type="text"
-    readonly
-  />
+      name="status"
+      style="display: none;"
+      v-model="custList.status"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="exeuserid"
+      style="display: none;"
+      v-model="custList.exeuserid"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="paytime"
+      style="display: none;"
+      v-model="custList.paytime"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="leadOrg"
+      style="display: none;"
+      v-model="custList.leadOrg"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="paycompany"
+      style="display: none;"
+      v-model="custList.paycompany"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="paymentId"
+      style="display: none;"
+      v-model="custList.paymentId"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="paymentIdName"
+      style="display: none;"
+      v-model="custList.paymentIdName"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="reqtype"
+      style="display: none;"
+      v-model="custList.reqtype"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="deptid"
+      style="display: none;"
+      v-model="custList.deptid"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="reqPaytime"
+      style="display: none;"
+      v-model="custList.reqPaytime"
+      type="text"
+      readonly
+    />
+    <van-field
+      name="contractNo"
+      style="display: none;"
+      v-model="custList.contractNo"
+      type="text"
+      readonly
+    />
     <van-field
       style="display: none;"
       name="meetingUsers"
       v-model="custList.meetingUsers"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="paytype"
+      v-model="custList.paytype"
       type="text"
       readonly
     />
@@ -33,102 +112,112 @@
       readonly
     />
     <van-field
-      style="display: none;"
-      name="cbxCostDetail"
-      type="text"
-      readonly
-    />
-    <van-field
+      name="exeuserName"
       v-model="custList.exeuserName"
       type="text"
       label="经办人:"
       readonly
     />
     <van-field
+      name="deptName"
       v-model="custList.deptName"
       type="text"
       label="经办人部门:"
       readonly
     />
     <van-field
+      name="reqdate"
       v-model="custList.reqdate"
       type="text"
       label="申请日期:"
       readonly
     />
     <van-field
+      name="tenderdate"
       v-model="custList.tenderdate"
       type="text"
       label="投标日期:"
       readonly
     />
     <van-field
+      name="leadOrgName"
       v-model="custList.leadOrgName"
       type="text"
       label="主导部门:"
       readonly
     />
     <van-field
+      name="paytimeid"
       v-model="custList.paytimeid"
       type="text"
       label="保证金付款时间:"
       readonly
     />
     <van-field
+      name="reqPaytimeId"
       v-model="custList.reqPaytimeId"
       type="text"
       label="保证金类型/对方单位:"
       readonly
     />
     <van-field
+      name="reqtypeName"
       v-model="custList.reqtypeName"
       type="text"
       label="申请性质:"
       readonly
     />
     <van-field
+      name="amount"
       v-model="custList.amount"
       type="text"
       label="金额(元):"
       readonly
     />
     <van-field
+      name="paycompanyName"
       v-model="custList.paycompanyName"
       type="text"
       label="支出公司:"
       readonly
     />
     <van-field
+      name="paytypeName"
       v-model="custList.paytypeName"
       type="text"
       label="支出形式:"
       readonly
     />
     <van-field
+      name="projectname"
       v-model="custList.projectname"
       type="text"
       label="项目名称:"
       readonly
     />
     <van-field
+      name="payeename"
       v-model="custList.payeename"
       type="text"
       label="开户名称:"
       readonly
     />
     <van-field
+      name="payeebank"
       v-model="custList.payeebank"
       type="text"
       label="开户银行:"
       readonly
     />
     <van-field
+      name="payeeaccount"
       v-model="custList.payeeaccount"
       type="text"
       label="账号:"
       readonly
     />
     <van-field
+      name="returndate"
       v-model="custList.returndate"
       type="text"
       label="退回日期:"
@@ -142,6 +231,7 @@
       readonly
     />
     <van-field
+      name="amountWords"
       v-model="custList.amountWords"
       type="text"
       label="金额大写:"
@@ -191,6 +281,7 @@ export default {
   name: 'bizcustinfoform',
   data () {
     return {
+      fileIdList: [],
       fileList: [],
       projptenderList: [],
       custList: [],
@@ -220,29 +311,18 @@ export default {
         this.custList.tenderdate = this.custList.tenderdate ? this.custList.tenderdate.split(' ')[0] : ''
         this.situation = res.data.situation ? res.data.situation : []
         this.projptenderList = res.data.fileList ? res.data.fileList : []
-        this.fileList = res.data.attachmentVOList ? res.data.attachmentVOList : []
+        this.fileList = res.data.fileList ? res.data.fileList : []
+        this.fileList.forEach(item => {
+          this.fileIdList = this.fileIdList.concat(item.fileId)
+        })
         this.fileList = this.fileList.map(item => {
           return JSON.stringify({
-            url: item.atturl,
-            fileName: item.attname,
-            filePath: item.attdir,
-            fileSize: item.attsize,
-            fileId: item.id,
-            bizid: item.bizid
+            url: item.url,
+            fileName: item.fileName,
+            fileSize: item.fileSize,
+            fileId: item.fileId
           })
         })
-        if (res.data.situation) {
-          this.situationList = this.situationList.map(item => {
-            return {
-              url: item.atturl,
-              fileName: item.attname,
-              filePath: item.attdir,
-              fileSize: item.attsize,
-              fileId: item.id,
-              bizid: item.bizid
-            }
-          })
-        }
       }
     })
   },

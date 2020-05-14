@@ -1,4 +1,4 @@
-/** *@author XuJinTao *@date 2020/5/13 16:10 *@title index */
+/** *@author XuJinTao *@date 2020/5/14 10:10 *@title index */
 <template>
   <div class="projpriskbondthaw">
     <div class="title">详情</div>

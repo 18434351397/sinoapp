@@ -20,6 +20,11 @@ const contractRouter = [
     path: '/projpriskbondthaw',
     component: () => import('../views/projpriskbondthaw'), // 风险保证金解冻
     name: 'projpriskbondthaw'
+  },
+  {
+    path: '/projpcontractprotocolform',
+    component: () => import('../views/projpcontractprotocolform'), // 合同协议
+    name: 'projpcontractprotocolform'
   }
 ]
 // 导出router，方便在index里引用

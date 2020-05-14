@@ -390,8 +390,9 @@ export default {
         } else {
           // this.url = this.url.slice(0, -11) + "/updateVOs";
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金  解冻风险保证金
+          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金  解冻风险保证金
           // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口 采购合同接口
+          this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }
       }
     },

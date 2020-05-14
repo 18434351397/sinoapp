@@ -3,11 +3,264 @@
     <div class="title">合同管理-采购合同评审表单信息详情</div>
     <van-field
       style="display: none;"
+      name="bizId"
+      v-model="projpcontractpurchaseList.bizId"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
       name="id"
       v-model="projpcontractpurchaseList.id"
       type="text"
       readonly
     />
+    <van-field
+      style="display: none;"
+      name="company"
+      v-model="projpcontractpurchaseList.company"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="contractType"
+      v-model="projpcontractpurchaseList.contractType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="hasPno"
+      v-model="projpcontractpurchaseList.hasPno"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="isSingle"
+      v-model="projpcontractpurchaseList.isSingle"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="meetingUsers"
+      v-model="projpcontractpurchaseList.meetingUsers"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="ownDeptId"
+      v-model="projpcontractpurchaseList.ownDeptId"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="payType"
+      v-model="projpcontractpurchaseList.payType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="pmManager"
+      v-model="projpcontractpurchaseList.pmManager"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="purchaseType"
+      v-model="projpcontractpurchaseList.purchaseType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="supplierId"
+      v-model="projpcontractpurchaseList.supplierId"
+      type="text"
+      readonly
+    />
+
+    <van-field
+      type="text"
+      name="hasPnoName"
+      label="是否已有采购合同/合作协议"
+      v-model="projpcontractpurchaseList.hasPnoName"
+      readonly
+      colon
+    />
+    <van-field
+      type="text"
+      name="purchaseNo"
+      v-model="projpcontractpurchaseList.purchaseNo"
+      label="采购合同编号"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="projectNo"
+      v-model="projpcontractpurchaseList.projectNo"
+      label="立项号/合同号"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="companyText"
+      v-model="projpcontractpurchaseList.companyText"
+      label="涉及公司"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="projectName"
+      v-model="projpcontractpurchaseList.projectName"
+      label="销售合同名称"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="contractTypeName"
+      v-model="projpcontractpurchaseList.contractTypeName"
+      label="销售合同类型"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="contractAmount"
+      v-model="projpcontractpurchaseList.contractAmount"
+      label="销售合同金额"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="pmManagerName"
+      v-model="projpcontractpurchaseList.pmManagerName"
+      label="项目经理"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="isSingleName"
+      label="是否单一来源采购"
+      v-model="projpcontractpurchaseList.isSingleName"
+      readonly
+      colon
+    />
+    <van-field
+      type="text"
+      name="supplierName"
+      v-model="projpcontractpurchaseList.supplierName"
+      label="乙方名称"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="purchaseAmount"
+      v-model="projpcontractpurchaseList.purchaseAmount"
+      label="采购金额"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="payTypeName"
+      v-model="projpcontractpurchaseList.payTypeName"
+      label="支付方式"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="purchaseTypeName"
+      v-model="projpcontractpurchaseList.purchaseTypeName"
+      label="采购类型"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="dataType"
+      v-model="projpcontractpurchaseList.dataType"
+      label="账期类型"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="singleExplain"
+      v-model="projpcontractpurchaseList.singleExplain"
+      label="单一来源说明"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="startCondition"
+      v-model="projpcontractpurchaseList.startCondition"
+      label="质保期起始条件"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="ownDeptIdName"
+      v-model="projpcontractpurchaseList.ownDeptIdName"
+      label="主导部门"
+      colon
+      readonly
+    />
+    <div>
+      <div class="table-title">采购明细</div>
+      <el-table border :data="goodsList" style="width: 100%">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="成本类型" prop="costTypeName"></el-table-column>
+        <el-table-column label="产品名称" prop="name"></el-table-column>
+        <el-table-column label="规格型号" prop="model"></el-table-column>
+        <el-table-column label="品牌" prop="brandName"></el-table-column>
+        <el-table-column label="产品单价" prop="price"></el-table-column>
+        <el-table-column label="产品数量" prop="num"></el-table-column>
+        <el-table-column label="发票类型" prop="invoiceTypeName"></el-table-column>
+        <el-table-column label="税率" prop="invoiceTaxName"></el-table-column>
+      </el-table>
+    </div>
+    <div>
+      <div class="table-title">付款条件</div>
+      <el-table border :data="payforList" style="width: 100%">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="预计付款时间" prop="receiveDate"></el-table-column>
+        <el-table-column label="预计付款条件" prop="content"></el-table-column>
+        <el-table-column label="付款金额" prop="receiveAmount"></el-table-column>
+        <el-table-column label="备注" prop="remark"></el-table-column>
+      </el-table>
+    </div>
+    <div>
+      <div class="table-title">附件列表</div>
+      <el-table border :data="files" style="width: 100%">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="附件名称" prop="fileName"></el-table-column>
+        <el-table-column label="大小" width="80">
+          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="50">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
@@ -20,18 +273,58 @@ export default {
     return {
       dataList: this.$route.query,
       fileList: [],
-      files: [], // 循环列表
-      projpcontractpurchaseList: [] // 风险保证金
+      files: [], // 循环附件
+      goodsList: [], // 采购
+      payforList: [], // 付款
+      fileIdList: [], // 附件编号
+      projpcontractpurchaseList: [] // 采购合同
     }
   },
   created () {
     projpcontractpurchaseformList(this.dataList.dataId).then(res => {
       if (res.data) {
+        // 判断bool值类型
+        if (res.data.hasPno === '1') {
+          res.data.hasPnoName = '是'
+        } else {
+          res.data.hasPnoName = '否'
+        }
+        if (res.data.isSingle === '1') {
+          res.data.isSingleName = '是'
+        } else {
+          res.data.isSingleName = '否'
+        }
         this.projpcontractpurchaseList = res.data
+        this.goodsList = res.data.goodsList
+        this.payforList = res.data.payforList
+        this.files = res.data.fileList ? res.data.fileList : []
+        // 传输附件id字段
+        res.data.fileList.map(item => {
+          this.fileIdList = this.fileIdList.concat(item.fileId)
+        })
+        this.fileList = res.data.fileList.map(item => {
+          return JSON.stringify({
+            fileName: item.fileName,
+            url: item.url,
+            fileSize: item.fileSize,
+            fileId: item.fileId
+          })
+        })
       } else {
         throw new '数据异常'()
       }
     })
+  },
+  methods: {
+    // 下载调用方法
+    handleClick (data) {
+      console.log(data.url)
+      this.downLoad(data)
+    },
+    // 处理序号
+    indexMethods (index) {
+      return index + 1
+    }
   }
 }
 </script>

@@ -10,6 +10,11 @@ const contractRouter = [
     path: '/projpriskbond',
     component: () => import('../views/projpriskbond'), // 风险保证金
     name: 'projpriskbond'
+  },
+  {
+    path: '/projpcontractpurchaseform',
+    component: () => import('../views/projpcontractpurchaseform'), // 风险保证金
+    name: 'projpcontractpurchaseform'
   }
 ]
 // 导出router，方便在index里引用

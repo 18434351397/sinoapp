@@ -1,130 +1,103 @@
+/** *@author XuJinTao *@date 2020/5/13 16:10 *@title index */
 <template>
-  <div class="sealpreservation">
+  <div class="projpriskbondthaw">
     <div class="title">详情</div>
     <van-field
       style="display: none;"
-      name="depositoryId"
-      v-model="sealpreservationList.depositoryId"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
       name="id"
-      v-model="sealpreservationList.id"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="ownDeptId"
-      v-model="sealpreservationList.ownDeptId"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="recipientsId"
-      v-model="sealpreservationList.recipientsId"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="recipientsDeptId"
-      v-model="sealpreservationList.recipientsDeptId"
+      v-model="projpriskbondthawList.id"
       type="text"
       readonly
     />
     <van-field
       style="display: none;"
       name="meetingUsers"
-      v-model="sealpreservationList.meetingUsers"
+      v-model="projpriskbondthawList.meetingUsers"
       type="text"
       readonly
     />
     <van-field
       type="text"
-      name="userName"
-      v-model="sealpreservationList.userName"
-      label="领用人"
+      name="contractNo"
+      v-model="projpriskbondthawList.contractNo"
+      label="合同号"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="orgName"
-      v-model="sealpreservationList.orgName"
-      label="领用人部门"
+      name="contractName"
+      v-model="projpriskbondthawList.contractName"
+      label="合同名称"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="companyDesc"
-      v-model="sealpreservationList.companyDesc"
-      label="涉及公司"
+      name="ownDeptName"
+      v-model="projpriskbondthawList.ownDeptName"
+      label="合同主导部门"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="sealName"
-      v-model="sealpreservationList.sealName"
-      label="印章名称"
+      name="ownUserName"
+      v-model="projpriskbondthawList.ownUserName"
+      label="主导部门负责人"
       colon
       readonly
     />
     <van-field
       type="text"
-      name="timeLimit"
-      v-model="sealpreservationList.timeLimit"
-      label="保管期限"
+      name="frozenAmount"
+      v-model="projpriskbondthawList.frozenAmount"
+      label="冻结金额"
       colon
       readonly
     />
     <van-field
       type="text"
-      v-if="!isSeal"
-      name="sealTypeDesc"
-      v-model="sealpreservationList.sealTypeDesc"
-      label="印章类型"
+      name="startFrozenTime"
+      v-model="projpriskbondthawList.startFrozenTime"
+      label="开始冻结时间"
       colon
       readonly
     />
     <van-field
       type="text"
-      v-if="isSeal"
-      v-model="sealpreservationList.sealTypeDesc"
-      label="印章类型"
-      colon
-      readonly
-    />
-    <van-field
-      v-if="isSeal"
-      style="display: none;"
-      type="text"
-      name="company"
-      v-model="sealpreservationList.company"
-    />
-    <van-field
-      type="text"
-      name="depositoryName"
-      v-model="sealpreservationList.depositoryName"
-      label="保管人"
+      name="riskTypeText"
+      v-model="projpriskbondthawList.riskTypeText"
+      label="风险类型"
       colon
       readonly
     />
     <van-field
       type="text"
       name="remark"
-      v-model="sealpreservationList.remark"
-      label="备注说明"
+      v-model="projpriskbondthawList.remark"
+      label="备注"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="cThawAmount"
+      v-model="projpriskbondthawList.cThawAmount"
+      label="本次解冻金额"
+      colon
+      readonly
+    />
+    <van-field
+      type="text"
+      name="thawTime"
+      v-model="projpriskbondthawList.thawTime"
+      label="解冻时间"
       colon
       readonly
     />
     <div>
-      <div class="table-title">附件列表</div>
+      <div class="table-title">其他</div>
       <el-table border :data="files" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="附件名称" prop="fileName"></el-table-column>
@@ -140,38 +113,25 @@
     </div>
   </div>
 </template>
+
 <script>
-import { sealpreservationformList } from '../../api/characteristic'
+import { projpriskbondthawList } from '../../api/contract'
 
 export default {
   name: 'index',
   data () {
     return {
-      isSeal: false, // 限制特殊属性
       dataList: this.$route.query,
-      sealpreservationList: [], // 印信使用审批数据
       fileList: [],
-      files: [],
-      fileIdList: [], // 附件编号
-      sealTypes: [] // 印章类型
+      files: [], // 循环列表
+      projpriskbondthawList: [] // 风险保证金
     }
   },
   created () {
-    if (this.dataList.currFlowId === 'SealKeepApprove' &&
-      this.dataList.currUserName === '白建平' &&
-      this.dataList.currTaskDefinitionKey === 'SealManager' &&
-      this.dataList.currTaskDefinitionName === '印章管理员') {
-      this.isSeal = true
-    }
-    sealpreservationformList(this.dataList.dataId).then(res => {
+    projpriskbondthawList(this.dataList.dataId).then(res => {
       if (res.data) {
-        this.sealpreservationList = res.data
-        this.sealTypes = res.data.sealTypes
+        this.projpriskbondthawList = res.data
         this.files = res.data.fileList ? res.data.fileList : []
-        // 传输附件id字段
-        res.data.fileList.map(item => {
-          this.fileIdList = this.fileIdList.concat(item.fileId)
-        })
         this.fileList = this.files.map(item => {
           return JSON.stringify({
             fileName: item.fileName,
@@ -200,7 +160,7 @@ export default {
 </script>
 
 <style lang="less">
-div.sealpreservation {
+div.projpriskbondthaw {
   background-color: #f8f8f8;
   div.title {
     font-size: 14px;
@@ -214,9 +174,7 @@ div.sealpreservation {
     background-color: #fff;
   }
 }
-</style>
-<style lang="less">
-div.sealpreservation {
+div.projpriskbondthaw {
   div.tax.van-cell:not(:last-child)::after {
     border-bottom: 1px solid #6c6c6c;
   }

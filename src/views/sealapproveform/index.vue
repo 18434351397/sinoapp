@@ -142,7 +142,7 @@ export default {
       if (res.data) {
         this.useApprovalList = res.data
         this.files = res.data.fileList ? res.data.fileList : []
-        this.fileList = res.data.fileList.map(item => {
+        this.fileList = this.files.map(item => {
           return JSON.stringify({
             fileName: item.fileName,
             url: item.url,

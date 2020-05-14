@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { projpcontractpurchaseformList } from '../../api/bidManagement'
+import { projpcontractpurchaseformList } from '../../api/contract'
 
 export default {
   name: 'index',

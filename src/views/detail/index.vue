@@ -304,8 +304,13 @@ export default {
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
       values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
       // 判断是否是印章保管登记
-      if (this.dataList.currFlowId === 'SealKeepApprove') {
+      if (this.dataList.currFlowId === 'SealKeepApprove' || this.dataList.currFlowId === 'PurchaseApprove') {
         values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
+      } else { }
+      // 判断是否是采购合同流程
+      if (this.dataList.currFlowId === 'PurchaseApprove') {
+        values.payforList = this.$refs.detail.payforList ? this.$refs.detail.payforList : []
+        values.goodsList = this.$refs.detail.goodsList ? this.$refs.detail.goodsList : []
       } else { }
       // 判断印章管理员
       if (this.dataList.currFlowId === 'SealKeepApprove' &&
@@ -385,8 +390,8 @@ export default {
         } else {
           // this.url = this.url.slice(0, -11) + "/updateVOs";
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金
-          // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口
+          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金
+          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口 采购合同接口
         }
       }
     },

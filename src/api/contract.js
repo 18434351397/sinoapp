@@ -3,7 +3,10 @@ const api = {
   projpriskbond: '/app/form/projpriskbond/detail', // 风险保证金
   projpcontractpurchaseform: '/app/form/projpcontractpurchaseform/detail', // 采购合同
   projpriskbondthaw: '/app/form/projpriskbondthaw/detail', // 解冻风险保证金
-  projpcontractprotocolform: '/app/form/projpcontractprotocolform/detail' // 合作协议
+  projpcontractprotocolform: '/app/form/projpcontractprotocolform/detail', // 合作协议
+  projpprojectinfoform: '/app/form/projpprojectinfoform/detail', // 项目立项
+  projpprojectstageinfo: 'app/pro/projpprojectstageinfo/all/list', // 项目立项 --- 阶段列表
+  attachment: '/app/admin/attachment/biz/list' // 项目立项 --- 附件
 }
 
 // 风险保证金
@@ -34,6 +37,30 @@ export async function projpriskbondthawList (data) {
 export async function projpcontractprotocolformApi (data) {
   return request({
     url: api.projpcontractprotocolform + '/' + data,
+    method: 'get'
+  })
+}
+
+// 项目立项
+export async function projpprojectinfoformApi (data) {
+  return request({
+    url: api.projpprojectinfoform + '/' + data,
+    method: 'get'
+  })
+}
+
+// 项目立项 --- 阶段列表
+export async function projpprojectstageinfoApi (data) {
+  return request({
+    url: api.projpprojectstageinfo + '/?projectKey=' + data,
+    method: 'get'
+  })
+}
+
+// 项目立项 --- 阶段列表
+export async function attachmentApi (data) {
+  return request({
+    url: api.attachment + '/?bizId=' + data,
     method: 'get'
   })
 }

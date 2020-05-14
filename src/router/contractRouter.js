@@ -13,7 +13,7 @@ const contractRouter = [
   },
   {
     path: '/projpcontractpurchaseform',
-    component: () => import('../views/projpcontractpurchaseform'), // 风险保证金
+    component: () => import('../views/projpcontractpurchaseform'), // 采购合同
     name: 'projpcontractpurchaseform'
   },
   {
@@ -25,6 +25,11 @@ const contractRouter = [
     path: '/projpcontractprotocolform',
     component: () => import('../views/projpcontractprotocolform'), // 合同协议
     name: 'projpcontractprotocolform'
+  },
+  {
+    path: '/projpprojectinfoform',
+    component: () => import('../views/projpprojectinfoform'), // 项目立项
+    name: 'projpprojectinfoform'
   }
 ]
 // 导出router，方便在index里引用

@@ -1,7 +1,7 @@
 /** *@author XuJinTao *@date 2020/5/14 11:30 *@title index */
 <template>
   <div class="projpcontractprotocol">
-    <div class="title">合同管理-合作协议信息表单详情</div>
+    <div class="title">合作协议信息</div>
     <van-field
       style="display: none;"
       name="id"

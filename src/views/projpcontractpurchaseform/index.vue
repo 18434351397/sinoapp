@@ -1,6 +1,6 @@
 <template>
   <div class="projpcontractpurchase">
-    <div class="title">合同管理-采购合同评审表单信息详情</div>
+    <div class="title">采购合同评审信息</div>
     <van-field
       style="display: none;"
       name="bizId"

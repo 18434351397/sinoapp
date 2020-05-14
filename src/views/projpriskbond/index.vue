@@ -1,7 +1,7 @@
 /** *@author XuJinTao *@date 2020/5/13 16:10 *@title index */
 <template>
   <div class="bizcompanychangeform">
-    <div class="title">详情</div>
+    <div class="title">风险保证金信息</div>
     <van-field
       style="display: none;"
       name="id"

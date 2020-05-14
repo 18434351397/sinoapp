@@ -1,6 +1,6 @@
 <template>
   <div class="sealpreservation">
-    <div class="title">详情</div>
+    <div class="title">印章保管登记信息</div>
     <van-field
       style="display: none;"
       name="depositoryId"

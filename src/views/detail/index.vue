@@ -385,14 +385,16 @@ export default {
         console.log(this.url)
       } else {
         // 投标保证金接口的特殊处理
-        if (this.url.includes('cashier')) {
+        if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -12) + 'update'
+        } else if (this.url.includes('fundmanagercheck')) { // 投标保函的最后一个审批人的特殊处理
+          this.url = this.url.slice(0, -22) + '/update'
         } else {
-          // this.url = this.url.slice(0, -11) + "/updateVOs";
-          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口
-          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金  解冻风险保证金
-          // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口   印章保管流程接口 采购合同接口
-          this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
+          // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
+          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
+          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金
+          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口
+          // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }
       }
     },

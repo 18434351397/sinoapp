@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { projpriskbondList } from '../../api/bidManagement'
+import { projpriskbondList } from '../../api/contract'
 
 export default {
   name: 'index',

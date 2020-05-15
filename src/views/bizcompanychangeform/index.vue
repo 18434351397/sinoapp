@@ -1,7 +1,7 @@
 /** *@author XuJinTao *@date 2020/5/13 15:10 *@title index */
 <template>
   <div class="bizcompanychangeform">
-    <div class="title">分子公司变更详情</div>
+    <div class="title">分子公司设立与变更信息</div>
     <van-field
       style="display: none;"
       name="id"

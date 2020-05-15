@@ -1,7 +1,7 @@
 /** *@author XuJinTao *@date 2020/5/14 10:10 *@title index */
 <template>
   <div class="projpriskbondthaw">
-    <div class="title">详情</div>
+    <div class="title">风险保证金解冻信息</div>
     <van-field
       style="display: none;"
       name="id"

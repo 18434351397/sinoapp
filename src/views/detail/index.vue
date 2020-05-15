@@ -307,6 +307,10 @@ export default {
       if (this.dataList.currFlowId === 'SealKeepApprove' || this.dataList.currFlowId === 'PurchaseApprove') {
         values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
       } else { }
+      // 判断是否是项目立项流程
+      if (this.dataList.currFlowId === 'CommonApprove') {
+        values.stageData = this.$refs.detail.projpprojectstageinfo
+      } else { }
       // 判断是否是采购合同流程
       if (this.dataList.currFlowId === 'PurchaseApprove') {
         values.payforList = this.$refs.detail.payforList ? this.$refs.detail.payforList : []
@@ -383,6 +387,12 @@ export default {
       ) {
         this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
         console.log(this.url)
+      } else if (this.dataList.currFlowId === 'CommonApprove' &&
+        this.dataList.currTaskDefinitionName === '受理退回' &&
+        (this.dataList.currUserName === this.dataList.userName)) {
+        this.url = this.url.slice(0, -10) + '/updateProject' // 项目立项 特殊处理-->判断当前节点是受理退回并且当前处理人=== 当前发起人
+      } else if (this.dataList.currFlowId === 'CommonApprove') {
+        this.url = this.url.slice(0, -10) + '/updateProject' // 项目立项接口
       } else {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
@@ -399,7 +409,7 @@ export default {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
           // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金
-          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口
+          // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }
       }

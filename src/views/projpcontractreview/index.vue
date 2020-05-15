@@ -629,7 +629,7 @@ export default {
       showPicker: false,
       custProList: [],
       dataList: this.$route.query,
-      title: '合同评审信息表编辑',
+      title: '销售合同评审信息',
       contractList: [], // 整体信息
       incomeList: [], // 收入
       costList: [], // 成本

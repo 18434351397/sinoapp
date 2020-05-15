@@ -1,7 +1,7 @@
 /** *@author XuJinTao *@date 2020/5/12 15:40 *@title index */
 <template>
   <div class="projpcontractre">
-    <div class="title">投标报价信息表详情</div>
+    <div class="title">投标报价信息</div>
     <van-field style="display: none;" name="cbxAchievementFlow" type="text" readonly />
     <van-field style="display: none;" name="cbxCashFlow" type="text" readonly />
     <van-field style="display: none;" name="cbxCostDetail" type="text" readonly />

@@ -35,6 +35,11 @@ const contractRouter = [
     path: '/bizperformdenoteform',
     component: () => import('../views/bizperformdenoteform'), // 履约保函
     name: 'bizperformdenoteform'
+  },
+  {
+    path: '/projpcontractarchives',
+    component: () => import('../views/projpcontractarchives'), // 履约保函
+    name: 'projpcontractarchives'
   }
 ]
 // 导出router，方便在index里引用

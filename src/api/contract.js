@@ -6,7 +6,8 @@ const api = {
   projpcontractprotocolform: '/app/form/projpcontractprotocolform/detail', // 合作协议
   projpprojectinfoform: '/app/form/projpprojectinfoform/detail', // 项目立项
   projpprojectstageinfo: 'app/pro/projpprojectstageinfo/all/list', // 项目立项 --- 阶段列表
-  attachment: '/app/admin/attachment/biz/list' // 项目立项 --- 附件
+  attachment: '/app/admin/attachment/biz/list', // 项目立项 --- 附件
+  bizperformdenoteform: '/app/form/bizperformdenoteform/detail' // 履约保函
 }
 
 // 风险保证金
@@ -61,6 +62,14 @@ export async function projpprojectstageinfoApi (data) {
 export async function attachmentApi (data) {
   return request({
     url: api.attachment + '/?bizId=' + data,
+    method: 'get'
+  })
+}
+
+// 履约保函
+export async function bizperformdenoteformApi (data) {
+  return request({
+    url: api.bizperformdenoteform + '/' + data,
     method: 'get'
   })
 }

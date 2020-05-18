@@ -13,7 +13,8 @@ const api = {
   projppayreq: '/app/form/projppayreq/detail', // 合同付款
   projpcontractpayment: '/app/pro/projpcontractpayment/contract', // 合同付款金额
   cashStatus: '/app/form/projppayreq/contract/cash/status/', // 现金流状态
-  bizperformbondform: '/app/form/bizperformbondform/detail' // 履约保证金
+  bizperformbondform: '/app/form/bizperformbondform/detail', // 履约保证金
+  projpbidservicefee: '/app/form/projpbidservicefee/detail' // 中标服务费
 }
 
 // 风险保证金
@@ -119,6 +120,13 @@ export async function cashStatusApi (data) {
 export async function bizperformbondformApi (data) {
   return request({
     url: api.bizperformbondform + '/' + data,
+    method: 'get'
+  })
+}
+// 中标服务费
+export async function projpbidservicefeeApi (data) {
+  return request({
+    url: api.projpbidservicefee + '/' + data,
     method: 'get'
   })
 }

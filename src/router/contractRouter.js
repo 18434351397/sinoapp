@@ -38,8 +38,13 @@ const contractRouter = [
   },
   {
     path: '/projpcontractarchives',
-    component: () => import('../views/projpcontractarchives'), // 履约保函
+    component: () => import('../views/projpcontractarchives'), // 合同存档
     name: 'projpcontractarchives'
+  },
+  {
+    path: '/projppayreq',
+    component: () => import('../views/projppayreq'), // 合同付款
+    name: 'projppayreq'
   }
 ]
 // 导出router，方便在index里引用

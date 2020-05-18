@@ -18,7 +18,7 @@ export async function projptenderpreqpayList (data) {
     method: 'get'
   })
 }
-//投标保函
+// 投标保函
 export async function projptenderletterList (data) {
   return request({
     url: api.projptenderletterList + '/' + data,

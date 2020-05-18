@@ -386,10 +386,15 @@ export default {
       } else if (this.dataList.currTaskDefinitionName === '受理退回' &&
         (this.dataList.currUserName === this.dataList.userName)) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
         this.url = this.url.slice(0, -10) + '/update'
+      } else if (user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.currFlowId === 'FinanceApprove' &&
+        user.currFlowName === '履约保证金'
+      ) {
+        this.url = this.url.slice(0, -12) + '/update' // 履约保证金
       } else if (
         user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
         user.currFlowId === 'FinanceApprove'
-      ) {
+      ) { // 投标保证金
         this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
         console.log(this.url)
       } else if (this.dataList.currFlowId === 'CommonApprove' &&
@@ -420,8 +425,8 @@ export default {
         } else {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
-          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口  合同付款接口
-          // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函
+          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口  合同付款接口
+          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函  履约保证金
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }
       }

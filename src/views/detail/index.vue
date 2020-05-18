@@ -425,8 +425,8 @@ export default {
         } else {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
-          // this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口  合同付款接口
-          this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函  履约保证金
+          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口  合同付款接口  中标服务费
+          // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函  履约保证金
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }
       }

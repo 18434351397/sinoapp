@@ -48,8 +48,13 @@ const contractRouter = [
   },
   {
     path: '/bizperformbondform',
-    component: () => import('../views/bizperformbondform'), // 合同付款
+    component: () => import('../views/bizperformbondform'), // 履约保证金
     name: 'bizperformbondform'
+  },
+  {
+    path: '/projpbidservicefee',
+    component: () => import('../views/projpbidservicefee'), // 中标服务费
+    name: 'projpbidservicefee'
   }
 ]
 // 导出router，方便在index里引用

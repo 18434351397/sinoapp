@@ -695,7 +695,6 @@ export default {
     const user = this.dataList
     if (
       user.currTaskDefinitionName === '运营管理部' &&
-      user.currUserName === '李月平' &&
       user.currTaskDefinitionKey === 'BusiAnalysis' &&
       user.currFlowId === 'ContrReviewApprove'
     ) {

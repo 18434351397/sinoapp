@@ -1,3 +1,4 @@
+/** *@author XuJinTao *@date 2020/5/18 9:01 *@title index */
 <template>
   <div class="projppayreq">
     <div class="title">合同付款信息</div>

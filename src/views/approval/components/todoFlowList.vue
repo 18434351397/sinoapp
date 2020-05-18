@@ -112,14 +112,22 @@ export default {
       data.searchType = this.searchType
       const path = data.url.split('/')[3]
       // 处理投标保证金和付业务往来款相同name
-      console.log(data.url)
       if (data.url.includes('pay')) {
-        this.$router.push({
-          name: 'projptenderpreqpay',
-          query: data
-        }).catch(err => {
-          console.log(err)
-        })
+        if (data.url === '/app/form/projptenderpreq/detail/pay/page') { // 处理付业务往来款路由一样的问题
+          this.$router.push({
+            name: 'projptenderpreqpay',
+            query: data
+          }).catch(err => {
+            console.log(err)
+          })
+        } else { // 处理合同付款地址与付业务往来款里都有pay字段
+          this.$router.push({
+            name: 'projppayreq',
+            query: data
+          }).catch(err => {
+            console.log(err)
+          })
+        }
       } else if (path) {
         this.$router.push({
           name: path,

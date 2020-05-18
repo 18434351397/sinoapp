@@ -2,7 +2,9 @@ import request from '@/utils/request'
 const api = {
   sealapproveformList: '/app/form/sealapproveform/detail', // 印信使用审批
   sealpreservationformList: '/app/form/sealpreservationform/detail', // 印章保管
-  bizcompanychangeformList: '/app/form/bizcompanychangeform/detail' // 分子公司注册变更
+  bizcompanychangeformList: '/app/form/bizcompanychangeform/detail', // 分子公司注册变更
+  sealdestoryformList: '/app/form/sealdestoryform/detail', // 分子公司注册变更
+  postmanageformList: '/app/form/postmanageform/detail' // 分子公司注册变更
 }
 
 // 印信使用审批
@@ -25,6 +27,20 @@ export async function sealpreservationformList (data) {
 export async function bizcompanychangeformList (data) {
   return request({
     url: api.bizcompanychangeformList + '/' + data,
+    method: 'get'
+  })
+}
+// 印章销毁
+export async function sealdestoryformList (data) {
+  return request({
+    url: api.sealdestoryformList + '/' + data,
+    method: 'get'
+  })
+}
+// 发文管理
+export async function postmanageformList (data) {
+  return request({
+    url: api.postmanageformList + '/' + data,
     method: 'get'
   })
 }

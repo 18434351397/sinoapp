@@ -1,36 +1,41 @@
 const biddingRouter = [
   {
-    path: '/bizcustinfoform',
+    path: '/bizcustinfoform', // 客户管理
     component: () => import('../views/addCustomer'),
     name: 'bizcustinfoform'
   },
   {
-    path: '/bizsupplierinfoform',
+    path: '/bizsupplierinfoform', // 供应商管理
     component: () => import('../views/bizsupplierinfoform'),
     name: 'bizsupplierinfoform'
   },
   {
-    path: '/projptenderrecord',
+    path: '/projptenderrecord', // 投标备案
     component: () => import('../views/projptenderrecord'),
     name: 'projptenderrecord'
   },
   {
-    path: '/projpcontractreview',
+    path: '/projpcontractreview', // 合同评审
     component: () => import('../views/projpcontractreview'),
     name: 'projpcontractreview'
   },
   {
-    path: '/projptenderpreq',
+    path: '/projptenderpreq', // 投标保证金
     component: () => import('../views/projptenderpreq'),
     name: 'projptenderpreq'
   },
   {
-    path: '/projptenderquote',
+    path: '/projptenderpreqpay', // 付业务往来款
+    component: () => import('../views/projptenderpreqpay'),
+    name: 'projptenderpreqpay'
+  },
+  {
+    path: '/projptenderquote', // 投标报价
     component: () => import('../views/projptenderquote'),
     name: 'projptenderquote'
   },
   {
-    path: '/projptenderletter',
+    path: '/projptenderletter', // 投标保函
     component: () => import('../views/projptenderletter'),
     name: 'projptenderletter'
   }

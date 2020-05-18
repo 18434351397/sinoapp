@@ -405,9 +405,15 @@ export default {
       } else {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
-          this.url = this.url.slice(0, -12) + 'update'
+          if (this.url.includes('pay')) {
+            this.url = this.url.slice(0, -17) + '/update'
+          } else {
+            this.url = this.url.slice(0, -12) + 'update'
+          }
         } else if (this.url.includes('fundmanagercheck')) { // 投标保函的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -22) + '/update'
+        } else if (this.url.includes('pay')) { // 付业务往来款的最后一个审批人的特殊处理
+          this.url = this.url.slice(0, -16) + '/update'
         } else {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口

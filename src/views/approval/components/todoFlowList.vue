@@ -111,7 +111,16 @@ export default {
     toDetail (data) {
       data.searchType = this.searchType
       const path = data.url.split('/')[3]
-      if (path) {
+      // 处理投标保证金和付业务往来款相同name
+      console.log(data.url)
+      if (data.url.includes('pay')) {
+        this.$router.push({
+          name: 'projptenderpreqpay',
+          query: data
+        }).catch(err => {
+          console.log(err)
+        })
+      } else if (path) {
         this.$router.push({
           name: path,
           query: data

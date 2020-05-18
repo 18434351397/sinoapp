@@ -10,7 +10,9 @@ const api = {
   bizperformdenoteform: '/app/form/bizperformdenoteform/detail', // 履约保函
   projpcontractarchives: '/app/form/projpcontractarchives/detail', // 合同存档
   selectReportByRequestNo: '/app/pro/projpcontractreview/selectReportByRequestNo', // 验收报告相关信息
-  projppayreq: '/app/form/projppayreq/detail' // 合同付款
+  projppayreq: '/app/form/projppayreq/detail', // 合同付款
+  projpcontractpayment: '/app/pro/projpcontractpayment/contract', // 合同付款金额
+  cashStatus: '/app/form/projppayreq/contract/cash/status/' // 现金流状态
 }
 
 // 风险保证金
@@ -90,11 +92,24 @@ export async function selectReportByRequestNoApi (data) {
     method: 'get'
   })
 }
-
 // 合同付款
 export async function projppayreqApi (data) {
   return request({
     url: api.projppayreq + '/' + data,
+    method: 'get'
+  })
+}
+// 合同付款金额
+export async function projpcontractpaymentApi (data) {
+  return request({
+    url: api.projpcontractpayment + '/' + data,
+    method: 'get'
+  })
+}
+// 现金流状态
+export async function cashStatusApi (data) {
+  return request({
+    url: api.cashStatus + '/' + data,
     method: 'get'
   })
 }

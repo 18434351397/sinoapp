@@ -402,6 +402,8 @@ export default {
         this.dataList.currTaskDefinitionKey !== 'DepotManager' &&
         this.dataList.currTaskDefinitionName !== '库管') {
         this.url = this.url.slice(0, -10) + '/busi/comit/task' // 合同存档
+      } else if (this.dataList.currFlowId === 'PaymentApprove' && this.dataList.currFlowName === 'currFlowName') {
+        this.url = this.url.slice(0, -12) + '/comit/task' // 合同付款接口
       } else {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
@@ -413,11 +415,12 @@ export default {
         } else if (this.url.includes('fundmanagercheck')) { // 投标保函的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -22) + '/update'
         } else if (this.url.includes('pay')) { // 付业务往来款的最后一个审批人的特殊处理
+          console.log(this.url)
           this.url = this.url.slice(0, -16) + '/update'
         } else {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
-          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口
+          this.url = this.url.slice(0, -12) + '/comit/task' // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口  合同付款接口
           // this.url = this.url.slice(0, -12) + '/update' // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }

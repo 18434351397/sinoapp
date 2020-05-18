@@ -45,6 +45,11 @@ const contractRouter = [
     path: '/projppayreq',
     component: () => import('../views/projppayreq'), // 合同付款
     name: 'projppayreq'
+  },
+  {
+    path: '/bizperformbondform',
+    component: () => import('../views/bizperformbondform'), // 合同付款
+    name: 'bizperformbondform'
   }
 ]
 // 导出router，方便在index里引用

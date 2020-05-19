@@ -13,6 +13,11 @@ const costRouter = [
     path: '/bizfeestransferform', // 内部收益划转
     component: () => import('../views/bizfeestransferform'),
     name: 'bizfeestransferform'
+  },
+  {
+    path: '/projpinvoicereq', // 开发票/收据
+    component: () => import('../views/projpinvoicereq'),
+    name: 'projpinvoicereq'
   }
 ]
 export default costRouter

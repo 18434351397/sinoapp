@@ -415,7 +415,10 @@ export default {
       } else if (this.dataList.currFlowId === 'TransferApprove' &&
         this.dataList.currFlowName === '内部收益划转' &&
         this.dataList.currTaskDefinitionKey === 'BusiAnalysis') {
-        this.url = this.url.slice(0, -22) + '/update' // 内部收益划转在运管节点特殊处理
+        this.url = this.url.slice(0, -22) + '/update' // 内部收益划转在运管节 点特殊处理
+      } else if (this.dataList.currFlowId === 'CustApprove' &&
+        this.dataList.currFlowName === '分摊费用') {
+        this.url = this.url.slice(0, -16) + '/update/task' // 费用分摊
       } else {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
@@ -431,7 +434,7 @@ export default {
           this.url = this.url.slice(0, -16) + '/update'
         } else {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
-          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
+          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口  
           // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口 合同付款接口  中标服务费
           // this.url = this.url.slice(0, -12) + '/comit/task'
           // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函 履约保证金 发文管理 印章销毁 个人借款接口 内部收益划转接口 开发票/收据  内部收益划转

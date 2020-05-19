@@ -5,7 +5,8 @@ const api = {
   bizfeesreimbursementformList: '/app/form/bizfeesreimbursementform/detail', // 报销发起
   selectByUserIdLoanList: '/app/biz/bizfeesloan/selectByUserIdLoan', // 报销发起
   projpinvoicereq: '/app/form/projpinvoicereq/detail', // 开发票/收据
-  bizfeestransferform: '/app/form/bizfeestransferform/detail' // 内部收益划转
+  bizfeestransferform: '/app/form/bizfeestransferform/detail', // 内部收益划转
+  bizfeesreimbursementform: '/app/form/bizfeesreimbursementform/detail' // 分摊报销
 }
 // 报销发起
 export async function bizfeesreimbursementformList (data) {
@@ -48,6 +49,14 @@ export async function projpinvoicereqApi (data) {
 export async function bizfeestransferformApi (data) {
   return request({
     url: api.bizfeestransferform + '/' + data,
+    method: 'get'
+  })
+}
+
+// 分摊报销
+export async function bizfeesreimbursementformApi (data) {
+  return request({
+    url: api.bizfeesreimbursementform + '/' + data,
     method: 'get'
   })
 }

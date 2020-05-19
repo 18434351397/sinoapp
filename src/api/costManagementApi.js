@@ -3,7 +3,8 @@ const api = {
   projptenderletterList: '/app/form/projptenderletter/detail',
   bizfeesloanformList: '/app/form/bizfeesloanform/detail', // 个人借款
   bizfeesreimbursementformList: '/app/form/bizfeesreimbursementform/detail', // 报销发起
-  selectByUserIdLoanList: '/app/biz/bizfeesloan/selectByUserIdLoan' // 报销发起
+  selectByUserIdLoanList: '/app/biz/bizfeesloan/selectByUserIdLoan', // 报销发起
+  projpinvoicereq: '/app/form/projpinvoicereq/detail' // 开发票/收据
 }
 // 报销发起
 export async function bizfeesreimbursementformList (data) {
@@ -30,6 +31,14 @@ export async function bizfeesloanformList (data) {
 export async function projptenderletterList (data) {
   return request({
     url: api.projptenderletterList + '/' + data,
+    method: 'get'
+  })
+}
+
+// 开发票/收据
+export async function projpinvoicereqApi (data) {
+  return request({
+    url: api.projpinvoicereq + '/' + data,
     method: 'get'
   })
 }

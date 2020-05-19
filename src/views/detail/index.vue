@@ -313,6 +313,10 @@ export default {
       if (this.dataList.currFlowId === 'CommonApprove') {
         values.stageData = this.$refs.detail.projpprojectstageinfo
       } else { }
+      // 判断是否是开发票/收据
+      if (this.dataList.currFlowId === 'BillApprove' && this.dataList.currFlowName === '开发票/收据') {
+        values.invoiceDetail = this.$refs.detail.invoiceDetail
+      } else { }
       // 判断是否是采购合同流程
       if (this.dataList.currFlowId === 'PurchaseApprove') {
         values.payforList = this.$refs.detail.payforList ? this.$refs.detail.payforList : []
@@ -426,7 +430,7 @@ export default {
           // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
           // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口 合同付款接口  中标服务费
           // this.url = this.url.slice(0, -12) + '/comit/task'
-          // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函 履约保证金 发文管理 印章销毁 个人借款接口 内部收益划转接口
+          // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函 履约保证金 发文管理 印章销毁 个人借款接口 内部收益划转接口 开发票/收据
           this.url = this.url.slice(0, -12) + '/update'
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }

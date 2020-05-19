@@ -5,7 +5,7 @@
 */
 <template>
   <div class="bizfeesreimbursementform">
-    <div class="title">分摊费用</div>
+    <div class="title">分摊费用信息</div>
     <van-field
       style="display: none;"
       name="id"

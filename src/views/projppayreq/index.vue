@@ -51,7 +51,15 @@
       colon
       readonly
     />
-    <van-field type="text" name="dueDate" v-model="projppayreq.dueDate" label="到期日" colon readonly />
+    <van-field
+      type="text"
+      name="dueDate"
+      v-if="isDueDate"
+      v-model="projppayreq.dueDate"
+      label="到期日"
+      colon
+      readonly
+    />
     <van-field
       type="text"
       name="leadOrgName"
@@ -220,6 +228,7 @@ export default {
       dataList: this.$route.query,
       fileList: [],
       fileIdList: [],
+      isDueDate: false,
       files: [], // 循环列表
       projpPayDetailList: [], // 付款明细
       projpcontractpayment: [], // 金额数据
@@ -245,6 +254,11 @@ export default {
             }
           } else { }
         })
+        if (res.data.payMethodDesc === '其他' || res.data.payMethodDesc === '现金') {
+          this.isDueDate = false
+        } else {
+          this.isDueDate = true
+        }
         if (res.data.payMoneyType === '0') {
           res.data.payMoneyTypeDesc = '人民币'
         } else {

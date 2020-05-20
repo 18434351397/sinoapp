@@ -164,8 +164,8 @@
       colon
       readonly
     />
-    <div>
-      <div class="table-title">其他</div>
+    <div v-if="isFile">
+      <div class="table-title">附件列表</div>
       <el-table border :data="files" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="附件名称" prop="fileName"></el-table-column>
@@ -191,6 +191,7 @@ export default {
     return {
       dataList: this.$route.query,
       fileList: [],
+      isFile: false,
       files: [], // 循环列表
       projpcontractprotocol: [] // 合同协议信息
     }
@@ -212,8 +213,10 @@ export default {
         }
         // 是否有模板
         if (res.data.hasTemplate === '1') {
+          this.isFile = true
           res.data.hasTemplateName = '是'
         } else {
+          this.isFile = false
           res.data.hasTemplateName = '否'
         }
         this.projpcontractprotocol = res.data
@@ -246,7 +249,7 @@ export default {
 </script>
 
 <style lang="less">
-div.projpriskbondthaw {
+div.projpcontractprotocol {
   background-color: #f8f8f8;
   div.title {
     font-size: 14px;
@@ -260,7 +263,7 @@ div.projpriskbondthaw {
     background-color: #fff;
   }
 }
-div.projpriskbondthaw {
+div.projpcontractprotocol {
   div.tax.van-cell:not(:last-child)::after {
     border-bottom: 1px solid #6c6c6c;
   }

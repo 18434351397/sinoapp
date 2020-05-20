@@ -314,7 +314,7 @@ export default {
         values.stageData = this.$refs.detail.projpprojectstageinfo
       } else { }
       // 判断是否是开发票/收据
-      if (this.dataList.currFlowId === 'BillApprove' && this.dataList.currFlowName === '开发票/收据') {
+      if (this.dataList.currFlowId === 'ReceiptApprove' && this.dataList.currFlowName === '开发票/收据') {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
       } else { }
       // 判断是否是采购合同流程
@@ -410,7 +410,7 @@ export default {
         this.dataList.currTaskDefinitionKey !== 'DepotManager' &&
         this.dataList.currTaskDefinitionName !== '库管') {
         this.url = this.url.slice(0, -10) + '/busi/comit/task' // 合同存档
-      } else if (this.dataList.currFlowId === 'PaymentApprove' && this.dataList.currFlowName === '合同存档') {
+      } else if (this.dataList.currFlowId === 'PaymentApprove' && this.dataList.currFlowName === '付款申请') {
         this.url = this.url.slice(0, -12) + '/comit/task' // 合同付款接口
       } else if (this.dataList.currFlowId === 'TransferApprove' &&
         this.dataList.currFlowName === '内部收益划转' &&

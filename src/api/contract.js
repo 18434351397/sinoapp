@@ -20,7 +20,7 @@ const api = {
 // 风险保证金
 export async function projpriskbondList (data) {
   return request({
-    url: api.projpriskbondList + '/' + data,
+    url: api.projpriskbond + '/' + data,
     method: 'get'
   })
 }

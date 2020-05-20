@@ -112,6 +112,7 @@ export default {
     }
   },
   created () {
+    console.log(this.dataList)
     projpriskbondList(this.dataList.dataId).then(res => {
       if (res.data) {
         this.projpriskbondList = res.data

@@ -124,7 +124,7 @@ export default {
       dataList: this.$route.query,
       fileList: [],
       files: [], // 循环列表
-      projpriskbondthawList: [] // 风险保证金
+      projpriskbondthawList: [] // 解冻风险保证金
     }
   },
   created () {

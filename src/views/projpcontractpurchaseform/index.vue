@@ -200,6 +200,7 @@
     />
     <van-field
       type="text"
+      v-if="isShow"
       name="singleExplain"
       v-model="projpcontractpurchaseList.singleExplain"
       label="单一来源说明"
@@ -273,6 +274,7 @@ export default {
     return {
       dataList: this.$route.query,
       fileList: [],
+      isShow: false,
       files: [], // 循环附件
       goodsList: [], // 采购
       payforList: [], // 付款
@@ -290,8 +292,10 @@ export default {
           res.data.hasPnoName = '否'
         }
         if (res.data.isSingle === '1') {
+          this.isShow = true
           res.data.isSingleName = '是'
         } else {
+          this.isShow = false
           res.data.isSingleName = '否'
         }
         this.projpcontractpurchaseList = res.data

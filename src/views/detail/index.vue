@@ -81,61 +81,63 @@
             </van-step>
           </van-steps>
         </div>
-        <div style="margin-bottom: 70px;">
-          <div
-            style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-          >审批</div>
-          <van-field name="radio" label="审批结果">
-            <template #input>
-              <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
-                <van-radio name="1">同意</van-radio>
-                <van-radio name="2">不同意</van-radio>
-              </van-radio-group>
-            </template>
-          </van-field>
-          <van-field
-            name="content"
-            v-model="message"
-            rows="2"
-            autosize
-            label="办理意见"
-            type="textarea"
-            maxlength="50"
-            placeholder="请输入办理意见"
-            show-word-limit
-          />
-          <el-select
-            style="width: 100%;"
-            @change="pullSelect"
-            v-model="region.id"
-            placeholder="请选择步骤"
-          >
-            <el-option
-              :value="item.id"
-              :label="item.text"
-              :key="index"
-              v-for="(item, index) in nextSelectOpts"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="submitBox">
-          <van-button style="width: 30%" round block type="info" native-type="submit">提交</van-button>
-          <van-button
-            style="width: 30%"
-            @click="counterSign"
-            round
-            block
-            type="default"
-            native-type="submit"
-          >会签</van-button>
-          <van-button
-            style="width: 30%"
-            @click="back"
-            round
-            block
-            type="default"
-            native-type="button"
-          >取消</van-button>
+        <div v-if="isShow">
+          <div style="margin-bottom: 70px;">
+            <div
+              style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+            >审批</div>
+            <van-field name="radio" label="审批结果">
+              <template #input>
+                <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
+                  <van-radio name="1">同意</van-radio>
+                  <van-radio name="2">不同意</van-radio>
+                </van-radio-group>
+              </template>
+            </van-field>
+            <van-field
+              name="content"
+              v-model="message"
+              rows="2"
+              autosize
+              label="办理意见"
+              type="textarea"
+              maxlength="50"
+              placeholder="请输入办理意见"
+              show-word-limit
+            />
+            <el-select
+              style="width: 100%;"
+              @change="pullSelect"
+              v-model="region.id"
+              placeholder="请选择步骤"
+            >
+              <el-option
+                :value="item.id"
+                :label="item.text"
+                :key="index"
+                v-for="(item, index) in nextSelectOpts"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="submitBox">
+            <van-button style="width: 30%" round block type="info" native-type="submit">提交</van-button>
+            <van-button
+              style="width: 30%"
+              @click="counterSign"
+              round
+              block
+              type="default"
+              native-type="submit"
+            >会签</van-button>
+            <van-button
+              style="width: 30%"
+              @click="back"
+              round
+              block
+              type="default"
+              native-type="button"
+            >取消</van-button>
+          </div>
         </div>
       </van-form>
     </div>
@@ -157,6 +159,7 @@ export default {
       commitType: '',
       treeList: [],
       show: false,
+      isShow: true, // 是否展示底部按钮
       region: {
         id: ''
       },
@@ -230,6 +233,13 @@ export default {
   created () {
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
+    console.log(this.dataList)
+    // 判断是否显示底部功能
+    if (this.dataList.onlyId === 'Done') {
+      this.isShow = false
+    } else {
+      this.isShow = true
+    }
     flowForm(url).then((res) => {
       if (res) {
         this.flowList = res.data

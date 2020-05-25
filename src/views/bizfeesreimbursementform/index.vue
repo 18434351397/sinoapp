@@ -21,13 +21,6 @@
     readonly
     />
     <van-field
-    style="display: none;"
-    name="bankAccount"
-    v-model="custList.bankAccount"
-    type="text"
-    readonly
-    />
-    <van-field
       style="display: none;"
       name="id"
       v-model="custList.id"
@@ -47,20 +40,6 @@
     v-model="custList.payee"
     type="text"
     readonly
-    />
-    <van-field
-      style="display: none;"
-      name="oppenBank"
-      v-model="custList.oppenBank"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="oppositeCompany"
-      v-model="custList.oppositeCompany"
-      type="text"
-      readonly
     />
 <!--    <van-field label="付款对象:" name="borrower" v-model="custList.borrower">-->
 <!--      <template #input>-->
@@ -124,6 +103,30 @@
       label="立项号主导部门:"
       readonly
     />
+    <van-field
+      v-if="custList.feesType === '2' || custList.feesType === '3'"
+      name="oppositeCompany"
+      v-model="custList.oppositeCompany"
+      type="text"
+      label="对方公司名称:"
+      readonly
+    />
+    <van-field
+      v-if="custList.feesType === '2' || custList.feesType === '3'"
+      name="oppenBank"
+      v-model="custList.oppenBank"
+      type="text"
+      label="开户行:"
+      readonly
+    />
+    <van-field
+      v-if="custList.feesType === '2' || custList.feesType === '3'"
+      name="bankAccount"
+      v-model="custList.bankAccount"
+      type="text"
+      label="账号:"
+      readonly
+    />
     <div>
       <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">报销明细详情</div>
       <el-table
@@ -144,6 +147,7 @@
 <!--        </el-table-column>-->
         <el-table-column
           label="报销人员姓名"
+          width="120"
           prop="reimbursementUserName">
         </el-table-column>
         <el-table-column
@@ -151,8 +155,11 @@
           prop="subjectName">
         </el-table-column>
         <el-table-column
-          label="是否本地票"
-          prop="isLocal">
+          label="是否本地票">
+          <template slot-scope="scope">
+            <div v-if="scope.row.isLocal === '1'">是</div>
+            <div v-if="scope.row.isLocal === '2'">否</div>
+          </template>
         </el-table-column>
         <el-table-column
           label="金额"
@@ -164,6 +171,7 @@
         </el-table-column>
         <el-table-column
           label="项目名称"
+          width="200"
           prop="projectName">
         </el-table-column>
         <el-table-column
@@ -179,7 +187,8 @@
           prop="aprUserIds">
         </el-table-column>
         <el-table-column
-          label="借款余额">
+          label="借款余额"
+          width="120">
           <template slot-scope="scope">
             {{totalLoanAmount}}
           </template>

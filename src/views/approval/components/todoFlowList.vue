@@ -180,6 +180,7 @@ export default {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid rgb(25, 137, 250);
 
     .titleBox_content {
       display: flex;

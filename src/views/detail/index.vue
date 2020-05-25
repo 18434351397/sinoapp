@@ -434,11 +434,11 @@ export default {
           this.url = this.url.slice(0, -16) + '/update'
         } else {
           // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
-          // this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口
+          this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口 报销发起  特殊  财务资金
           // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口 合同付款接口  中标服务费
           // this.url = this.url.slice(0, -12) + '/comit/task'
           // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函 履约保证金 发文管理 印章销毁 个人借款接口 内部收益划转接口 开发票/收据  内部收益划转  特殊收益划转
-          this.url = this.url.slice(0, -12) + '/update'
+          // this.url = this.url.slice(0, -12) + '/update'
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }
       }

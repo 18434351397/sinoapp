@@ -1,12 +1,14 @@
 <template>
     <div>
       <van-card
-        :title="userinfo.userName"
         :thumb="imageURL"
         centered
         @click="toPerson"
         style="margin: 0;"
       >
+        <div slot="title">
+          <div style="font-size: 20px;">{{userinfo.userName}}</div>
+        </div>
         <div slot="desc" style="width: 100%;margin: 0;">
           <div style="margin: 0;width: 100%;display: flex;justify-content: space-between;align-items: center;">
             <div><span>账号: </span>{{userinfo.userAccount}}</div><van-icon name="arrow" />
@@ -20,8 +22,8 @@
       </van-card>
       <div style="padding: 10px;">
         <van-dialog id="van-dialog" />
-        <van-button @click="editPassword" round type="default" style="width: 100%;margin-bottom: 20px;">修改密码</van-button>
-        <van-button @click="loginout" round id="loginout" type="default" style="width: 100%;">退出</van-button>
+        <van-button @click="editPassword" round type="default" style="width: 100%;margin-bottom: 20px;position: fixed;top: 190px;left: 0;">修改密码</van-button>
+        <van-button @click="loginout" round id="loginout" type="default" style="width: 100%;position: fixed;bottom: 100px;left: 0;">退出</van-button>
       </div>
 
     </div>
@@ -69,6 +71,9 @@ export default {
 </script>
 
 <style scoped>
+  .van-card{
+    padding: 20px 15px;
+  }
   .van-card__content div{
     margin: 0;
     text-align: left;

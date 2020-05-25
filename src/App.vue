@@ -16,4 +16,7 @@ export default {
 .van-field--error .van-field__control, .van-field--error .van-field__control::placeholder {
   color: #969799;
 }
+.van-cell:not(:last-child)::after{
+  border-bottom: none;
+}
 </style>

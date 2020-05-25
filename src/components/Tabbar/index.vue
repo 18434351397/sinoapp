@@ -1,6 +1,6 @@
 <template>
     <div>
-      <van-tabbar v-model="active" @change="onChange">
+      <van-tabbar style="height: 60px;" safe-area-inset-bottom v-model="active" @change="onChange">
         <van-tabbar-item to="/approval" replace icon="records">审批</van-tabbar-item>
         <van-tabbar-item to="/my" replace icon="friends-o">我的</van-tabbar-item>
       </van-tabbar>
@@ -37,5 +37,10 @@ export default {
 <style scoped>
     .van-tabbar--fixed{
         z-index: 999
+    }
+    >>>.van-tabbar-item__icon {
+      position: relative;
+      margin-bottom: 5px;
+      font-size: 30px;
     }
 </style>

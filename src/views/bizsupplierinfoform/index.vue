@@ -268,18 +268,7 @@ export default {
       custList: [],
       cooperativeList: [],
       qualificationsList: [],
-      dataList: this.$route.query,
-      tableData: [
-        {
-          id: '12987122',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }
-      ]
+      dataList: this.$route.query
     }
   },
   created () {

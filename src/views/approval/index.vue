@@ -102,7 +102,6 @@ export default {
               })
               this.$refs.todolist.dataList = res.data.records ? res.data.records : []
             }
-            console.log(res.data.records)
           }
         }).catch(err => {
           console.log(err)

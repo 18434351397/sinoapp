@@ -55,6 +55,11 @@ const contractRouter = [
     path: '/projpbidservicefee',
     component: () => import('../views/projpbidservicefee'), // 中标服务费
     name: 'projpbidservicefee'
+  },
+  {
+    path: '/projpcontractreviewupdateform',
+    component: () => import('../views/projpcontractreviewupdateform'), // 销售合同变更
+    name: 'projpcontractreviewupdateform'
   }
 ]
 // 导出router，方便在index里引用

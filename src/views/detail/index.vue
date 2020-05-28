@@ -111,6 +111,7 @@
               show-word-limit
             />
             <el-select
+              v-if="isStatusDes"
               style="width: 100%;"
               @change="pullSelect"
               v-model="region.id"
@@ -125,13 +126,14 @@
             </el-select>
           </div>
           <div class="submitBox">
-            <van-button style="width: 30%" round block type="info" native-type="submit">提交</van-button>
+            <van-button style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
             <van-button
+              v-if="!isSBtn && isStatusDes"
               style="width: 30%"
-              @click="counterSign($event)"
+              @click="counterSign"
               round
               block
-              type="default"
+              type="info"
               native-type="submit"
             >会签</van-button>
             <van-button
@@ -165,7 +167,9 @@ export default {
       signData: {}, // 会签数据
       signIds: [], // 会签id
       signText: '', // 会签人员名称
+      isStatusDes: true, // 当前流程是否是会签
       treeList: [],
+      isSBtn: false, // 废弃和会签按钮
       show: false,
       isShow: true, // 是否展示底部按钮
       region: {
@@ -190,6 +194,14 @@ export default {
     }
   },
   created () {
+    if (this.dataList.statusDes === '会签中') {
+      this.isStatusDes = false
+    }
+    if (this.dataList.currTaskDefinitionName === '受理退回' &&
+      this.dataList.currUserName === this.dataList.userName) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
+      // 废弃功能
+      this.isSBtn = true
+    }
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
     // 判断是否显示底部功能
@@ -255,6 +267,7 @@ export default {
     },
 
     onSubmit (values) {
+      this.signData = values
       if (values.commitType === 'meeting') {
         this.signData = values
         console.log('会签')
@@ -271,6 +284,8 @@ export default {
       values.submitTask = this.region.id ? this.region.id : '【下一步】'
       if (values.meetingUsers) {
         values.content = '【发起会签】' + this.signText
+      } else if (values.commitType === 'terminate') {
+        values.content = this.message
       } else {
         if (values.submitTask !== '【下一步】') {
           values.content =
@@ -347,6 +362,7 @@ export default {
           })
         })
         .catch(() => {
+          this.commitType = ''
           this.url = this.submitUrl
         })
     },

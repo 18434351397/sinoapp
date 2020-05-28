@@ -265,7 +265,7 @@ export default {
     },
     // 点击提交按钮要进行的操作
     isSubmit (values) {
-      values.meetingUsers = this.signIds
+      values.meetingUsers = this.signIds.toString()
       delete values.radio
       delete values.undefined
       values.submitTask = this.region.id ? this.region.id : '【下一步】'

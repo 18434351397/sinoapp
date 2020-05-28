@@ -4,7 +4,7 @@
 *@title index
 */
 <template>
-  <div class="projpinvoicereq">
+  <div class="app-title">
     <div class="title">开发票/收据信息</div>
     <van-field style="display: none;" name="id" v-model="projpinvoicereq.id" type="text" readonly />
     <van-field style="display: none;" name="meetingUsers" v-model="projpinvoicereq.meetingUsers" type="text" readonly />
@@ -233,28 +233,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-div.projpinvoicereq {
-  background-color: #f8f8f8;
-  div.title {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
-  div.table-title {
-    font-size: 14px;
-    border-top: 1px dashed #f8f8f8;
-    padding: 10px 15px;
-    text-align: left;
-    background-color: #fff;
-  }
-}
-div.projpinvoicereq {
-  div.tax.van-cell:not(:last-child)::after {
-    border-bottom: 1px solid #6c6c6c;
-  }
-  .van-cell:not(:last-child)::after {
-    border-bottom: none;
-  }
-}
-</style>

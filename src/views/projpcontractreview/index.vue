@@ -1,6 +1,6 @@
 /** *@author XuJinTao *@date 2020/5/8 9:11 *@title index */
 <template>
-  <div class="projpcontractre">
+  <div class="app-title">
     <div class="title">{{ title }}</div>
     <van-field type="text" v-model="contractList.bizId" label="合同号" colon readonly />
     <van-field name="radio" label="是否已投标备案" v-model="contractList.isRecord" readonly colon>
@@ -419,6 +419,7 @@
       v-if="isCustPro"
       name="tax"
       v-model="contractList.tax"
+      placeholder="请输入税金"
       label="税金"
       colon
     />
@@ -427,7 +428,6 @@
       v-if="!isCustPro"
       v-model="contractList.tax"
       label="税金"
-      placeholder="请输入税金"
       colon
       readonly
     />
@@ -684,9 +684,7 @@ export default {
               return {}
             }
           }
-        } else {
-          return {}
-        }
+        } else { }
       } else {
         throw new '数据异常'()
       }
@@ -780,30 +778,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-div.projpcontractre {
-  background-color: #f8f8f8;
-  div.title {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
-  div.table-title {
-    font-size: 14px;
-    border-top: 1px dashed #f8f8f8;
-    padding: 10px 15px;
-    text-align: left;
-    background-color: #fff;
-  }
-}
-</style>
-<style lang="less">
-div.projpcontractre {
-  div.tax.van-cell:not(:last-child)::after {
-    border-bottom: 1px solid #6c6c6c;
-  }
-  .van-cell:not(:last-child)::after {
-    border-bottom: none;
-  }
-}
-</style>

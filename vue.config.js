@@ -20,7 +20,7 @@ module.exports = {
     extract: true, // 是否使用css分离插件 ExtractTextPlugin
     sourceMap: false, // 开启 CSS source maps
     loaderOptions: {}, // css预设器配置项
-    modules: false// 启用 CSS modules for all css / pre-processor files.
+    requireModuleExtension: true// 启用 CSS modules for all css / pre-processor files.
   },
   devServer: { // 环境配置
     host: '',

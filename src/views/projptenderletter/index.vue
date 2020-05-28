@@ -14,6 +14,13 @@
       readonly
     />
     <van-field
+      name="reqdeptid"
+      style="display: none;"
+      v-model="custList.reqdeptid"
+      type="text"
+      readonly
+    />
+    <van-field
       name="paycompany"
       style="display: none;"
       v-model="custList.paycompany"

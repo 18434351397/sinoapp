@@ -192,7 +192,6 @@ export default {
   created () {
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
-    console.log(this.dataList)
     // 判断是否显示底部功能
     if (this.dataList.onlyId === 'Done') {
       this.isShow = false
@@ -383,7 +382,6 @@ export default {
         user.currFlowId === 'FinanceApprove'
       ) { // 投标保证金
         this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
-        console.log(this.url)
       } else if (this.dataList.currFlowId === 'CommonApprove' &&
         this.dataList.currTaskDefinitionName === '受理退回' &&
         (this.dataList.currUserName === this.dataList.userName)) {
@@ -399,7 +397,7 @@ export default {
       } else if (this.dataList.currFlowId === 'TransferApprove' &&
         this.dataList.currFlowName === '内部收益划转' &&
         this.dataList.currTaskDefinitionKey === 'BusiAnalysis') {
-        this.url = this.url.slice(0, -22) + '/update' // 内部收益划转在运管节 点特殊处理
+        this.url = this.url.slice(0, -22) + '/mobileUpdate' // 内部收益划转在运管节 点特殊处理
       } else if (this.dataList.currFlowId === 'CustApprove' &&
         this.dataList.currFlowName === '分摊费用') {
         this.url = this.url.slice(0, -16) + '/update/task' // 费用分摊
@@ -407,21 +405,27 @@ export default {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
           if (this.url.includes('pay')) {
-            this.url = this.url.slice(0, -17) + '/update'
+            this.url = this.url.slice(0, -17) + '/mobileUpdate'
           } else {
-            this.url = this.url.slice(0, -12) + 'update'
+            this.url = this.url.slice(0, -12) + 'mobileUpdate'
           }
         } else if (this.url.includes('fundmanagercheck')) { // 投标保函的最后一个审批人的特殊处理
-          this.url = this.url.slice(0, -22) + '/update'
+          this.url = this.url.slice(0, -22) + '/mobileUpdate'
         } else if (this.url.includes('pay')) { // 付业务往来款的最后一个审批人的特殊处理
-          console.log(this.url)
-          this.url = this.url.slice(0, -16) + '/update'
+          this.url = this.url.slice(0, -16) + '/mobileUpdate'
         } else {
-          // this.url = this.url.slice(0, -12) + 'updateVOs' // 供应商接口
-          this.url = this.url.slice(0, -12) + '/update/task' // 销售合同接口  投标备案接口 报销发起  特殊  财务资金
-          // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金 合同存档提交接口 合同付款接口  中标服务费
+          // 公共提交接口
+          this.url = this.url.slice(0, -12) + '/mobileUpdate'
+          // 供应商接口
+          // this.url = this.url.slice(0, -12) + 'updateVOs'
+          // 销售合同接口  投标备案接口 报销发起  特殊  财务资金
+          // this.url = this.url.slice(0, -12) + '/update/task'
+          // 投标报价接口 印信使用接口  分子公司接口  风险保证金 解冻风险保证金
+          // 合同存档提交接口 合同付款接口  中标服务费
           // this.url = this.url.slice(0, -12) + '/comit/task'
-          // 投标保证金接口 投标保函接口   印章保管流程接口 采购合同接口  履约保函 履约保证金 发文管理 印章销毁 个人借款接口 内部收益划转接口 开发票/收据  内部收益划转  特殊收益划转
+          // 投标保证金接口 投标保函接口 印章保管流程接口 采购合同接口
+          // 履约保函 履约保证金 发文管理 印章销毁 个人借款接口 内部收益划转接口
+          // 开发票/收据  内部收益划转  特殊收益划转 客户管理
           // this.url = this.url.slice(0, -12) + '/update'
           // this.url = this.url.slice(0, -12) + '/updateVO' // 合作协议接口
         }

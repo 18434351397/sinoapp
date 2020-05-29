@@ -49,7 +49,8 @@
 <script>
 import NoData from './NoDataShow'
 import Loading from './loading'
-import { getTodoList } from '../../../api/flowfrom'
+import { search } from '../../../api/flowfrom'
+import { mapGetters } from 'vuex'
 export default {
   name: 'doneFlowList',
   components: {
@@ -58,6 +59,13 @@ export default {
   },
   created () {
     this.loadData()
+  },
+  watch: {
+    searchValue: function (old, newV) {
+      this.currentPage = 1
+      console.log(this.currentPage)
+      // this.loadData()
+    }
   },
   mounted () {
     window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
@@ -68,11 +76,13 @@ export default {
       totalPage: null,
       currentPage: 1,
       searchType: '2',
+      searchCondition1: '',
       dataList: [],
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }
   },
   computed: {
+    ...mapGetters(['searchValue']),
     noMore () {
       return this.current >= this.totalPage
     },
@@ -90,11 +100,13 @@ export default {
         size: 10,
         condition: {
           searchType: this.searchType,
-          currUseerId: this.id
+          currUseerId: this.id,
+          searchCondition: this.searchValue ? this.searchValue : ''
         }
       }
+      console.log(data)
       this.loading = true
-      getTodoList(data).then(res => {
+      search(data).then(res => {
         this.loading = false
         if (res) {
           if (res.data) {

@@ -5,13 +5,18 @@
       <NavBar />
     </van-sticky>
     <div style="background-color: #f8f8f8;">
-      <van-dialog v-model="show" @confirm="confirmCounterSign" title="会签" show-cancel-button>
+      <van-dialog
+        v-model="show"
+        @confirm="confirmCounterSign"
+        @close="closeDialog"
+        title="会签"
+        show-cancel-button
+      >
         <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
           <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
           <el-tree
             accordion
             check-on-click-node
-            check-strictly
             node-key="id"
             @check-change="handleCheckChange"
             @current-change="handleCurrentChange"
@@ -106,6 +111,7 @@
               show-word-limit
             />
             <el-select
+              v-if="isStatusDes"
               style="width: 100%;"
               @change="pullSelect"
               v-model="region.id"
@@ -120,13 +126,14 @@
             </el-select>
           </div>
           <div class="submitBox">
-            <van-button style="width: 30%" round block type="info" native-type="submit">提交</van-button>
+            <van-button style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
             <van-button
+              v-if="!isSBtn && isStatusDes"
               style="width: 30%"
               @click="counterSign"
               round
               block
-              type="default"
+              type="info"
               native-type="submit"
             >会签</van-button>
             <van-button
@@ -157,7 +164,12 @@ export default {
   data () {
     return {
       commitType: '',
+      signData: {}, // 会签数据
+      signIds: [], // 会签id
+      signText: '', // 会签人员名称
+      isStatusDes: true, // 当前流程是否是会签
       treeList: [],
+      isSBtn: false, // 废弃和会签按钮
       show: false,
       isShow: true, // 是否展示底部按钮
       region: {
@@ -172,56 +184,7 @@ export default {
       message: '',
       nextSelectOpts: [],
       filterText: '',
-      data: [
-        {
-          id: 1,
-          label: '一级 1',
-          children: [
-            {
-              id: 4,
-              label: '二级 1-1',
-              children: [
-                {
-                  id: 9,
-                  label: '车永基'
-                },
-                {
-                  id: 10,
-                  label: '田冬慧'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          id: 2,
-          label: '一级 2',
-          children: [
-            {
-              id: 5,
-              label: '二级 2-1'
-            },
-            {
-              id: 6,
-              label: '二级 2-2'
-            }
-          ]
-        },
-        {
-          id: 3,
-          label: '一级 3',
-          children: [
-            {
-              id: 7,
-              label: '二级 3-1'
-            },
-            {
-              id: 8,
-              label: '二级 3-2'
-            }
-          ]
-        }
-      ],
+      data: [],
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -231,6 +194,14 @@ export default {
     }
   },
   created () {
+    if (this.dataList.statusDes === '会签中') {
+      this.isStatusDes = false
+    }
+    if (this.dataList.currTaskDefinitionName === '受理退回' &&
+      this.dataList.currUserName === this.dataList.userName) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
+      // 废弃功能
+      this.isSBtn = true
+    }
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
     // 判断是否显示底部功能
@@ -294,18 +265,36 @@ export default {
       })
       return val
     },
-    // 点击提交按钮要进行的操作
+
     onSubmit (values) {
+      this.signData = values
+      if (values.commitType === 'meeting') {
+        this.signData = values
+        console.log('会签')
+      } else {
+        this.isSubmit(values)
+        console.log('提交')
+      }
+    },
+    // 点击提交按钮要进行的操作
+    isSubmit (values) {
+      values.meetingUsers = this.signIds.toString()
       delete values.radio
       delete values.undefined
       values.submitTask = this.region.id ? this.region.id : '【下一步】'
-      if (values.submitTask !== '【下一步】') {
-        values.content =
-          values.content +
-          ' >>>>' +
-          document.querySelector('.el-select').children[0].children[0].value
+      if (values.meetingUsers) {
+        values.content = '【发起会签】' + this.signText
+      } else if (values.commitType === 'terminate') {
+        values.content = this.message
       } else {
-        values.content = values.content + ' >>>>' + '【下一步】'
+        if (values.submitTask !== '【下一步】') {
+          values.content =
+            values.content +
+            ' >>>>' +
+            document.querySelector('.el-select').children[0].children[0].value
+        } else {
+          values.content = values.content + ' >>>>' + '【下一步】'
+        }
       }
       // 接口调用
       // this.url = this.url.slice(0, -11) + 'updateVOs'
@@ -373,6 +362,7 @@ export default {
           })
         })
         .catch(() => {
+          this.commitType = ''
           this.url = this.submitUrl
         })
     },
@@ -459,11 +449,6 @@ export default {
     },
     onchange () {
       this.message = this.radio === '1' ? '同意' : '不同意'
-      // if (this.radio === '1') {
-      //   this.message = '同意'
-      // } else {
-      //   this.message = '不同意'
-      // }
     },
     //  处理下一步节点的方法
     handleNextSelectOpts (data) {
@@ -592,16 +577,43 @@ export default {
       }
     },
     // 会签弹框显示
-    counterSign (data) {
+    counterSign () {
       this.show = true
       if (this.show) {
         this.commitType = 'meeting'
       }
     },
+    // 关闭弹窗
+    closeDialog () {
+      this.commitType = ''
+    },
     // 会签方法提交
     confirmCounterSign () {
-      console.log(this.$refs.tree.getCheckedKeys())
-      console.log(this.$refs.tree.getCheckedNodes())
+      // 人员名字
+      const signData = this.$refs.tree.getCheckedNodes()
+      const newSign = []
+      this.recursion(signData, newSign)
+
+      this.signIds = this.$refs.tree.getCheckedKeys()
+      this.isSubmit(this.signData)
+    },
+    // 递归获取数据信息
+    recursion (signData, newSign = []) {
+      if (Array.isArray(signData) && signData.length > 0) {
+        signData.forEach(item => {
+          if (item.issub) {
+            // 对名字进行去重处理
+            if (newSign.indexOf(item.label) === -1) {
+              newSign = newSign.concat(item.label)
+            }
+          }
+          if (item.children) {
+            this.recursion(item.children, newSign)
+          }
+        })
+      }
+      this.signText = newSign.toString()
+      this.message = newSign.toString()
     },
     filterNode (value, data) {
       if (!value) return true

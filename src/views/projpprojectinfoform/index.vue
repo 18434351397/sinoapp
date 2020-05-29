@@ -1,5 +1,5 @@
 <template>
-  <div class="projpprojectinfoform">
+  <div class="app-title">
     <div class="title">项目立项信息</div>
     <van-field
       style="display: none;"
@@ -268,28 +268,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-div.projpprojectinfoform {
-  background-color: #f8f8f8;
-  div.title {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
-  div.table-title {
-    font-size: 14px;
-    border-top: 1px dashed #f8f8f8;
-    padding: 10px 15px;
-    text-align: left;
-    background-color: #fff;
-  }
-}
-div.projpprojectinfoform {
-  div.tax.van-cell:not(:last-child)::after {
-    border-bottom: 1px solid #6c6c6c;
-  }
-  .van-cell:not(:last-child)::after {
-    border-bottom: none;
-  }
-}
-</style>

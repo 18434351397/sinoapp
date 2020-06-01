@@ -72,7 +72,7 @@ export default {
     this.loadData()
   },
   mounted () {
-    window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
+    window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
   },
   watch: {
     searchValue: function (old, newV) {
@@ -103,21 +103,25 @@ export default {
         this.loading = false
         if (res) {
           if (res.data) {
-            if (res.data.current === '1') {
-              this.dataList = res.data.records ? res.data.records : []
-              this.totalPage = res.data.pages
-              this.currentPage = res.data.current
+            if (res.data.records.length === data.size) {
+              if (res.data.current === '1') {
+                this.dataList = res.data.records ? res.data.records : []
+                this.totalPage = res.data.pages
+                this.currentPage = res.data.current
+              } else {
+                this.dataList = [
+                  ...this.dataList,
+                  ...res.data.records ? res.data.records : []
+                ]
+              }
+              ++this.currentPage
+              this.dataList.forEach(item => {
+                item.createdDate = item.createdDate.split('.')[0]
+                item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
+              })
             } else {
-              this.dataList = [
-                ...this.dataList,
-                ...res.data.records ? res.data.records : []
-              ]
+              window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
             }
-            ++this.currentPage
-            this.dataList.forEach(item => {
-              item.createdDate = item.createdDate.split('.')[0]
-              item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
-            })
           }
         }
       }).catch(err => {
@@ -185,7 +189,8 @@ export default {
     }
   },
   beforeDestroy () {
-    window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
+    this.loadData()
+    window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
   }
 }
 </script>

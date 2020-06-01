@@ -38,4 +38,23 @@ div.app-title {
     border-bottom: 1px solid #6c6c6c;
   }
 }
+// 去除navbar的下划线
+.van-hairline--bottom::after {
+  border-width: 0;
+}
+.van-hairline--top-bottom::after {
+  border-width: 0;
+}
+  // 表格字体颜色调整
+  .cell{
+    color: #000;
+  }
+
+.van-toast {
+  background-color:rgba(210,199,199,0.3);
+    color: #000;
+}
+.van-toast__loading {
+  color: #000;
+}
 </style>

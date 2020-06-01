@@ -20,6 +20,8 @@ const serve = axios.create({
   // baseURL: 'http://172.169.2.235:8095',
   // baseURL: 'http://192.168.162.128:88',
   // baseURL: 'http://172.169.200.207:8082',
+  // baseURL: 'http://218.241.175.243:8082',  // 生产外网
+  // baseURL: 'http://218.241.175.246:8082', // 126外网
   // baseURL: '/admin',
   timeout: 200000
 })
@@ -61,8 +63,9 @@ serve.interceptors.response.use(
     // 清理loading
     Toast.clear()
     // 删除session信息
+    console.log(response.data.code)
     if (response.data.code) {
-      router.push('/')
+      router.push('/mobile')
       removeSession('userinfo')
       return
     }

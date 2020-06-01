@@ -3,8 +3,8 @@
     <div class="value_box">
       <div class="form_box">
         <div class="official_box">
-          <img style="width: 50%;" src="@/assets/image/twodevelopment/logo-light.png">
-          <img style="width: 120%;" src="@/assets/image/twodevelopment/logo-light-text.png">
+          <img style="width: 50%;" src="@/assets/image/twodevelopment/logo-light-large.png">
+          <img style="width: 120%;" src="@/assets/image/twodevelopment/logo-light-text-large.png">
         </div>
         <div class="formtitle">
           <p class="chiness">中科金财运营管理系统</p>
@@ -22,22 +22,22 @@
                   <p class="form_val_title">账号</p>
                   <div>
                     <p class="username"></p>
-                    <input v-focus type="text" placeholder="请输入账号" v-model="userAccount" id="userAccount" class="inputs">
+                    <input v-focus @focus="userFocus(1)" @blur="userBlur(1)" type="text" :placeholder="userAccount ? '' :userToast"  v-model="userAccount" id="userAccount" class="inputs">
                   </div>
                 </li>
                 <li>
                   <p class="form_val_title">密码</p>
                   <div>
                     <p class="pasword"></p>
-                    <input type="password" placeholder="请输入密码" v-model="password" id="password" class="inputs">
+                    <input type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
                   </div>
                 </li>
                 <li>
-                  <span class="forget_pwd" @click="forgetpwd()">忘记密码</span>
+                  <span class="forget_pwd" @click="forgetpwd()" style="visibility: hidden;">忘记密码</span>
                 </li>
                 <li>
                   <!--<input class="login_btn" type="button" id="btnSubmit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">-->
-                  <span class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</span>
+                  <span class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登录</span>
                 </li>
               </ul>
             </div>
@@ -99,7 +99,9 @@ export default {
       password: '',
       errMsg: '',
       status: 'edit',
-      isLogin: false
+      isLogin: false,
+      userToast: '请输入账号',
+      passToast: '请输入密码'
     }
   },
   created () {
@@ -109,6 +111,22 @@ export default {
     this.enterKeyupDestroyed()
   },
   methods: {
+    // 处理输入状态不明显
+    userFocus (val) {
+      if (val === 1) {
+        this.userToast = ''
+      } else {
+        this.passToast = ''
+      }
+    },
+    userBlur (val) {
+      if (val === 1) {
+        this.userToast = this.userAccount ? '' : '请输入账号'
+      } else {
+        this.passToast = this.password ? '' : '请输入密码'
+      }
+    },
+    // 登录方法
     login () {
       if (this.userAccount) {
         if (this.password) {
@@ -176,4 +194,7 @@ export default {
 <style scoped>
   @import '../../assets/css/Login.css';
   /*@import '@/assets/css/Login.css';*/
+  .van-toast {
+    background-color:rgba(210,199,199,0.3);
+  }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div style="background-color: #f8f8f8;">
-    <div style="padding: 10px 15px;text-align: center;">{{title}}</div>
     <van-form id='editPwdForm'>
       <van-field
         v-model="personList.userAccount"
@@ -138,7 +137,8 @@ export default {
     background: #fff;
   }
   >>>.van-field__label {
-    width: auto;
+    width: 90px;
     margin-right: 10px;
+    /*text-align: right;*/
   }
 </style>

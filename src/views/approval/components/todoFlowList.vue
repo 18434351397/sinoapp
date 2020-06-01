@@ -203,13 +203,13 @@ div {
   margin: 0;
 }
 
-.todoListBox {
-  height: auto;
-  background: #f8f8f8;
-  margin-bottom: 50px;
-  padding: 10px;
-  box-sizing: border-box;
-}
+  .todoListBox {
+    height: auto;
+    background: #f8f8f8;
+    margin-bottom: 70px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 
 .titleBox {
   background: #fff;

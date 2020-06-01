@@ -12,7 +12,11 @@
         type="text"
         label="供应商名称:"
         readonly
-      />
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{custList.name}}</div>
+        </template>
+      </van-field>
       <van-field
         style="display: none;"
         name="meetingUsers"

@@ -147,9 +147,9 @@
       readonly
     />
     <van-field
+      type="textarea"
       name="reqPaytimeId"
       v-model="custList.reqPaytimeId"
-      type="text"
       label="对方单位:"
       readonly
     />

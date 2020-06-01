@@ -1,14 +1,13 @@
 <template>
   <div style="height: 100%;background-color: #f8f8f8;">
     <NavBar/>
-    <div style="padding: 10px 15px;text-align: center;">{{title}}</div>
     <van-form id='editPwdForm' @submit="onSubmit">
       <van-field
         v-model="username"
         type="text"
         label="用户名"
         name="userName"
-        disabled
+        readonly
       />
       <van-field
         v-model="userId"
@@ -26,20 +25,26 @@
         :rules="[{ required: true, message: '请输入原密码' }]"
       />
       <van-field
+        show-word-limit
+        maxlength="16"
         v-model="password"
         type="password"
         label="密码"
         name="userToken"
+        required
         placeholder="请输入密码"
-        :rules="[{ required: true, message: '请输入密码' }]"
+        :rules="[{ required: true, message: toastMessage, validator: validator }]"
       />
       <van-field
+        show-word-limit
+        required
+        maxlength="16"
         v-model="repassword"
         type="password"
         label="确认密码"
         name="confirmPwd"
         placeholder="请输入确认密码"
-        :rules="[{ required: true, message: '请再次输入密码' }]"
+        :rules="[{ validator: revalidator, required: true, message: retoastMessage }]"
       />
       <div class="submitBox">
         <van-button style="width: 30%" round block  type="info" native-type="submit">
@@ -65,6 +70,8 @@ export default {
   },
   data () {
     return {
+      toastMessage: '',
+      retoastMessage: '',
       username: JSON.parse(sessionStorage.getItem('userinfo')).userName,
       userId: JSON.parse(sessionStorage.getItem('userinfo')).id,
       phone: '',
@@ -79,7 +86,26 @@ export default {
   },
   created () {
   },
+  mounted () {
+    this.validator()
+    this.revalidator()
+  },
   methods: {
+    // 验证密码规则
+    validator (val) {
+      console.log(val)
+      if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
+        this.toastMessage = '密码6-16位，必须为字母+数字+特殊字符'
+      }
+      return /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val)
+    },
+    revalidator (val) {
+      if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
+        console.log(this.retoastMessage)
+        this.retoastMessage = '密码6-16位，必须为字母+数字+特殊字符'
+      }
+      return /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val)
+    },
     onSubmit (values) {
       checkOldPwd({ oldPwd: this.oldPwd }).then(res => {
         if (res.data === '1') {

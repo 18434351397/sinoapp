@@ -7,7 +7,16 @@ const api = {
   projpinvoicereq: '/app/form/projpinvoicereq/detail', // 开发票/收据
   bizfeestransferform: '/app/form/bizfeestransferform/detail', // 内部收益划转
   bizfeesreimbursementform: '/app/form/bizfeesreimbursementform/detail', // 分摊报销
-  bizfeesspecialtransferform: '/app/form/bizfeesspecialtransferform/detail' // 特殊收益划转
+  bizfeesspecialtransferform: '/app/form/bizfeesspecialtransferform/detail', // 特殊收益划转
+  SubCodes: '/app/admin/dictionary/getBySubCodes' // 特殊收益划转
+}
+
+// 客户属性
+export async function getBySubCodes (code) {
+  return request({
+    url: api.SubCodes + '?subCodes=' + code,
+    method: 'get'
+  })
 }
 // 报销发起
 export async function bizfeesreimbursementformList (data) {

@@ -7,7 +7,7 @@
           <div>{{item.statusDes}}</div>
         </div>
         <div class="flowMessage">
-          <div class="flowMessage_box">流程标题: <span>{{item.currFlowName}}</span></div>
+          <div class="flowMessage_box">流程名称: <span>{{item.currFlowName}}</span></div>
           <div class="flowMessage_box" style="padding: 10px 0 0;">当前节点: <span>{{item.currTaskDefinitionName}}</span></div>
           <div class="flowMessage_box" style="padding: 10px 0 0;margin-right: 20px;">当前办理人: <span>{{item.currUserName}}</span></div>
           <div class="flowMessage_box" style="padding: 10px 0 0;margin-bottom:10px;">发起人: <span>{{item.userName}}</span></div>
@@ -143,7 +143,7 @@ export default {
           })
         }
       } else if (data.url.includes('bizfeesreimbursementform')) {
-        if (data.url === '/app/form/bizfeesreimbursementform/detail/page') { // 处理报销发起和分摊费用路由一样的问题
+        if (data.url === '/app/form/bizfeesreimbursementform/detail/page' || data.url === '/app/form/bizfeesreimbursementform/cashier/page') { // 处理报销发起和分摊费用路由一样的问题
           this.$router.push({
             name: 'bizfeesreimbursementform',
             query: data

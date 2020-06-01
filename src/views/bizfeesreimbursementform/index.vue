@@ -83,6 +83,64 @@
       readonly
     />
     <van-field
+      name="employeeType"
+      readonly
+      clickable
+      right-icon="arrow-down"
+      label="员工类型"
+      colon
+      :value="personType"
+      placeholder="请选择"
+      :rules="[{ required: true, message: '员工类型是必选字段' }]"
+      @click="showpersonType = true"
+    />
+    <van-popup v-model="showpersonType" round position="bottom">
+      <van-picker
+        show-toolbar
+        :columns="personTypeList"
+        @cancel="showpersonType = false"
+        @confirm="isshowpersonType"
+      />
+    </van-popup>
+    <van-field
+      readonly
+      clickable
+      name="capitalizedProject"
+      right-icon="arrow-down"
+      label="资本化项目"
+      colon
+      :value="capitalizedProject"
+      placeholder="请选择"
+      :rules="[{ required: true, message: '资本化项目是必选字段' }]"
+      @click="showcapitalizedProject = true"
+    />
+    <van-popup v-model="showcapitalizedProject" round position="bottom">
+      <van-picker
+        show-toolbar
+        :columns="capitalizedProjectList"
+        @cancel="showcapitalizedProject = false"
+        @confirm="isshowcapitalizedProject"
+      />
+    </van-popup>
+    <van-field
+      style="display: none;"
+      name="capitalizedProjectId"
+      v-model="capitalizedProjects"
+      type="text"
+    />
+    <van-field
+      style="display: none;"
+      name="employeeTypeId"
+      v-model="employeeTypes"
+      type="text"
+    />
+    <van-field
+      name="cou"
+      v-model="custList.cou"
+      type="text"
+      label="记字:"
+    />
+    <van-field
       name="payeeName"
       v-model="custList.payeeName"
       type="text"
@@ -283,7 +341,7 @@
 </template>
 
 <script>
-import { bizfeesreimbursementformList, selectByUserIdLoanList } from '../../api/costManagementApi'
+import { bizfeesreimbursementformList, selectByUserIdLoanList, getBySubCodes } from '../../api/costManagementApi'
 
 export default {
   name: 'index',
@@ -299,11 +357,20 @@ export default {
       totalLoanAmount: 0.00,
       file: [],
       fileList: [],
-      fileIdList: []
+      fileIdList: [],
+      personType: null,
+      capitalizedProject: null,
+      showcapitalizedProject: false,
+      showpersonType: false,
+      personTypeList: [],
+      capitalizedProjectList: [],
+      employeeTypes: null,
+      capitalizedProjects: null
     }
   },
   created () {
     this.loadData()
+    this.getBySubCodesList()
   },
   methods: {
     // 获取数据
@@ -361,9 +428,41 @@ export default {
         this.totalLoanAmount = '￥' + this.totalLoanAmount.toFixed(2)
       })
     },
+    // 获取字典数据
+    getBySubCodesList () {
+      getBySubCodes('company-ReimbursementType-U8Company-employeeType-capitalizedProject').then(res => {
+        this.personTypeList = res.data.employeeType.map(item => {
+          return {
+            employeeType: item.attribute,
+            id: item.id,
+            text: item.nameChs
+          }
+        })
+        this.capitalizedProjectList = res.data.capitalizedProject.map(item => {
+          return {
+            capitalizedProject: item.attribute,
+            id: item.id,
+            text: item.nameChs
+          }
+        })
+      })
+    },
     // 处理表格的序号的方法
     indexMethods (index) {
       return index + 1
+    },
+    // 员工类型
+    isshowpersonType (value) {
+      console.log(value)
+      this.personType = value.text
+      this.employeeTypes = value.employeeType
+      this.showpersonType = false
+    },
+    // 资本化项目
+    isshowcapitalizedProject (value) {
+      this.capitalizedProject = value.text
+      this.capitalizedProjects = value.capitalizedProject
+      this.showcapitalizedProject = false
     }
   }
 }

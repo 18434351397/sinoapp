@@ -22,7 +22,7 @@
                   <p class="form_val_title">账号</p>
                   <div>
                     <p class="username"></p>
-                    <input type="text" placeholder="请输入账号" v-model="userAccount" id="userAccount" class="inputs">
+                    <input v-focus type="text" placeholder="请输入账号" v-model="userAccount" id="userAccount" class="inputs">
                   </div>
                 </li>
                 <li>

@@ -6,7 +6,7 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-// import './utils/appback'
+import './utils/appback'
 // import './mock/index'
 
 Vue.use(Vant)

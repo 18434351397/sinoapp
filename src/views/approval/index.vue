@@ -1,18 +1,18 @@
 <template>
     <div>
         <van-tabs @change="change" :active="active" sticky color="#1989fa">
-          <van-sticky offset-top="44">
+          <van-sticky offset-top="78">
             <van-search
               v-model="searchValue"
               placeholder="请输入搜索关键词"
               bind:search="onSearch"
             >
-<!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
+              <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
             </van-search>
           </van-sticky>
-          <van-tab title="待我处理"><todolist ref="todolist" v-if="tabIndex === 0"></todolist></van-tab>
-          <van-tab title="我已办的"><donelist ref="donelist" v-if="tabIndex === 1"></donelist></van-tab>
-          <van-tab title="我发起的"><launchlist ref="launchlist" v-if="tabIndex === 2"></launchlist></van-tab>
+            <van-tab title="待我处理"><todolist ref="todolist" v-if="tabIndex === 0"></todolist></van-tab>
+            <van-tab title="我已办的"><donelist ref="donelist" v-if="tabIndex === 1"></donelist></van-tab>
+            <van-tab title="我发起的"><launchlist ref="launchlist" v-if="tabIndex === 2"></launchlist></van-tab>
         </van-tabs>
     </div>
 </template>
@@ -155,11 +155,14 @@ export default {
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
+      this.searchValue = ''
     }
   }
 }
 </script>
 
 <style scoped>
-
+  >>>.van-sticky--fixed{
+    top:34px;
+  }
 </style>

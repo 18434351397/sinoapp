@@ -1,11 +1,12 @@
 <template>
-   <div>
+   <div style="padding-top:22px;box-sizing: border-box;">
      <van-nav-bar
        title="运营管理系统"
        left-text=""
        :left-arrow = 'leftBack'
        @click-left="onClickLeft"
      />
+     <div class="handle"></div>
    </div>
 </template>
 
@@ -41,5 +42,13 @@ export default {
   }
   .van-nav-bar__title{
     font-size: 18px;
+  }
+  .handle{
+    width: 100%;
+    height: 22px;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 999;
   }
 </style>

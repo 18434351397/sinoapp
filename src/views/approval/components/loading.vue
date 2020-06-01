@@ -5,8 +5,8 @@
 */
 <template>
     <div :style="style">
-      <img src="../../../assets/image/twodevelopment/noorder.png"/>
-      <div>正在加载...</div>
+      <!-- <img src="../../../assets/image/twodevelopment/noorder.png"/> -->
+      <div>数据正在加载中，请稍等...</div>
     </div>
 </template>
 

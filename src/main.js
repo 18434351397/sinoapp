@@ -8,7 +8,8 @@ import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button
 import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
 // import './mock/index'
-
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 Vue.use(Vant)
 Vue.use(Select)
 Vue.use(Option)
@@ -19,7 +20,6 @@ Vue.use(TableColumn)
   .use(Input)
   .use(Tree)
   .use(Button)
-
 Vue.config.productionTip = false
 
 new Vue({

@@ -1,20 +1,22 @@
 <template>
-    <div>
-        <van-tabs @change="change" :active="active" sticky color="#1989fa">
-          <van-sticky offset-top="78">
-            <van-search
-              v-model="searchValue"
-              placeholder="请输入搜索关键词"
-              bind:search="onSearch"
-            >
-              <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
-            </van-search>
-          </van-sticky>
-            <van-tab title="待我处理"><todolist ref="todolist" v-if="tabIndex === 0"></todolist></van-tab>
-            <van-tab title="我已办的"><donelist ref="donelist" v-if="tabIndex === 1"></donelist></van-tab>
-            <van-tab title="我发起的"><launchlist ref="launchlist" v-if="tabIndex === 2"></launchlist></van-tab>
-        </van-tabs>
-    </div>
+  <div>
+    <van-tabs @change="change" :active="active" sticky color="#1989fa">
+      <van-sticky offset-top="78">
+        <van-search v-model="searchValue" placeholder="请输入搜索关键词" bind:search="onSearch">
+          <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
+        </van-search>
+      </van-sticky>
+      <van-tab title="待我处理">
+        <todolist ref="todolist" v-if="tabIndex === 0"></todolist>
+      </van-tab>
+      <van-tab title="我已办的">
+        <donelist ref="donelist" v-if="tabIndex === 1"></donelist>
+      </van-tab>
+      <van-tab title="我发起的">
+        <launchlist ref="launchlist" v-if="tabIndex === 2"></launchlist>
+      </van-tab>
+    </van-tabs>
+  </div>
 </template>
 
 <script>
@@ -35,7 +37,7 @@ export default {
       'userinfo'
     ])
   },
-  created () {},
+  created () { },
   watch: {
     searchValue (old, newV) {
       this.ththrottle(this.handleSearch(), 1000)
@@ -162,7 +164,16 @@ export default {
 </script>
 
 <style scoped>
-  >>>.van-sticky--fixed{
-    top:34px;
-  }
+>>> .van-sticky--fixed {
+  top: 34px;
+}
+</style>
+<style lang="less">
+.van-toast {
+  background-color: rgba(210, 199, 199, 0.3);
+  color: #000;
+}
+.van-toast__loading {
+  color: #000;
+}
 </style>

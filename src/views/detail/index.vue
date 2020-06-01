@@ -31,63 +31,74 @@
         </div>
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit">
-        <van-field
-          name="formTitle"
-          v-model="flowList.formTitle"
-          type="text"
-          label="流程标题:"
-          readonly
-        />
-        <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly />
-        <van-field
-          style="display: none;"
-          name="commitType"
-          v-model="commitType"
-          type="text"
-          readonly
-        />
-        <van-field
-          style="display: none;"
-          name="objName"
-          v-model="flowList.objName"
-          type="text"
-          readonly
-        />
-        <van-field
-          style="display: none;"
-          name="currTaskDefinitionKey"
-          v-model="flowList.currTaskDefinitionKey"
-          type="text"
-          readonly
-        />
-        <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly />
-        <van-field v-model="flowList.currTaskDefinitionName" type="text" label="当前节点:" readonly />
-        <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly />
-        <van-field v-model="flowList.userName" type="text" label="发起人:" readonly />
-        <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly />
-        <!--审批流程详情部分开始-->
-        <router-view ref="detail" />
-        <!--审批流程详情部分结束-->
-        <div style="margin-bottom: 10px;">
+        <scroller height="100%" :on-infinite="infinite" ref="my_scroller">
+          <div class="detail-header-title">
+            <van-field
+              name="formTitle"
+              v-model="flowList.formTitle"
+              type="text"
+              label="流程标题:"
+              readonly
+            />
+
+            <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly />
+            <van-field
+              style="display: none;"
+              name="commitType"
+              v-model="commitType"
+              type="text"
+              readonly
+            />
+            <van-field
+              style="display: none;"
+              name="objName"
+              v-model="flowList.objName"
+              type="text"
+              readonly
+            />
+            <van-field
+              style="display: none;"
+              name="currTaskDefinitionKey"
+              v-model="flowList.currTaskDefinitionKey"
+              type="text"
+              readonly
+            />
+            <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly />
+            <van-field
+              v-model="flowList.currTaskDefinitionName"
+              type="text"
+              label="当前节点:"
+              readonly
+            />
+            <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly />
+            <van-field v-model="flowList.userName" type="text" label="发起人:" readonly />
+            <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly />
+          </div>
+          <!--审批流程详情部分开始-->
+          <router-view ref="detail" />
+          <!--审批流程详情部分结束-->
           <div
-            style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-          >历史办理详情</div>
-          <van-steps direction="vertical" :active="historyList.length - 1" active-color="#409EFF">
-            <van-step :key="index" v-for="(item, index) in historyList">
-              <h5>
-                【{{ item.taskName }}】
-                <div v-if="!item.porxy">
-                  {{ item.userName }}
-                  <p>{{ item.remark }}</p>
-                </div>
-                <span v-else>{{ item.proxyUserName }}(待办)</span>
-              </h5>
-              <span>{{ item.createdDate }}</span>
-            </van-step>
-          </van-steps>
-        </div>
-        <div v-if="isShow">
-          <div style="margin-bottom: 70px;">
+            class="history-detail"
+            v-bind:class="{historyDetail: isShow && isApproval, historyDetails: isShow && !isApproval , historyButton: !isShow}"
+          >
+            <div class="title">历史办理详情</div>
+            <van-steps direction="vertical" :active="historyList.length - 1" active-color="#409EFF">
+              <van-step :key="index" v-for="(item, index) in historyList">
+                <h5>
+                  【{{ item.taskName }}】
+                  <div v-if="!item.porxy">
+                    {{ item.userName }}
+                    <p>{{ item.remark }}</p>
+                  </div>
+                  <span v-else>{{ item.proxyUserName }}(待办)</span>
+                </h5>
+                <span>{{ item.createdDate }}</span>
+              </van-step>
+            </van-steps>
+          </div>
+        </scroller>
+        <div class="approval" v-if="isShow">
+          <div v-if="isApproval" class="approval-select">
             <div
               style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
             >审批</div>
@@ -126,7 +137,14 @@
             </el-select>
           </div>
           <div class="submitBox">
-            <van-button style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
+            <van-button
+              style="width: 30%"
+              v-if="!isSBtn"
+              round
+              block
+              type="info"
+              native-type="submit"
+            >提交</van-button>
             <van-button
               v-if="!isSBtn && isStatusDes"
               style="width: 30%"
@@ -149,6 +167,11 @@
       </van-form>
     </div>
     <van-toast id="van-toast" />
+    <!-- 固钉 -->
+    <div class="affix">
+      <van-button v-if="isShow" @click="approvalFnc" class="affix-approval" type="default">审批</van-button>
+      <!-- <i class="el-icon-bottom affix-anchor" v-anchor></i> -->
+    </div>
   </div>
 </template>
 <script>
@@ -167,6 +190,7 @@ export default {
       signData: {}, // 会签数据
       signIds: [], // 会签id
       signText: '', // 会签人员名称
+      isApproval: false, // 是否显示审批功能
       isStatusDes: true, // 当前流程是否是会签
       treeList: [],
       isSBtn: false, // 废弃和会签按钮
@@ -239,6 +263,11 @@ export default {
     }
   },
   methods: {
+    // 显示审批
+    approvalFnc () {
+      this.isApproval = !this.isApproval
+    },
+    infinite () { console.log('上拉') },
     // 处理树的数据
     toTree (data) {
       // 删除 所有 children,以防止多次调用
@@ -667,6 +696,82 @@ export default {
 div.public-title {
   .van-cell:not(:last-child)::after {
     border-bottom: none;
+  }
+}
+.approval {
+  position: fixed;
+  bottom: -6px;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0px 1px 1px 2px #1989fa;
+  .approval-select {
+    margin-bottom: 70px;
+    width: 100%;
+  }
+}
+.detail-header-title {
+  margin-top: 68px;
+  position: relative;
+  border-bottom: 1px solid #1989fa;
+}
+.van-step__circle {
+  width: 15px;
+  height: 15px;
+}
+.van-hairline:last-child .van-step__circle-container {
+  font-size: 18px;
+}
+// 历史办理详情样式
+.historyDetail {
+  margin-bottom: 285px;
+}
+.historyDetails {
+  margin-bottom: 64px;
+}
+div.history-detail {
+  .title {
+    border-top: 1px dashed #f8f8f8;
+    padding: 10px 15px;
+    text-align: left;
+    background-color: #fff;
+  }
+}
+.historyButton {
+  margin-bottom: 16px;
+}
+.loading-layer {
+  visibility: hidden;
+  // line-height: 0px !important;
+  // height: 0 !important;
+}
+// 固钉样式
+div.affix {
+  .affix-approval {
+    display: block;
+    position: fixed;
+    right: 5%;
+    z-index: 999;
+    bottom: 25%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  .affix-anchor {
+    display: block;
+    position: fixed;
+    right: 5%;
+    z-index: 999;
+    bottom: 20%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #ebedf0;
+    line-height: 60px;
+    font-size: 24px;
   }
 }
 </style>

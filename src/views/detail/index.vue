@@ -39,9 +39,16 @@
               type="text"
               label="流程标题:"
               readonly
-            />
-
-            <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly />
+            >
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.formTitle}}</div>
+              </template>
+            </van-field>
+            <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly>
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.currFlowName}}</div>
+              </template>
+            </van-field>
             <van-field
               style="display: none;"
               name="commitType"
@@ -63,16 +70,31 @@
               type="text"
               readonly
             />
-            <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly />
-            <van-field
-              v-model="flowList.currTaskDefinitionName"
-              type="text"
-              label="当前节点:"
-              readonly
-            />
-            <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly />
-            <van-field v-model="flowList.userName" type="text" label="发起人:" readonly />
-            <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly />
+            <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly>
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.statusDes}}</div>
+              </template>
+            </van-field>
+            <van-field v-model="flowList.currTaskDefinitionName" type="text" label="当前节点:" readonly>
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.currTaskDefinitionName}}</div>
+              </template>
+            </van-field>
+            <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly>
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.currUserName}}</div>
+              </template>
+            </van-field>
+            <van-field v-model="flowList.userName" type="text" label="发起人:" readonly>
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.userName}}</div>
+              </template>
+            </van-field>
+            <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly>
+              <template #input>
+                <div style="text-align: left;margin: 0;">{{flowList.createdDate}}</div>
+              </template>
+            </van-field>
           </div>
           <!--审批流程详情部分开始-->
           <router-view ref="detail" />

@@ -14,74 +14,65 @@
       readonly
     />
     <van-field
-    style="display: none;"
-    name="ownDeptId"
-    v-model="custList.ownDeptId"
-    type="text"
-    readonly
+      style="display: none;"
+      name="ownDeptId"
+      v-model="custList.ownDeptId"
+      type="text"
+      readonly
     />
+    <van-field style="display: none;" name="id" v-model="custList.id" type="text" readonly />
+    <van-field style="display: none;" name="cou" v-model="custList.cou" type="text" readonly />
+    <van-field style="display: none;" name="payee" v-model="custList.payee" type="text" readonly />
     <van-field
       style="display: none;"
-      name="id"
-      v-model="custList.id"
+      name="capitalizedProjectId"
+      v-model="capitalizedProjects"
       type="text"
-      readonly
     />
-    <van-field
-    style="display: none;"
-    name="cou"
-    v-model="custList.cou"
-    type="text"
-    readonly
-    />
-    <van-field
-    style="display: none;"
-    name="payee"
-    v-model="custList.payee"
-    type="text"
-    readonly
-    />
-<!--    <van-field label="付款对象:" name="borrower" v-model="custList.borrower">-->
-<!--      <template #input>-->
-<!--        <div v-if="custList.borrower === '1'" style="margin: 0;">公司</div>-->
-<!--        <div v-if="custList.borrower === '0'" style="margin: 0;">个人</div>-->
-<!--      </template>-->
-<!--    </van-field>-->
-    <van-field
-      name="feesTypeDes"
-      v-model="custList.feesTypeDes"
-      type="text"
-      label="报销类型:"
-      readonly
-    />
+    <van-field style="display: none;" name="employeeTypeId" v-model="employeeTypes" type="text" />
+    <!--    <van-field label="付款对象:" name="borrower" v-model="custList.borrower">-->
+    <!--      <template #input>-->
+    <!--        <div v-if="custList.borrower === '1'" style="margin: 0;">公司</div>-->
+    <!--        <div v-if="custList.borrower === '0'" style="margin: 0;">个人</div>-->
+    <!--      </template>-->
+    <!--    </van-field>-->
+    <van-field name="feesTypeDes" v-model="custList.feesTypeDes" type="text" label="报销类型:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.feesTypeDes}}</div>
+      </template>
+    </van-field>
     <van-field
       name="companyCodeUs"
       v-model="custList.companyCodeUs"
       type="text"
       label="公司名称:"
       readonly
-    />
-    <van-field
-      name="feesCode"
-      v-model="custList.feesCode"
-      type="text"
-      label="报销编号:"
-      readonly
-    />
-    <van-field
-      name="exeUserName"
-      v-model="custList.exeUserName"
-      type="text"
-      label="经办人员:"
-      readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.companyCodeUs}}</div>
+      </template>
+    </van-field>
+    <van-field name="feesCode" v-model="custList.feesCode" type="text" label="报销编号:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.feesCode}}</div>
+      </template>
+    </van-field>
+    <van-field name="exeUserName" v-model="custList.exeUserName" type="text" label="经办人员:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.exeUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="reimbursementDate"
       v-model="custList.reimbursementDate"
       type="text"
       label="报销日期:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reimbursementDate}}</div>
+      </template>
+    </van-field>
     <van-field
       name="employeeType"
       readonly
@@ -122,45 +113,32 @@
         @confirm="isshowcapitalizedProject"
       />
     </van-popup>
-    <van-field
-      style="display: none;"
-      name="capitalizedProjectId"
-      v-model="capitalizedProjects"
-      type="text"
-    />
-    <van-field
-      style="display: none;"
-      name="employeeTypeId"
-      v-model="employeeTypes"
-      type="text"
-    />
-    <van-field
-      name="cou"
-      v-model="custList.cou"
-      type="text"
-      label="记字:"
-    />
-    <van-field
-      name="payeeName"
-      v-model="custList.payeeName"
-      type="text"
-      label="领款人:"
-      readonly
-    />
-    <van-field
-      name="protocolNo"
-      v-model="custList.protocolNo"
-      type="text"
-      label="协议号:"
-      readonly
-    />
+    <van-field name="cou" v-model="custList.cou" type="text" label="记字:">
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.cou}}</div>
+      </template>
+    </van-field>
+    <van-field name="payeeName" v-model="custList.payeeName" type="text" label="领款人:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.payeeName}}</div>
+      </template>
+    </van-field>
+    <van-field name="protocolNo" v-model="custList.protocolNo" type="text" label="协议号:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.protocolNo}}</div>
+      </template>
+    </van-field>
     <van-field
       name="ownDeptName"
       v-model="custList.ownDeptName"
       type="text"
       label="立项号主导部门:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.ownDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       v-if="custList.feesType === '2' || custList.feesType === '3'"
       name="oppositeCompany"
@@ -168,7 +146,11 @@
       type="text"
       label="对方公司名称:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.oppositeCompany}}</div>
+      </template>
+    </van-field>
     <van-field
       v-if="custList.feesType === '2' || custList.feesType === '3'"
       name="oppenBank"
@@ -176,7 +158,11 @@
       type="text"
       label="开户行:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.oppenBank}}</div>
+      </template>
+    </van-field>
     <van-field
       v-if="custList.feesType === '2' || custList.feesType === '3'"
       name="bankAccount"
@@ -184,84 +170,48 @@
       type="text"
       label="账号:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.bankAccount}}</div>
+      </template>
+    </van-field>
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">报销明细详情</div>
-      <el-table
-        border
-        :data="costDetailList"
-        style="width: 100%">
-<!--        <el-table-column-->
-<!--          label="预计收款日期">-->
-<!--          <template slot-scope="scope">-->
-<!--            {{scope.row.receivDate.split(' ')[0]}}-->
-<!--          </template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column-->
-<!--          label="预计付款时间">-->
-<!--          <template slot-scope="scope">-->
-<!--            {{scope.row.paytime.split(' ')[0]}}-->
-<!--          </template>-->
-<!--        </el-table-column>-->
-        <el-table-column
-          label="报销人员姓名"
-          width="120"
-          prop="reimbursementUserName">
-        </el-table-column>
-        <el-table-column
-          label="科目"
-          prop="subjectName">
-        </el-table-column>
-        <el-table-column
-          label="是否本地票">
+      <div
+        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+      >报销明细详情</div>
+      <el-table border :data="costDetailList" style="width: 100%">
+        <!--        <el-table-column-->
+        <!--          label="预计收款日期">-->
+        <!--          <template slot-scope="scope">-->
+        <!--            {{scope.row.receivDate.split(' ')[0]}}-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <!--        <el-table-column-->
+        <!--          label="预计付款时间">-->
+        <!--          <template slot-scope="scope">-->
+        <!--            {{scope.row.paytime.split(' ')[0]}}-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <el-table-column label="报销人员姓名" width="120" prop="reimbursementUserName"></el-table-column>
+        <el-table-column label="科目" prop="subjectName"></el-table-column>
+        <el-table-column label="是否本地票">
           <template slot-scope="scope">
             <div v-if="scope.row.isLocal === '1'">是</div>
             <div v-if="scope.row.isLocal === '2'">否</div>
           </template>
         </el-table-column>
-        <el-table-column
-          label="金额"
-          prop="amount">
+        <el-table-column label="金额" prop="amount"></el-table-column>
+        <el-table-column label="立项号" prop="projectNo"></el-table-column>
+        <el-table-column label="项目名称" width="200" prop="projectName"></el-table-column>
+        <el-table-column label="费用归属部门名称" prop="ownDeptName"></el-table-column>
+        <el-table-column label="费用归属部门编号" prop="ownDeptCode"></el-table-column>
+        <el-table-column label="应审批人" prop="aprUserIds"></el-table-column>
+        <el-table-column label="借款余额" width="120">
+          <template slot-scope="scope">{{totalLoanAmount}}</template>
         </el-table-column>
-        <el-table-column
-          label="立项号"
-          prop="projectNo">
-        </el-table-column>
-        <el-table-column
-          label="项目名称"
-          width="200"
-          prop="projectName">
-        </el-table-column>
-        <el-table-column
-          label="费用归属部门名称"
-          prop="ownDeptName">
-        </el-table-column>
-        <el-table-column
-          label="费用归属部门编号"
-          prop="ownDeptCode">
-        </el-table-column>
-        <el-table-column
-          label="应审批人"
-          prop="aprUserIds">
-        </el-table-column>
-        <el-table-column
-          label="借款余额"
-          width="120">
-          <template slot-scope="scope">
-            {{totalLoanAmount}}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="清借款金额"
-          prop="loanAmount">
-        </el-table-column>
-        <el-table-column
-          label="备注"
-          prop="remark">
-        </el-table-column>
-        <el-table-column
-          label="查看明细">
-        </el-table-column>
+        <el-table-column label="清借款金额" prop="loanAmount"></el-table-column>
+        <el-table-column label="备注" prop="remark"></el-table-column>
+        <el-table-column label="查看明细"></el-table-column>
       </el-table>
       <van-field
         name="reimbursementAmount"
@@ -269,43 +219,25 @@
         type="text"
         label="报销总金额:"
         readonly
-      />
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{reimbursementAmount}}</div>
+        </template>
+      </van-field>
     </div>
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">清借款列表</div>
-      <el-table
-        border
-        :data="feesReimbursementLoanVOList"
-        style="width: 100%">
+      <div
+        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+      >清借款列表</div>
+      <el-table border :data="feesReimbursementLoanVOList" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column
-          label="借款人"
-          prop="loanUserName">
-        </el-table-column>
-        <el-table-column
-          label="项目号"
-          prop="projectNo">
-        </el-table-column>
-        <el-table-column
-          label="项目名"
-          prop="projectName">
-        </el-table-column>
-        <el-table-column
-          label="待还金额"
-          prop="waitReAmount">
-        </el-table-column>
-        <el-table-column
-          label="借款编号"
-          prop="loanNo">
-        </el-table-column>
-        <el-table-column
-          label="科目"
-          prop="subjectNames">
-        </el-table-column>
-        <el-table-column
-          label="清借款金额"
-          prop="amounts">
-        </el-table-column>
+        <el-table-column label="借款人" prop="loanUserName"></el-table-column>
+        <el-table-column label="项目号" prop="projectNo"></el-table-column>
+        <el-table-column label="项目名" prop="projectName"></el-table-column>
+        <el-table-column label="待还金额" prop="waitReAmount"></el-table-column>
+        <el-table-column label="借款编号" prop="loanNo"></el-table-column>
+        <el-table-column label="科目" prop="subjectNames"></el-table-column>
+        <el-table-column label="清借款金额" prop="amounts"></el-table-column>
       </el-table>
       <van-field
         name="cleranloanAmount"
@@ -313,17 +245,21 @@
         type="text"
         label="清借款总金额:"
         readonly
-      />
-      <van-field
-        name="payAmount"
-        v-model="payAmount"
-        type="text"
-        label="应付款金额:"
-        readonly
-      />
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{cleranloanAmount}}</div>
+        </template>
+      </van-field>
+      <van-field name="payAmount" v-model="payAmount" type="text" label="应付款金额:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{payAmount}}</div>
+        </template>
+      </van-field>
     </div>
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">附件列表</div>
+      <div
+        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+      >附件列表</div>
       <el-table border :data="file" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="附件名称" prop="fileName"></el-table-column>
@@ -469,16 +405,16 @@ export default {
 </script>
 
 <style scoped>
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
 </style>

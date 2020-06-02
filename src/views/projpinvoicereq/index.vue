@@ -7,14 +7,62 @@
   <div class="app-title">
     <div class="title">开发票/收据信息</div>
     <van-field style="display: none;" name="id" v-model="projpinvoicereq.id" type="text" readonly />
-    <van-field style="display: none;" name="meetingUsers" v-model="projpinvoicereq.meetingUsers" type="text" readonly />
-    <van-field style="display: none;" name="billType" v-model="projpinvoicereq.billType" type="text" readonly />
-    <van-field style="display: none;" name="hasReport" v-model="projpinvoicereq.hasReport" type="text" readonly />
-    <van-field style="display: none;" name="isReceived" v-model="projpinvoicereq.isReceived" type="text" readonly />
-    <van-field style="display: none;" name="invoiceType" v-model="projpinvoicereq.invoiceType" type="text" readonly />
-    <van-field style="display: none;" name="ownDeptId" v-model="projpinvoicereq.ownDeptId" type="text" readonly />
-    <van-field style="display: none;" name="reqDeptId" v-model="projpinvoicereq.reqDeptId" type="text" readonly />
-    <van-field style="display: none;" name="reqUserId" v-model="projpinvoicereq.reqUserId" type="text" readonly />
+    <van-field
+      style="display: none;"
+      name="meetingUsers"
+      v-model="projpinvoicereq.meetingUsers"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="billType"
+      v-model="projpinvoicereq.billType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="hasReport"
+      v-model="projpinvoicereq.hasReport"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="isReceived"
+      v-model="projpinvoicereq.isReceived"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="invoiceType"
+      v-model="projpinvoicereq.invoiceType"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="ownDeptId"
+      v-model="projpinvoicereq.ownDeptId"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="reqDeptId"
+      v-model="projpinvoicereq.reqDeptId"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
+      name="reqUserId"
+      v-model="projpinvoicereq.reqUserId"
+      type="text"
+      readonly
+    />
 
     <van-field
       type="text"
@@ -23,7 +71,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqDeptName"
@@ -31,7 +83,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.reqDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="billTypeName"
@@ -39,7 +95,11 @@
       label="票据类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.billTypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="hasReportName"
@@ -47,7 +107,11 @@
       label="是否有验收报告"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.hasReportName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reportDate"
@@ -55,7 +119,11 @@
       label="预计验收报告收回时间"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.reportDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="isReceivedName"
@@ -63,7 +131,11 @@
       label="是否提前开发票"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.isReceivedName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="planReceiveDate"
@@ -71,7 +143,11 @@
       label="预计收款时间"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.planReceiveDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="invoiceTypeName"
@@ -79,7 +155,11 @@
       label="发票类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.invoiceTypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractNo"
@@ -87,7 +167,11 @@
       label="合同号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="companyDesc"
@@ -95,7 +179,11 @@
       label="开具发票公司"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.companyDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payeeName"
@@ -103,17 +191,26 @@
       label="对方单位名称"
       colon
       readonly
-    />
-    <van-field type="text" name="taxNo" v-model="projpinvoicereq.taxNo" label="税号" colon readonly />
-    <van-field type="text" name="addr" v-model="projpinvoicereq.addr" label="单位地址" colon readonly />
-    <van-field
-      type="text"
-      name="phone"
-      v-model="projpinvoicereq.phone"
-      label="电话号码"
-      colon
-      readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.payeeName}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" name="taxNo" v-model="projpinvoicereq.taxNo" label="税号" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.taxNo}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" name="addr" v-model="projpinvoicereq.addr" label="单位地址" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.addr}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" name="phone" v-model="projpinvoicereq.phone" label="电话号码" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.phone}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="openBnak"
@@ -121,7 +218,11 @@
       label="开户行"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.openBnak}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="account"
@@ -129,7 +230,11 @@
       label="账号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.account}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="invoiceAmount"
@@ -137,7 +242,11 @@
       label="确认开发票金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpinvoicereq.invoiceAmount}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">填开内容</div>
       <el-table border :data="invoiceDetail" style="width: 100%">

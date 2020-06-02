@@ -2,14 +2,22 @@
 <template>
   <div class="app-title">
     <div class="title">{{ title }}</div>
-    <van-field type="text" v-model="contractList.bizId" label="合同号" colon readonly />
+    <van-field type="text" v-model="contractList.bizId" label="合同号" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.bizId}}</div>
+      </template>
+    </van-field>
     <van-field name="radio" label="是否已投标备案" v-model="contractList.isRecord" readonly colon>
       <template #input>
         <div v-if="contractList.isRecord === '1'" style="margin: 0;">是</div>
         <div v-else style="margin: 0;">否</div>
       </template>
     </van-field>
-    <van-field v-model="contractList.chanceId" type="text" label="商机编号" colon readonly />
+    <van-field v-model="contractList.chanceId" type="text" label="商机编号" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.chanceId}}</div>
+      </template>
+    </van-field>
     <van-field
       style="display: none;"
       v-if="isCustPro"
@@ -57,23 +65,67 @@
       type="text"
       readonly
     />
-    <van-field type="text" v-model="contractList.name" label="合同名称" colon readonly />
-    <van-field type="text" v-model="contractList.recordId" label="投标备案编号" colon readonly />
-    <van-field type="text" v-model="contractList.reqUserName" label="申请人" colon readonly />
+    <van-field type="text" v-model="contractList.name" label="合同名称" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.name}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.recordId" label="投标备案编号" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.recordId}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.reqUserName" label="申请人" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field name="radio" label="是否关联交易" v-model="contractList.isRelated" readonly colon>
       <template #input>
         <div v-if="contractList.isRelated === '1'" style="margin: 0;">是</div>
         <div v-else style="margin: 0;">否</div>
       </template>
     </van-field>
-    <van-field v-model="contractList.contractTypeDesc" type="text" label="合同类别" colon readonly />
-    <van-field type="text" v-model="contractList.leadOrgName" label="主导部门" colon readonly />
-    <van-field type="text" v-model="contractList.projectName" label="项目名称" colon readonly />
-    <van-field type="text" v-model="contractList.companyText" label="签订公司" colon readonly />
-    <van-field type="text" v-model="contractList.projectNum" label="项目编号" colon readonly />
-    <van-field type="text" v-model="contractList.customerName" label="客户名称" colon readonly />
-    <van-field type="text" v-model="contractList.saleManName" label="销售人员" colon readonly />
-    <van-field type="text" v-model="contractList.salesManOrgName" label="销售人员部门" colon readonly />
+    <van-field v-model="contractList.contractTypeDesc" type="text" label="合同类别" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.contractTypeDesc}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.leadOrgName" label="主导部门" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.leadOrgName}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.projectName" label="项目名称" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.projectName}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.companyText" label="签订公司" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.companyText}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.projectNum" label="项目编号" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.projectNum}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.customerName" label="客户名称" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.customerName}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.saleManName" label="销售人员" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.saleManName}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.salesManOrgName" label="销售人员部门" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.salesManOrgName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="pmManagerName"
@@ -81,7 +133,11 @@
       label="项目经理"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.pmManagerName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="operationStartTime"
@@ -89,7 +145,11 @@
       label="运维开始时间"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.operationStartTime}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="operationEndTime"
@@ -97,8 +157,16 @@
       label="运维结束时间"
       colon
       readonly
-    />
-    <van-field type="text" v-model="contractList.endCustName" label="最终客户" colon readonly />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.operationEndTime}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.endCustName" label="最终客户" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.endCustName}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">收入明细</div>
       <el-table border :data="incomeList" style="width: 100%">
@@ -162,7 +230,11 @@
         <el-table-column label="资金占用成本" prop="occupyAmount"></el-table-column>
         <el-table-column label="备注" prop="remark"></el-table-column>
       </el-table>
-      <van-field type="text" v-model="contractList.occupy" label="资金占用情况" colon readonly />
+      <van-field type="text" v-model="contractList.occupy" label="资金占用情况" colon readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{contractList.occupy}}</div>
+        </template>
+      </van-field>
     </div>
 
     <div class="title">金额计算</div>
@@ -174,8 +246,16 @@
       label="收入合计"
       colon
       readonly
-    />
-    <van-field type="text" v-if="isCustPro" name="custPro" v-model="contractList.custPro" readonly />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.receiveTotalAmount}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-if="isCustPro" name="custPro" v-model="contractList.custPro" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.custPro}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -183,7 +263,11 @@
       label="收入合计"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.receiveTotalAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -192,7 +276,11 @@
       label="商品收入"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.rGoods}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -200,7 +288,11 @@
       label="商品收入"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.rGoods}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -209,7 +301,11 @@
       label="工程收入"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.projectIncome}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -218,7 +314,11 @@
       label="自有软件收入"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.freeSftwareIncome}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -227,7 +327,11 @@
       label="工程成本"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.projectCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -236,7 +340,11 @@
       label="内包成本"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.interNalCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -245,7 +353,11 @@
       label="中标服务费"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.bidFeesCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -254,7 +366,11 @@
       label="技术服务收入"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.rService}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -262,7 +378,11 @@
       label="技术服务收入"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.rService}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -271,7 +391,11 @@
       label="采购成本"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.purchasingCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -279,7 +403,11 @@
       label="采购成本"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.purchasingCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -288,7 +416,11 @@
       label="分包成本"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.subcontractCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -296,7 +428,11 @@
       label="分包成本"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.subcontractCost}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="costTotalAmount"
@@ -305,7 +441,11 @@
       label="成本合计"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.costTotalAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -313,7 +453,11 @@
       label="成本合计"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.costTotalAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -322,7 +466,11 @@
       label="毛利润"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.grossProfit}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -330,7 +478,11 @@
       label="毛利润"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.grossProfit}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -338,7 +490,11 @@
       label="税前毛利润率%"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.pretaxGrossProfitRate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -346,7 +502,11 @@
       label="税后毛利润率%"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.aftertaxGrossProfitRate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -355,7 +515,11 @@
       label="税前毛利润率%"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.pretaxGrossProfitRate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -364,7 +528,11 @@
       label="税后毛利润率%"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.aftertaxGrossProfitRate}}</div>
+      </template>
+    </van-field>
     <van-field name="radio" label="是否有项目" v-model="contractList.hasProject" readonly colon>
       <template #input>
         <div v-if="contractList.hasProject === '1'" style="margin: 0;">是</div>
@@ -387,7 +555,11 @@
       label="项目号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.projcetNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -395,7 +567,11 @@
       label="项目号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.projcetNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="netProfit"
@@ -404,7 +580,11 @@
       label="净利润"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.netProfit}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -412,7 +592,11 @@
       label="净利润"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.netProfit}}</div>
+      </template>
+    </van-field>
     <van-field
       class="tax"
       type="text"
@@ -422,15 +606,16 @@
       placeholder="请输入税金"
       label="税金"
       colon
-    />
-    <van-field
-      type="text"
-      v-if="!isCustPro"
-      v-model="contractList.tax"
-      label="税金"
-      colon
-      readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.tax}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-if="!isCustPro" v-model="contractList.tax" label="税金" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.tax}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -439,7 +624,11 @@
       label="合同总金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.contractAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -447,7 +636,11 @@
       label="合同总金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.contractAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -456,14 +649,26 @@
       label="税后净利润率(%)"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.netProfitRate}}</div>
+      </template>
+    </van-field>
     <div style="padding: 8px 36px 16px;
     background: #fff;" v-if="isCustPro">
       <van-button round block type="primary" @click="taxes($event, contractList.tax)">计算</van-button>
     </div>
     <div class="title">其他</div>
-    <van-field type="text" v-model="contractList.linkman" label="客户联系人" colon readonly />
-    <van-field type="text" v-model="contractList.phone" label="联系人电话" colon readonly />
+    <van-field type="text" v-model="contractList.linkman" label="客户联系人" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.linkman}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="contractList.phone" label="联系人电话" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.phone}}</div>
+      </template>
+    </van-field>
     <van-field name="radio" label="是否有销售合同文件" v-model="contractList.hasContract" readonly colon>
       <template #input>
         <div v-if="contractList.hasContract === '1'" style="margin: 0;">是</div>
@@ -528,14 +733,22 @@
         @confirm="onConfirm"
       />
     </van-popup>
-    <van-field readonly v-if="isCustProShow" label="客户属性" colon v-model="contractList.custProDesc" />
+    <van-field readonly v-if="isCustProShow" label="客户属性" colon v-model="contractList.custProDesc">
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.custProDesc}}</div>
+      </template>
+    </van-field>
     <van-field name="radio" label="是否合作项目" colon v-model="contractList.hasCooperation" readonly>
       <template #input>
         <div v-if="contractList.hasCooperation === '1'" style="margin: 0;">是</div>
         <div v-else style="margin: 0;">否</div>
       </template>
     </van-field>
-    <van-field type="text" v-model="contractList.signDate" label="预计签订时间" colon readonly />
+    <van-field type="text" v-model="contractList.signDate" label="预计签订时间" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.signDate}}</div>
+      </template>
+    </van-field>
     <van-field
       v-model="contractList.remark"
       rows="2"
@@ -544,7 +757,11 @@
       label="备注"
       type="textarea"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{contractList.remark}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">销售合同文件上传</div>
       <el-table border :data="contractFileList" style="width: 100%">
@@ -574,14 +791,11 @@
           </template>
         </el-table-column>
       </el-table>
-      <van-field
-        left-icon="star"
-        type="text"
-        v-model="contractList.score"
-        label="评分"
-        colon
-        readonly
-      />
+      <van-field type="text" v-model="contractList.score" label="评分" colon readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{contractList.score}}</div>
+        </template>
+      </van-field>
     </div>
     <div>
       <div class="table-title">不签合同说明</div>

@@ -6,13 +6,11 @@
 <template>
   <div>
     <div style="padding: 10px 15px;text-align: left;background-color: #fff;">客户申请信息</div>
-    <van-field
-      name="postCode"
-      v-model="custList.postCode"
-      type="text"
-      label="发文编号:"
-      readonly
-    />
+    <van-field name="postCode" v-model="custList.postCode" type="text" label="发文编号:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.postCode}}</div>
+      </template>
+    </van-field>
     <van-field
       style="display: none;"
       name="meetingUsers"
@@ -41,96 +39,76 @@
       type="text"
       readonly
     />
-    <van-field
-      style="display: none;"
-      name="id"
-      v-model="custList.id"
-      type="text"
-      readonly
-    />
-    <van-field
-      name="postName"
-      v-model="custList.postName"
-      type="text"
-      label="发文名称:"
-      readonly
-    />
-    <van-field
-      name="postPurpose"
-      v-model="custList.postPurpose"
-      type="text"
-      label="发文目的:"
-      readonly
-    />
-    <van-field
-      name="postKindDes"
-      v-model="custList.postKindDes"
-      type="text"
-      label="发文种类:"
-      readonly
-    />
-    <van-field
-      name="postWay"
-      v-model="custList.postWay"
-      type="text"
-      label="发文方式:"
-      readonly
-    />
+    <van-field style="display: none;" name="id" v-model="custList.id" type="text" readonly />
+    <van-field name="postName" v-model="custList.postName" type="text" label="发文名称:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.postName}}</div>
+      </template>
+    </van-field>
+    <van-field name="postPurpose" v-model="custList.postPurpose" type="text" label="发文目的:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.postPurpose}}</div>
+      </template>
+    </van-field>
+    <van-field name="postKindDes" v-model="custList.postKindDes" type="text" label="发文种类:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.postKindDes}}</div>
+      </template>
+    </van-field>
+    <van-field name="postWay" v-model="custList.postWay" type="text" label="发文方式:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.postWay}}</div>
+      </template>
+    </van-field>
     <van-field
       name="postRangeDes"
       v-model="custList.postRangeDes"
       type="text"
       label="发文范围:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.postRangeDes}}</div>
+      </template>
+    </van-field>
     <van-field
       name="classifiedDes"
       v-model="custList.classifiedDes"
       type="text"
       label="秘密等级:"
       readonly
-    />
-    <van-field
-      name="reqUserName"
-      v-model="custList.reqUserName"
-      type="text"
-      label="申请人:"
-      readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.classifiedDes}}</div>
+      </template>
+    </van-field>
+    <van-field name="reqUserName" v-model="custList.reqUserName" type="text" label="申请人:" readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="reqDeptName"
       v-model="custList.reqDeptName"
       type="text"
       label="申请人部门:"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reqDeptName}}</div>
+      </template>
+    </van-field>
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">附件列表</div>
-      <el-table
-        border
-        :data="postmanageList"
-        style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods">
+      <div
+        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+      >附件列表</div>
+      <el-table border :data="postmanageList" style="width: 100%">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="附件名称" prop="fileName"></el-table-column>
+        <el-table-column label="大小" width="80">
+          <template slot-scope="scope">{{(scope.row.fileSize/1024).toFixed(2) + 'KB'}}</template>
         </el-table-column>
-        <el-table-column
-          label="附件名称"
-          prop="fileName">
-        </el-table-column>
-        <el-table-column
-          label="大小"
-          width="80">
-          <template slot-scope="scope">
-            {{(scope.row.fileSize/1024).toFixed(2) + 'KB'}}
-          </template>
-        </el-table-column>
-        <el-table-column
-          fixed="right"
-          label="操作"
-          width="50">
+        <el-table-column fixed="right" label="操作" width="50">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
@@ -186,5 +164,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

@@ -30,7 +30,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.proposerName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="deptName"
@@ -38,7 +42,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.deptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="type"
@@ -46,7 +54,11 @@
       label="类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.type}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="companyName"
@@ -54,7 +66,11 @@
       label="公司名"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.companyName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="demand"
@@ -62,7 +78,11 @@
       label="需求"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.demand}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="purpose"
@@ -70,7 +90,11 @@
       label="目的用途"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.purpose}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="bussinessPlan"
@@ -78,7 +102,11 @@
       label="经营计划"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.bussinessPlan}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="executer"
@@ -86,7 +114,11 @@
       label="实施人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.executer}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="remark"
@@ -94,7 +126,11 @@
       label="备注"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizcompanychangeformList.remark}}</div>
+      </template>
+    </van-field>
   </div>
 </template>
 

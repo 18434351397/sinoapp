@@ -42,7 +42,11 @@
       label="划出部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.payDeptN}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="amount"
@@ -50,7 +54,11 @@
       label="划转金额(元)"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.amount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="transFerTypeDesc"
@@ -58,7 +66,11 @@
       label="划转类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.transFerTypeDesc}}</div>
+      </template>
+    </van-field>
 
     <van-field
       type="text"
@@ -66,7 +78,11 @@
       label="是否成本支付"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.isCostPatName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="recDeptN"
@@ -74,7 +90,11 @@
       label="划入部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.recDeptN}}</div>
+      </template>
+    </van-field>
 
     <van-field
       type="text"
@@ -82,7 +102,11 @@
       label="是否计入合同到款"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.isReceiveName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isContractNo"
@@ -91,7 +115,11 @@
       label="划出合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="conNo"
@@ -100,7 +128,11 @@
       label="划入合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.conNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="voucherDate"
@@ -108,21 +140,33 @@
       label="凭证日期"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.voucherDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="hasAttachment"
       v-model="bizfeestransferform.hasAttachment"
       style="display: none;"
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.hasAttachment}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-model="bizfeestransferform.hasAttachmentName"
       label="是否有附件"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.hasAttachmentName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="des"
@@ -130,7 +174,11 @@
       label="收益划转情况简述"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.des}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="remark"
@@ -138,7 +186,11 @@
       label="备注"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeestransferform.remark}}</div>
+      </template>
+    </van-field>
     <div v-if="hasAttachment">
       <div class="table-title">附件列表</div>
       <el-table border :data="files" style="width: 100%">

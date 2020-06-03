@@ -63,7 +63,6 @@ export default {
   watch: {
     searchValue: function (old, newV) {
       this.currentPage = 1
-      console.log(this.currentPage)
       this.loadData()
     }
   },
@@ -109,29 +108,24 @@ export default {
         this.loading = false
         if (res) {
           if (res.data) {
-            console.log(res.data.records.length)
-            if (res.data.records.length === data.size) {
-              if (res.data.current === '1') {
-                this.dataList = res.data.records ? res.data.records : []
-                this.totalPage = res.data.pages
-                this.currentPage = res.data.current
-              } else {
-                this.dataList = [
-                  ...this.dataList,
-                  ...res.data.records ? res.data.records : []
-                ]
-              }
-              this.totalPage = res.data.pages
-              this.current = res.data.current
+            if (res.data.current === '1') {
               this.dataList = res.data.records ? res.data.records : []
-              this.dataList.forEach(item => {
-                item.createdDate = item.createdDate.split('.')[0]
-                item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
-              })
-              ++this.currentPage
+              this.totalPage = res.data.pages
+              this.currentPage = res.data.current
             } else {
-              window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
+              this.dataList = [
+                ...this.dataList,
+                ...res.data.records ? res.data.records : []
+              ]
             }
+            this.totalPage = res.data.pages
+            this.current = res.data.current
+            this.dataList = res.data.records ? res.data.records : []
+            this.dataList.forEach(item => {
+              item.createdDate = item.createdDate.split('.')[0]
+              item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
+            })
+            ++this.currentPage
           }
         }
       })

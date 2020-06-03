@@ -18,8 +18,9 @@ export default {
   },
   methods: {
     onChange () {
+      console.log(this.$route.path)
       if (this.path === '/my') {
-        window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
+        window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
       }
     }
   },

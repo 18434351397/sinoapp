@@ -20,6 +20,7 @@
         v-model="oldPwd"
         type="password"
         label="原密码"
+        required
         name="oldPwd"
         placeholder="请输入原密码"
         :rules="[{ required: true, message: '请输入原密码' }]"
@@ -33,7 +34,7 @@
         name="userToken"
         required
         placeholder="请输入密码"
-        :rules="[{ required: true, message: toastMessage, validator: validator }]"
+        :rules="[{ required: true, message: toastMessage ? toastMessage: '', validator: validator }]"
       />
       <van-field
         show-word-limit
@@ -44,7 +45,7 @@
         label="确认密码"
         name="confirmPwd"
         placeholder="请输入确认密码"
-        :rules="[{ validator: revalidator, required: true, message: retoastMessage }]"
+        :rules="[{ validator: revalidator, required: true, message: retoastMessage ?retoastMessage : '' }]"
       />
       <div class="submitBox">
         <van-button style="width: 30%" round block  type="info" native-type="submit">
@@ -70,10 +71,10 @@ export default {
   },
   data () {
     return {
-      toastMessage: '',
-      retoastMessage: '',
-      username: JSON.parse(sessionStorage.getItem('userinfo')).userName,
-      userId: JSON.parse(sessionStorage.getItem('userinfo')).id,
+      toastMessage: '请输入密码',
+      retoastMessage: '请输入确认密码',
+      username: JSON.parse(sessionStorage.getItem('userinfo')).userName ? JSON.parse(sessionStorage.getItem('userinfo')).userName : '',
+      userId: JSON.parse(sessionStorage.getItem('userinfo')).id ? JSON.parse(sessionStorage.getItem('userinfo')).id : '',
       phone: '',
       code: '',
       password: '',
@@ -93,9 +94,10 @@ export default {
   methods: {
     // 验证密码规则
     validator (val) {
-      console.log(val)
-      if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
-        this.toastMessage = '密码6-16位，必须为字母+数字+特殊字符'
+      if (val) {
+        if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
+          this.toastMessage = '密码6-16位，必须为字母+数字+特殊字符'
+        }
       }
       return /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val)
     },

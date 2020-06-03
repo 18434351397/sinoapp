@@ -2,7 +2,7 @@
   <div>
     <van-tabs @change="change" :active="active" sticky color="#1989fa">
       <van-sticky offset-top="78">
-        <van-search v-model="searchValue" placeholder="请输入搜索关键词" bind:search="onSearch">
+        <van-search v-model="searchValue" placeholder="请输入搜索关键词">
           <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
         </van-search>
       </van-sticky>
@@ -59,14 +59,12 @@ export default {
       this.searchValue = ''
       if (event === 0) {
         if (this.$refs.todolist) {
-          console.log(this.tabIndex + 1 + '')
           this.$refs.todolist.searchType = this.tabIndex + 1 + ''
           // this.$refs.todolist.currentPage = 1
           // this.$refs.todolist.loadData()
         }
       }
       if (event === 1) {
-        console.log('切换到已办了')
         if (this.$refs.donelist) {
           // this.$refs.donelist.searchType = this.tabIndex + 1 + ''
           this.$refs.donelist.searchType = '3'
@@ -75,7 +73,6 @@ export default {
         }
       }
       if (event === 2) {
-        console.log(this.$refs.launchlist)
         if (this.$refs.launchlist) {
           this.$refs.launchlist.searchType = this.tabIndex + 1
           // this.$refs.launchlist.currentPage = 1
@@ -159,6 +156,9 @@ export default {
       window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
       this.searchValue = ''
     }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
   }
 }
 </script>

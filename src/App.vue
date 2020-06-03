@@ -48,6 +48,7 @@ div.app-title {
   // 表格字体颜色调整
   .cell{
     color: #000;
+    font-weight: normal;
   }
 
 .van-toast {

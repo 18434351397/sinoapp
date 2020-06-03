@@ -65,7 +65,6 @@ export default {
   watch: {
     searchValue: function (old, newV) {
       this.currentPage = 1
-      console.log(this.currentPage)
       this.loadData()
     }
   },
@@ -104,27 +103,21 @@ export default {
         this.loading = false
         if (res) {
           if (res.data) {
-            if (res.data.records.length === data.size) {
-              console.log('进来了')
-              if (res.data.current === '1') {
-                this.dataList = res.data.records ? res.data.records : []
-                this.totalPage = res.data.pages
-                this.currentPage = res.data.current
-              } else {
-                this.dataList = [
-                  ...this.dataList,
-                  ...res.data.records ? res.data.records : []
-                ]
-              }
-              ++this.currentPage
-              this.dataList.forEach(item => {
-                item.createdDate = item.createdDate.split('.')[0]
-                item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
-              })
+            if (res.data.current === '1') {
+              this.dataList = res.data.records ? res.data.records : []
+              this.totalPage = res.data.pages
+              this.currentPage = res.data.current
             } else {
-              console.log('销毁')
-              window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
+              this.dataList = [
+                ...this.dataList,
+                ...res.data.records ? res.data.records : []
+              ]
             }
+            ++this.currentPage
+            this.dataList.forEach(item => {
+              item.createdDate = item.createdDate.split('.')[0]
+              item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
+            })
           }
         }
       }).catch(err => {

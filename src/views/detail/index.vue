@@ -31,7 +31,7 @@
         </div>
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit">
-        <scroller height="100%" :on-infinite="infinite" ref="my_scroller">
+        <!-- <scroller height="100%" :on-infinite="infinite" ref="my_scroller"> -->
           <div class="detail-header-title">
             <van-field
               name="formTitle"
@@ -118,7 +118,7 @@
               </van-step>
             </van-steps>
           </div>
-        </scroller>
+        <!-- </scroller> -->
         <div class="approval" v-if="isShow">
           <div v-if="isApproval" class="approval-select">
             <div
@@ -289,7 +289,7 @@ export default {
     approvalFnc () {
       this.isApproval = !this.isApproval
     },
-    infinite () { console.log('上拉') },
+    // infinite () { console.log('上拉') },
     // 处理树的数据
     toTree (data) {
       // 删除 所有 children,以防止多次调用

@@ -93,7 +93,11 @@
       v-model="projpcontractpurchaseList.hasPnoName"
       readonly
       colon
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.hasPnoName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="purchaseNo"
@@ -101,7 +105,11 @@
       label="采购合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.purchaseNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="projectNo"
@@ -109,7 +117,11 @@
       label="立项号/合同号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.projectNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="companyText"
@@ -117,7 +129,11 @@
       label="涉及公司"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.companyText}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="projectName"
@@ -125,7 +141,11 @@
       label="销售合同名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.projectName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractTypeName"
@@ -133,7 +153,11 @@
       label="销售合同类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.contractTypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractAmount"
@@ -141,7 +165,11 @@
       label="销售合同金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.contractAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="pmManagerName"
@@ -149,7 +177,11 @@
       label="项目经理"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.pmManagerName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="isSingleName"
@@ -157,7 +189,11 @@
       v-model="projpcontractpurchaseList.isSingleName"
       readonly
       colon
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.isSingleName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="supplierName"
@@ -165,7 +201,11 @@
       label="乙方名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.supplierName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="purchaseAmount"
@@ -173,7 +213,11 @@
       label="采购金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.purchaseAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payTypeName"
@@ -181,7 +225,11 @@
       label="支付方式"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.payTypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="purchaseTypeName"
@@ -189,7 +237,11 @@
       label="采购类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.purchaseTypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="dataType"
@@ -197,7 +249,11 @@
       label="账期类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.dataType}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isShow"
@@ -206,7 +262,11 @@
       label="单一来源说明"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.singleExplain}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="startCondition"
@@ -214,7 +274,11 @@
       label="质保期起始条件"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.startCondition}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownDeptIdName"
@@ -222,7 +286,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.ownDeptIdName}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">采购明细</div>
       <el-table border :data="goodsList" style="width: 100%">

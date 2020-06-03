@@ -59,7 +59,11 @@
       label="协议号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.bizId}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="name"
@@ -67,7 +71,11 @@
       label="协议名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.name}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqUserName"
@@ -75,7 +83,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqDeptName"
@@ -83,7 +95,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.reqDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="custName"
@@ -91,7 +107,11 @@
       label="客户名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.custName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="companyDesc"
@@ -99,7 +119,11 @@
       label="涉及公司"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.companyDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="hasSubName"
@@ -107,7 +131,11 @@
       label="是否有分包或第三方产品服务"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.hasSubName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownDeptName"
@@ -115,7 +143,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.ownDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="pmUserId"
@@ -123,7 +155,11 @@
       label="项目经理"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.pmUserId}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="aim"
@@ -131,7 +167,11 @@
       label="合作目的"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.aim}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="otherName"
@@ -139,7 +179,11 @@
       label="合作方名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.otherName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="hasTemplateName"
@@ -147,7 +191,11 @@
       label="是否有模板"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.hasTemplateName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="hasAmountName"
@@ -155,7 +203,11 @@
       label="是否有金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.hasAmountName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="remark"
@@ -163,7 +215,11 @@
       label="备注"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractprotocol.remark}}</div>
+      </template>
+    </van-field>
     <div v-if="isFile">
       <div class="table-title">附件列表</div>
       <el-table border :data="files" style="width: 100%">

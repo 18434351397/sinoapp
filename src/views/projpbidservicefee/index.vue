@@ -24,7 +24,11 @@
       label="经办人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.agentName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractNo"
@@ -32,7 +36,11 @@
       label="合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractPaymentDesc"
@@ -40,7 +48,11 @@
       label="付款条件"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.contractPaymentDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownDeptName"
@@ -48,7 +60,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.ownDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="applyDate"
@@ -56,7 +72,11 @@
       label="申请时间"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.applyDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="mPayAmount"
@@ -64,7 +84,11 @@
       label="应付款金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.mPayAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="hPayAmount"
@@ -72,7 +96,11 @@
       label="已付款金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.hPayAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="cPayAmount"
@@ -80,15 +108,21 @@
       label="本次申请金额"
       colon
       readonly
-    />
-    <van-field
-      type="text"
-      v-model="projpbidservicefee.hasInvoiceText"
-      label="是否有发票"
-      colon
-      readonly
-    />
-    <van-field type="text" v-model="projpbidservicefee.hasPayText" label="是否实际付款" colon readonly />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.cPayAmount}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="projpbidservicefee.hasInvoiceText" label="是否有发票" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.hasInvoiceText}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" v-model="projpbidservicefee.hasPayText" label="是否实际付款" colon readonly>
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.hasPayText}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="company"
@@ -96,7 +130,11 @@
       label="支出公司"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.company}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="bidPayTypeText"
@@ -104,7 +142,11 @@
       label="支付方式"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.bidPayTypeText}}</div>
+      </template>
+    </van-field>
     <van-field
       v-if="isDate"
       type="text"
@@ -113,7 +155,11 @@
       label="到期日"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.dueDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payee"
@@ -121,7 +167,11 @@
       label="收款单位"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.payee}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="account"
@@ -129,7 +179,11 @@
       label="账户"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.account}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="openAccount"
@@ -137,7 +191,11 @@
       label="开户银行"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.openAccount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="otherExplain"
@@ -145,7 +203,11 @@
       label="其他说明"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpbidservicefee.otherExplain}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">中标服务费明细</div>
       <el-table border :data="projpBidServiceFeeDetailList" style="width: 100%">

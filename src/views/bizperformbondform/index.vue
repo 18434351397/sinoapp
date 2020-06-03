@@ -79,7 +79,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqDeptName"
@@ -87,7 +91,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.reqDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractNo"
@@ -95,7 +103,11 @@
       label="合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractName"
@@ -103,7 +115,11 @@
       label="合同名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.contractName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="leadOrgName"
@@ -111,7 +127,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.leadOrgName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="agreementNo"
@@ -119,7 +139,11 @@
       label="履约保证金编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.agreementNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="paymentNameId"
@@ -127,7 +151,11 @@
       label="履约保证金付款款项名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.paymentNameId}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="bondName"
@@ -135,7 +163,11 @@
       label="履约保证金匹配条件"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.bondName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="total"
@@ -143,7 +175,11 @@
       label="履约保证金金额"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.total}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="totalCapital"
@@ -151,7 +187,11 @@
       label="金额转大写"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.totalCapital}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="exeuserName"
@@ -159,7 +199,11 @@
       label="经办人"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.exeuserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payTypeDesc"
@@ -167,7 +211,11 @@
       label="支出形式"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.payTypeDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="explain"
@@ -175,7 +223,11 @@
       label="其他说明"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.explain}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payDate"
@@ -183,7 +235,11 @@
       label="支出日期"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.payDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="backDate"
@@ -191,7 +247,11 @@
       label="退回日期"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.backDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payCompanyName"
@@ -199,7 +259,11 @@
       label="支出公司"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.payCompanyName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payeeName"
@@ -207,7 +271,11 @@
       label="开户名称"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.payeeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payeeAccount"
@@ -215,7 +283,11 @@
       label="对方账号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.payeeAccount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payeeBank"
@@ -223,7 +295,11 @@
       label="开户银行"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{bizperformbondform.payeeBank}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">附件列表</div>
       <el-table border :data="files" style="width: 100%">

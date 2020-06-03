@@ -1,84 +1,71 @@
 <template>
   <div style="background-color: #f8f8f8;">
-    <van-form id='editPwdForm'>
-      <van-field
-        v-model="personList.userAccount"
-        type="text"
-        label="账号:"
-        readonly
-      />
-      <van-field
-        v-model="personList.userName"
-        type="text"
-        label="用户名:"
-        readonly
-      />
-      <van-field
-        v-model="personList.genderDesc"
-        type="text"
-        label="性别:"
-        readonly
-      />
-      <van-field
-        v-model="personList.birthday"
-        type="text"
-        label="生日:"
-        readonly
-      />
-      <van-field
-        v-model="personList.telephone"
-        type="text"
-        label="电话:"
-        readonly
-      />
-      <van-field
-        v-model="personList.email"
-        type="text"
-        label="邮箱:"
-        readonly
-      />
-      <van-field
-        v-model="personList.certificatesType"
-        type="text"
-        label="证件类型:"
-        readonly
-      />
-      <van-field
-        v-model="personList.certificatesCode"
-        type="text"
-        label="证件号码:"
-        readonly
-      />
-      <van-field
-        v-model="personList.jobNumber"
-        type="text"
-        label="工号:"
-        readonly
-      />
-      <van-field
-        v-model="personList.bankCard"
-        type="text"
-        label="工资卡:"
-        readonly
-      />
-      <van-field
-        v-model="personList.weight"
-        type="text"
-        label="用户销售等级加权:"
-        readonly
-      />
-      <van-field
-        v-model="personList.roles"
-        type="text"
-        label="角色:"
-        readonly
-      />
-      <van-field
-        v-model="personList.orgName"
-        type="text"
-        label="机构:"
-        readonly
-      />
+    <van-form id="editPwdForm">
+      <van-field v-model="personList.userAccount" type="text" label="账号:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.userAccount}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.userName" type="text" label="用户名:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.userName}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.genderDesc" type="text" label="性别:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.genderDesc}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.birthday" type="text" label="生日:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.birthday}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.telephone" type="text" label="电话:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.telephone}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.email" type="text" label="邮箱:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.email}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.certificatesType" type="text" label="证件类型:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.certificatesType}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.certificatesCode" type="text" label="证件号码:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.certificatesCode}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.jobNumber" type="text" label="工号:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.jobNumber}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.bankCard" type="text" label="工资卡:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.bankCard}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.weight" type="text" label="用户销售等级加权:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.weight}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.roles" type="text" label="角色:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.roles}}</div>
+        </template>
+      </van-field>
+      <van-field v-model="personList.orgName" type="text" label="机构:" readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{personList.orgName}}</div>
+        </template>
+      </van-field>
     </van-form>
   </div>
 </template>
@@ -126,19 +113,19 @@ export default {
 </script>
 
 <style scoped>
-  .submitBox {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background: #fff;
-  }
-  >>>.van-field__label {
-    width: 90px;
-    margin-right: 10px;
-    /*text-align: right;*/
-  }
+.submitBox {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background: #fff;
+}
+>>> .van-field__label {
+  width: 90px;
+  margin-right: 10px;
+  /*text-align: right;*/
+}
 </style>

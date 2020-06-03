@@ -81,7 +81,11 @@
       label="合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isProcure"
@@ -90,7 +94,11 @@
       label="采购合同编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.purchaseNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="archivesTypeText"
@@ -98,14 +106,22 @@
       label="存档类型"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.archivesTypeText}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-model="projpcontractarchives.hasOriginalName"
       label="是否原件"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.hasOriginalName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownDeptName"
@@ -113,14 +129,22 @@
       label="所属部门"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.ownDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-model="projpcontractarchives.hasContractName"
       label="是否签订合同"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.hasContractName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="archivesAttribute2"
@@ -128,7 +152,11 @@
       label="存档属性"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.archivesAttributeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isSale"
@@ -137,7 +165,11 @@
       label="原存档编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.oldId}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       v-if="isSale"
@@ -146,7 +178,11 @@
       label="实际签订时间"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractarchives.actualSignDate}}</div>
+      </template>
+    </van-field>
     <div v-if="isCheck">
       <div class="table-title">验收报告相关信息</div>
       <el-table border :data="selectReportByRequestNo" style="width: 100%">

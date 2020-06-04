@@ -13,7 +13,11 @@
       type="text"
       label="申请人:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.userName}}</div>
+      </template>
+    </van-field>
     <van-field
       style="display: none;"
       name="meetingUsers"
@@ -55,42 +59,66 @@
       type="text"
       label="申请人部门:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.orgName}}</div>
+      </template>
+</van-field>
     <van-field
       name="companyDesc"
       v-model="custList.companyDesc"
       type="text"
       label="涉及公司:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.companyDesc}}</div>
+      </template>
+</van-field>
     <van-field
       name="sealTypeDesc"
       v-model="custList.sealTypeDesc"
       type="text"
       label="印章类型:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.sealTypeDesc}}</div>
+      </template>
+</van-field>
     <van-field
       name="operaTionDesc"
       v-model="custList.operaTionDesc"
       type="text"
       label="操作:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.operaTionDesc}}</div>
+      </template>
+</van-field>
     <van-field
       name="reason"
       v-model="custList.reason"
       type="text"
       label="原因和依据:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reason}}</div>
+      </template>
+</van-field>
     <van-field
       name="remark"
       v-model="custList.remark"
       type="text"
       label="备注:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.remark}}</div>
+      </template>
+</van-field>
   </div>
 </template>
 <script>

@@ -16,6 +16,7 @@
       type="text"
       readonly
     />
+
     <van-field
       type="text"
       name="contractNo"
@@ -23,7 +24,11 @@
       label="合同号"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractName"
@@ -31,7 +36,11 @@
       label="合同名称"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.contractName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownDeptName"
@@ -39,7 +48,11 @@
       label="合同主导部门"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.ownDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownUserName"
@@ -47,7 +60,11 @@
       label="主导部门负责人"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.ownUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="frozenAmount"
@@ -55,7 +72,11 @@
       label="冻结金额"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.frozenAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="startFrozenTime"
@@ -63,7 +84,11 @@
       label="开始冻结时间"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.startFrozenTime}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="riskTypeText"
@@ -71,7 +96,11 @@
       label="风险类型"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.riskTypeText}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="remark"
@@ -79,7 +108,11 @@
       label="备注"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.remark}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="cThawAmount"
@@ -87,7 +120,11 @@
       label="本次解冻金额"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.cThawAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="thawTime"
@@ -95,7 +132,11 @@
       label="解冻时间"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.thawTime}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">其他</div>
       <el-table border :data="files" style="width: 100%">

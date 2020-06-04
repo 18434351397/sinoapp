@@ -21,7 +21,11 @@
       label="投标备案编号"
       colon
       readonly
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.recordId}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="projectName"
@@ -29,7 +33,11 @@
       label="项目名称"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.projectName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="reqUserName"
@@ -37,7 +45,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.reqUserName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="customerName"
@@ -45,7 +57,11 @@
       label="客户名称"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.customerName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="reqDeptName"
@@ -53,7 +69,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.reqDeptName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="isCooperate"
@@ -74,7 +94,11 @@
       label="质保金金额(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.assureAmount}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="amount"
@@ -82,7 +106,11 @@
       label="投标保证金金额(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.amount}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="ownDeptName"
@@ -90,7 +118,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.ownDeptName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="bidTime"
@@ -98,7 +130,11 @@
       label="投标时间"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.bidTime}}</div>
+      </template>
+</van-field>
     <div>
       <div class="table-title">收入明细</div>
       <el-table border :data="incomeList" style="width: 100%">
@@ -156,7 +192,11 @@
         label="资金占用情况"
         colon
         readonly
-      />
+      >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.occupy}}</div>
+      </template>
+</van-field>
     </div>
     <div class="title">金额计算</div>
     <van-field
@@ -166,7 +206,11 @@
       label="商品收入"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.rGoods}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="rTechnology"
@@ -174,7 +218,11 @@
       label="技术服务收入"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.rTechnology}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="rCount"
@@ -182,7 +230,11 @@
       label="收入合计(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.rCount}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="purchasingCost"
@@ -190,7 +242,11 @@
       label="采购成本"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.purchasingCost}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="subcontractCost"
@@ -198,7 +254,11 @@
       label="分包成本"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.subcontractCost}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="cCount"
@@ -206,7 +266,11 @@
       label="成本合计(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.cCount}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="addedTax"
@@ -214,7 +278,11 @@
       label="增值税及附加(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.addedTax}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="ownSoftware"
@@ -222,7 +290,11 @@
       label="自有软件增值税及附加(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.ownSoftware}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="stampDuty"
@@ -230,7 +302,11 @@
       label="印花税(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.stampDuty}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="tCount"
@@ -238,7 +314,11 @@
       label="税金合计(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.tCount}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="grossProfit"
@@ -246,7 +326,11 @@
       label="税后毛利润合计(元)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.grossProfit}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="pretaxGrossProfitRate"
@@ -254,7 +338,11 @@
       label="税前毛利润率(%)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.pretaxGrossProfitRate}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="aftertaxGrossProfitRate"
@@ -262,7 +350,11 @@
       label="税后毛利润率(%)"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{tenderOfferList.aftertaxGrossProfitRate}}</div>
+      </template>
+</van-field>
     <div>
       <div class="table-title">其他</div>
       <el-table border :data="files" style="width: 100%">

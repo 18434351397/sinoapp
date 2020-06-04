@@ -58,7 +58,9 @@
       label="项目编号"
       colon
       readonly
-    />
+    >
+    
+    </van-field>
     <van-field
       type="text"
       name="projectTypeName"
@@ -66,7 +68,11 @@
       label="项目类型"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.projectTypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="projectName"
@@ -74,7 +80,11 @@
       label="项目名称"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.projectName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqUserName"
@@ -82,7 +92,11 @@
       label="项目申请人"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqDeptName"
@@ -90,7 +104,11 @@
       label="项目申请部门"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.reqDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="pmUserName"
@@ -98,7 +116,11 @@
       label="项目经理"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.pmUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="ownDeptName"
@@ -106,7 +128,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.ownDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="radio"
@@ -127,7 +153,11 @@
       label="合同编号"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="cPersion"
@@ -135,7 +165,11 @@
       label="预计人员成本(元)"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.cPersion}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="creimbursement"
@@ -143,7 +177,11 @@
       label="预计报销性费用(元)"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.creimbursement}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="startDate"
@@ -151,7 +189,11 @@
       label="预计开始时间"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.startDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="endDate"
@@ -159,7 +201,11 @@
       label="预计结束时间"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.endDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="projectExplain"
@@ -167,7 +213,11 @@
       label="项目情况描述"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.projectExplain}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">项目阶段划分</div>
       <el-table border :data="projpprojectstageinfo" style="width: 100%">

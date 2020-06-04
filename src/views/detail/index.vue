@@ -134,6 +134,7 @@
             </van-field>
             <van-field
               name="content"
+              class="message-textarea"
               v-model="message"
               rows="2"
               autosize
@@ -145,7 +146,7 @@
             />
             <el-select
               v-if="isStatusDes"
-              style="width: 100%;"
+              class="region-select"
               @change="pullSelect"
               v-model="region.id"
               placeholder="请选择步骤"
@@ -157,8 +158,7 @@
                 v-for="(item, index) in nextSelectOpts"
               ></el-option>
             </el-select>
-          </div>
-          <div class="submitBox">
+             <div class="submitBox">
             <van-button
               style="width: 30%"
               v-if="!isSBtn"
@@ -185,6 +185,7 @@
               native-type="button"
             >取消</van-button>
           </div>
+          </div>
         </div>
       </van-form>
     </div>
@@ -192,7 +193,7 @@
     <!-- 固钉 -->
     <div class="affix">
       <van-button v-if="isShow" @click="approvalFnc" class="affix-approval" type="default">审批</van-button>
-      <!-- <i class="el-icon-bottom affix-anchor" v-anchor></i> -->
+      <i class="el-icon-bottom affix-anchor" v-anchor></i>
     </div>
   </div>
 </template>
@@ -715,6 +716,18 @@ export default {
 }
 </style>
 <style lang="less">
+// 办理意见样式
+.message-textarea .van-field__control{
+    border: 1px solid #1989fa;
+    border-radius: 5px;
+    padding: 0 4px;
+}
+.region-select {
+  width: 100%;
+  input.el-input__inner {
+    border: 1px solid #1989fa;
+  }
+}
 div.public-title {
   .van-cell:not(:last-child)::after {
     border-bottom: none;
@@ -732,7 +745,6 @@ div.public-title {
   }
 }
 .detail-header-title {
-  margin-top: 68px;
   position: relative;
   border-bottom: 1px solid #1989fa;
 }
@@ -748,7 +760,7 @@ div.public-title {
   margin-bottom: 285px;
 }
 .historyDetails {
-  margin-bottom: 64px;
+  margin-bottom: 16px;
 }
 div.history-detail {
   .title {
@@ -773,7 +785,7 @@ div.affix {
     position: fixed;
     right: 5%;
     z-index: 999;
-    bottom: 25%;
+    bottom: 27.5%;
     cursor: pointer;
     width: 60px;
     height: 60px;

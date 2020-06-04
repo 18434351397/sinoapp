@@ -41,7 +41,11 @@
       type="text"
       readonly
     />
-    <van-field type="text" name="feesTypeDes" v-model="feesTypeDes" label="报销类型" colon readonly />
+    <van-field type="text" name="feesTypeDes" v-model="feesTypeDes" label="报销类型" colon readonly >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{feesTypeDes}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="companyCodeUs"
@@ -49,7 +53,11 @@
       label="公司名称"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.companyCodeUs}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="feesCode"
@@ -57,7 +65,11 @@
       label="报销编号"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.feesCode}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="exeUserName"
@@ -65,7 +77,11 @@
       label="经办人员"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.exeUserName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="remark"
@@ -73,7 +89,11 @@
       label="备注"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.remark}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="reimbursementDate"
@@ -81,7 +101,11 @@
       label="报销日期"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.reimbursementDate}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="costDate"
@@ -89,7 +113,11 @@
       label="费用归属日期"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.costDate}}</div>
+      </template>
+</van-field>
     <div>
       <div class="table-title">报销明细详情</div>
       <el-table border :data="feesReimbursementDetailVOList" style="width: 100%">
@@ -110,7 +138,11 @@
       label="报销总金额"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.reimbursementAmount}}</div>
+      </template>
+</van-field>
   </div>
 </template>
 

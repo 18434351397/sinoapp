@@ -18,7 +18,11 @@
       label="合同号"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.contractNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="projectname"
@@ -26,7 +30,11 @@
       label="项目名称"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.projectname}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payTypeDesc"
@@ -34,7 +42,11 @@
       label="付款类型"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.payTypeDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payAmount"
@@ -42,7 +54,11 @@
       label="本次付款总金额"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.payAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payMethodDesc"
@@ -50,7 +66,11 @@
       label="支出形式"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.payMethodDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="dueDate"
@@ -59,7 +79,11 @@
       label="到期日"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.dueDate}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="leadOrgName"
@@ -67,7 +91,11 @@
       label="主导部门"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.leadOrgName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="pmManagerName"
@@ -75,7 +103,11 @@
       label="项目经理"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.pmManagerName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractAmount"
@@ -83,7 +115,11 @@
       label="合同金额"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.contractAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="receiveAmount"
@@ -91,7 +127,11 @@
       label="合同已收款金额"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.receiveAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="contractPayAmount"
@@ -99,7 +139,11 @@
       label="合同已付款金额"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.contractPayAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="companyq"
@@ -107,7 +151,11 @@
       label="现金流状态"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.companyq}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="purchaseNo"
@@ -115,7 +163,11 @@
       label="采购合同号"
       colon
       readonly
-    />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.purchaseNo}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="supplierIdDesc"
@@ -123,8 +175,16 @@
       label="供应商"
       colon
       readonly
-    />
-    <van-field type="text" name="bank" v-model="projppayreq.bank" label="开户银行" colon readonly />
+    >
+     <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.supplierIdDesc}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" name="bank" v-model="projppayreq.bank" label="开户银行" colon readonly >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.bank}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="accountInformention"
@@ -132,7 +192,11 @@
       label="对方账户信息"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.accountInformention}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="nexReceiveAmount"
@@ -140,7 +204,11 @@
       label="下一笔收款金额"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.nexReceiveAmount}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="nextReceiveTime"
@@ -148,7 +216,11 @@
       label="下一笔收款时间"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.nextReceiveTime}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="nextReceivePeople"
@@ -156,7 +228,11 @@
       label="收款负责人"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.nextReceivePeople}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="companyDesc"
@@ -164,7 +240,11 @@
       label="支出公司"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.companyDesc}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqUserName"
@@ -172,7 +252,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.reqUserName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="reqDeptName"
@@ -180,7 +264,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.reqDeptName}}</div>
+      </template>
+    </van-field>
     <van-field
       type="text"
       name="payMoneyTypeDesc"
@@ -188,8 +276,16 @@
       label="付款方式"
       colon
       readonly
-    />
-    <van-field type="text" name="remark" v-model="projppayreq.remark" label="备注" colon readonly />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.payMoneyTypeDesc}}</div>
+      </template>
+    </van-field>
+    <van-field type="text" name="remark" v-model="projppayreq.remark" label="备注" colon readonly >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projppayreq.remark}}</div>
+      </template>
+    </van-field>
     <div>
       <div class="table-title">付款明细</div>
       <el-table border :data="projpPayDetailList" style="width: 100%">

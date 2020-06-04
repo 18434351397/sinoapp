@@ -12,7 +12,11 @@
       type="text"
       label="备案编号:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.recordno}}</div>
+      </template>
+    </van-field>
     <van-field
       name="status"
       style="display: none;"
@@ -111,132 +115,205 @@
       type="text"
       readonly
     />
+
     <van-field
       name="exeuserName"
       v-model="custList.exeuserName"
       type="text"
       label="经办人:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.exeuserName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="deptName"
       v-model="custList.deptName"
       type="text"
       label="经办人部门:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.deptName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="reqdate"
       v-model="custList.reqdate"
       type="text"
       label="申请日期:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reqdate}}</div>
+      </template>
+    </van-field>
     <van-field
       name="tenderdate"
       v-model="custList.tenderdate"
       type="text"
       label="投标日期:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.tenderdate}}</div>
+      </template>
+    </van-field>
     <van-field
       name="leadOrgName"
       v-model="custList.leadOrgName"
       type="text"
       label="主导部门:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.leadOrgName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="paytimeid"
       v-model="custList.paytimeid"
       type="text"
       label="保证金付款时间:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.paytimeid}}</div>
+      </template>
+    </van-field>
     <van-field
       name="reqPaytimeId"
       v-model="custList.reqPaytimeId"
       type="text"
       label="保证金类型/对方单位:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reqPaytimeId}}</div>
+      </template>
+    </van-field>
     <van-field
       name="reqtypeName"
       v-model="custList.reqtypeName"
       type="text"
       label="申请性质:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.reqtypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="amount"
       v-model="custList.amount"
       type="text"
       label="金额(元):"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.amount}}</div>
+      </template>
+    </van-field>
     <van-field
       name="paycompanyName"
       v-model="custList.paycompanyName"
       type="text"
       label="支出公司:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.paycompanyName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="paytypeName"
       v-model="custList.paytypeName"
       type="text"
       label="支出形式:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.paytypeName}}</div>
+      </template>
+    </van-field>
     <van-field
       name="projectname"
       v-model="custList.projectname"
       type="text"
       label="项目名称:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.projectname}}</div>
+      </template>
+    </van-field>
     <van-field
       name="payeename"
       v-model="custList.payeename"
       type="text"
       label="开户名称:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.payeename}}</div>
+      </template>
+    </van-field>
     <van-field
       name="payeebank"
       v-model="custList.payeebank"
       type="text"
       label="开户银行:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.payeebank}}</div>
+      </template>
+    </van-field>
     <van-field
       name="payeeaccount"
       v-model="custList.payeeaccount"
       type="text"
       label="账号:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.payeeaccount}}</div>
+      </template>
+    </van-field>
     <van-field
       name="returndate"
       v-model="custList.returndate"
       type="text"
       label="退回日期:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.returndate}}</div>
+      </template>
+    </van-field>
     <van-field
       name="remark"
       v-model="custList.remark"
       type="text"
       label="备注:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.remark}}</div>
+      </template>
+    </van-field>
     <van-field
       name="amountWords"
       v-model="custList.amountWords"
       type="text"
       label="金额大写:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.amountWords}}</div>
+      </template>
+    </van-field>
     <div>
       <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">附件列表</div>
       <el-table

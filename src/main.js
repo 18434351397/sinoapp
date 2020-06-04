@@ -8,7 +8,6 @@ import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button
 import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
 // import './mock/index'
-import VueScroller from 'vue-scroller'
 
 Vue.directive('anchor', {
   inserted: function (el) {

@@ -101,7 +101,7 @@
           <!--审批流程详情部分结束-->
           <div
             class="history-detail"
-            v-bind:class="{historyDetail: isShow && isApproval, historyDetails: isShow && !isApproval , historyButton: !isShow}"
+            v-bind:class="{historyDetail: isShow && isApproval && isStatusDes, historyStatus: isShow && isApproval && !isStatusDes, historyDetails: isShow && !isApproval, historyButton: !isShow}"
           >
             <div class="title">历史办理详情</div>
             <van-steps direction="vertical" :active="historyList.length - 1" active-color="#409EFF">
@@ -757,12 +757,16 @@ div.public-title {
 }
 // 历史办理详情样式
 .historyDetail {
-  margin-bottom: 285px;
+  padding-bottom: 285px;
 }
 .historyDetails {
-  margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+.historyStatus {
+  padding-bottom: 250px;
 }
 div.history-detail {
+  background: #fff;
   .title {
     border-top: 1px dashed #f8f8f8;
     padding: 10px 15px;
@@ -771,7 +775,7 @@ div.history-detail {
   }
 }
 .historyButton {
-  margin-bottom: 16px;
+  padding-bottom: 16px;
 }
 .loading-layer {
   visibility: hidden;
@@ -785,7 +789,7 @@ div.affix {
     position: fixed;
     right: 5%;
     z-index: 999;
-    bottom: 27.5%;
+    bottom: 18em;
     cursor: pointer;
     width: 60px;
     height: 60px;
@@ -796,7 +800,7 @@ div.affix {
     position: fixed;
     right: 5%;
     z-index: 999;
-    bottom: 20%;
+    bottom: 7.7em;
     cursor: pointer;
     width: 60px;
     height: 60px;

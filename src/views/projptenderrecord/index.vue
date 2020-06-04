@@ -12,7 +12,11 @@
       type="text"
       label="备案编号:"
       readonly
-    />
+    >
+    <template #input>
+        <div style="text-align: left;margin: 0;">{{custList.bizId}}</div>
+      </template>
+    </van-field>
     <van-field
       name="company"
       style="display: none;"
@@ -95,21 +99,33 @@
       type="text"
       label="项目名称:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.projectName}}</div>
+      </template>
+</van-field>
     <van-field
       name="tenderCompany"
       v-model="custList.tenderCompany"
       type="text"
       label="招标公司:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.tenderCompany}}</div>
+      </template>
+</van-field>
     <van-field
       name="custName"
       v-model="custList.custName"
       type="text"
       label="客户名称:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.custName}}</div>
+      </template>
+</van-field>
     <van-field label="是否有招标编号:" name="hasBidNo" v-model="custList.hasBidNo">
       <template #input>
         <div v-if="custList.hasBidNo === '1'" style="margin: 0;">是</div>
@@ -122,56 +138,88 @@
       type="text"
       label="招标编号:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.bidNo}}</div>
+      </template>
+</van-field>
     <van-field
       name="companyText"
       v-model="custList.companyText"
       type="text"
       label="投标公司:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.companyText}}</div>
+      </template>
+</van-field>
     <van-field
       name="exeTypeText"
       v-model="custList.exeTypeText"
       type="text"
       label="项目执行方式:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.exeTypeText}}</div>
+      </template>
+</van-field>
     <van-field
       name="bidTime"
       v-model="custList.bidTime"
       type="text"
       label="投标时间:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.bidTime}}</div>
+      </template>
+</van-field>
     <van-field
       name="bidTypeText"
       v-model="custList.bidTypeText"
       type="text"
       label="投标类型:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.bidTypeText}}</div>
+      </template>
+</van-field>
     <van-field
       name="salesManName"
       v-model="custList.salesManName"
       type="text"
       label="销售人:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.salesManName}}</div>
+      </template>
+</van-field>
     <van-field
       name="salesManOrgName"
       v-model="custList.salesManOrgName"
       type="text"
       label="销售人员二级部门:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.salesManOrgName}}</div>
+      </template>
+</van-field>
     <van-field
       name="leadOrgName"
       v-model="custList.leadOrgName"
       type="text"
       label="主导部门:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.leadOrgName}}</div>
+      </template>
+</van-field>
     <van-field label="是否有投标保证金:" name="hasBond" v-model="custList.hasBond">
       <template #input >
         <div v-if="custList.hasBond === '1'" style="margin: 0;">是</div>
@@ -184,7 +232,11 @@
       type="text"
       label="备注:"
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{custList.remark}}</div>
+      </template>
+</van-field>
     <div>
       <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">保证金收付情况</div>
       <el-table

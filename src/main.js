@@ -8,8 +8,15 @@ import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button
 import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
 // import './mock/index'
-import VueScroller from 'vue-scroller'
-Vue.use(VueScroller)
+
+Vue.directive('anchor', {
+  inserted: function (el) {
+    el.onclick = function () {
+      document.documentElement.scrollTop = document.querySelector('.history-detail').offsetTop
+      document.body.scrollTop = document.querySelector('.history-detail').offsetTop
+    }
+  }
+})
 Vue.use(Vant)
 Vue.use(Select)
 Vue.use(Option)

@@ -17,7 +17,11 @@
       label="申请人"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.applicantName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="applicantDeptName"
@@ -25,7 +29,11 @@
       label="申请人部门"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.applicantDeptName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="applicationCategoryDesc"
@@ -33,7 +41,11 @@
       label="申请类别"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.applicationCategoryDesc}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="usagemode"
@@ -41,7 +53,11 @@
       label="使用方式"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.usagemode}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="sealcompanyDesc"
@@ -49,7 +65,11 @@
       label="印信公司"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.sealcompanyDesc}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="othersealcompany"
@@ -57,7 +77,11 @@
       label="印信公司其它"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.othersealcompany}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="sealnameDesc"
@@ -65,7 +89,11 @@
       label="印信名称"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.sealnameDesc}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="othersealname"
@@ -73,7 +101,11 @@
       label="印信名称其它"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.othersealname}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="applicationDate"
@@ -81,7 +113,11 @@
       label="申请日期"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.applicationDate}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="items"
@@ -89,7 +125,11 @@
       label="申请事项"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.items}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="detail"
@@ -97,7 +137,11 @@
       label="盖章资料明细"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.detail}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="remark"
@@ -105,7 +149,11 @@
       label="备注"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{useApprovalList.remark}}</div>
+      </template>
+</van-field>
     <div>
       <div class="table-title">附件列表</div>
       <el-table border :data="files" style="width: 100%">

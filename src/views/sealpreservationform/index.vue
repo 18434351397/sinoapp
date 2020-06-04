@@ -43,6 +43,7 @@
       type="text"
       readonly
     />
+
     <van-field
       type="text"
       name="userName"
@@ -50,7 +51,11 @@
       label="领用人"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.userName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="orgName"
@@ -58,7 +63,11 @@
       label="领用人部门"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.orgName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="companyDesc"
@@ -66,7 +75,11 @@
       label="涉及公司"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.companyDesc}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="sealName"
@@ -74,7 +87,11 @@
       label="印章名称"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.sealName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="timeLimit"
@@ -82,7 +99,11 @@
       label="保管期限"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.timeLimit}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       v-if="!isSeal"
@@ -91,7 +112,11 @@
       label="印章类型"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.sealTypeDesc}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       v-if="isSeal"
@@ -99,14 +124,22 @@
       label="印章类型"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.sealTypeDesc}}</div>
+      </template>
+</van-field>
     <van-field
       v-if="isSeal"
       style="display: none;"
       type="text"
       name="company"
       v-model="sealpreservationList.company"
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.company}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="depositoryName"
@@ -114,7 +147,11 @@
       label="保管人"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.depositoryName}}</div>
+      </template>
+</van-field>
     <van-field
       type="text"
       name="remark"
@@ -122,7 +159,11 @@
       label="备注说明"
       colon
       readonly
-    />
+    >
+<template #input>
+        <div style="text-align: left;margin: 0;">{{sealpreservationList.remark}}</div>
+      </template>
+</van-field>
     <div>
       <div class="table-title">附件列表</div>
       <el-table border :data="files" style="width: 100%">

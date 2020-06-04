@@ -3,8 +3,8 @@
     <div class="value_box">
       <div class="form_box">
         <div class="official_box">
-          <img style="width: 50%;" src="@/assets/image/twodevelopment/logo-light-large.png">
-          <img style="width: 120%;" src="@/assets/image/twodevelopment/logo-light-text-large.png">
+          <img style="width: 80px; height: 50px;" src="@/assets/image/twodevelopment/logo-light-large.png">
+          <img style="width: 180px; height: 55px;" src="@/assets/image/twodevelopment/logo-light-text-large.png">
         </div>
         <div class="formtitle">
           <p class="chiness">中科金财运营管理系统</p>
@@ -32,9 +32,9 @@
                     <input type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
                   </div>
                 </li>
-                <li>
+                <!-- <li>
                   <span class="forget_pwd" @click="forgetpwd()" style="visibility: hidden;">忘记密码</span>
-                </li>
+                </li> -->
                 <li>
                   <!--<input class="login_btn" type="button" id="btnSubmit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">-->
                   <span class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登录</span>
@@ -197,4 +197,10 @@ export default {
   .van-toast {
     background-color:rgba(210,199,199,0.3);
   }
+</style>
+<style lang="less">
+div.formtitle {
+  padding-top: 1.6em !important;
+  padding-bottom: 0px !important;
+}
 </style>

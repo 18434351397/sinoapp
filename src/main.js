@@ -16,7 +16,6 @@ Vue.directive('anchor', {
     }
   }
 })
-Vue.use(VueScroller)
 Vue.use(Vant)
 Vue.use(Select)
 Vue.use(Option)

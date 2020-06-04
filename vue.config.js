@@ -1,6 +1,6 @@
 module.exports = {
   // assetsPublicPath: './',
-  publicPath: './', // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制)
+  publicPath: process.env.NODE_ENV === 'production' ? './' : './', // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制)
   outputDir: 'dist', // 运行时生成的生产环境构建文件的目录(默认''dist''，构建之前会被清除)
   assetsDir: '', // 放置生成的静态资源(s、css、img、fonts)的(相对于 outputDir 的)目录(默认'')
   indexPath: 'index.html', // 指定生成的 index.html 的输出路径(相对于 outputDir)也可以是一个绝对路径
@@ -30,8 +30,8 @@ module.exports = {
     open: true, // 配置自动启动浏览器
     proxy: { // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
       '/admin': {
-        // target: 'http://172.169.100.126:8082',
-        target: 'http://172.169.200.207:8082',
+        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://192.168.18.26:8095',
         // ws: true,
@@ -41,26 +41,26 @@ module.exports = {
         // }
       },
       '/app': {
-        target: 'http://172.169.200.207:8082',
+        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
-        // target: 'http://172.169.100.126:8082',
         // target: 'http://192.168.18.26:8095',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
-        target: 'http://172.169.200.207:8082',
+        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://192.168.18.26:8095',
-        // target: 'http://172.169.100.126:8082',
         // ws: true,
         changeOrigin: true
       },
       '/toLogin': {
-        target: 'http://172.169.200.207:8082',
+        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://192.168.18.26:8095',
         // target: 'http://172.169.2.235:8095',
-        // target: 'http://172.169.100.126:8082',
         // ws: true,
         changeOrigin: true
       }

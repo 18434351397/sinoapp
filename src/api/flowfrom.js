@@ -41,5 +41,5 @@ export async function downLoad (data) {
     data,
     responseType: 'blob',
     headers: { 'content-type': 'application/x-www-form-urlencoded' }
-  })
+  }).then(res => console.log(res))
 }

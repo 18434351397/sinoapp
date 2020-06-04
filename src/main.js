@@ -13,6 +13,7 @@ Vue.directive('anchor', {
   inserted: function (el) {
     el.onclick = function () {
       document.documentElement.scrollTop = document.querySelector('.history-detail').offsetTop
+      document.body.scrollTop = document.querySelector('.history-detail').offsetTop
     }
   }
 })

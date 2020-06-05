@@ -5,8 +5,11 @@ const api = {
   projpriskbondthaw: '/app/form/projpriskbondthaw/detail', // 解冻风险保证金
   projpcontractprotocolform: '/app/form/projpcontractprotocolform/detail', // 合作协议
   projpprojectinfoform: '/app/form/projpprojectinfoform/detail', // 项目立项
-  projpprojectstageinfo: 'app/pro/projpprojectstageinfo/all/list', // 项目立项 --- 阶段列表
-  attachment: '/app/admin/attachment/biz/list', // 项目立项 --- 附件
+  projpprojectstageinfo: '/app/pro/projpprojectstageinfo/all/list', // 项目立项 --- 阶段列表
+  attachment: '/app/admin/attachment/biz/list', // 项目立项 --- 附件 || 项目文档列表
+  projpprojectupdateform: '/app/form/projpprojectupdateform/detail', // 项目变更 --- 预算变更
+  getOtherInfo: '/app/form/projpprojectinfoform/getOtherInfo', // 项目人员打分 和 供应商打分
+  projpprojectendform: '/app/form/projpprojectendform/detail', // 项目结算
   bizperformdenoteform: '/app/form/bizperformdenoteform/detail', // 履约保函
   projpcontractarchives: '/app/form/projpcontractarchives/detail', // 合同存档
   selectReportByRequestNo: '/app/pro/projpcontractreview/selectReportByRequestNo', // 验收报告相关信息
@@ -69,7 +72,7 @@ export async function projpprojectstageinfoApi (data) {
 // 项目立项 --- 阶段列表
 export async function attachmentApi (data) {
   return request({
-    url: api.attachment + '/?bizId=' + data,
+    url: api.attachment + '?bizId=' + data,
     method: 'get'
   })
 }
@@ -136,6 +139,28 @@ export async function projpbidservicefeeApi (data) {
 export async function projpcontractreviewupdateformApi (data) {
   return request({
     url: api.projpcontractreviewupdateform + '/' + data,
+    method: 'get'
+  })
+}
+
+// 项目变更 --- 预算变更
+export async function projpprojectupdateformApi (data) {
+  return request({
+    url: api.projpprojectupdateform + '/' + data,
+    method: 'get'
+  })
+}
+
+// 项目结项
+export async function projpprojectendformApi (data) {
+  return request({
+    url: api.projpprojectendform + '/' + data,
+    method: 'get'
+  })
+}
+export async function getOtherInfoApi (projectNo, contractNo) {
+  return request({
+    url: api.getOtherInfo + '?projectNo=' + projectNo + '&contractNo=' + contractNo,
     method: 'get'
   })
 }

@@ -1,5 +1,5 @@
 <template>
-   <div style="padding-top:22px;box-sizing: border-box;">
+   <div style="box-sizing: border-box;">
      <van-nav-bar
        title="运营管理系统"
        left-text=""
@@ -51,4 +51,17 @@ export default {
     top: 0;
     z-index: 999;
   }
+</style>
+<style lang="less">
+div.van-nav-bar {
+    padding-top: 1.5em;
+  div.van-nav-bar__left{
+    align-items: baseline;
+    top: 35px;
+    i.van-icon {
+      font-size: 24px;
+    }
+  }
+}
+
 </style>

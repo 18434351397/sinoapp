@@ -32,92 +32,98 @@
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit">
         <!-- <scroller height="100%" :on-infinite="infinite" ref="my_scroller"> -->
-          <div class="detail-header-title">
-            <van-field
-              name="formTitle"
-              v-model="flowList.formTitle"
-              type="text"
-              label="流程标题:"
-              readonly
-            >
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.formTitle}}</div>
-              </template>
-            </van-field>
-            <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly>
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.currFlowName}}</div>
-              </template>
-            </van-field>
-            <van-field
-              style="display: none;"
-              name="commitType"
-              v-model="commitType"
-              type="text"
-              readonly
-            />
-            <van-field
-              style="display: none;"
-              name="objName"
-              v-model="flowList.objName"
-              type="text"
-              readonly
-            />
-            <van-field
-              style="display: none;"
-              name="currTaskDefinitionKey"
-              v-model="flowList.currTaskDefinitionKey"
-              type="text"
-              readonly
-            />
-            <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly>
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.statusDes}}</div>
-              </template>
-            </van-field>
-            <van-field v-model="flowList.currTaskDefinitionName" type="text" label="当前节点:" readonly>
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.currTaskDefinitionName}}</div>
-              </template>
-            </van-field>
-            <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly>
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.currUserName}}</div>
-              </template>
-            </van-field>
-            <van-field v-model="flowList.userName" type="text" label="发起人:" readonly>
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.userName}}</div>
-              </template>
-            </van-field>
-            <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly>
-              <template #input>
-                <div style="text-align: left;margin: 0;">{{flowList.createdDate}}</div>
-              </template>
-            </van-field>
-          </div>
-          <!--审批流程详情部分开始-->
-          <router-view ref="detail" />
-          <!--审批流程详情部分结束-->
-          <div
-            class="history-detail"
-            v-bind:class="{historyDetail: isShow && isApproval && isStatusDes, historyStatus: isShow && isApproval && !isStatusDes, historyDetails: isShow && !isApproval, historyButton: !isShow}"
+        <div class="detail-header-title">
+          <van-field
+            name="formTitle"
+            class="process-title"
+            v-model="flowList.formTitle"
+            type="text"
+            label="流程标题:"
+            readonly
           >
-            <div class="title">历史办理详情</div>
-            <van-steps direction="vertical" :active="historyList.length - 1" active-color="#409EFF">
-              <van-step :key="index" v-for="(item, index) in historyList">
-                <h5>
-                  【{{ item.taskName }}】
-                  <div v-if="!item.porxy">
-                    {{ item.userName }}
-                    <p>{{ item.remark }}</p>
-                  </div>
-                  <span v-else>{{ item.proxyUserName }}(待办)</span>
-                </h5>
-                <span>{{ item.createdDate }}</span>
-              </van-step>
-            </van-steps>
-          </div>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.formTitle }}</div>
+            </template>
+          </van-field>
+          <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.currFlowName }}</div>
+            </template>
+          </van-field>
+          <van-field
+            style="display: none;"
+            name="commitType"
+            v-model="commitType"
+            type="text"
+            readonly
+          />
+          <van-field
+            style="display: none;"
+            name="objName"
+            v-model="flowList.objName"
+            type="text"
+            readonly
+          />
+          <van-field
+            style="display: none;"
+            name="currTaskDefinitionKey"
+            v-model="flowList.currTaskDefinitionKey"
+            type="text"
+            readonly
+          />
+          <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.statusDes }}</div>
+            </template>
+          </van-field>
+          <van-field v-model="flowList.currTaskDefinitionName" type="text" label="当前节点:" readonly>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.currTaskDefinitionName }}</div>
+            </template>
+          </van-field>
+          <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.currUserName }}</div>
+            </template>
+          </van-field>
+          <van-field v-model="flowList.userName" type="text" label="发起人:" readonly>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.userName }}</div>
+            </template>
+          </van-field>
+          <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly>
+            <template #input>
+              <div style="text-align: left;margin: 0;">{{ flowList.createdDate }}</div>
+            </template>
+          </van-field>
+        </div>
+        <!--审批流程详情部分开始-->
+        <router-view ref="detail" />
+        <!--审批流程详情部分结束-->
+        <div
+          class="history-detail"
+          v-bind:class="{
+            historyDetail: isShow && isApproval && isStatusDes,
+            historyStatus: isShow && isApproval && !isStatusDes,
+            historyDetails: isShow && !isApproval,
+            historyButton: !isShow
+          }"
+        >
+          <div class="title">历史办理详情</div>
+          <van-steps direction="vertical" :active="historyList.length - 1" active-color="#409EFF">
+            <van-step :key="index" v-for="(item, index) in historyList">
+              <h5>
+                【{{ item.taskName }}】
+                <div v-if="!item.porxy">
+                  {{ item.userName }}
+                  <p>{{ item.remark }}</p>
+                </div>
+                <span v-else>{{ item.proxyUserName }}(待办)</span>
+              </h5>
+              <span>{{ item.createdDate }}</span>
+            </van-step>
+          </van-steps>
+        </div>
         <!-- </scroller> -->
         <div class="approval" v-if="isShow">
           <div v-if="isApproval" class="approval-select">
@@ -140,7 +146,7 @@
               autosize
               label="办理意见"
               type="textarea"
-              maxlength="50"
+              maxlength="2000"
               placeholder="请输入办理意见"
               show-word-limit
             />
@@ -158,33 +164,33 @@
                 v-for="(item, index) in nextSelectOpts"
               ></el-option>
             </el-select>
-             <div class="submitBox">
-            <van-button
-              style="width: 30%"
-              v-if="!isSBtn"
-              round
-              block
-              type="info"
-              native-type="submit"
-            >提交</van-button>
-            <van-button
-              v-if="!isSBtn && isStatusDes"
-              style="width: 30%"
-              @click="counterSign"
-              round
-              block
-              type="info"
-              native-type="submit"
-            >会签</van-button>
-            <van-button
-              style="width: 30%"
-              @click="back"
-              round
-              block
-              type="default"
-              native-type="button"
-            >取消</van-button>
-          </div>
+            <div class="submitBox">
+              <van-button
+                style="width: 30%"
+                v-if="!isSBtn"
+                round
+                block
+                type="info"
+                native-type="submit"
+              >提交</van-button>
+              <van-button
+                v-if="!isSBtn && isStatusDes"
+                style="width: 30%"
+                @click="counterSign"
+                round
+                block
+                type="info"
+                native-type="submit"
+              >会签</van-button>
+              <van-button
+                style="width: 30%"
+                @click="back"
+                round
+                block
+                type="default"
+                native-type="button"
+              >取消</van-button>
+            </div>
           </div>
         </div>
       </van-form>
@@ -193,7 +199,7 @@
     <!-- 固钉 -->
     <div class="affix">
       <van-button v-if="isShow" @click="approvalFnc" class="affix-approval" type="default">审批</van-button>
-      <i class="el-icon-bottom affix-anchor" v-anchor></i>
+      <i class="el-icon-download affix-anchor" v-anchor></i>
     </div>
   </div>
 </template>
@@ -244,8 +250,11 @@ export default {
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }
-    if (this.dataList.currTaskDefinitionName === '受理退回' &&
-      this.dataList.currUserName === this.dataList.userName) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
+    if (
+      this.dataList.currTaskDefinitionName === '受理退回' &&
+      this.dataList.currUserName === this.dataList.userName
+    ) {
+      // 判断当前节点是受理退回并且当前处理人=== 当前发起人
       // 废弃功能
       this.isSBtn = true
     }
@@ -309,7 +318,7 @@ export default {
         var parent = map[item.parent]
         // 好绕啊，如果找到索引，那么说明此项不在顶级当中,那么需要把此项添加到，他对应的父级中
         if (parent) {
-          ; (parent.children || (parent.children = [])).push(item)
+          ;(parent.children || (parent.children = [])).push(item)
         } else {
           // 如果没有在map中找到对应的索引ID,那么直接把 当前的item添加到 val结果集中，作为顶级
           val.push(item)
@@ -354,34 +363,74 @@ export default {
       // 调用接口判断方法
       this.specialFun(values)
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
-      values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
+      values.fileIdList = this.$refs.detail.fileIdList
+        ? this.$refs.detail.fileIdList
+        : []
       // 判断是否是印章保管登记
-      if (this.dataList.currFlowId === 'SealKeepApprove' || this.dataList.currFlowId === 'PurchaseApprove') {
-        values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
-      } else { }
+      if (
+        this.dataList.currFlowId === 'SealKeepApprove' ||
+        this.dataList.currFlowId === 'PurchaseApprove'
+      ) {
+        values.fileIdList = this.$refs.detail.fileIdList
+          ? this.$refs.detail.fileIdList
+          : []
+      } else {
+      }
+      // 判断是否是项目结项
+      if (
+        this.dataList.currFlowId === 'ProjectEndApprove' &&
+        this.dataList.currFlowName === '项目结项'
+      ) {
+        values.attachIds = this.$refs.detail.fileIdList
+          ? this.$refs.detail.fileIdList
+          : []
+        values.personData = this.$refs.detail.personData
+          ? this.$refs.detail.personData
+          : []
+        values.supplierData = this.$refs.detail.supplierData
+          ? this.$refs.detail.supplierData
+          : []
+      } else {
+      }
       // 判断是否是项目立项流程
       if (this.dataList.currFlowId === 'CommonApprove') {
         values.stageData = this.$refs.detail.projpprojectstageinfo
-      } else { }
+      } else {
+      }
       // 判断是否是开发票/收据
-      if (this.dataList.currFlowId === 'ReceiptApprove' && this.dataList.currFlowName === '开发票/收据') {
+      if (
+        this.dataList.currFlowId === 'ReceiptApprove' &&
+        this.dataList.currFlowName === '开发票/收据'
+      ) {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
-      } else { }
+      } else {
+      }
       // 判断是否是采购合同流程
       if (this.dataList.currFlowId === 'PurchaseApprove') {
-        values.payforList = this.$refs.detail.payforList ? this.$refs.detail.payforList : []
-        values.goodsList = this.$refs.detail.goodsList ? this.$refs.detail.goodsList : []
-      } else { }
+        values.payforList = this.$refs.detail.payforList
+          ? this.$refs.detail.payforList
+          : []
+        values.goodsList = this.$refs.detail.goodsList
+          ? this.$refs.detail.goodsList
+          : []
+      } else {
+      }
       // 判断印章管理员
-      if (this.dataList.currFlowId === 'SealKeepApprove' &&
+      if (
+        this.dataList.currFlowId === 'SealKeepApprove' &&
         this.dataList.currUserName === '白建平' &&
         this.dataList.currTaskDefinitionKey === 'SealManager' &&
-        this.dataList.currTaskDefinitionName === '印章管理员') {
-        values.sealTypes = this.$refs.detail.sealTypes ? this.$refs.detail.sealTypes : []
-      } else { }
+        this.dataList.currTaskDefinitionName === '印章管理员'
+      ) {
+        values.sealTypes = this.$refs.detail.sealTypes
+          ? this.$refs.detail.sealTypes
+          : []
+      } else {
+      }
       if (values.file.length <= 0) {
         delete values.file
-      } else { }
+      } else {
+      }
       const data = {
         url: this.url,
         data: values
@@ -432,15 +481,21 @@ export default {
         user.currFlowId === 'ContrReviewApprove'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
-      } else if (this.dataList.currFlowId === 'SealKeepApprove' &&
+      } else if (
+        this.dataList.currFlowId === 'SealKeepApprove' &&
         this.dataList.currUserName === '白建平' &&
         this.dataList.currTaskDefinitionKey === 'SealManager' &&
-        this.dataList.currTaskDefinitionName === '印章管理员') {
+        this.dataList.currTaskDefinitionName === '印章管理员'
+      ) {
         this.url = this.url.slice(0, -10) + '/update' // 白建平并且是印章保管流程
-      } else if (this.dataList.currTaskDefinitionName === '受理退回' &&
-        (this.dataList.currUserName === this.dataList.userName)) { // 判断当前节点是受理退回并且当前处理人=== 当前发起人
+      } else if (
+        this.dataList.currTaskDefinitionName === '受理退回' &&
+        this.dataList.currUserName === this.dataList.userName
+      ) {
+        // 判断当前节点是受理退回并且当前处理人=== 当前发起人
         this.url = this.url.slice(0, -10) + '/update'
-      } else if (user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+      } else if (
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
         user.currFlowId === 'FinanceApprove' &&
         user.currFlowName === '履约保证金'
       ) {
@@ -448,38 +503,73 @@ export default {
       } else if (
         user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
         user.currFlowId === 'FinanceApprove'
-      ) { // 投标保证金
+      ) {
+        // 投标保证金
         this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
-      } else if (this.dataList.currFlowId === 'CommonApprove' &&
+      } else if (
+        this.dataList.currFlowId === 'CommonApprove' &&
         this.dataList.currTaskDefinitionName === '受理退回' &&
-        (this.dataList.currUserName === this.dataList.userName)) {
+        this.dataList.currUserName === this.dataList.userName
+      ) {
         this.url = this.url.slice(0, -10) + '/updateProject' // 项目立项 特殊处理-->判断当前节点是受理退回并且当前处理人=== 当前发起人
-      } else if (this.dataList.currFlowId === 'CommonApprove') {
+      } else if (
+        this.dataList.currFlowId === 'CommonApprove' &&
+        this.dataList.currFlowName === '项目立项'
+      ) {
         this.url = this.url.slice(0, -10) + '/updateProject' // 项目立项接口
-      } else if (this.dataList.currFlowId === 'ContractFileApprove' &&
+      } else if (
+        this.dataList.currFlowId === 'CommonApprove' &&
+        (this.dataList.currFlowName === '项目变更-预算变更' ||
+          this.dataList.currFlowName === '项目变更-PM变更' ||
+          this.dataList.currFlowName === '项目变更-项目完成时间变更')
+      ) {
+        this.url = this.url.slice(0, -12) + '/updateForm' // 项目变更接口
+      } else if (
+        this.dataList.currFlowId === 'ProjectEndApprove' &&
+        this.dataList.currFlowName === '项目结项'
+      ) {
+        this.url = this.url.slice(0, -12) + '/updateEndForm' // 项目结项接口
+      } else if (
+        this.dataList.currFlowId === 'ChangeApprove' &&
+        this.dataList.currFlowName === '项目变更-项目归属变更'
+      ) {
+        this.url = this.url.slice(0, -12) + '/updateForm' // 项目变更-项目归属变更接口
+      } else if (
+        this.dataList.currFlowId === 'ContractFileApprove' &&
         this.dataList.currTaskDefinitionKey !== 'DepotManager' &&
-        this.dataList.currTaskDefinitionName !== '库管') {
+        this.dataList.currTaskDefinitionName !== '库管'
+      ) {
         this.url = this.url.slice(0, -10) + '/busi/comit/task' // 合同存档
-      } else if (this.dataList.currFlowId === 'PaymentApprove' && this.dataList.currFlowName === '付款申请') {
+      } else if (
+        this.dataList.currFlowId === 'PaymentApprove' &&
+        this.dataList.currFlowName === '付款申请'
+      ) {
         this.url = this.url.slice(0, -12) + '/comit/task' // 合同付款接口
-      } else if (this.dataList.currFlowId === 'TransferApprove' &&
+      } else if (
+        this.dataList.currFlowId === 'TransferApprove' &&
         this.dataList.currFlowName === '内部收益划转' &&
-        this.dataList.currTaskDefinitionKey === 'BusiAnalysis') {
+        this.dataList.currTaskDefinitionKey === 'BusiAnalysis'
+      ) {
         this.url = this.url.slice(0, -22) + '/mobileUpdate' // 内部收益划转在运管节 点特殊处理
-      } else if (this.dataList.currFlowId === 'CustApprove' &&
-        this.dataList.currFlowName === '分摊费用') {
+      } else if (
+        this.dataList.currFlowId === 'CustApprove' &&
+        this.dataList.currFlowName === '分摊费用'
+      ) {
         this.url = this.url.slice(0, -16) + '/update/task' // 费用分摊
       } else {
         // 投标保证金接口的特殊处理
-        if (this.url.includes('cashier')) { // 投标保证金的最后一个审批人的特殊处理
+        if (this.url.includes('cashier')) {
+          // 投标保证金的最后一个审批人的特殊处理
           if (this.url.includes('pay')) {
             this.url = this.url.slice(0, -17) + '/mobileUpdate'
           } else {
             this.url = this.url.slice(0, -12) + 'mobileUpdate'
           }
-        } else if (this.url.includes('fundmanagercheck')) { // 投标保函的最后一个审批人的特殊处理
+        } else if (this.url.includes('fundmanagercheck')) {
+          // 投标保函的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -22) + '/mobileUpdate'
-        } else if (this.url.includes('pay')) { // 付业务往来款的最后一个审批人的特殊处理
+        } else if (this.url.includes('pay')) {
+          // 付业务往来款的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -16) + '/mobileUpdate'
         } else {
           // 公共提交接口
@@ -571,7 +661,7 @@ export default {
             // 回退列表中只展现同一流程实例的历史审批，避免主、子流程间退回异常的问题
             if (
               data.processInstanceId ===
-              data.historyList[i].processInstanceId ||
+                data.historyList[i].processInstanceId ||
               data.historyList[i].taskDefinitionKey === 'Accept'
             ) {
               if (
@@ -619,7 +709,7 @@ export default {
       }
       this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
     },
-    handleContent (data) { },
+    handleContent (data) {},
     // 下拉框选择值发生变化时，调用方法
     pullSelect (data) {
       if (this.region.id.includes('back')) {
@@ -652,7 +742,7 @@ export default {
     // 递归获取数据信息
     recursion (signData, newSign = []) {
       if (Array.isArray(signData) && signData.length > 0) {
-        signData.forEach(item => {
+        signData.forEach((item) => {
           if (item.issub) {
             // 对名字进行去重处理
             if (newSign.indexOf(item.label) === -1) {
@@ -674,7 +764,7 @@ export default {
     handleCheckChange (data, checked, indeterminate) {
       console.log(checked)
     },
-    handleCurrentChange (data, node) { },
+    handleCurrentChange (data, node) {},
     back () {
       this.$router.go(-1)
     }
@@ -717,10 +807,10 @@ export default {
 </style>
 <style lang="less">
 // 办理意见样式
-.message-textarea .van-field__control{
-    border: 1px solid #1989fa;
-    border-radius: 5px;
-    padding: 0 4px;
+.message-textarea .van-field__control {
+  border: 1px solid #1989fa;
+  border-radius: 5px;
+  padding: 0 4px;
 }
 .region-select {
   width: 100%;
@@ -747,6 +837,9 @@ div.public-title {
 .detail-header-title {
   position: relative;
   border-bottom: 1px solid #1989fa;
+  .process-title {
+    font-weight: bold;
+  }
 }
 .van-step__circle {
   width: 15px;
@@ -767,6 +860,7 @@ div.public-title {
 }
 div.history-detail {
   background: #fff;
+  border-top: 1px solid #1989fa;
   .title {
     border-top: 1px dashed #f8f8f8;
     padding: 10px 15px;

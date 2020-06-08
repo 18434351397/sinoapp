@@ -122,7 +122,7 @@ export default {
             }
             this.totalPage = res.data.pages
             this.current = res.data.current
-            this.dataList = res.data.records ? res.data.records : []
+            // this.dataList = res.data.records ? res.data.records : []
             this.dataList.forEach(item => {
               item.createdDate = item.createdDate.split('.')[0]
               item.lastModifiedDate = item.lastModifiedDate.split('.')[0]

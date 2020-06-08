@@ -176,7 +176,4 @@ export default {
 .van-toast__loading {
   color: #000;
 }
-.van-tabs__nav {
-  z-index: 9999;
-}
 </style>

@@ -54,57 +54,52 @@ Vue.prototype.debounce = function debounce(fn, wait) {
     timeout = setTimeout(fn, wait)
   }
 }
-// 防抖
-const delay = (function () {
-  let timer = 0
-  return function (callback, ms) {
-    clearTimeout(timer)
-    timer = setTimeout(callback, ms)
-  }
-})()
 
 // 全局封装的下载方法
 Vue.prototype.downLoad = function (data) {
   const u = navigator.userAgent
-  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+  //android终端或者uc浏览器
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
   if (isAndroid) {
-    let dtask = plus.downloader.createDownload(data.url, {});
-    dtask.addEventListener('statechanged', function (d, status) {
-      plus.gallery.save( // 下载保存路径到图库
-        d.filename,
-        function () {
-          switch (d.state) {
-            case 1: // 开始
-              Toast.loading({ message: '加载中...' });
-              break;
-            case 2: // 已连接到服务器
-              Toast.loading({ message: '链接到服务器...' });
-              break;
-            case 3: // 已接收到数据
-              const a = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
-              Toast.loading({ message: a });
-              break;
-            case 4: // 下载完成
+    var dtask = plus.downloader.createDownload(data.url, {})
+    dtask.addEventListener('statechanged', (d, status) => {
+      switch (d.state) {
+        case 1: // 开始
+          Toast('加载中...');
+          break;
+        case 2: // 已连接到服务器
+          Toast('链接到服务器...');
+          break;
+        case 3: // 已接收到数据
+          var a = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
+          Toast(a);
+          break;
+        case 4: // 下载完成
+          // 下载保存路径到图库
+          plus.gallery.save(
+            d.filename,
+            () => {
               Toast.success('下载完成！');
               plus.nativeUI.closeWaiting()
               plus.runtime.openFile(d.filename);
-              break;
-          }
-        })
+            })
+          break;
+      }
     })
+    dtask.start();
   } else {
-    let dtask = plus.downloader.createDownload(data.url, {});
-    dtask.addEventListener('statechanged', function (d, status) {
+    var dtaskIos = plus.downloader.createDownload(data.url, {});
+    dtaskIos.addEventListener('statechanged', (d, status) => {
       switch (d.state) {
         case 1: // 开始
-          Toast.loading({ message: '加载中...' });
+          Toast('加载中...');
           break;
         case 2: // 已连接到服务器
-          Toast.loading({ message: '链接到服务器...' });
+          Toast('链接到服务器...');
           break;
         case 3: // 已接收到数据
-          const a = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
-          Toast.loading({ message: a });
+          var aIos = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
+          Toast(aIos);
           break;
         case 4: // 下载完成
           Toast.success('下载完成！');
@@ -113,43 +108,8 @@ Vue.prototype.downLoad = function (data) {
           break;
       }
     })
+    dtaskIos.start();
   }
-  dtask.start();
-
-  // // 下载方法  通过form表单来发起请求
-  // const form = document.createElement('form')
-  // form.method = 'post'
-  // form.style.display = 'none'
-  // // form.action = window.location.href.split('#')[0] + api.downLoadUrl
-  // // form.action = 'http://172.169.200.207:8082' + api.downLoadUrl
-  // form.action = api.downLoadUrl
-  // const input = document.createElement('input')
-  // input.type = 'hidden'
-  // input.name = 'fileId'
-  // input.value = data.fileId
-  // form.append(input)
-  // document.body.append(form)
-  // form.submit()
-
-  // 普通download  通过a标签下载--暂时不用
-  // downLoad({ fileId: values.fileId }).then(res => {
-  //   // if (res) {
-  //   // const blob = new Blob([res])
-  //   // const fileName = data.fileName
-  //   // if ('download' in document.createElement('a')) { // 非IE下载
-  //   //   const elink = document.createElement('a')
-  //   //   elink.download = fileName
-  //   //   elink.style.display = 'none'
-  //   //   elink.href = URL.createObjectURL(blob)
-  //   //   document.body.appendChild(elink)
-  //   //   elink.click()
-  //   //   URL.revokeObjectURL(elink.href) // 释放URL 对象
-  //   //   document.body.removeChild(elink)
-  //   // } else { // IE10+下载
-  //   //   navigator.msSaveBlob(blob, fileName)
-  //   // }
-  //   // }
-  //   // })
 }
 
 // 转换大小写方法

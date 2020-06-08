@@ -1,7 +1,6 @@
 import axios from 'axios'
 import router from '../router'
 import { removeSession } from './auth'
-import { Toast } from 'vant'
 // import qs from 'qs'
 const serve = axios.create({
   headers: {
@@ -65,7 +64,7 @@ serve.interceptors.response.use(
       return response.data
     }
     // 清理loading
-    Toast.clear()
+    // Toast.clear()
     // 删除session信息
     console.log(response.data.code)
     if (response.data.code) {
@@ -85,7 +84,7 @@ serve.interceptors.response.use(
     }
   },
   error => {
-    Toast.clear()
+    // Toast.clear()
     // if (error) {
     //   router.push('/')
     // }

@@ -65,7 +65,9 @@ export default {
   watch: {
     searchValue: function (old, newV) {
       this.currentPage = 1
-      this.loadData()
+      if (old !== newV) {
+        this.loadData()
+      }
     }
   },
   computed: {
@@ -185,7 +187,6 @@ export default {
   },
 
   beforeDestroy () {
-    this.loadData()
     window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
   }
 }
@@ -215,7 +216,7 @@ div {
     display: flex;
     justify-content: space-between;
     .titleBox_content_title {
-      width: 80%;
+      width: 78%;
       font-size: 20px;
       overflow: hidden;
       white-space: nowrap;

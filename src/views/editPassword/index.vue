@@ -31,10 +31,10 @@
         v-model="password"
         type="password"
         label="密码"
-        name="userToken"
         required
+        name="userToken"
         placeholder="请输入密码"
-        :rules="[{ required: true, message: toastMessage ? toastMessage: '', validator: validator }]"
+        :rules="[{validator: newvalidator, required: true, message: toastMessage ? toastMessage: ''  }]"
       />
       <van-field
         show-word-limit
@@ -71,7 +71,7 @@ export default {
   },
   data () {
     return {
-      toastMessage: '请输入密码',
+      toastMessage: '密码6-16位，必须为字母+数字+特殊字符',
       retoastMessage: '请输入确认密码',
       username: JSON.parse(sessionStorage.getItem('userinfo')).userName ? JSON.parse(sessionStorage.getItem('userinfo')).userName : '',
       userId: JSON.parse(sessionStorage.getItem('userinfo')).id ? JSON.parse(sessionStorage.getItem('userinfo')).id : '',
@@ -88,14 +88,15 @@ export default {
   created () {
   },
   mounted () {
-    this.validator()
     this.revalidator()
+    this.newvalidator()
   },
   methods: {
     // 验证密码规则
-    validator (val) {
+    newvalidator (val) {
       if (val) {
         if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
+          console.log(this.toastMessage)
           this.toastMessage = '密码6-16位，必须为字母+数字+特殊字符'
         }
       }

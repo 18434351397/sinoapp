@@ -35,13 +35,13 @@ const instance = axios.create({
 serve.interceptors.request.use(
   config => {
     console.log(router.currentRoute.path)
-    if (router.currentRoute.path !== '/approval') {
-    } else {
-      Toast.loading({
-        message: '加载中...',
-        forbidClick: true
-      })
-    }
+    // if (router.currentRoute.path !== '/approval') {
+    // } else {
+    //   Toast.loading({
+    //     message: '加载中...',
+    //     forbidClick: true
+    //   })
+    // }
     if (config.method === 'post') {
       // config.data = qs.stringify(config.data)
     }

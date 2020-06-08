@@ -338,7 +338,7 @@
 import { projpprojectupdateformApi } from '../../api/contract'
 export default {
   name: 'index',
-  data() {
+  data () {
     return {
       isBudget: false, // 预算变更字段
       isPm: false, // PM 变更字段
@@ -350,7 +350,7 @@ export default {
       custList: [] // 项目变更-预算变更
     }
   },
-  created() {
+  created () {
     if (this.dataList.currFlowName === '项目变更-预算变更') {
       this.isBudget = true
     } else if (this.dataList.currFlowName === '项目变更-PM变更') {

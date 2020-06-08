@@ -32,8 +32,8 @@ module.exports = {
 
       '/admin': {
         // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.100.126:8082',
-        target: 'http://172.169.200.207:8082',
+        target: 'http://172.169.100.126:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://192.168.18.26:8095',
         // ws: true,
@@ -45,9 +45,9 @@ module.exports = {
       '///fileupload': {
         // target: 'http://172.169.1.42:8095',
         // target: 'http://172.169.100.121:8082',
-        // target: 'http://172.169.100.126:8082',
+        target: 'http://172.169.100.126:8082',
         // target: 'http://218.241.175.243:8082',
-        target: 'http://172.169.200.207:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://192.168.18.26:8095',
         // ws: true,
@@ -59,9 +59,9 @@ module.exports = {
       '/group1': {
         // target: 'http://172.169.1.42:8095',
         // target: 'http://172.169.100.121:8082',
-        // target: 'http://172.169.100.126:8082'
+        target: 'http://172.169.100.126:8082',
         // target: 'http://218.241.175.246:8082',
-        target: 'http://172.169.200.207:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://192.168.18.26:8095',
         // ws: true,
@@ -72,28 +72,28 @@ module.exports = {
       },
       '/app': {
         // target: 'http://172.169.1.42:8095',
-        target: 'http://172.169.200.207:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
-        // target: 'http://172.169.100.126:8082',
+        target: 'http://172.169.100.126:8082',
         // target: 'http://192.168.18.26:8095',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
         // target: 'http://172.169.1.42:8095',
-        target: 'http://172.169.200.207:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://192.168.18.26:8095',
-        // target: 'http://172.169.100.126:8082',
+        target: 'http://172.169.100.126:8082',
         // ws: true,
         changeOrigin: true
       },
       '/toLogin': {
-        target: 'http://172.169.200.207:8082',
+        // target: 'http://172.169.200.207:8082',
         // target: 'http://192.168.18.26:8095',
         // target: 'http://172.169.2.235:8095',
         // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.100.126:8082',
+        target: 'http://172.169.100.126:8082',
         // ws: true,
         changeOrigin: true
       }

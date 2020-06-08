@@ -51,4 +51,7 @@ export default {
     top: 0;
     z-index: 999;
   }
+  >>>.van-nav-bar__arrow {
+    font-size: 20px;
+  }
 </style>

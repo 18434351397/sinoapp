@@ -878,30 +878,35 @@ div.history-detail {
 }
 // 固钉样式
 div.affix {
+  color: #fff;
   .affix-approval {
+    background: rgba(25, 137, 250, 0.65);
+    z-index: 999;
     display: block;
     position: fixed;
     right: 5%;
-    z-index: 999;
     bottom: 18em;
     cursor: pointer;
+    color: #fff;
     width: 60px;
     height: 60px;
+    box-shadow: 0px 0px 5px 1px #1989faa6;
     border-radius: 50%;
   }
   .affix-anchor {
+    z-index: 999;
     display: block;
     position: fixed;
     right: 5%;
-    z-index: 999;
-    bottom: 7.7em;
+    bottom: 7.5em;
     cursor: pointer;
     width: 60px;
     height: 60px;
     text-align: center;
     border-radius: 50%;
-    background: #fff;
-    border: 1px solid #ebedf0;
+    background: rgba(25, 137, 250, 0.65);
+    box-shadow: 0px 0px 5px 1px #1989faa6;
+    border: 1px solid #f5f5f5;
     line-height: 60px;
     font-size: 24px;
   }

@@ -321,7 +321,7 @@ export default {
         this.scroll = document.documentElement.scrollTop || document.body.scrollTop
         const offsetY = document.querySelector('.history-detail').offsetTop
         const top = this.scroll - offsetY
-        if (top >= -600) {
+        if (top >= -720) {
           // 到一定位置之后
           this.isShow = false
           this.isShowAgree = true

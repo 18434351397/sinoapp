@@ -198,7 +198,7 @@
       </template>
 </van-field>
     </div>
-    <div class="title">金额计算</div>
+    <div class="title title-content">金额计算</div>
     <van-field
       type="text"
       name="rGoods"

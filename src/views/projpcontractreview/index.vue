@@ -237,7 +237,7 @@
       </van-field>
     </div>
 
-    <div class="title">金额计算</div>
+    <div class="title title-content">金额计算</div>
     <van-field
       type="text"
       v-if="isCustPro"
@@ -658,7 +658,7 @@
     background: #fff;" v-if="isCustPro">
       <van-button round block type="primary" @click="taxes($event, contractList.tax)">计算</van-button>
     </div>
-    <div class="title">其他</div>
+    <div class="title title-content">其他</div>
     <van-field type="text" v-model="contractList.linkman" label="客户联系人" colon readonly>
       <template #input>
         <div style="text-align: left;margin: 0;">{{contractList.linkman}}</div>

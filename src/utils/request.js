@@ -1,6 +1,7 @@
 import axios from 'axios'
 import router from '../router'
 import { removeSession } from './auth'
+import { Toast } from 'vant'
 // import qs from 'qs'
 const serve = axios.create({
   headers: {
@@ -68,9 +69,12 @@ serve.interceptors.response.use(
     // 删除session信息
     console.log(response.data.code)
     if (response.data.code === '200') {
-      this.$toast({
+      Toast({
+        closeOnClick: true,
+        closeOnClickOverlay: true,
+        duration: 30000,
         message: '账号已在其他设备登录，请重新登录! \n 如非本人操作。建议尽快修改密码！',
-        forbidClick: true
+        forbidClick: false
       })
       router.push('/')
       removeSession('userinfo')

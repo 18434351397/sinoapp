@@ -7,13 +7,13 @@
         </van-search>
       </van-sticky>
       <van-tab title="待我处理">
-        <todolist ref="todolist" v-if="tabIndex === 0"></todolist>
+        <todolist ref="todolist" v-if="active === 0"></todolist>
       </van-tab>
       <van-tab title="我已办的">
-        <donelist ref="donelist" v-if="tabIndex === 1"></donelist>
+        <donelist ref="donelist" v-if="active === 1"></donelist>
       </van-tab>
       <van-tab title="我发起的">
-        <launchlist ref="launchlist" v-if="tabIndex === 2"></launchlist>
+        <launchlist ref="launchlist" v-if="active === 2"></launchlist>
       </van-tab>
     </van-tabs>
   </div>
@@ -34,27 +34,36 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userinfo'
+      'userinfo',
+      'active'
     ])
   },
-  created () { },
+  created () {
+  },
+  mounted () {
+  },
   watch: {
     searchValue (old, newV) {
       this.ththrottle(this.handleSearch(), 1000)
       this.$store.dispatch('setsearchValue', this.searchValue)
+    },
+    active (newV, oldV) {
+      console.log(newV + '---' + oldV)
+      console.log(this.active)
     }
   },
   data () {
     return {
       searchValue: '',
       current: 1,
-      active: 0,
+      // active: 0,
       tabIndex: 0,
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }
   },
   methods: {
     change (event) {
+      this.$store.dispatch('setactive', event)
       this.tabIndex = event
       this.searchValue = ''
       if (event === 0) {

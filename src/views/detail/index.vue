@@ -31,7 +31,6 @@
         </div>
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit">
-        <!-- <scroller height="100%" :on-infinite="infinite" ref="my_scroller"> -->
         <div class="detail-header-title">
           <van-field
             name="formTitle"
@@ -124,7 +123,6 @@
             </van-step>
           </van-steps>
         </div>
-        <!-- </scroller> -->
         <div class="approval" v-if="isShowAgree">
           <div v-if="isApproval" class="approval-select">
             <div
@@ -193,13 +191,14 @@
             </div>
           </div>
         </div>
+        <footer class="footer"></footer>
       </van-form>
     </div>
     <van-toast id="van-toast" />
     <!-- 固钉 -->
     <div class="affix">
       <van-button v-if="isShow" @click="approvalFnc" class="affix-approval" type="default">审批</van-button>
-      <i class="el-icon-download affix-anchor" v-if="isToEnd"  v-anchor></i>
+      <i class="el-icon-download affix-anchor" v-if="isToEnd"  @click="inserted"></i>
     </div>
   </div>
 </template>
@@ -254,7 +253,6 @@ export default {
     }
   },
   created () {
-    console.log(this.active)
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }
@@ -269,7 +267,7 @@ export default {
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
     // 判断是否显示底部功能
-    if (this.dataList.status === '1') {
+    if (this.active === 0) {
       this.isShow = true
       this.isShowAgree = true
     } else {
@@ -308,8 +306,18 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
+    // 一键到底
+    inserted () {
+      if (this.active === 0) {
+        document.querySelector('.history-detail').className = 'history-detail historyDetail'
+        document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
+      } else {
+        document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
+      }
+    },
+    // 滚动检测
     handleScroll () {
-      if (this.dataList.status === '1') {
+      if (this.active === 0) {
         this.scroll = document.documentElement.scrollTop || document.body.scrollTop
         const offsetY = document.querySelector('.history-detail').offsetTop
         const top = this.scroll - offsetY
@@ -343,7 +351,6 @@ export default {
       this.isApproval = !this.isApproval
       this.isShowAgree = !this.isShowAgree
     },
-    // infinite () { console.log('上拉') },
     // 处理树的数据
     toTree (data) {
       // 删除 所有 children,以防止多次调用
@@ -828,7 +835,7 @@ export default {
   left: 0;
   display: flex;
   justify-content: space-around;
-  padding: 8px 0 16px;
+  padding: 16px 0 20px;
   background: #fff;
 }
 
@@ -877,7 +884,7 @@ div.public-title {
   z-index: 999;
   box-shadow: 0px 1px 1px 2px #1989fa;
   .approval-select {
-    margin-bottom: 74px;
+    padding-bottom: 86px;
     width: 100%;
   }
 }
@@ -897,13 +904,13 @@ div.public-title {
 }
 // 历史办理详情样式
 .historyDetail {
-  padding-bottom: 285px;
+  padding-bottom: 295px;
 }
 .historyDetails {
   padding-bottom: 16px;
 }
 .historyStatus {
-  padding-bottom: 250px;
+  padding-bottom: 260px;
 }
 div.history-detail {
   background: #fff;

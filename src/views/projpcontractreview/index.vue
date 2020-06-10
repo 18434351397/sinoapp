@@ -220,7 +220,7 @@
         <el-table-column label="对方单位" prop="opposingUnit"></el-table-column>
         <el-table-column label="我方单位" prop="ourUnit"></el-table-column>
         <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
-        <el-table-column label="计入科目" prop="accountSubject"></el-table-column>
+        <el-table-column label="计入科目" prop="accountSubjectText"></el-table-column>
         <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
         <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
         <el-table-column label="是否有验收报告" prop="hasReport"></el-table-column>

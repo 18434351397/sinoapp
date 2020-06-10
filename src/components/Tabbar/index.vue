@@ -1,6 +1,6 @@
 <template>
     <div>
-      <van-tabbar style="height: 60px; padding: 0px 0 8px;" safe-area-inset-bottom v-model="active" @change="onChange">
+      <van-tabbar style="height: 60px;" safe-area-inset-bottom v-model="active" @change="onChange">
         <van-tabbar-item to="/approval" replace icon="records">审批</van-tabbar-item>
         <van-tabbar-item to="/my" replace icon="friends-o">我的</van-tabbar-item>
       </van-tabbar>

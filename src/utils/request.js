@@ -68,7 +68,7 @@ serve.interceptors.response.use(
     // 删除session信息
     console.log(response.data.code)
     if (response.data.code === '200') {
-      Toast({
+      this.$toast({
         message: '账号已在其他设备登录，请重新登录! \n 如非本人操作。建议尽快修改密码！',
         forbidClick: true
       })

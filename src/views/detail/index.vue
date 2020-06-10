@@ -206,12 +206,16 @@
 <script>
 import { flowForm, flowFormUpdate, getOrgTree } from '../../api/flowfrom'
 import NavBar from '@/components/Navbar'
+import { mapGetters } from 'vuex'
 import { Dialog, Toast } from 'vant'
 
 export default {
   name: 'index',
   components: {
     NavBar
+  },
+  computed: {
+    ...mapGetters(['active'])
   },
   data () {
     return {
@@ -250,6 +254,7 @@ export default {
     }
   },
   created () {
+    console.log(this.active)
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }

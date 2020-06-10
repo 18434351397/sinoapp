@@ -115,7 +115,7 @@ export default {
     left: 0;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 8px 0 16px;
     background: #fff;
   }
 </style>

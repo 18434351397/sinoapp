@@ -46,10 +46,6 @@ export default {
     searchValue (old, newV) {
       this.ththrottle(this.handleSearch(), 1000)
       this.$store.dispatch('setsearchValue', this.searchValue)
-    },
-    active (newV, oldV) {
-      console.log(newV + '---' + oldV)
-      console.log(this.active)
     }
   },
   data () {

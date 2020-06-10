@@ -40,7 +40,7 @@ export default {
   .van-nav-bar .van-icon {
     color: #161616;
   }
-  .van-nav-bar__title{
+  >>>.van-nav-bar__title{
     font-size: 18px;
   }
   .handle{
@@ -54,13 +54,14 @@ export default {
   >>>.van-nav-bar__arrow {
     font-size: 20px;
   }
+
 </style>
 <style lang="less">
 div.van-nav-bar {
     padding-top: 1.5em;
   div.van-nav-bar__left{
     align-items: baseline;
-    top: 35px;
+    top: 38px;
     i.van-icon {
       font-size: 24px;
     }

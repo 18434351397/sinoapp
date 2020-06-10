@@ -5,8 +5,8 @@
 */
 
 <template>
-  <div>
-    <div style="padding: 10px 15px;text-align: left;background-color: #fff;">客户申请信息</div>
+  <div class="app-title">
+    <div class="title" style="padding: 10px 15px;text-align: left;background-color: #fff;">客户申请信息</div>
     <van-field
       name="username"
       v-model="custList.userName"

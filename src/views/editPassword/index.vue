@@ -71,7 +71,7 @@ export default {
   },
   data () {
     return {
-      toastMessage: '密码6-16位，必须为字母+数字+特殊字符',
+      toastMessage: '密码安全性较低，6-16位，务必包含字符、数字、特殊符号！',
       retoastMessage: '请输入确认密码',
       username: JSON.parse(sessionStorage.getItem('userinfo')).userName ? JSON.parse(sessionStorage.getItem('userinfo')).userName : '',
       userId: JSON.parse(sessionStorage.getItem('userinfo')).id ? JSON.parse(sessionStorage.getItem('userinfo')).id : '',
@@ -97,7 +97,7 @@ export default {
       if (val) {
         if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
           console.log(this.toastMessage)
-          this.toastMessage = '密码6-16位，必须为字母+数字+特殊字符'
+          this.toastMessage = '密码安全性较低，6-16位，务必包含字符、数字、特殊符号！'
         }
       }
       return /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val)
@@ -105,7 +105,7 @@ export default {
     revalidator (val) {
       if (/(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val) === false) {
         console.log(this.retoastMessage)
-        this.retoastMessage = '密码6-16位，必须为字母+数字+特殊字符'
+        this.retoastMessage = '密码安全性较低，6-16位，务必包含字符、数字、特殊符号！'
       }
       return /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{0,16}/.test(val)
     },

@@ -4,8 +4,8 @@
 *@title index
 */
 <template>
-  <div>
-    <div style="padding: 10px 15px;text-align: left;background-color: #fff;">客户申请信息</div>
+  <div class="app-title">
+    <div class="title">客户申请信息</div>
     <van-field name="username" v-model="custList.name" type="text" label="客户名称:" readonly>
       <template #input>
         <div style="text-align: left;margin: 0;">{{custList.name}}</div>

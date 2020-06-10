@@ -4,8 +4,8 @@
 *@title index
 */
 <template>
-  <div>
-    <div style="padding: 10px 15px;text-align: left;background-color: #fff;">报销发起信息</div>
+  <div class="app-title">
+    <div class="title" style="padding: 10px 15px;text-align: left;background-color: #fff;">报销发起信息</div>
     <van-field
       style="display: none;"
       name="meetingUsers"
@@ -179,7 +179,7 @@
     </van-field>
     <div>
       <div
-        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+        class="table-title"
       >报销明细详情</div>
       <el-table border :data="costDetailList" style="width: 100%">
         <!--        <el-table-column-->
@@ -229,7 +229,7 @@
     </div>
     <div>
       <div
-        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+        class="table-title"
       >清借款列表</div>
       <el-table border :data="feesReimbursementLoanVOList" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
@@ -260,7 +260,7 @@
     </div>
     <div>
       <div
-        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+        class="table-title"
       >附件列表</div>
       <el-table border :data="file" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>

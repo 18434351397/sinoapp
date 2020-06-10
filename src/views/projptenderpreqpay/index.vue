@@ -4,8 +4,8 @@
 *@title projptenderpreqpay
 */
 <template>
-  <div>
-    <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">付业务往来款信息</div>
+  <div class="app-title">
+    <div class="title" style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">付业务往来款信息</div>
     <van-field
       name="recordRecordNo"
       v-model="custList.recordRecordNo"
@@ -282,7 +282,7 @@
       </template>
     </van-field>
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">附件列表</div>
+      <div class="table-title">附件列表</div>
       <el-table
         border
         :data="projptenderList"

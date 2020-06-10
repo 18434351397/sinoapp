@@ -74,6 +74,7 @@
       </template>
     </van-field>
     <van-field
+      v-if="dataList.currTaskDefinitionKey === 'Accountant'"
       name="employeeType"
       readonly
       clickable
@@ -94,6 +95,7 @@
       />
     </van-popup>
     <van-field
+      v-if="dataList.currTaskDefinitionKey === 'Accountant'"
       readonly
       clickable
       name="capitalizedProject"
@@ -113,7 +115,7 @@
         @confirm="isshowcapitalizedProject"
       />
     </van-popup>
-    <van-field name="cou" v-model="custList.cou" type="text" label="记字:">
+    <van-field v-if="dataList.currTaskDefinitionKey === 'Accountant'" name="cou" v-model="custList.cou" type="text" label="记字:">
       <template #input>
         <div style="text-align: left;margin: 0;">{{custList.cou}}</div>
       </template>

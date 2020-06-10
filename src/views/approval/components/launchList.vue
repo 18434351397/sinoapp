@@ -139,7 +139,6 @@ export default {
       }
     },
     toDetail (data) {
-      console.log(data)
       data.searchType = this.searchType
       data.onlyId = 'Done'
       const path = data.url.split('/')[3]
@@ -198,7 +197,7 @@ div {
 .todoListBox {
   height: auto;
   background: #f8f8f8;
-  padding: 10px 10px 70px;
+  padding: 10px 10px 90px;
   box-sizing: border-box;
 }
 

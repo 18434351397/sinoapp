@@ -4,8 +4,8 @@
 *@title index
 */
 <template>
-  <div>
-    <div style="padding: 10px 15px;text-align: left;background-color: #fff;">个人借款信息</div>
+  <div class="app-title">
+    <div class="title">个人借款信息</div>
     <van-field
       style="display: none;"
       name="meetingUsers"

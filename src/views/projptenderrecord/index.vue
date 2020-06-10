@@ -4,8 +4,8 @@
 *@title index
 */
 <template>
-  <div>
-    <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">投标备案信息</div>
+  <div class="app-title">
+    <div class="title">投标备案信息</div>
     <van-field
       name="bizId"
       v-model="custList.bizId"
@@ -238,7 +238,7 @@
       </template>
 </van-field>
     <div>
-      <div style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;">保证金收付情况</div>
+      <div class="table-title">保证金收付情况</div>
       <el-table
         border
         :data="situation"

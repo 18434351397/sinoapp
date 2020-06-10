@@ -4,9 +4,9 @@
 *@title index
 */
 <template>
-  <div>
+  <div class="app-title">
     <div
-      style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+      class="title"
     >供应商信息</div>
     <van-field name="name" v-model="custList.name" type="text" label="供应商名称:" readonly>
       <template #input>
@@ -157,7 +157,7 @@
     </van-field>
     <div>
       <div
-        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+        class="table-title"
       >合作信息</div>
       <el-table border :data="cooperativeList" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
@@ -168,6 +168,7 @@
     </div>
     <div>
       <div
+        class="table-title"
         style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
       >资质详情</div>
       <el-table border :data="qualificationsList" style="width: 100%">
@@ -186,7 +187,7 @@
     </div>
     <div>
       <div
-        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+        class="table-title"
       >附件列表</div>
       <el-table border :data="attachmentVOList" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>

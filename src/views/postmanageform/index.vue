@@ -4,8 +4,9 @@
 *@title index
 */
 <template>
-  <div>
-    <div style="padding: 10px 15px;text-align: left;background-color: #fff;">客户申请信息</div>
+  <div class="app-title">
+    <div class="title"
+    >客户申请信息</div>
     <van-field name="postCode" v-model="custList.postCode" type="text" label="发文编号:" readonly>
       <template #input>
         <div style="text-align: left;margin: 0;">{{custList.postCode}}</div>
@@ -100,7 +101,7 @@
     </van-field>
     <div>
       <div
-        style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
+        class="table-title"
       >附件列表</div>
       <el-table border :data="postmanageList" style="width: 100%">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>

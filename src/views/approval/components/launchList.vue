@@ -1,6 +1,6 @@
 <template>
   <div id="launchList">
-    <div class="todoListBox" style="padding-bottom: 40px;" v-show="dataList.length">
+    <div class="todoListBox" v-show="dataList.length">
       <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
           <div class="titleBox_content_title" style>{{item.formTitle}}</div>
@@ -197,7 +197,7 @@ div {
 .todoListBox {
   height: auto;
   background: #f8f8f8;
-  padding: 10px 10px 90px;
+  padding: 10px 10px 70px;
   box-sizing: border-box;
 }
 

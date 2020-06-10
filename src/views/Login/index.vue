@@ -22,14 +22,14 @@
                   <p class="form_val_title">账号</p>
                   <div>
                     <p class="username"></p>
-                    <input v-focus @focus="userFocus(1)" @blur="userBlur(1)" type="text" :placeholder="userAccount ? '' :userToast"  v-model="userAccount" id="userAccount" class="inputs">
+                    <input style="caret-color:#fff;" v-focus @focus="userFocus(1)" @blur="userBlur(1)" type="text" :placeholder="userAccount ? '' :userToast"  v-model="userAccount" id="userAccount" class="inputs">
                   </div>
                 </li>
                 <li>
                   <p class="form_val_title">密码</p>
                   <div>
                     <p class="pasword"></p>
-                    <input type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
+                    <input style="caret-color:#fff;" type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
                   </div>
                 </li>
                 <!-- <li>

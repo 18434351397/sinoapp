@@ -4,7 +4,7 @@
       <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
           <div class="titleBox_content_title" style>{{item.formTitle}}</div>
-          <div style="width: 64px;">{{item.statusDes}}</div>
+          <div style="width: 64px;text-align: right;">{{item.statusDes}}</div>
         </div>
         <div class="flowMessage">
           <div class="flowMessage_box">
@@ -139,7 +139,6 @@ export default {
       }
     },
     toDetail (data) {
-      console.log(data)
       data.searchType = this.searchType
       data.onlyId = 'Done'
       const path = data.url.split('/')[3]
@@ -198,8 +197,7 @@ div {
 .todoListBox {
   height: auto;
   background: #f8f8f8;
-  margin-bottom: 70px;
-  padding: 10px;
+  padding: 10px 10px 90px;
   box-sizing: border-box;
 }
 

@@ -47,10 +47,10 @@ Vue.prototype.ththrottle = function (func, delay) {
     }
   }
 }
-Vue.prototype.debounce = function debounce(fn, wait) {
+Vue.prototype.debounce = function debounce (fn, wait) {
   var timeout = null
   return function () {
-    if (timeout !== null) clearTimeout(timeout)
+    if (timeout !== null)clearTimeout(timeout)
     timeout = setTimeout(fn, wait)
   }
 }
@@ -102,10 +102,10 @@ Vue.prototype.downLoad = function (data) {
           Toast(aIos);
           break;
         case 4: // 下载完成
-          Toast.success('下载完成！');
+          Toast.success('下载完成！')
           plus.nativeUI.closeWaiting()
-          plus.runtime.openFile(d.filename);
-          break;
+          plus.runtime.openFile(d.filename)
+          break
       }
     })
     dtaskIos.start();
@@ -113,7 +113,7 @@ Vue.prototype.downLoad = function (data) {
 }
 
 // 转换大小写方法
-Vue.prototype.intToChinese = function intToChinese(n) {
+Vue.prototype.intToChinese = function intToChinese (n) {
   var fraction = ['角', '分']
   var digit = [
     '零', '壹', '贰', '叁', '肆',

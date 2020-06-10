@@ -9,14 +9,15 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
 // import './mock/index'
 
-Vue.directive('anchor', {
-  inserted: function (el) {
-    el.onclick = function () {
-      document.documentElement.scrollTop = document.querySelector('.history-detail').offsetTop
-      document.body.scrollTop = document.querySelector('.history-detail').offsetTop
-    }
-  }
-})
+// Vue.directive('anchor', {
+//   inserted: function (el) {
+//     el.onclick = function () {
+//       console.log(this.active)
+//       document.querySelector('.history-detail').className = 'history-detail historyDetail'
+//       document.querySelector('.footer').scrollIntoView({behavior: "smooth"})
+//     }
+//   }
+// })
 Vue.use(Vant)
 Vue.use(Select)
 Vue.use(Option)

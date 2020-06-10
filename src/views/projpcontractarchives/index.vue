@@ -312,6 +312,10 @@ export default {
     })
   },
   methods: {
+    handleClick (data) {
+      console.log(data.url)
+      this.downLoad(data)
+    },
     // 处理序号
     indexMethods (index) {
       return index + 1

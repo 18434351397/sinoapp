@@ -173,7 +173,7 @@ export default {
     left: 0;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 16px 0 20px;
     background: #fff;
   }
 </style>

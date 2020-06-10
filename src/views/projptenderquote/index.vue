@@ -178,7 +178,7 @@
         <el-table-column label="预计收/付款时间" prop="paymentDate"></el-table-column>
         <el-table-column label="预计收/付款金额" prop="paymentAmount"></el-table-column>
         <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
-        <el-table-column label="计入科目" prop="accountSubject"></el-table-column>
+        <el-table-column label="计入科目" prop="accountSubjectText"></el-table-column>
         <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
         <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
         <el-table-column label="款项名称" prop="paymentName"></el-table-column>
@@ -198,7 +198,7 @@
       </template>
 </van-field>
     </div>
-    <div class="title">金额计算</div>
+    <div class="title title-content">金额计算</div>
     <van-field
       type="text"
       name="rGoods"

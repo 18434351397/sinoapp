@@ -31,7 +31,6 @@
         </div>
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit">
-        <!-- <scroller height="100%" :on-infinite="infinite" ref="my_scroller"> -->
         <div class="detail-header-title">
           <van-field
             name="formTitle"
@@ -103,10 +102,10 @@
         <div
           class="history-detail"
           v-bind:class="{
-            historyDetail: isShow && isApproval && isStatusDes,
-            historyStatus: isShow && isApproval && !isStatusDes,
-            historyDetails: isShow && !isApproval,
-            historyButton: !isShow
+            historyDetail: isShowAgree && isApproval && isStatusDes,
+            historyStatus: isShowAgree && isApproval && !isStatusDes,
+            historyDetails: isShowAgree && !isApproval,
+            historyButton: !isShowAgree
           }"
         >
           <div class="title">历史办理详情</div>
@@ -124,8 +123,7 @@
             </van-step>
           </van-steps>
         </div>
-        <!-- </scroller> -->
-        <div class="approval" v-if="isShow">
+        <div class="approval" v-if="isShowAgree">
           <div v-if="isApproval" class="approval-select">
             <div
               style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
@@ -193,13 +191,14 @@
             </div>
           </div>
         </div>
+        <footer class="footer"></footer>
       </van-form>
     </div>
     <van-toast id="van-toast" />
     <!-- 固钉 -->
     <div class="affix">
       <van-button v-if="isShow" @click="approvalFnc" class="affix-approval" type="default">审批</van-button>
-      <i class="el-icon-download affix-anchor" v-anchor></i>
+      <i class="el-icon-download affix-anchor" v-if="isToEnd"  @click="inserted"></i>
     </div>
   </div>
 </template>
@@ -225,10 +224,12 @@ export default {
       signText: '', // 会签人员名称
       isApproval: false, // 是否显示审批功能
       isStatusDes: true, // 当前流程是否是会签
+      isToEnd: true, // 一键到底
+      isShow: true, // 是否展示底部按钮
+      isShowAgree: true, // 判断当前是否是代办流程
       treeList: [],
       isSBtn: false, // 废弃和会签按钮
       show: false,
-      isShow: true, // 是否展示底部按钮
       region: {
         id: ''
       },
@@ -246,12 +247,12 @@ export default {
         children: 'children',
         label: 'label'
       },
+      scroll: '',
       hasProcessByBusiAnalysis: false,
       backSelectOpts: []
     }
   },
   created () {
-    console.log(this.active)
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }
@@ -266,10 +267,12 @@ export default {
     this.message = this.radio === '1' ? '同意' : '不同意'
     const url = '/' + this.dataList.searchType + '/' + this.dataList.id
     // 判断是否显示底部功能
-    if (this.dataList.onlyId === 'Done') {
-      this.isShow = false
-    } else {
+    if (this.active === 0) {
       this.isShow = true
+      this.isShowAgree = true
+    } else {
+      this.isShow = false
+      this.isShowAgree = false
     }
     flowForm(url).then((res) => {
       if (res) {
@@ -299,12 +302,55 @@ export default {
       }
     }
   },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
   methods: {
+    // 一键到底
+    inserted () {
+      if (this.active === 0) {
+        document.querySelector('.history-detail').className = 'history-detail historyDetail'
+        document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
+      } else {
+        document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
+      }
+    },
+    // 滚动检测
+    handleScroll () {
+      if (this.active === 0) {
+        this.scroll = document.documentElement.scrollTop || document.body.scrollTop
+        const offsetY = document.querySelector('.history-detail').offsetTop
+        const top = this.scroll - offsetY
+        if (top >= -720) {
+          // 到一定位置之后
+          this.isShow = false
+          this.isShowAgree = true
+          this.isApproval = true
+          this.isToEnd = false
+        } else {
+          this.isShow = true
+          this.isApproval = false
+          this.isShowAgree = false
+          this.isToEnd = true
+        }
+      } else {
+        this.scroll = document.documentElement.scrollTop || document.body.scrollTop
+        const offsetY = document.querySelector('.history-detail').offsetTop
+        const top = this.scroll - offsetY
+        if (top >= -600) {
+          this.isShow = false
+          this.isToEnd = false
+        } else {
+          this.isShow = false
+          this.isToEnd = true
+        }
+      }
+    },
     // 显示审批
     approvalFnc () {
       this.isApproval = !this.isApproval
+      this.isShowAgree = !this.isShowAgree
     },
-    // infinite () { console.log('上拉') },
     // 处理树的数据
     toTree (data) {
       // 删除 所有 children,以防止多次调用
@@ -773,6 +819,9 @@ export default {
     back () {
       this.$router.go(-1)
     }
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -786,7 +835,7 @@ export default {
   left: 0;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 16px 0 20px;
   background: #fff;
 }
 
@@ -835,7 +884,7 @@ div.public-title {
   z-index: 999;
   box-shadow: 0px 1px 1px 2px #1989fa;
   .approval-select {
-    margin-bottom: 70px;
+    padding-bottom: 86px;
     width: 100%;
   }
 }
@@ -855,13 +904,13 @@ div.public-title {
 }
 // 历史办理详情样式
 .historyDetail {
-  padding-bottom: 285px;
+  padding-bottom: 295px;
 }
 .historyDetails {
   padding-bottom: 16px;
 }
 .historyStatus {
-  padding-bottom: 250px;
+  padding-bottom: 260px;
 }
 div.history-detail {
   background: #fff;

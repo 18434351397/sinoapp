@@ -5,9 +5,7 @@
 */
 <template>
   <div class="app-title">
-    <div
-      class="title"
-    >供应商信息</div>
+    <div class="title">供应商信息</div>
     <van-field name="name" v-model="custList.name" type="text" label="供应商名称:" readonly>
       <template #input>
         <div style="text-align: left;margin: 0;">{{custList.name}}</div>

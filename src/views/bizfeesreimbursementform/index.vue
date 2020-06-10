@@ -385,6 +385,10 @@ export default {
         })
       })
     },
+    handleClick (data) {
+      console.log(data.url)
+      this.downLoad(data)
+    },
     // 处理表格的序号的方法
     indexMethods (index) {
       return index + 1

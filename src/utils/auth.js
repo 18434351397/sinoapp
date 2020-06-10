@@ -99,7 +99,7 @@ Vue.prototype.downLoad = function (data) {
           break;
         case 3: // 已接收到数据
           var aIos = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
-          Toast(aIos);
+          Toast.loading({ message : aIos });
           break;
         case 4: // 下载完成
           Toast.success('下载完成！')

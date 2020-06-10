@@ -26,9 +26,12 @@ div.app-title {
     font-size: 16px;
     padding: 10px 15px;
   }
+  div.title-content {
+    border-top: 1px solid #e8e4e4;
+  }
   div.table-title {
     font-size: 16px;
-    border-top: 1px dashed #f8f8f8;
+    border-top: 1px solid #e8e4e4;
     padding: 10px 15px;
     text-align: left;
     background-color: #fff;

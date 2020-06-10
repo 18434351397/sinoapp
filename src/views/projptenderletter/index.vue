@@ -5,8 +5,7 @@
 */
 <template>
   <div class="app-title">
-    <div
-      class="title"></div>
+    <div class="title">投标保函信息</div>
     <van-field
       name="ownDeptId"
       style="display: none;"

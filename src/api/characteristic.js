@@ -3,8 +3,8 @@ const api = {
   sealapproveformList: '/app/form/sealapproveform/detail', // 印信使用审批
   sealpreservationformList: '/app/form/sealpreservationform/detail', // 印章保管
   bizcompanychangeformList: '/app/form/bizcompanychangeform/detail', // 分子公司注册变更
-  sealdestoryformList: '/app/form/sealdestoryform/detail', // 分子公司注册变更
-  postmanageformList: '/app/form/postmanageform/detail' // 分子公司注册变更
+  sealdestoryformList: '/app/form/sealdestoryform/detail', // 印章销毁
+  postmanageformList: '/app/form/postmanageform/detail' // 发文管理
 }
 
 // 印信使用审批

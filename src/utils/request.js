@@ -73,7 +73,7 @@ serve.interceptors.response.use(
         closeOnClick: true,
         closeOnClickOverlay: true,
         duration: 30000,
-        message: '账号已在其他设备登录，请重新登录! \n 如非本人操作。建议尽快修改密码！',
+        message: '账号已在其他设备登录，请重新登录! \n 如非本人操作，建议尽快修改密码！',
         forbidClick: false
       })
       router.push('/')

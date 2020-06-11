@@ -759,6 +759,8 @@ export default {
       } else {
       }
       this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
+      console.log(this.nextSelectOpts)
+      this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
     },
     handleContent (data) {},
     // 下拉框选择值发生变化时，调用方法

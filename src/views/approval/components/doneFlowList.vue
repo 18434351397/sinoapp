@@ -152,6 +152,7 @@ export default {
       }, 2000)
     },
     toDetail (data) {
+      this.$store.dispatch('setsearchValue', '')
       data.searchType = this.searchType
       data.onlyId = 'Done'
       const path = data.url.split('/')[3]
@@ -172,7 +173,7 @@ export default {
           })
         }
       } else if (data.url.includes('bizfeesreimbursementform')) {
-        if (data.url === '/app/form/bizfeesreimbursementform/edit/page' || data.url === '/app/form/bizfeesreimbursementform/detail/page' || data.url === '/app/form/bizfeesreimbursementform/cashier/page') { // 处理报销发起和分摊费用路由一样的问题
+        if (data.url === '/app/form/bizfeesreimbursementform/detailFinancia/page' || data.url === '/app/form/bizfeesreimbursementform/edit/page' || data.url === '/app/form/bizfeesreimbursementform/detail/page' || data.url === '/app/form/bizfeesreimbursementform/cashier/page') { // 处理报销发起和分摊费用路由一样的问题
           this.$router.push({
             name: 'bizfeesreimbursementform',
             query: data

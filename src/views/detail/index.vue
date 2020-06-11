@@ -123,6 +123,7 @@
             </van-step>
           </van-steps>
         </div>
+        <transition name="fade">
         <div class="approval" v-if="isShowAgree">
           <div v-if="isApproval" class="approval-select">
             <div
@@ -191,6 +192,7 @@
             </div>
           </div>
         </div>
+        </transition>
         <footer class="footer"></footer>
       </van-form>
     </div>
@@ -225,7 +227,7 @@ export default {
       isApproval: false, // 是否显示审批功能
       isStatusDes: true, // 当前流程是否是会签
       isToEnd: true, // 一键到底
-      isShow: true, // 是否展示底部按钮
+      isShow: true, // 是否展示审批按钮
       isShowAgree: true, // 判断当前是否是代办流程
       treeList: [],
       isSBtn: false, // 废弃和会签按钮
@@ -966,5 +968,17 @@ div.affix {
     line-height: 60px;
     font-size: 24px;
   }
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.6s;
 }
 </style>

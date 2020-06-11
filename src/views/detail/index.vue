@@ -228,7 +228,7 @@ export default {
       isStatusDes: true, // 当前流程是否是会签
       isToEnd: true, // 一键到底
       isShow: true, // 是否展示审批按钮
-      isShowAgree: true, // 判断当前是否是代办流程
+      isShowAgree: false, // 判断当前是否是代办流程
       treeList: [],
       isSBtn: false, // 废弃和会签按钮
       show: false,
@@ -271,10 +271,8 @@ export default {
     // 判断是否显示底部功能
     if (this.active === 0) {
       this.isShow = true
-      this.isShowAgree = true
     } else {
       this.isShow = false
-      this.isShowAgree = false
     }
     flowForm(url).then((res) => {
       if (res) {
@@ -319,6 +317,7 @@ export default {
     },
     // 滚动检测
     handleScroll () {
+      console.log(this.active)
       if (this.active === 0) {
         this.scroll = document.documentElement.scrollTop || document.body.scrollTop
         const offsetY = document.querySelector('.history-detail').offsetTop
@@ -350,8 +349,12 @@ export default {
     },
     // 显示审批
     approvalFnc () {
+       console.log(this.isApproval, '之前 isApproval')
+      console.log(this.isShowAgree, '之前 isShowAgree')
       this.isApproval = !this.isApproval
       this.isShowAgree = !this.isShowAgree
+      console.log(this.isApproval, 'isApproval')
+      console.log(this.isShowAgree, 'isShowAgree')
     },
     // 处理树的数据
     toTree (data) {

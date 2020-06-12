@@ -275,14 +275,21 @@ export default {
       this.isShow = false
     }
     flowForm(url).then((res) => {
+      // const historyList = res.data.historyList
+      // const history = historyList[historyList.length - 1]
+      // console.log(history.userName)
+      // if(history.remark === '自动同意') {
+      //   console.log('12312312312')
+      // } else {
+      // }
       if (res) {
-        this.flowList = res.data
-        this.url = res.data.url
-        this.submitUrl = res.data.url
-        this.historyList = res.data.historyList
-        this.handleNextSelectOpts(res.data)
-        this.handleBackSelectOpts(res.data)
-        this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
+          this.flowList = res.data
+          this.url = res.data.url
+          this.submitUrl = res.data.url
+          this.historyList = res.data.historyList
+          this.handleNextSelectOpts(res.data)
+          this.handleBackSelectOpts(res.data)
+          this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
       }
     })
     getOrgTree().then((res) => {
@@ -317,7 +324,6 @@ export default {
     },
     // 滚动检测
     handleScroll () {
-      console.log(this.active)
       if (this.active === 0) {
         this.scroll = document.documentElement.scrollTop || document.body.scrollTop
         const offsetY = document.querySelector('.history-detail').offsetTop
@@ -349,12 +355,8 @@ export default {
     },
     // 显示审批
     approvalFnc () {
-       console.log(this.isApproval, '之前 isApproval')
-      console.log(this.isShowAgree, '之前 isShowAgree')
       this.isApproval = !this.isApproval
       this.isShowAgree = !this.isShowAgree
-      console.log(this.isApproval, 'isApproval')
-      console.log(this.isShowAgree, 'isShowAgree')
     },
     // 处理树的数据
     toTree (data) {

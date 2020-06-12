@@ -183,9 +183,9 @@
         <div style="text-align: left;margin: 0;">{{projpcontractarchives.actualSignDate}}</div>
       </template>
     </van-field>
-    <div v-if="isCheck">
+    <div v-if="isCheck" id="table-tr">
       <div class="table-title">验收报告相关信息</div>
-      <el-table border :data="selectReportByRequestNo" style="width: 100%">
+      <el-table border :data="selectReportByRequestNo" :row-class-name="tableRowClassName" style="width: 100%" @row-click="handleClickTable">
         <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
         <el-table-column label="预计收款时间" prop="paymentDate"></el-table-column>
@@ -198,6 +198,13 @@
         <el-table-column label="预计验收报告时间" prop="reportDate"></el-table-column>
         <el-table-column label="确认业绩时间" prop="rReportDate"></el-table-column>
         <el-table-column label="款项名称" prop="paymentName"></el-table-column>
+        <el-table-column fixed="right" width="50">
+          <template slot-scope="scope">
+            <div>
+              <el-button @click.native.stop="handleClickTable(scope.row)" type="text" size="small">查看</el-button>
+            </div>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <div v-if="isTable">
@@ -234,6 +241,22 @@
         </el-table-column>
       </el-table>
     </div>
+    <!-- 弹出框 -->
+    <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+      <el-table :data="gridData">
+        <el-table-column
+          property="date"
+          label="日期"
+          width="150"
+        ></el-table-column>
+        <el-table-column
+          property="name"
+          label="姓名"
+          width="200"
+        ></el-table-column>
+        <el-table-column property="address" label="地址"></el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -248,18 +271,45 @@ export default {
       isCheck: false, // 验收报告
       isTable: false, // 销售合同 // 采购合同 // 合作协议
       isProcure: false, // 采购合同
+      dialogTableVisible: false, // 弹出框
       dataList: this.$route.query,
       fileList: [],
       files: [], // 循环列表
       selectReportByRequestNo: [], // 验收报告相关信息
       paymentArchivesList: [], // 现金流
-      projpcontractarchives: []
+      projpcontractarchives: [],
+      gridData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
     }
   },
   created () {
+    // 判断当前节点
+    if(
+        this.dataList.currFlowId === 'ContractFileApprove' &&
+        this.dataList.currFlowName === '合同存档' &&
+        this.dataList.currTaskDefinitionKey === 'BusiAnalysis' &&
+        this.dataList.currTaskDefinitionName === '运营管理部'
+    ) {
+      console.log('11')
+    } else {}
     projpcontractarchivesApi(this.dataList.dataId).then(res => {
       // 验收报告相关信息
-      selectReportByRequestNoApi(res.data.contractNo + '/' + this.dataList.dataId).then(res => {
+      selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
         if (res.data) {
           this.selectReportByRequestNo = res.data.paymentList
         } else {
@@ -312,9 +362,20 @@ export default {
     })
   },
   methods: {
+    tableRowClassName ({row, rowIndex}) {
+        if (row.hasModify === '1') {
+          return 'acceptance'
+        } else {
+          return 'isAcceptance'
+        }
+    },
     handleClick (data) {
       console.log(data.url)
       this.downLoad(data)
+    },
+    handleClickTable (table) {
+      this.dialogTableVisible = true
+      console.log(table)
     },
     // 处理序号
     indexMethods (index) {
@@ -323,3 +384,16 @@ export default {
   }
 }
 </script>
+<style lang="less">
+#table-tr {
+.el-table .acceptance {
+  background: yellow;
+}
+.el-table .isAcceptance {
+  background: white;
+}
+.el-table__body tr.hover-row>td {
+    background: yellow;
+}
+}
+</style>

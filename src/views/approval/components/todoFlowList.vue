@@ -145,7 +145,7 @@ export default {
       // 处理投标保证金和付业务往来款相同name
       console.log(data.url)
       if (data.url.includes('pay')) {
-        if (data.url === '/app/form/projptenderpreq/detail/pay/page') { // 处理付业务往来款路由一样的问题
+        if (data.url === '/app/form/projptenderpreq/cashier/pay/page' || data.url === '/app/form/projptenderpreq/busiAnalysisManager/pay/page' || data.url === '/app/form/projptenderpreq/detail/pay/page') { // 处理付业务往来款路由一样的问题
           this.$router.push({
             name: 'projptenderpreqpay',
             query: data

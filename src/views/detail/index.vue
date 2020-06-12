@@ -283,13 +283,13 @@ export default {
       // } else {
       // }
       if (res) {
-          this.flowList = res.data
-          this.url = res.data.url
-          this.submitUrl = res.data.url
-          this.historyList = res.data.historyList
-          this.handleNextSelectOpts(res.data)
-          this.handleBackSelectOpts(res.data)
-          this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
+        this.flowList = res.data
+        this.url = res.data.url
+        this.submitUrl = res.data.url
+        this.historyList = res.data.historyList
+        this.handleNextSelectOpts(res.data)
+        this.handleBackSelectOpts(res.data)
+        this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
       }
     })
     getOrgTree().then((res) => {
@@ -630,13 +630,10 @@ export default {
           // 付业务往来款的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -16) + '/mobileUpdate'
         } else if (this.url === '/app/form/bizfeesreimbursementform/detailFinancia/page') { // 财务资金特殊处理
-          console.log(this.url)
           this.url = this.url.slice(0, -20) + '/mobileUpdate'
         } else if (this.url === '/app/form/projpcontractreview/acceptUpload/page') { // 合同受理上传文本特殊处理
-          console.log(this.url)
           this.url = this.url.slice(0, -18) + '/mobileUpdate'
         } else {
-          console.log(this.url)
           // 公共提交接口
           this.url = this.url.slice(0, -12) + '/mobileUpdate'
           // 供应商接口

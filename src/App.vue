@@ -61,4 +61,10 @@ div.app-title {
 .van-toast__loading {
   color: #000;
 }
+// 详情文字换行处理
+.van-field__control {
+  div {
+    word-break: break-all;
+  }
+}
 </style>

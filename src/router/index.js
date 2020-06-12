@@ -53,11 +53,11 @@ const routes = [
     name: 'detail',
     children: RouterList
   },
-  {
-    path: '/preview',
-    component: () => import('../views/preview'),
-    name: 'preview'
-  }
+  // {
+  //   path: '/preview',
+  //   component: () => import('../views/preview'),
+  //   name: 'preview'
+  // }
 ]
 
 const routerPush = VueRouter.prototype.push

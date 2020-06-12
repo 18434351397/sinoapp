@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #f8f8f8;">
+  <div class="user-style">
     <van-form id="editPwdForm">
       <van-field v-model="personList.userAccount" type="text" label="账号:" readonly>
         <template #input>
@@ -100,7 +100,7 @@ export default {
           }).join(',')
         }
         if (res.data.orgList) {
-          res.data.orgList = res.data.orgList.map(item => {
+          res.data.orgName = res.data.orgList.map(item => {
             return item.orgName
           }).join(',')
         }
@@ -127,5 +127,11 @@ export default {
   width: 90px;
   margin-right: 10px;
   /*text-align: right;*/
+}
+</style>
+<style lang="less">
+.user-style {
+  background-color: #f8f8f8;
+  padding-bottom: 61px;
 }
 </style>

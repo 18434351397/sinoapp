@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div class="header-top">
     <van-tabs @change="change" :active="active" sticky color="#1989fa">
       <van-sticky offset-top="78">
         <van-search v-model="searchValue" placeholder="请输入搜索关键词">
           <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
         </van-search>
+        <div>
+          排序：<van-button @click="sortFnc(active)" type="info" size="small">{{sortValue}}</van-button>
+        </div>
       </van-sticky>
       <van-tab title="待我处理">
         <todolist ref="todolist" v-if="active === 0"></todolist>
@@ -39,6 +42,13 @@ export default {
     ])
   },
   created () {
+    if(this.active === 0) {
+      this.sortValue = this.sort ? '正序' : '倒序'
+    } else if (this.active === 1) {
+      this.sortValue = this.sort2 ? '正序' : '倒序'
+    } else if (this.active === 2) {
+      this.sortValue = this.sort3 ? '正序' : '倒序'
+    }
   },
   mounted () {
   },
@@ -51,6 +61,10 @@ export default {
   data () {
     return {
       searchValue: '',
+      sort: false, // 待办默认属性
+      sort2: true, // 已办默认属性
+      sort3: true, // 发起默认属性
+      sortValue: '', // 默认值
       current: 1,
       // active: 0,
       tabIndex: 0,
@@ -63,6 +77,7 @@ export default {
       this.tabIndex = event
       this.searchValue = ''
       if (event === 0) {
+        this.sortValue = this.sort ? '正序' : '倒序'
         if (this.$refs.todolist) {
           this.$refs.todolist.searchType = this.tabIndex + 1 + ''
           // this.$refs.todolist.currentPage = 1
@@ -70,6 +85,7 @@ export default {
         }
       }
       if (event === 1) {
+        this.sortValue = this.sort2 ? '正序' : '倒序'
         if (this.$refs.donelist) {
           // this.$refs.donelist.searchType = this.tabIndex + 1 + ''
           this.$refs.donelist.searchType = '3'
@@ -78,11 +94,44 @@ export default {
         }
       }
       if (event === 2) {
+        this.sortValue = this.sort3 ? '正序' : '倒序'
         if (this.$refs.launchlist) {
           this.$refs.launchlist.searchType = this.tabIndex + 1
           // this.$refs.launchlist.currentPage = 1
           // this.$refs.launchlist.loadData()
         }
+      }
+    },
+    // 排序
+    sortFnc(event) {
+      let sort
+      if(event === 0) {
+        this.sort = !this.sort
+        this.sortValue = this.sort ? '正序' : '倒序'
+        if(this.sortValue === '正序') {
+          sort = true
+        } else if (this.sortValue === '倒序') {
+          sort = false
+        }
+        this.$refs.todolist.loadData(sort)
+      } else if (event === 1) {
+        this.sort2 = !this.sort2
+        this.sortValue = this.sort2 ? '正序' : '倒序'
+        if(this.sortValue === '正序') {
+          sort = true
+        } else if (this.sortValue === '倒序') {
+          sort = false
+        }
+        this.$refs.donelist.loadData(sort)
+      } else if (event === 2) {
+        this.sort3 = !this.sort3
+        this.sortValue = this.sort3 ? '正序' : '倒序'
+        if(this.sortValue === '正序') {
+          sort = true
+        } else if (this.sortValue === '倒序') {
+          sort = false
+        }
+        this.$refs.launchlist.loadData(sort)
       }
     },
     handleSearch () {
@@ -180,5 +229,14 @@ export default {
 }
 .van-toast__loading {
   color: #000;
+}
+</style>
+<style lang="less">
+.header-top {
+ .van-tabs__content .van-sticky {
+    display: flex;
+    background: #fff;
+    line-height: 54px;
+  }
 }
 </style>

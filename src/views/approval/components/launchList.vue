@@ -86,9 +86,14 @@ export default {
     ...mapGetters(['searchValue'])
   },
   methods: {
-    loadData (data) {
-      data = {
-        asc: false,
+    loadData (sort) {
+      if (sort) {
+        sort = sort
+      } else {
+        sort = false
+      }
+      let data = {
+        asc: sort,
         current: this.currentPage,
         openSort: true,
         searchCount: true,

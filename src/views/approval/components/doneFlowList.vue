@@ -92,10 +92,15 @@ export default {
     }
   },
   methods: {
-    loadData () {
+    loadData (sort) {
+      if (sort) {
+        sort = sort
+      } else {
+        sort = false
+      }
       const data = {
         current: this.currentPage,
-        asc: false,
+        asc: sort,
         openSort: true,
         searchCount: true,
         size: 10,

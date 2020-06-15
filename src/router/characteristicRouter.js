@@ -25,6 +25,11 @@ const characteristicRouter = [
     path: '/sealdestoryform', // 印章销毁
     component: () => import('../views/sealdestoryform'),
     name: 'sealdestoryform'
+  },
+  {
+    path: '/sealrecordform', // 印章刻制备案
+    component: () => import('../views/sealrecordform'),
+    name: 'sealrecordform'
   }
 ]
 // 导出router，方便在index里引用

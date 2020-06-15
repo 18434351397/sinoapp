@@ -509,7 +509,7 @@ export default {
                 loadingType: 'spinner',
                 type: 'success',
                 forbidClick: true,
-                message: res.resultMessage,
+                message: '提交成功',
                 onClose: () => {
                   this.$router.push('/approval')
                 }

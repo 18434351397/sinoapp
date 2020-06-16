@@ -228,7 +228,7 @@ export default {
       isStatusDes: true, // 当前流程是否是会签
       isToEnd: true, // 一键到底
       isShow: true, // 是否展示审批按钮
-      isShowAgree: false, // 判断当前是否是代办流程
+      isShowAgree: false, // 判断当前是否是待办流程
       treeList: [],
       isSBtn: false, // 废弃和会签按钮
       show: false,
@@ -275,21 +275,26 @@ export default {
       this.isShow = false
     }
     flowForm(url).then((res) => {
-      // const historyList = res.data.historyList
-      // const history = historyList[historyList.length - 1]
-      // console.log(history.userName)
-      // if(history.remark === '自动同意') {
-      //   console.log('12312312312')
-      // } else {
-      // }
+      if (this.isShowAgree) {
+        const historyList = res.data.historyList
+        const history = historyList[historyList.length - 1]
+        if (history.remark === '自动同意') {
+          Dialog.alert({
+            message: `当前任务已流转至【${res.data.currUserName}】处理，您无法处理该任务！`
+          }).then(() => {
+            // on close
+            this.$router.push('/approval')
+          })
+        } else {}
+      }
       if (res) {
-          this.flowList = res.data
-          this.url = res.data.url
-          this.submitUrl = res.data.url
-          this.historyList = res.data.historyList
-          this.handleNextSelectOpts(res.data)
-          this.handleBackSelectOpts(res.data)
-          this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
+        this.flowList = res.data
+        this.url = res.data.url
+        this.submitUrl = res.data.url
+        this.historyList = res.data.historyList
+        this.handleNextSelectOpts(res.data)
+        this.handleBackSelectOpts(res.data)
+        this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
       }
     })
     getOrgTree().then((res) => {
@@ -614,6 +619,19 @@ export default {
         this.dataList.currFlowName === '分摊费用'
       ) {
         this.url = this.url.slice(0, -16) + '/update/task' // 费用分摊
+      } else if (
+        this.dataList.currFlowName === '解冻风险保证金' &&
+        this.dataList.currFlowId === 'UnfreezeApprove' &&
+        this.dataList.currTaskDefinitionName === '风控法规部信用管理专员' &&
+        this.dataList.currTaskDefinitionKey === 'RiskRuleCreditCommissioner'
+      ) {
+        this.url = this.url.slice(0, -16) + '/comit/task/commmanage'
+      } else if (
+        this.dataList.currFlowName === '解冻风险保证金' &&
+        this.dataList.currFlowId === 'UnfreezeApprove' &&
+        this.dataList.currTaskDefinitionKey !== 'RiskRuleCreditCommissioner'
+      ) {
+        this.url = this.url.slice(0, -12) + '/comit/task'
       } else {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) {
@@ -800,10 +818,12 @@ export default {
     confirmCounterSign () {
       // 人员名字
       const signData = this.$refs.tree.getCheckedNodes()
+      const signDataId = this.$refs.tree.getCheckedNodes()
       const newSign = []
-      this.recursion(signData, newSign)
+      const newSignId = []
+      this.recursion(signData, newSign) // 姓名
+      this.recursionId(signDataId, newSignId) // Id
 
-      this.signIds = this.$refs.tree.getCheckedKeys()
       this.isSubmit(this.signData)
     },
     // 递归获取数据信息
@@ -818,19 +838,34 @@ export default {
           }
           if (item.children) {
             this.recursion(item.children, newSign)
-          }
+          } else {}
         })
       }
       this.signText = newSign.toString()
       this.message = newSign.toString()
     },
+    // 递归id
+    recursionId (signDataId, newSignId = []) {
+      if (Array.isArray(signDataId) && signDataId.length > 0) {
+        signDataId.forEach((item) => {
+          if (item.issub) {
+            // 对id进行去重处理
+            if (newSignId.indexOf(item.id) === -1) {
+              newSignId = newSignId.concat(item.id)
+            } else {}
+          } else {}
+          if (item.children) {
+            this.recursionId(item.children, newSignId)
+          } else {}
+        })
+      }
+      this.signIds = newSignId
+    },
     filterNode (value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     },
-    handleCheckChange (data, checked, indeterminate) {
-      console.log(checked)
-    },
+    handleCheckChange (data, checked, indeterminate) {},
     handleCurrentChange (data, node) {},
     back () {
       this.$router.go(-1)

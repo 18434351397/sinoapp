@@ -87,13 +87,8 @@ export default {
   },
   methods: {
     loadData (sort) {
-      if (sort) {
-        sort = sort
-      } else {
-        sort = false
-      }
       let data = {
-        asc: sort,
+        asc: false,
         current: this.currentPage,
         openSort: true,
         searchCount: true,
@@ -103,6 +98,15 @@ export default {
           createdBy: this.id,
           searchCondition: this.searchValue ? this.searchValue : ''
         }
+      }
+      if (sort === false) {
+        data.condition.asc = sort.toString()
+        data.current = 1
+      } else if (sort === true) {
+        data.condition.asc = 'true'
+        data.current = 1
+      } else {
+        data.condition.asc = 'false'
       }
       this.loading = true
       search(data).then(res => {

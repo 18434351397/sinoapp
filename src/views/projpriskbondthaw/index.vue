@@ -11,6 +11,13 @@
     />
     <van-field
       style="display: none;"
+      name="cThawAmount"
+      v-model="projpriskbondthawList.cThawAmount"
+      type="text"
+      readonly
+    />
+    <van-field
+      style="display: none;"
       name="meetingUsers"
       v-model="projpriskbondthawList.meetingUsers"
       type="text"
@@ -115,17 +122,18 @@
     </van-field>
     <van-field
       type="text"
-      name="cThawAmount"
-      v-model="projpriskbondthawList.cThawAmount"
+      name="thawAmount"
+      v-model="projpriskbondthawList.thawAmount"
       label="本次解冻金额"
       colon
       readonly
     >
     <template #input>
-        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.cThawAmount}}</div>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.thawAmount}}</div>
       </template>
     </van-field>
     <van-field
+      v-if="!hasThawTime"
       type="text"
       name="thawTime"
       v-model="projpriskbondthawList.thawTime"
@@ -137,6 +145,20 @@
         <div style="text-align: left;margin: 0;">{{projpriskbondthawList.thawTime}}</div>
       </template>
     </van-field>
+    <van-field
+      class="thawTime-field"
+      v-if="hasThawTime"
+      type="text"
+      name="thawTime"
+      @click="showPopFn()"
+      v-model="projpriskbondthawList.thawTime"
+      label="解冻时间"
+      colon
+      :rules="[{ required: true, message: '请选择解冻时间' }]"
+    />
+    <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
+          <van-datetime-picker v-model="currentDate" type="date" @change="changeFn()" @confirm="confirmFn()" @cancel="cancelFn()" />
+    </van-popup>
     <div>
       <div class="table-title">其他</div>
       <el-table border :data="files" style="width: 100%">
@@ -162,6 +184,10 @@ export default {
   name: 'index',
   data () {
     return {
+      currentDate: new Date(),
+      changeDate: new Date(),
+      show: false, // 用来显示弹出层
+      hasThawTime: false,
       dataList: this.$route.query,
       fileList: [],
       files: [], // 循环列表
@@ -169,6 +195,14 @@ export default {
     }
   },
   created () {
+    if (
+      this.dataList.currFlowName === '解冻风险保证金' && 
+      this.dataList.currFlowId === 'UnfreezeApprove' &&
+      this.dataList.currTaskDefinitionName === '风控法规部信用管理专员' &&
+      this.dataList.currTaskDefinitionKey === 'RiskRuleCreditCommissioner'
+      ) {
+        this.hasThawTime = true
+    } else {}
     projpriskbondthawList(this.dataList.dataId).then(res => {
       if (res.data) {
         this.projpriskbondthawList = res.data
@@ -187,6 +221,30 @@ export default {
     })
   },
   methods: {
+    showPopFn (date) {
+      this.show = true
+    },
+    showPopup () {
+      this.show = true
+    },
+    changeFn () { // 值变化是触发
+      this.changeDate = this.currentDate // Tue Sep 08 2020 00:00:00 GMT+0800 (中国标准时间)
+    },
+    confirmFn () { // 确定按钮
+      this.projpriskbondthawList.thawTime = this.timeFormat(this.currentDate)
+      this.show = false
+    },
+    cancelFn () {
+      this.show = true
+    },
+    timeFormat (time) {
+      const y = time.getFullYear()
+      let m = time.getMonth() + 1
+      m = m < 10 ? '0' + m : m
+      let d = time.getDate()
+      d = d < 10 ? ('0' + d) : d
+      return y + '-' + m + '-' + d
+    },
     // 下载调用方法
     handleClick (data) {
       console.log(data.url)
@@ -199,3 +257,10 @@ export default {
   }
 }
 </script>
+<style lang="less">
+.thawTime-field {
+  .van-field__body {
+    border-bottom: 1px solid #999091;
+  }
+}
+</style>

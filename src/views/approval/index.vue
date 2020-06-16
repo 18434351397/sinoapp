@@ -5,9 +5,17 @@
         <van-search v-model="searchValue" placeholder="请输入搜索关键词">
           <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->
         </van-search>
-        <div>
-          排序：<van-button @click="sortFnc(active)" type="info" size="small">{{sortValue}}</van-button>
-        </div>
+        <!-- <div>
+          时间 <van-button class="sort" @click="sortFnc(active)" type="info" size="small">{{sortValue}}</van-button>
+        </div> -->
+        <el-select v-model="sortValue" @change="sortFnc($event,active)">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
       </van-sticky>
       <van-tab title="待我处理">
         <todolist ref="todolist" v-if="active === 0"></todolist>
@@ -42,12 +50,12 @@ export default {
     ])
   },
   created () {
-    if(this.active === 0) {
-      this.sortValue = this.sort ? '正序' : '倒序'
+    if (this.active === 0) {
+      this.sortValue = this.sort ? true : false
     } else if (this.active === 1) {
-      this.sortValue = this.sort2 ? '正序' : '倒序'
+      this.sortValue = this.sort2 ? true : false
     } else if (this.active === 2) {
-      this.sortValue = this.sort3 ? '正序' : '倒序'
+      this.sortValue = this.sort3 ? true : false
     }
   },
   mounted () {
@@ -61,11 +69,18 @@ export default {
   data () {
     return {
       searchValue: '',
-      sort: false, // 待办默认属性
-      sort2: true, // 已办默认属性
-      sort3: true, // 发起默认属性
-      sortValue: '', // 默认值
+      sort: true, // 待办默认属性
+      sort2: false, // 已办默认属性
+      sort3: false, // 发起默认属性
+      sortValue: true, // 默认值
       current: 1,
+      options: [{
+        value: true,
+        label: '时间正序排列'
+      }, {
+        value: false,
+        label: '时间倒序排列'
+      }],
       // active: 0,
       tabIndex: 0,
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
@@ -77,61 +92,45 @@ export default {
       this.tabIndex = event
       this.searchValue = ''
       if (event === 0) {
-        this.sortValue = this.sort ? '正序' : '倒序'
-        if (this.$refs.todolist) {
-          this.$refs.todolist.searchType = this.tabIndex + 1 + ''
-          // this.$refs.todolist.currentPage = 1
-          // this.$refs.todolist.loadData()
-        }
+        this.sortValue = this.sort ? true : false
+        // this.$refs.todolist.loadData(sort)
+        // if (this.$refs.todolist) {
+        //   // this.$refs.todolist.searchType = this.tabIndex + 1 + ''
+        //   // this.$refs.todolist.currentPage = 1
+        //   // this.$refs.todolist.loadData()
+        // }
       }
       if (event === 1) {
-        this.sortValue = this.sort2 ? '正序' : '倒序'
-        if (this.$refs.donelist) {
-          // this.$refs.donelist.searchType = this.tabIndex + 1 + ''
-          this.$refs.donelist.searchType = '3'
-          // this.$refs.launchlist.currentPage = 1
-          // this.$refs.launchlist.loadData()
-        }
+        this.sortValue = this.sort2 ? true : false
+        // this.$refs.donelist.loadData(sort2)
+        // if (this.$refs.donelist) {
+        //   // this.$refs.donelist.searchType = this.tabIndex + 1 + ''
+        //   // this.$refs.donelist.searchType = '3'
+        //   // this.$refs.launchlist.currentPage = 1
+        //   // this.$refs.launchlist.loadData()
+        // }
       }
       if (event === 2) {
-        this.sortValue = this.sort3 ? '正序' : '倒序'
-        if (this.$refs.launchlist) {
-          this.$refs.launchlist.searchType = this.tabIndex + 1
-          // this.$refs.launchlist.currentPage = 1
-          // this.$refs.launchlist.loadData()
-        }
+        this.sortValue = this.sort3 ? true : false
+        // this.$refs.launchlist.loadData(sort3)
+        // if (this.$refs.launchlist) {
+        //   // this.$refs.launchlist.searchType = this.tabIndex + 1
+        //   // this.$refs.launchlist.currentPage = 1
+        //   // this.$refs.launchlist.loadData()
+        // }
       }
     },
     // 排序
-    sortFnc(event) {
-      let sort
-      if(event === 0) {
-        this.sort = !this.sort
-        this.sortValue = this.sort ? '正序' : '倒序'
-        if(this.sortValue === '正序') {
-          sort = true
-        } else if (this.sortValue === '倒序') {
-          sort = false
-        }
-        this.$refs.todolist.loadData(sort)
+    sortFnc (item, event) {
+      if (event === 0) {
+        this.sortValue = item ? true : false
+        this.$refs.todolist.loadData(item)
       } else if (event === 1) {
-        this.sort2 = !this.sort2
-        this.sortValue = this.sort2 ? '正序' : '倒序'
-        if(this.sortValue === '正序') {
-          sort = true
-        } else if (this.sortValue === '倒序') {
-          sort = false
-        }
-        this.$refs.donelist.loadData(sort)
+        this.sortValue = item ? true : false
+        this.$refs.donelist.loadData(item)
       } else if (event === 2) {
-        this.sort3 = !this.sort3
-        this.sortValue = this.sort3 ? '正序' : '倒序'
-        if(this.sortValue === '正序') {
-          sort = true
-        } else if (this.sortValue === '倒序') {
-          sort = false
-        }
-        this.$refs.launchlist.loadData(sort)
+        this.sortValue = item ? true : false
+        this.$refs.launchlist.loadData(item)
       }
     },
     handleSearch () {
@@ -237,6 +236,22 @@ export default {
     display: flex;
     background: #fff;
     line-height: 54px;
+    .el-select {
+      width: 132px;
+      margin-left: 0;
+    }
   }
+}
+div .sort{
+  background: rgba(25, 137, 250, 0.65);
+  box-shadow: 0px 0px 3px 1px #1989faa6;
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
+}
+.el-select-dropdown {
+  margin: 0;
+}
+.el-popper {
+  margin-top: 0 !important;
 }
 </style>

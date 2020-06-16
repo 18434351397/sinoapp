@@ -416,7 +416,6 @@ export default {
   name: 'index',
   data () {
     return {
-      msg: '',
       currentDate: new Date(),
       changeDate: new Date(),
       show: false, // 用来显示弹出层
@@ -645,7 +644,7 @@ export default {
         current: 1,
         openSort: true,
         searchCount: true,
-        size: 10,
+        size: 30,
         condition: {
           cpId: this.tableList.id,
           requestNo: this.projpcontractarchives.requestNo

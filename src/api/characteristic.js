@@ -4,7 +4,8 @@ const api = {
   sealpreservationformList: '/app/form/sealpreservationform/detail', // 印章保管
   bizcompanychangeformList: '/app/form/bizcompanychangeform/detail', // 分子公司注册变更
   sealdestoryformList: '/app/form/sealdestoryform/detail', // 印章销毁
-  postmanageformList: '/app/form/postmanageform/detail' // 发文管理
+  postmanageformList: '/app/form/postmanageform/detail', // 发文管理
+  sealrecordformList: '/app/form/postmanageform/detail' // 发文管理
 }
 
 // 印信使用审批
@@ -41,6 +42,13 @@ export async function sealdestoryformList (data) {
 export async function postmanageformList (data) {
   return request({
     url: api.postmanageformList + '/' + data,
+    method: 'get'
+  })
+}
+// 印章刻制备案
+export async function sealrecordformList (data) {
+  return request({
+    url: api.sealrecordformList + '/' + data,
     method: 'get'
   })
 }

@@ -143,7 +143,7 @@ export default {
                 loadingType: 'spinner',
                 type: 'success',
                 forbidClick: true,
-                message: res.bizResultMessage,
+                message: '登录成功',
                 onClose: () => {
                   this.$store.dispatch('getInfo')
                 }

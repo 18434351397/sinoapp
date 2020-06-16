@@ -148,7 +148,9 @@ export default {
       var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
       // 是否滚动到底部的判断
       if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
-        if (this.currentPage < this.totalPage) {
+        console.log(this.currentPage)
+        console.log(this.totalPage)
+        if (this.currentPage <= this.totalPage) {
           this.loadData()
         }
       }

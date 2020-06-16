@@ -211,7 +211,7 @@ div {
   .todoListBox {
     height: auto;
     background: #f8f8f8;
-    padding: 10px 10px 70px;
+    padding: 10px 10px 80px;
     box-sizing: border-box;
   }
 

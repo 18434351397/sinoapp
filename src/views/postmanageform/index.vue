@@ -6,7 +6,7 @@
 <template>
   <div class="app-title">
     <div class="title"
-    >客户申请信息</div>
+    >发文管理信息</div>
     <van-field name="postCode" v-model="custList.postCode" type="text" label="发文编号:" readonly>
       <template #input>
         <div style="text-align: left;margin: 0;">{{custList.postCode}}</div>

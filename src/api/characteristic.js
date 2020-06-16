@@ -5,7 +5,7 @@ const api = {
   bizcompanychangeformList: '/app/form/bizcompanychangeform/detail', // 分子公司注册变更
   sealdestoryformList: '/app/form/sealdestoryform/detail', // 印章销毁
   postmanageformList: '/app/form/postmanageform/detail', // 发文管理
-  sealrecordformList: '/app/form/postmanageform/detail' // 发文管理
+  sealrecordformList: '/app/form/sealrecordform/detail' // 发文管理
 }
 
 // 印信使用审批

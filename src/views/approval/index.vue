@@ -237,8 +237,13 @@ export default {
     background: #fff;
     line-height: 54px;
     .el-select {
-      width: 132px;
       margin-left: 0;
+      padding-right: 12px;
+      .el-input {
+        input {
+          width: 132px;
+        }
+      }
     }
   }
 }

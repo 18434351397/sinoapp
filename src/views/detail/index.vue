@@ -275,17 +275,32 @@ export default {
       this.isShow = false
     }
     flowForm(url).then((res) => {
-      if (this.isShowAgree) {
-        const historyList = res.data.historyList
-        const history = historyList[historyList.length - 1]
-        if (history.remark === '自动同意') {
-          Dialog.alert({
-            message: `当前任务已流转至【${res.data.currUserName}】处理，您无法处理该任务！`
-          }).then(() => {
-            // on close
-            this.$router.push('/approval')
-          })
-        } else {}
+      if (this.isShow) {
+        let us = sessionStorage.getItem('userinfo')
+        us = JSON.parse(us)
+        if (res.data.status === '3') {
+          // 会签中
+          if (
+            res.data.meetingUserIds.indexOf(us.id) < 0 &&
+            res.data.proxyUserIds.indexOf(us.id) < 0
+          ) {
+            Dialog.alert({
+              message: `当前任务等待【${res.data.currUserName}】会签中，您无法处理该任务！`
+            }).then(() => {
+              // on close
+              this.$router.push('/approval')
+            })
+          } else {}
+        } else {
+          if (res.data.currUseerId !== us.id && res.data.proxyUserIds.indexOf(us.id) < 0) {
+            Dialog.alert({
+              message: `当前任务已流转至【${res.data.currUserName}】处理，您无法处理该任务！`
+            }).then(() => {
+              // on close
+              this.$router.push('/approval')
+            })
+          } else {}
+        }
       }
       if (res) {
         this.flowList = res.data

@@ -1,6 +1,6 @@
 /** *@author CheYongJi *@date 2020/4/15 12:51 *@title index */
 <template>
-  <div style="height: 100%;">
+  <div style="height: 100%;" id="detailBox">
     <van-sticky>
       <NavBar />
     </van-sticky>
@@ -251,7 +251,8 @@ export default {
       },
       scroll: '',
       hasProcessByBusiAnalysis: false,
-      backSelectOpts: []
+      backSelectOpts: [],
+      loading: true
     }
   },
   created () {
@@ -496,14 +497,25 @@ export default {
       console.log(data)
       this.submit(data)
     },
+    // 全屏遮罩加载方法
+    openFullScreen2 () {
+      Toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: false,
+        message: '正在提交'
+      })
+    },
     // 提交方法-->调接口进行提交
     submit (values) {
       Dialog.confirm({
         message: '你确定要提交吗？'
       })
         .then(() => {
+          this.openFullScreen2()
+          // 提交时，展示加载效果，防止接口响应过慢，用户重复点击提交按钮
           flowFormUpdate(values).then((res) => {
             if (res.resultCode === '200') {
+              Toast.clear()
               Toast.loading({
                 duration: 1000,
                 loadingType: 'spinner',

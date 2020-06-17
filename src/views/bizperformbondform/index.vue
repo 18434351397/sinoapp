@@ -1,6 +1,6 @@
 <template>
   <div class="app-title">
-    <div class="title">风险保证金详细</div>
+    <div class="title">履约保证金详细</div>
     <van-field
       style="display: none;"
       name="bondId"

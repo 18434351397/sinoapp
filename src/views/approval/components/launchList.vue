@@ -86,8 +86,8 @@ export default {
     ...mapGetters(['searchValue'])
   },
   methods: {
-    loadData (data) {
-      data = {
+    loadData (sort) {
+      let data = {
         asc: false,
         current: this.currentPage,
         openSort: true,
@@ -98,6 +98,15 @@ export default {
           createdBy: this.id,
           searchCondition: this.searchValue ? this.searchValue : ''
         }
+      }
+      if (sort === false) {
+        data.condition.asc = sort.toString()
+        data.current = 1
+      } else if (sort === true) {
+        data.condition.asc = 'true'
+        data.current = 1
+      } else {
+        data.condition.asc = 'false'
       }
       this.loading = true
       search(data).then(res => {

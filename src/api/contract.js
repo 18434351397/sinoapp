@@ -13,6 +13,9 @@ const api = {
   bizperformdenoteform: '/app/form/bizperformdenoteform/detail', // 履约保函
   projpcontractarchives: '/app/form/projpcontractarchives/detail', // 合同存档
   selectReportByRequestNo: '/app/pro/projpcontractreview/selectReportByRequestNo', // 验收报告相关信息
+  passedAndForm: '/app/pro/projpcontractreportattachment/form/list/passedAndForm', // 验收报告记录
+  selectAttname: '/app/pro/projpcontractreportattachment/form/selectAttname', // 验收报告附件
+  updateAttach: 'app/pro/projpcontractreportattachment/form/updateAttach', // 验收报告附件审核
   projppayreq: '/app/form/projppayreq/detail', // 合同付款
   projpcontractpayment: '/app/pro/projpcontractpayment/contract', // 合同付款金额
   cashStatus: '/app/form/projppayreq/contract/cash/status/', // 现金流状态
@@ -162,5 +165,29 @@ export async function getOtherInfoApi (projectNo, contractNo) {
   return request({
     url: api.getOtherInfo + '?projectNo=' + projectNo + '&contractNo=' + contractNo,
     method: 'get'
+  })
+}
+// 验收报告列表记录
+export async function passedAndFormApi (data) {
+  return request({
+    url: api.passedAndForm,
+    method: 'put',
+    data
+  })
+}
+// 验收报告附件
+export async function selectAttnameApi (data) {
+  return request({
+    url: api.selectAttname + '/' + data,
+    method: 'get',
+  })
+}
+
+// 验收报告附件审核
+export async function updateAttachApi (data) {
+  return request({
+    url: api.updateAttach,
+    method: 'POST',
+    data
   })
 }

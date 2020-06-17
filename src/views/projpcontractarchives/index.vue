@@ -241,81 +241,235 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- 弹出框 -->
-    <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
-      <el-table :data="gridData">
+    <!-- 表格数据弹出框 -->
+    <el-dialog title="验收报告记录" class="dialog-report" :visible.sync="dialogTableVisible">
+      <el-table :data="gridData" height="80vh">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
         <el-table-column
-          property="date"
-          label="日期"
-          width="150"
+          property="attName"
+          label="验收报告名称"
         ></el-table-column>
         <el-table-column
-          property="name"
-          label="姓名"
-          width="200"
+          property="percent"
+          label="确认业绩比例"
         ></el-table-column>
-        <el-table-column property="address" label="地址"></el-table-column>
+        <el-table-column property="reportSigningDate" label="验收实际签订时间"></el-table-column>
+        <el-table-column property="aRReportDate" label="验收实际收到日期"></el-table-column>
+        <el-table-column property="reportReceivedDate" label="确认业绩时间"></el-table-column>
+        <el-table-column property="remark" label="状态"></el-table-column>
+        <el-table-column fixed="right" width="50">
+          <template slot-scope="scope">
+            <div v-if="scope.row.remark === ''? false : true">
+              <el-button @click.native.stop="handleClickFile(scope.row)" v-if="!fileBtn" type="text" size="small">查看</el-button>
+              <el-button @click.native.stop="handleEditFile(scope.row)" v-if="fileBtn" type="text" size="small">修改</el-button>
+            </div>
+          </template>
+        </el-table-column>
       </el-table>
+      <div slot="footer" class="dialog-footer close-btn">
+          <el-button type="primary" @click="dialogTableVisible = false" size="small">确 定</el-button>
+      </div>
     </el-dialog>
+    <!-- 附件弹出框 -->
+    <el-dialog title="查看附件" class="dialog-report" :visible.sync="dialogFileVisible">
+      <van-field
+        type="text"
+        name="reportName"
+        v-model="selectAttname.reportName"
+        label="验收报告名称"
+        colon
+        readonly
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.reportName}}</div>
+        </template>
+      </van-field>
+      <van-field
+        type="text"
+        name="percent"
+        v-model="selectAttname.percent"
+        label="确认业绩比例"
+        colon
+        readonly
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.percent}}</div>
+        </template>
+      </van-field>
+      <van-field
+        type="text"
+        name="reportSigningDate"
+        v-model="selectAttname.reportSigningDate"
+        label="验收实际签订日期"
+        colon
+        readonly
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.reportSigningDate}}</div>
+        </template>
+      </van-field>
+      <van-field
+        type="text"
+        name="aRReportDate"
+        v-model="selectAttname.aRReportDate"
+        label="验收实际收到日期"
+        colon
+        readonly
+      >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.aRReportDate}}</div>
+        </template>
+      </van-field>
+      <div class="table-title">附件列表</div>
+      <el-table border :data="selectAttnameFile" style="width: 100%">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="附件名称" prop="fileName"></el-table-column>
+        <el-table-column label="大小" width="80">
+          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="50">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer close-btn">
+        <el-button type="primary" @click="dialogFileVisible = false" size="small">关 闭</el-button>
+      </div>
+    </el-dialog>
+    <!-- 运管的弹窗 -->
+    <el-dialog title="查看附件" class="dialog-report edit-dialog" :visible.sync="dialogFileEdit">
+      <van-form @submit="onSubmitEdit">
+        <van-field
+          type="text"
+          name="reportName"
+          v-model="selectAttname.reportName"
+          label="验收报告名称"
+          :rules="[{ required: true, message: '请填写验收报告名称' }]"
+          colon
+        />
+        <van-field
+          type="text"
+          name="percent"
+          v-model="selectAttname.percent"
+          label="确认业绩比例"
+          colon
+          :rules="[{ required: true, message: '请填写确认业绩比例' }]"
+        />
+        <van-field
+          name="reportSigningDate"
+          @click="showPopFn('report')"
+          v-model="selectAttname.reportSigningDate"
+          label="验收实际签订日期"
+          colon
+        />
+        <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
+          <van-datetime-picker v-model="currentDate" type="date" @change="changeFn()" @confirm="confirmFn()" @cancel="cancelFn()" />
+        </van-popup>
+        <van-field
+          name="aRReportDate"
+          @click="showPopFn('aRReport')"
+          v-model="selectAttname.aRReportDate"
+          label="验收实际收到日期"
+          colon
+        />
+        <van-field
+          name="rReportDate"
+          @click="showPopFn('rReportDate')"
+          v-model="selectAttname.rReportDate"
+          label="确认业绩时间"
+          colon
+          :rules="[{ required: true, message: '请选择确认业绩时间' }]"
+        />
+      </van-form>
+      <div class="table-title">附件列表</div>
+      <el-table border :data="selectAttnameFile" style="width: 100%">
+        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
+        <el-table-column label="附件名称" prop="fileName"></el-table-column>
+        <el-table-column label="大小" width="80">
+          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="50">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer close-btn">
+        <el-button type="primary" @click="onSubmitEdit(selectAttname,'ok')" size="small">同 意</el-button>
+        <el-button type="info" @click="onSubmitEdit(selectAttname,'noOk')" size="small">不同意</el-button>
+      </div>
+  </el-dialog>
   </div>
 </template>
 
 <script>
-import { projpcontractarchivesApi, selectReportByRequestNoApi } from '../../api/contract'
-import { Toast } from 'vant'
+import {
+  projpcontractarchivesApi,
+  selectReportByRequestNoApi,
+  passedAndFormApi,
+  selectAttnameApi,
+  updateAttachApi
+} from '../../api/contract'
+import { Toast, Dialog } from 'vant'
 export default {
   name: 'index',
   data () {
     return {
+      currentDate: new Date(),
+      changeDate: new Date(),
+      show: false, // 用来显示弹出层
+      tableList: [], // 暂存数据
+      value: '', // 判断日期
       isSale: false, // 销售合同
       isCheck: false, // 验收报告
       isTable: false, // 销售合同 // 采购合同 // 合作协议
       isProcure: false, // 采购合同
       dialogTableVisible: false, // 弹出框
+      dialogFileVisible: false, // 查看附件
+      dialogFileEdit: false, // 修改
+      selectAttname: [], // 附件列表信息
+      selectAttnameFile: [], // 附件列表数据
       dataList: this.$route.query,
+      fileBtn: false,
       fileList: [],
       files: [], // 循环列表
       selectReportByRequestNo: [], // 验收报告相关信息
       paymentArchivesList: [], // 现金流
       projpcontractarchives: [],
-      gridData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
+      gridData: []
     }
   },
   created () {
     // 判断当前节点
-    if(
-        this.dataList.currFlowId === 'ContractFileApprove' &&
-        this.dataList.currFlowName === '合同存档' &&
-        this.dataList.currTaskDefinitionKey === 'BusiAnalysis' &&
-        this.dataList.currTaskDefinitionName === '运营管理部'
+    if (
+      this.dataList.currFlowId === 'ContractFileApprove' &&
+      this.dataList.currFlowName === '合同存档' &&
+      this.dataList.currTaskDefinitionKey === 'BusiAnalysis' &&
+      this.dataList.currTaskDefinitionName === '运营管理部' &&
+      this.dataList.formTitle.indexOf('验收报告') !== -1
     ) {
-      console.log('11')
+      this.fileBtn = true
     } else {}
     projpcontractarchivesApi(this.dataList.dataId).then(res => {
-      // 验收报告相关信息
-      selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
-        if (res.data) {
-          this.selectReportByRequestNo = res.data.paymentList
-        } else {
-          Toast.fail({ duration: 1500, message: '数据异常，请刷新' })
-        }
-      })
+      if (this.dataList.currFlowName === '合同存档' && this.dataList.formTitle.indexOf('验收报告') !== -1) {
+        // 验收报告相关信息
+        selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
+          if (res.data) {
+            this.selectReportByRequestNo = res.data.paymentList
+          } else {
+            Toast.fail({ duration: 1500, message: '数据异常，请刷新' })
+          }
+        })
+      } else {
+        selectReportByRequestNoApi(res.data.contractNo + '/' + this.dataList.dataId).then(res => {
+          if (res.data) {
+            this.selectReportByRequestNo = res.data.paymentList
+          } else {
+            Toast.fail({ duration: 1500, message: '数据异常，请刷新' })
+          }
+        })
+      }
       if (res.data) {
         this.projpcontractarchives = res.data
         this.paymentArchivesList = res.data.paymentArchivesList
@@ -361,21 +515,146 @@ export default {
       }
     })
   },
+  mounted () {
+    this.timeFormat(new Date())
+  },
   methods: {
-    tableRowClassName ({row, rowIndex}) {
-        if (row.hasModify === '1') {
-          return 'acceptance'
-        } else {
-          return 'isAcceptance'
-        }
+    showPopFn (date) {
+      this.value = date
+      this.show = true
+    },
+    showPopup () {
+      this.show = true
+    },
+    changeFn () { // 值变化是触发
+      this.changeDate = this.currentDate // Tue Sep 08 2020 00:00:00 GMT+0800 (中国标准时间)
+    },
+    confirmFn () { // 确定按钮
+      if (this.value === 'report') {
+        this.selectAttname.reportSigningDate = this.timeFormat(this.currentDate)
+      } else if (this.value === 'aRReport') {
+        this.selectAttname.aRReportDate = this.timeFormat(this.currentDate)
+      } else if (this.value === 'rReportDate') {
+        this.selectAttname.rReportDate = this.timeFormat(this.currentDate)
+      }
+      this.show = false
+    },
+    cancelFn () {
+      this.show = true
+    },
+    timeFormat (time) {
+      const y = time.getFullYear()
+      let m = time.getMonth() + 1
+      m = m < 10 ? '0' + m : m
+      let d = time.getDate()
+      d = d < 10 ? ('0' + d) : d
+      return y + '-' + m + '-' + d
+    },
+    tableRowClassName ({ row, rowIndex }) {
+      if (row.hasModify === '1') {
+        return 'acceptance'
+      } else {
+        return 'isAcceptance'
+      }
     },
     handleClick (data) {
       console.log(data.url)
       this.downLoad(data)
     },
+    // 修改提交
+    onSubmitEdit (data, value) {
+      let audit = ''
+      if (value === 'ok') {
+        audit = 'agree'
+      } else {
+        audit = 'disAgree'
+      }
+      let fileList = data.fileList.map(item => {
+        return JSON.stringify({
+          fileName: item.fileName,
+          url: item.url,
+          fileSize: item.fileSize,
+          fileId: item.fileId
+        })
+      })
+      const option = {
+        aRReportDate: data.aRReportDate,
+        audit: audit,
+        fileIdList: data.fileIdList,
+        file: fileList,
+        id: data.id,
+        paymentCondition: data.paymentCondition,
+        percent: data.percent,
+        rReportDate: data.rReportDate,
+        reportName: data.reportName,
+        reportSigningDate: data.reportSigningDate,
+        requestNo: data.requestNo
+      }
+      Dialog.confirm({
+        message: '确定要提交吗？'
+      })
+        .then(() => {
+          // on confirm
+          updateAttachApi(option).then((res) => {
+            if (res.resultCode === '200') {
+              Toast.success('请求成功')
+              this.dialogFileEdit = false
+              setTimeout(() =>{this.handleClickTable(this.tableList)},500)
+            } else {
+              Toast.fail(res.resultMessage)
+            }
+          })
+        })
+        .catch(() => {
+          // on cancel
+        })
+    },
+    // 修改附件信息
+    handleEditFile (file) {
+      this.dialogFileEdit = true
+      selectAttnameApi(file.id).then(res => {
+        this.selectAttname = res.data
+        if(!res.data.rReportDate) {
+          let time = new Date()
+          let y = time.getFullYear()
+          let m = time.getMonth() + 1
+          m = m < 10 ? '0' + m : m
+          let d = time.getDate()
+          d = d < 10 ? ('0' + d) : d
+          let date =  y + '-' + m + '-' + d
+          this.selectAttname.rReportDate = date
+        } else {}
+        this.selectAttnameFile = res.data.fileList
+      })
+    },
+    // 附件
+    handleClickFile (file) {
+      this.dialogFileVisible = true
+      selectAttnameApi(file.id).then(res => {
+        this.selectAttname = res.data
+        this.selectAttnameFile = res.data.fileList
+      })
+    },
+    // 表格
     handleClickTable (table) {
+      this.tableList = table
       this.dialogTableVisible = true
-      console.log(table)
+      const data = {
+        asc: false,
+        current: 1,
+        openSort: true,
+        searchCount: true,
+        size: 30,
+        condition: {
+          cpId: this.tableList.id,
+          requestNo: this.projpcontractarchives.requestNo
+        }
+      }
+      passedAndFormApi(data).then(res => {
+        if(res.data) {
+          this.gridData = res.data.records
+        }
+      })
     },
     // 处理序号
     indexMethods (index) {
@@ -395,5 +674,36 @@ export default {
 .el-table__body tr.hover-row>td {
     background: yellow;
 }
+}
+.dialog-report {
+  .el-dialog {
+    margin-top: 0 !important;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+  .el-dialog__body {
+    padding: 0;
+  }
+}
+.el-dialog__footer{
+  padding: 0;
+}
+.close-btn{
+  position: fixed;
+  bottom: 0;
+  padding: 10px 20px 28px;
+  right: 0;
+}
+.edit-dialog {
+  .van-cell:not(:last-child)::after {
+    border-bottom: 1px solid #ebedf0;
+  }
+}
+.van-toast, .van-dialog, .van-popup--bottom {
+  z-index: 9999 !important;
+}
+div.van-overlay {
+  z-index: 9000 !important;
 }
 </style>

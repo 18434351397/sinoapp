@@ -2,6 +2,7 @@ import axios from 'axios'
 import router from '../router'
 import { removeSession } from './auth'
 import { Toast } from 'vant'
+// import { Message } from 'element-ui';
 // import qs from 'qs'
 const serve = axios.create({
   headers: {
@@ -60,21 +61,22 @@ serve.interceptors.request.use(
 serve.interceptors.response.use(
   response => {
     // 下载处理
-    const headers = response.headers
-    if (headers['content-type'] === 'application/octet-stream;charset=utf-8') {
-      return response.data
-    }
+    // const headers = response.headers
+    // if (headers['content-type'] === 'application/octet-stream;charset=utf-8') {
+    //   return response.data
+    // }
     // 清理loading
     // Toast.clear()
     // 删除session信息
-    console.log(response.data.code)
+    // Message.success({
+    //   message: response.data,
+    // })
     if (response.data.code === '200') {
       Toast({
         closeOnClick: true,
         closeOnClickOverlay: true,
-        duration: 30000,
+        duration: 0,
         message: '账号已在其他设备登录，请重新登录! \n 如非本人操作，建议尽快修改密码！',
-        forbidClick: false
       })
       router.push('/')
       removeSession('userinfo')

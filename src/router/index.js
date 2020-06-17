@@ -72,7 +72,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log(to)
   if (to.matched.length === 0) { // 如果未匹配到路由
-    Toast.fail('手机端不支持，请到pc端办理')
+    Toast.fail({
+      message: '手机端不支持，请到pc端办理',
+      closeOnClick: true,
+      closeOnClickOverlay: true,
+      duration: 10000,
+    })
     // 解决页面不存在时，搜索栏有值的问题
     document.querySelector('.van-field__control').value = ''
     from.name ? next({ name: from.name }) : next('/') // 如果上级也未匹配到路由则跳转登录页面，如果上级能匹配到则转上级路由

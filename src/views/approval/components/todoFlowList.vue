@@ -87,7 +87,7 @@ export default {
     }
   },
   methods: {
-    loadData () {
+    loadData (sort) {
       const data = {
         asc: false,
         current: this.currentPage,
@@ -95,10 +95,20 @@ export default {
         searchCount: true,
         size: 10,
         condition: {
+          asc: sort,
           searchType: this.searchType,
           currUseerId: this.id,
           searchCondition: this.searchValue ? this.searchValue : ''
         }
+      }
+      if (sort === false) {
+        data.condition.asc = sort.toString()
+        data.current = 1
+      } else if (sort === true) {
+        data.condition.asc = 'true'
+        data.current = 1
+      } else {
+        data.condition.asc = 'true'
       }
       this.loading = true
       search(data).then(res => {

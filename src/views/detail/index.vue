@@ -256,6 +256,8 @@ export default {
     }
   },
   created () {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }
@@ -701,6 +703,7 @@ export default {
     },
     //  处理下一步节点的方法
     handleNextSelectOpts (data) {
+      console.log(data)
       data.nextTaskList.forEach((item) => {
         if (
           data.nextTaskList.length === 1 ||

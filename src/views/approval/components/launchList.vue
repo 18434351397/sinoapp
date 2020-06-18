@@ -33,9 +33,9 @@
           </div>
         </div>
       </div>
-      <div style="text-align: center;padding: 10px 0;" v-if="loading">
+      <!-- <div style="text-align: center;padding: 10px 0;" v-if="loading">
         <van-loading color="#1989fa" size="24px"></van-loading>
-      </div>
+      </div> -->
     </div>
     <div style="height: 100%;" v-show="!dataList.length && loading">
       <Loading />
@@ -51,6 +51,7 @@ import NoData from './NoDataShow'
 import Loading from './loading'
 import { search } from '../../../api/flowfrom'
 import { mapGetters } from 'vuex'
+import { Toast } from 'vant'
 export default {
   name: 'launchList',
   components: {
@@ -69,10 +70,10 @@ export default {
     }
   },
   created () {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     this.loadData()
-  },
-  mounted () {
-    window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
+    window.addEventListener('scroll', this.handleScroll)
   },
   watch: {
     searchValue: function (old, newV) {
@@ -87,7 +88,7 @@ export default {
   },
   methods: {
     loadData (sort) {
-      let data = {
+      const data = {
         asc: false,
         current: this.currentPage,
         openSort: true,
@@ -139,11 +140,19 @@ export default {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       var windowHeight = document.documentElement.clientHeight || document.body.clientHeight
       var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
-      // 是否滚动到底部的判断
-
-      if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
-        if (this.currentPage <= this.totalPage) {
-          this.loadData()
+      // 判断是否是第一次加载
+      if (scrollTop !== 0) {
+        // 是否滚动到底部的判断
+        if ((scrollTop + windowHeight) >= scrollHeight) {
+          if (this.currentPage <= this.totalPage) {
+            this.loadData()
+          } else {
+            Toast({
+              message: '没有更多数据了',
+              icon: 'orders-o'
+            })
+            window.removeEventListener('scroll', this.handleScroll)
+          }
         }
       }
     },
@@ -195,7 +204,8 @@ export default {
     }
   },
   beforeDestroy () {
-    window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
+    this.currentPage = 1
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>

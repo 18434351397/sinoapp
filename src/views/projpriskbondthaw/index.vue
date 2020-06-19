@@ -211,11 +211,6 @@ export default {
     } else {}
     projpriskbondthawList(this.dataList.dataId).then(res => {
       if (res.resultCode === '200') {
-        if (res.data.thawTime = 'null' ) {
-          res.data.thawTime = '' 
-        } else {
-          res.data.thawTime = res.data.thawTime
-        }
         this.projpriskbondthawList = res.data
         this.files = res.data.fileList ? res.data.fileList : []
         this.fileList = this.files.map(item => {
@@ -227,8 +222,10 @@ export default {
           })
         })
       } else {
-        throw new '数据异常'()
+        console.log('数据异常')
       }
+    }).catch(err => {
+      console.log(err)
     })
   },
   methods: {

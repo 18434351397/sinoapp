@@ -464,16 +464,6 @@ export default {
       this.fileBtn = true
     } else {}
     projpcontractarchivesApi(this.dataList.dataId).then(res => {
-      if (res.data.operationEndTime = 'null') {
-        res.data.operationEndTime = ''
-      } else {
-        res.data.operationEndTime = res.data.operationEndTime
-      }
-      if (res.data.operationStartTime = 'null') {
-        res.data.operationStartTime = ''
-      } else {
-        res.data.operationStartTime = res.data.operationStartTime
-      }
       if (this.dataList.currFlowName === '合同存档' && this.dataList.formTitle.indexOf('验收报告') !== -1) {
         // 验收报告相关信息
         selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
@@ -591,7 +581,7 @@ export default {
       } else {
         audit = 'disAgree'
       }
-      let fileList = data.fileList.map(item => {
+      const fileList = data.fileList.map(item => {
         return JSON.stringify({
           fileName: item.fileName,
           url: item.url,
@@ -623,7 +613,7 @@ export default {
               this.dialogFileEdit = false
               setTimeout(() => {
                 this.handleClickTable(this.tableList)
-              },500)
+              }, 500)
             } else {
               Toast.fail(res.resultMessage)
             }
@@ -638,14 +628,14 @@ export default {
       this.dialogFileEdit = true
       selectAttnameApi(file.id).then(res => {
         this.selectAttname = res.data
-        if(!res.data.rReportDate) {
-          let time = new Date()
-          let y = time.getFullYear()
+        if (!res.data.rReportDate) {
+          const time = new Date()
+          const y = time.getFullYear()
           let m = time.getMonth() + 1
           m = m < 10 ? '0' + m : m
           let d = time.getDate()
           d = d < 10 ? ('0' + d) : d
-          let date =  y + '-' + m + '-' + d
+          const date = y + '-' + m + '-' + d
           this.selectAttname.rReportDate = date
         } else {}
         this.selectAttnameFile = res.data.fileList
@@ -675,7 +665,7 @@ export default {
         }
       }
       passedAndFormApi(data).then(res => {
-        if(res.data) {
+        if (res.data) {
           this.gridData = res.data.records
         }
       })

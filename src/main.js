@@ -4,14 +4,13 @@ import router from './router'
 import store from './store'
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button, Dialog, Drawer  } from 'element-ui'
+import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button, Dialog } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
 // import './mock/index'
 
 Vue.use(Vant)
 Vue.use(Dialog)
-Vue.use(Drawer)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Table)

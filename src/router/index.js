@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
       message: '手机端不支持，请到pc端办理',
       closeOnClick: true,
       closeOnClickOverlay: true,
-      duration: 10000,
+      duration: 10000
     })
     // 解决页面不存在时，搜索栏有值的问题
     document.querySelector('.van-field__control').value = ''

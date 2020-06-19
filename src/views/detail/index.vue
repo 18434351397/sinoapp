@@ -256,6 +256,8 @@ export default {
     }
   },
   created () {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }
@@ -418,22 +420,26 @@ export default {
     },
     // 点击提交按钮要进行的操作
     isSubmit (values) {
-      values.meetingUsers = this.signIds.toString()
-      delete values.radio
-      delete values.undefined
-      values.submitTask = this.region.id ? this.region.id : '【下一步】'
-      if (values.meetingUsers) {
-        values.content = '【发起会签】' + this.signText
-      } else if (values.commitType === 'terminate') {
-        values.content = this.message
+      if (this.flowList.status === '3' && this.flowList.statusDes === '会签中') {
+        values.content = values.content + ' >>>>' + '【下一步】'
       } else {
-        if (values.submitTask !== '【下一步】') {
-          values.content =
-            values.content +
-            ' >>>>' +
-            document.querySelector('.el-select').children[0].children[0].value
+        values.meetingUsers = this.signIds.toString()
+        delete values.radio
+        delete values.undefined
+        values.submitTask = this.region.id ? this.region.id : '【下一步】'
+        if (values.meetingUsers) {
+          values.content = '【发起会签】' + this.signText
+        } else if (values.commitType === 'terminate') {
+          values.content = this.message
         } else {
-          values.content = values.content + ' >>>>' + '【下一步】'
+          if (values.submitTask !== '【下一步】') {
+            values.content =
+              values.content +
+              ' >>>>' +
+              document.querySelector('.el-select').children[0].children[0].value
+          } else {
+            values.content = values.content + ' >>>>' + '【下一步】'
+          }
         }
       }
       // 接口调用

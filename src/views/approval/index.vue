@@ -223,7 +223,7 @@ export default {
 </style>
 <style lang="less">
 .van-toast {
-  background-color: rgba(210, 199, 199, 0.3);
+  background-color: rgba(241, 239, 239, 0.8);
   color: #000;
 }
 .van-toast__loading {
@@ -241,10 +241,14 @@ export default {
       padding-right: 12px;
       .el-input {
         input {
-          width: 132px;
+          width: 10em;
         }
       }
     }
+  }
+  .el-input__inner {
+    height: 36px;
+    line-height: 36px;
   }
 }
 div .sort{

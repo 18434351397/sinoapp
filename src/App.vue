@@ -55,7 +55,6 @@ div.app-title {
   }
 
 .van-toast {
-  background-color:rgba(210,199,199,0.3);
     color: #000;
 }
 .van-toast__loading {
@@ -65,6 +64,38 @@ div.app-title {
 .van-field__control {
   div {
     word-break: break-all;
+  }
+}
+
+// 表格文字抖动样式
+body .el-table th.gutter {
+  display: table-cell !important;
+}
+body .el-table colgroup.gutter {
+  display: table-cell !important;
+}
+.el-table__body {
+  // 使表格兼容safari，不错位
+  width: 100%;
+  table-layout: fixed !important;
+}
+// .el-table{
+//   overflow-x: scroll;
+//   width:99.9%!important;
+//   -webkit-overflow-scrolling:touch
+// }
+// .el-table__footer-wrapper, .el-table__header-wrapper{
+//   overflow: auto;
+// }
+.el-table__body, .el-table__footer, .el-table__header{
+  width: calc(100% - 2%) !important;
+}
+
+// 到底了提示单独样式
+div.van-toast {
+  background-color: rgba(241, 239, 239, 0.8);
+  i.van-toast__icon {
+    font-size: 64px;
   }
 }
 </style>

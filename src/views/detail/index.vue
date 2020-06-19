@@ -552,6 +552,9 @@ export default {
                   this.$router.push('/approval')
                 }
               })
+            } else if(res.resultCode === '409') {
+              Toast.fail(res.bizResultMessage)
+              this.url = this.submitUrl
             } else {
               Toast.fail(res.resultMessage)
               this.url = this.submitUrl

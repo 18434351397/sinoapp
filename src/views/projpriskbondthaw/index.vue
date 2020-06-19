@@ -196,12 +196,12 @@ export default {
   },
   created () {
     if (
-      this.dataList.currFlowName === '解冻风险保证金' && 
+      this.dataList.currFlowName === '解冻风险保证金' &&
       this.dataList.currFlowId === 'UnfreezeApprove' &&
       this.dataList.currTaskDefinitionName === '风控法规部信用管理专员' &&
       this.dataList.currTaskDefinitionKey === 'RiskRuleCreditCommissioner'
-      ) {
-        this.hasThawTime = true
+    ) {
+      this.hasThawTime = true
     } else {}
     projpriskbondthawList(this.dataList.dataId).then(res => {
       if (res.data) {

@@ -464,8 +464,16 @@ export default {
       this.fileBtn = true
     } else {}
     projpcontractarchivesApi(this.dataList.dataId).then(res => {
-      res.data.operationEndTime = 'null' ? '' : res.data.operationEndTime
-      res.data.operationStartTime = 'null' ? '' : res.data.operationStartTime
+      if (res.data.operationEndTime = 'null') {
+        res.data.operationEndTime = ''
+      } else {
+        res.data.operationEndTime = res.data.operationEndTime
+      }
+      if (res.data.operationStartTime = 'null') {
+        res.data.operationStartTime = ''
+      } else {
+        res.data.operationStartTime = res.data.operationStartTime
+      }
       if (this.dataList.currFlowName === '合同存档' && this.dataList.formTitle.indexOf('验收报告') !== -1) {
         // 验收报告相关信息
         selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
@@ -554,7 +562,7 @@ export default {
       this.show = false
     },
     cancelFn () {
-      this.show = true
+      this.show = false
     },
     timeFormat (time) {
       const y = time.getFullYear()

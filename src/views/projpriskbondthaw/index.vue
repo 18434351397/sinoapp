@@ -145,6 +145,7 @@
         <div style="text-align: left;margin: 0;">{{projpriskbondthawList.thawTime}}</div>
       </template>
     </van-field>
+
     <van-field
       class="thawTime-field"
       v-if="hasThawTime"
@@ -160,6 +161,7 @@
         <div style="text-align: left;margin: 0;">{{projpriskbondthawList.thawTime}}</div>
       </template>
     </van-field>
+
     <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
           <van-datetime-picker v-model="currentDate" type="date" @change="changeFn()" @confirm="confirmFn()" @cancel="cancelFn()" />
     </van-popup>
@@ -208,8 +210,12 @@ export default {
       this.hasThawTime = true
     } else {}
     projpriskbondthawList(this.dataList.dataId).then(res => {
-      if (res.data) {
-        res.data.thawTime = 'null' ? '' : res.data.thawTime
+      if (res.resultCode === '200') {
+        if (res.data.thawTime = 'null' ) {
+          res.data.thawTime = '' 
+        } else {
+          res.data.thawTime = res.data.thawTime
+        }
         this.projpriskbondthawList = res.data
         this.files = res.data.fileList ? res.data.fileList : []
         this.fileList = this.files.map(item => {
@@ -240,7 +246,7 @@ export default {
       this.show = false
     },
     cancelFn () {
-      this.show = true
+      this.show = false
     },
     timeFormat (time) {
       const y = time.getFullYear()

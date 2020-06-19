@@ -21,9 +21,8 @@
         </div>
       </van-card>
       <div style="padding: 10px;">
-        <van-dialog id="van-dialog" />
         <van-button @click="editPassword" round type="default" style="width: 100%;margin-bottom: 20px;position: fixed;top: 190px;left: 0;">修改密码</van-button>
-        <van-button @click="loginout" round id="loginout" type="default" style="width: 100%;position: fixed;bottom: 100px;left: 0;">退出</van-button>
+        <van-button @click="loginout($event)" round id="loginout" type="default" style="width: 100%;position: fixed;bottom: 100px;left: 0;">退出</van-button>
       </div>
 
     </div>
@@ -34,15 +33,23 @@ import { Dialog } from 'vant'
 import { getSession } from '../../utils/auth'
 
 export default {
-  name: 'index',
+  name: 'my',
   data () {
     return {
       imageURL: 'touxiang',
       title: '陈景硕',
       message: 'chenjingshuo',
       num: '>',
-      userinfo: getSession('userinfo')
+      userinfo: getSession('userinfo'),
+      show: false
     }
+  },
+  created () {
+    // this.enterKeyup()
+  },
+  destroyed () {
+    this.enterKeyupDestroyed()
+    // window.removeEventListener('scroll')
   },
   methods: {
     toPerson () {
@@ -52,19 +59,46 @@ export default {
     editPassword () {
       this.$router.push('/editPassword')
     },
-    loginout () {
-      Dialog.confirm({
-        message: '你确定要退出吗？'
-      }).then(() => {
-        // sessionStorage.removeItem('userinfo')
-        this.$store.dispatch('loginout')
-        this.$router.push('/')
-      }).catch(() => {
-        // on close
-      })
+    loginout (e) {
+      e.stopPropagation()
+      this.show = true
+      if (this.show === true) {
+        Dialog.confirm({
+          message: '你确定要退出吗？'
+        }).then(() => {
+          // sessionStorage.removeItem('userinfo')
+          this.$store.dispatch('setactive', 0)
+          this.$store.dispatch('loginout')
+          this.$router.push('/')
+        }).catch(() => {
+          // on close
+        })
+      }
     },
-    beforeDestroy () {
-      window.removeEventListener('scroll')
+    // 监听键盘事件--空格键
+    enterKey (event) {
+      const componentName = this.$options.name
+      if (componentName === 'my') {
+        const code = event.keyCode
+          ? event.keyCode
+          : event.which
+            ? event.which
+            : event.charCode
+        if (code === 32) {
+          this.show = false
+          Dialog.close()
+          this.$store.dispatch('loginout')
+          this.$router.push('/')
+        }
+      }
+    },
+    // 退出成功后，摧毁监听事件
+    enterKeyupDestroyed () {
+      document.removeEventListener('keyup', this.enterKey)
+    },
+    // 调用监听事件
+    enterKeyup () {
+      document.addEventListener('keyup', this.enterKey)
     }
   }
 }

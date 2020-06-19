@@ -532,6 +532,14 @@ export default {
           return
         }
       }
+      // 商机变更--处理
+      if (
+        this.dataList.currFlowId === 'DeptGradApprove'
+      ) {
+        delete values.fileList
+        delete values.fileIdList
+        values.projpVisitList = this.$refs.detail.custList.projpVisitList
+      }
       console.log(data)
       this.submit(data)
     },

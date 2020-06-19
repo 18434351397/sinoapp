@@ -1,6 +1,6 @@
 const api = {
   loginUrl: '/admin/login/ajax',
-  loginOutUrl: '/logout?clientType=pc',
+  loginOutUrl: '/logout?clientType=mobile',
   getInfoUrl: '/app/admin/user/getUserAll',
   smsSendUrl: '/sms/send',
   editPasswordUrl: '/app/admin/user/changePswd',

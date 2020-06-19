@@ -115,10 +115,7 @@
         @confirm="isshowcapitalizedProject"
       />
     </van-popup>
-    <van-field v-if="dataList.currTaskDefinitionKey === 'Accountant'" name="cou" v-model="custList.cou" type="text" label="记字:">
-      <template #input>
-        <div style="text-align: left;margin: 0;">{{custList.cou}}</div>
-      </template>
+    <van-field @blur="checkCou" v-if="dataList.currTaskDefinitionKey === 'Accountant'" name="cou" v-model="custList.cou" type="text" label="记字:">
     </van-field>
     <van-field name="payeeName" v-model="custList.payeeName" type="text" label="领款人:" readonly>
       <template #input>
@@ -279,7 +276,7 @@
 </template>
 
 <script>
-import { bizfeesreimbursementformList, selectByUserIdLoanList, getBySubCodes } from '../../api/costManagementApi'
+import { bizfeesreimbursementformList, selectByUserIdLoanList, getBySubCodes, fessCheckInoId } from '../../api/costManagementApi'
 
 export default {
   name: 'index',
@@ -289,9 +286,9 @@ export default {
       custList: [],
       costDetailList: [],
       feesReimbursementLoanVOList: [],
-      reimbursementAmount: null, // 报销总金额
-      cleranloanAmount: null, // 清借款总金额
-      payAmount: null, // 应付款金额
+      reimbursementAmount: 0, // 报销总金额
+      cleranloanAmount: 0, // 清借款总金额
+      payAmount: 0, // 应付款金额
       totalLoanAmount: 0.00,
       file: [],
       fileList: [],
@@ -303,7 +300,8 @@ export default {
       personTypeList: [],
       capitalizedProjectList: [],
       employeeTypes: null,
-      capitalizedProjects: null
+      capitalizedProjects: null,
+      isCou: false
     }
   },
   created () {
@@ -311,6 +309,29 @@ export default {
     this.getBySubCodesList()
   },
   methods: {
+    // 检查记字号
+    checkCou () {
+      const data = {
+        cou: this.custList.cou,
+        company: this.custList.companyCodeU
+      }
+      // 记字号的处理
+      fessCheckInoId(data).then(res => {
+        debugger
+        if (res.resultCode !== '200') {
+          this.$toast(res.data.bizResultMessage)
+          this.custList.cou = ''
+          this.isCou = false
+        }
+        if (res.data === 'false') {
+          this.$toast('输入记字有误，请重新输入！')
+          this.custList.cou = ''
+          this.isCou = false
+        } else {
+          this.isCou = true
+        }
+      })
+    },
     // 获取数据
     loadData () {
       bizfeesreimbursementformList(this.dataList.dataId).then(res => {

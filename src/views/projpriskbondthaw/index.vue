@@ -155,7 +155,11 @@
       label="解冻时间"
       colon
       :rules="[{ required: true, message: '请选择解冻时间' }]"
-    />
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpriskbondthawList.thawTime}}</div>
+      </template>
+    </van-field>
     <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
           <van-datetime-picker v-model="currentDate" type="date" @change="changeFn()" @confirm="confirmFn()" @cancel="cancelFn()" />
     </van-popup>
@@ -205,6 +209,7 @@ export default {
     } else {}
     projpriskbondthawList(this.dataList.dataId).then(res => {
       if (res.data) {
+        res.data.thawTime = 'null' ? '' : res.data.thawTime
         this.projpriskbondthawList = res.data
         this.files = res.data.fileList ? res.data.fileList : []
         this.fileList = this.files.map(item => {

@@ -362,7 +362,11 @@
           v-model="selectAttname.reportSigningDate"
           label="验收实际签订日期"
           colon
-        />
+        >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.reportSigningDate}}</div>
+        </template>
+        </van-field>
         <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
           <van-datetime-picker v-model="currentDate" type="date" @change="changeFn()" @confirm="confirmFn()" @cancel="cancelFn()" />
         </van-popup>
@@ -372,7 +376,11 @@
           v-model="selectAttname.aRReportDate"
           label="验收实际收到日期"
           colon
-        />
+        >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.aRReportDate}}</div>
+        </template>
+        </van-field>
         <van-field
           name="rReportDate"
           @click="showPopFn('rReportDate')"
@@ -380,7 +388,11 @@
           label="确认业绩时间"
           colon
           :rules="[{ required: true, message: '请选择确认业绩时间' }]"
-        />
+        >
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{selectAttname.rReportDate}}</div>
+        </template>
+        </van-field>
       </van-form>
       <div class="table-title">附件列表</div>
       <el-table border :data="selectAttnameFile" style="width: 100%">
@@ -452,6 +464,8 @@ export default {
       this.fileBtn = true
     } else {}
     projpcontractarchivesApi(this.dataList.dataId).then(res => {
+      res.data.operationEndTime = 'null' ? '' : res.data.operationEndTime
+      res.data.operationStartTime = 'null' ? '' : res.data.operationStartTime
       if (this.dataList.currFlowName === '合同存档' && this.dataList.formTitle.indexOf('验收报告') !== -1) {
         // 验收报告相关信息
         selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
@@ -599,7 +613,9 @@ export default {
             if (res.resultCode === '200') {
               Toast.success('请求成功')
               this.dialogFileEdit = false
-              setTimeout(() =>{this.handleClickTable(this.tableList)},500)
+              setTimeout(() => {
+                this.handleClickTable(this.tableList)
+              },500)
             } else {
               Toast.fail(res.resultMessage)
             }

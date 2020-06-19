@@ -18,20 +18,6 @@
       type="text"
       readonly
     />
-    <van-field
-      style="display: none;"
-      name="reqDeptId"
-      v-model="custList.reqDeptId"
-      type="text"
-      readonly
-    />
-    <van-field
-      style="display: none;"
-      name="reqUserId"
-      v-model="custList.reqUserId"
-      type="text"
-      readonly
-    />
     <van-field style="display: none;" name="id" v-model="custList.id" type="text" readonly />
     <van-field name="custname" v-model="custList.custname" type="text" label="客户:" readonly>
       <template #input>
@@ -217,34 +203,29 @@
       <div
         class="table-title"
       >客户拜访信息</div>
-      <el-table border :data="postmanageList" style="width: 100%">
-        <el-table-column label="被访人姓名" prop="fileName"></el-table-column>
-        <el-table-column label="职务" prop="fileName"></el-table-column>
-        <el-table-column label="拜访时间" prop="fileName"></el-table-column>
-        <el-table-column label="拜访结果" prop="fileName"></el-table-column>
+      <el-table border :data="custList.projpVisitList" style="width: 100%">
+        <el-table-column label="被访人姓名" prop="linkmanName"></el-table-column>
+        <el-table-column label="职务" prop="jobtitle"></el-table-column>
+        <el-table-column label="拜访时间" prop="visitdate"></el-table-column>
+        <el-table-column label="拜访结果" prop="visitresult"></el-table-column>
       </el-table>
     </div>
     <div class="title">中标确认信息</div>
-    <van-field
-      name="responsibleName"
-      v-model="custList.responsibleName"
-      type="text"
-      label="是否中标:"
-      readonly
-    >
+    <van-field label="是否中标" v-model="custList.ishit" readonly colon>
       <template #input>
-        <div style="text-align: left;margin: 0;">{{custList.responsibleName}}</div>
+        <div v-if="custList.ishit === '1'" style="margin: 0;">是</div>
+        <div v-else style="margin: 0;">否</div>
       </template>
     </van-field>
     <van-field
-      name="responsibleName"
-      v-model="custList.responsibleName"
+      name="hiturl"
+      v-model="custList.hiturl"
       type="text"
       label="中标公告地址:"
       readonly
     >
       <template #input>
-        <div style="text-align: left;margin: 0;">{{custList.responsibleName}}</div>
+        <div style="text-align: left;margin: 0;">{{custList.hiturl}}</div>
       </template>
     </van-field>
   </div>

@@ -74,7 +74,7 @@
       </template>
     </van-field>
     <van-field
-      v-if="dataList.currTaskDefinitionKey === 'Accountant'"
+      v-if="dataList.currTaskDefinitionKey === 'Accountant'  && this.active === 0"
       name="employeeType"
       readonly
       clickable
@@ -95,7 +95,7 @@
       />
     </van-popup>
     <van-field
-      v-if="dataList.currTaskDefinitionKey === 'Accountant'"
+      v-if="dataList.currTaskDefinitionKey === 'Accountant' && this.active === 0"
       readonly
       clickable
       name="capitalizedProject"
@@ -115,7 +115,7 @@
         @confirm="isshowcapitalizedProject"
       />
     </van-popup>
-    <van-field @blur="checkCou" v-if="dataList.currTaskDefinitionKey === 'Accountant'" name="cou" v-model="custList.cou" type="text" label="记字:">
+    <van-field @blur="checkCou" v-if="dataList.currTaskDefinitionKey === 'Accountant'  && this.active === 0" name="cou" v-model="custList.cou" type="text" label="记字:">
     </van-field>
     <van-field name="payeeName" v-model="custList.payeeName" type="text" label="领款人:" readonly>
       <template #input>
@@ -277,7 +277,7 @@
 
 <script>
 import { bizfeesreimbursementformList, selectByUserIdLoanList, getBySubCodes, fessCheckInoId } from '../../api/costManagementApi'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'index',
   data () {
@@ -304,7 +304,11 @@ export default {
       isCou: false
     }
   },
+  computed: {
+    ...mapGetters(['active'])
+  },
   created () {
+    console.log(this.active)
     this.loadData()
     this.getBySubCodesList()
   },

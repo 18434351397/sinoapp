@@ -59,7 +59,9 @@
       colon
       readonly
     >
-    
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpprojectinfoform.projectNo}}</div>
+      </template>
     </van-field>
     <van-field
       type="text"
@@ -93,7 +95,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.reqUserName}}</div>
       </template>
     </van-field>
@@ -105,7 +107,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.reqDeptName}}</div>
       </template>
     </van-field>
@@ -117,7 +119,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.pmUserName}}</div>
       </template>
     </van-field>
@@ -129,7 +131,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.ownDeptName}}</div>
       </template>
     </van-field>
@@ -154,7 +156,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.contractNo}}</div>
       </template>
     </van-field>
@@ -166,7 +168,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.cPersion}}</div>
       </template>
     </van-field>
@@ -178,7 +180,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.creimbursement}}</div>
       </template>
     </van-field>
@@ -190,7 +192,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.startDate}}</div>
       </template>
     </van-field>
@@ -202,7 +204,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.endDate}}</div>
       </template>
     </van-field>
@@ -214,7 +216,7 @@
       colon
       readonly
     >
-     <template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{projpprojectinfoform.projectExplain}}</div>
       </template>
     </van-field>

@@ -464,8 +464,8 @@ export default {
       this.fileBtn = true
     } else {}
     projpcontractarchivesApi(this.dataList.dataId).then(res => {
-      res.data.operationEndTime = ''
-      res.data.operationStartTime = ''
+      res.data.operationEndTime = 'null' ? '' : res.data.operationEndTime
+      res.data.operationStartTime = 'null' ? '' : res.data.operationStartTime
       if (this.dataList.currFlowName === '合同存档' && this.dataList.formTitle.indexOf('验收报告') !== -1) {
         // 验收报告相关信息
         selectReportByRequestNoApi(res.data.contractNo + '/' + res.data.requestNo).then(res => {
@@ -613,7 +613,9 @@ export default {
             if (res.resultCode === '200') {
               Toast.success('请求成功')
               this.dialogFileEdit = false
-              setTimeout(() =>{this.handleClickTable(this.tableList)},500)
+              setTimeout(() => {
+                this.handleClickTable(this.tableList)
+              },500)
             } else {
               Toast.fail(res.resultMessage)
             }

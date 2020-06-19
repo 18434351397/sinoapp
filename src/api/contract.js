@@ -15,7 +15,7 @@ const api = {
   selectReportByRequestNo: '/app/pro/projpcontractreview/selectReportByRequestNo', // 验收报告相关信息
   passedAndForm: '/app/pro/projpcontractreportattachment/form/list/passedAndForm', // 验收报告记录
   selectAttname: '/app/pro/projpcontractreportattachment/form/selectAttname', // 验收报告附件
-  updateAttach: 'app/pro/projpcontractreportattachment/form/updateAttach', // 验收报告附件审核
+  updateAttach: '/app/pro/projpcontractreportattachment/form/updateAttach', // 验收报告附件审核
   projppayreq: '/app/form/projppayreq/detail', // 合同付款
   projpcontractpayment: '/app/pro/projpcontractpayment/contract', // 合同付款金额
   cashStatus: '/app/form/projppayreq/contract/cash/status/', // 现金流状态

@@ -36,13 +36,13 @@ const instance = axios.create({
 serve.interceptors.request.use(
   config => {
     console.log(router.currentRoute.path)
-    // if (router.currentRoute.path !== '/approval') {
-    // } else {
-    //   Toast.loading({
-    //     message: '加载中...',
-    //     forbidClick: true
-    //   })
-    // }
+    if (router.currentRoute.path !== '/approval') {
+    } else {
+      Toast.loading({
+        message: '加载中...',
+        forbidClick: true
+      })
+    }
     if (config.method === 'post') {
       // config.data = qs.stringify(config.data)
     }
@@ -66,7 +66,7 @@ serve.interceptors.response.use(
     //   return response.data
     // }
     // 清理loading
-    // Toast.clear()
+    Toast.clear()
     // 删除session信息
     // Message.success({
     //   message: response.data,
@@ -76,7 +76,7 @@ serve.interceptors.response.use(
         closeOnClick: true,
         closeOnClickOverlay: true,
         duration: 0,
-        message: '账号已在其他设备登录，请重新登录! \n 如非本人操作，建议尽快修改密码！',
+        message: '账号已在其他设备登录，请重新登录! \n 如非本人操作，建议尽快修改密码！'
       })
       router.push('/')
       removeSession('userinfo')

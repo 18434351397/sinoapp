@@ -33,9 +33,9 @@
           </div>
         </div>
       </div>
-      <div style="text-align: center;padding: 10px 0;" v-if="loading">
+      <!-- <div style="text-align: center;padding: 10px 0;" v-if="loading">
         <van-loading color="#1989fa" size="24px"></van-loading>
-      </div>
+      </div> -->
     </div>
     <div style="height: 100%;" v-show="!dataList.length && loading">
       <Loading />
@@ -51,7 +51,8 @@ import NoData from './NoDataShow'
 import Loading from './loading'
 import { search } from '../../../api/flowfrom'
 import { mapGetters } from 'vuex'
-
+import { Toast } from 'vant'
+import * as noMoreHei from '../../../assets/image/noMoreHei.png'
 export default {
   name: 'todoFlowList',
   components: {
@@ -59,8 +60,9 @@ export default {
     Loading
   },
   created () {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     this.loadData()
-    window.addEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
   },
   watch: {
     searchValue: function (old, newV) {
@@ -73,8 +75,6 @@ export default {
   computed: {
     ...mapGetters(['searchValue'])
   },
-  mounted () {
-  },
   data () {
     return {
       dataList: [],
@@ -86,7 +86,13 @@ export default {
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }
   },
+  mounted () {
+    this.tabScroll()
+  },
   methods: {
+    tabScroll () {
+      window.addEventListener('scroll', this.handleScroll)
+    },
     loadData (sort) {
       const data = {
         asc: false,
@@ -141,10 +147,19 @@ export default {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       var windowHeight = document.documentElement.clientHeight || document.body.clientHeight
       var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
-      // 是否滚动到底部的判断
-      if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
-        if (this.currentPage <= this.totalPage) {
-          this.loadData()
+      // 判断是否是第一次加载
+      if (scrollTop !== 0) {
+        // 是否滚动到底部的判断
+        if ((scrollTop + windowHeight) >= scrollHeight) {
+          if (this.currentPage <= this.totalPage) {
+            this.loadData()
+          } else {
+            Toast({
+              message: '我是有底线的',
+              icon: noMoreHei,
+              duration: 2000
+            })
+          }
         }
       }
     },
@@ -196,22 +211,21 @@ export default {
       }
     }
   },
-
   beforeDestroy () {
-    window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000), true)
+    this.currentPage = 1
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 div {
   margin: 0;
 }
-
   .todoListBox {
     height: auto;
     background: #f8f8f8;
-    padding: 10px 10px 80px;
+    padding: 1em 1em 6em;
     box-sizing: border-box;
   }
 

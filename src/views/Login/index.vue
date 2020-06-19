@@ -195,7 +195,8 @@ export default {
   @import '../../assets/css/Login.css';
   /*@import '@/assets/css/Login.css';*/
   .van-toast {
-    background-color:rgba(210,199,199,0.3);
+    background-color: rgba(241, 239, 239, 0.8);
+    /* rgba(210, 199, 199, 0.3); */
   }
 </style>
 <style lang="less">

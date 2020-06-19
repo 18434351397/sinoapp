@@ -52,7 +52,7 @@ import Loading from './loading'
 import { search } from '../../../api/flowfrom'
 import { mapGetters } from 'vuex'
 import { Toast } from 'vant'
-
+import * as noMoreHei from '../../../assets/image/noMoreHei.png'
 export default {
   name: 'todoFlowList',
   components: {
@@ -155,10 +155,10 @@ export default {
             this.loadData()
           } else {
             Toast({
-              message: '没有更多数据了',
-              icon: 'orders-o'
+              message: '我是有底线的',
+              icon: noMoreHei,
+              duration: 2000
             })
-            window.removeEventListener('scroll', this.handleScroll)
           }
         }
       }
@@ -218,15 +218,14 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 div {
   margin: 0;
 }
-
   .todoListBox {
     height: auto;
     background: #f8f8f8;
-    padding: 10px 10px 80px;
+    padding: 1em 1em 6em;
     box-sizing: border-box;
   }
 

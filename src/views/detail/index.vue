@@ -514,6 +514,18 @@ export default {
         url: this.url,
         data: values
       }
+      // 费用会计--报销发起--记字号处理
+      if (
+        this.dataList.currFlowId === 'ReimbursementApprove' &&
+        this.dataList.currUserName === '刘玉丽' &&
+        this.dataList.currTaskDefinitionKey === 'Accountant' &&
+        this.dataList.currTaskDefinitionName === '费用会计'
+      ) {
+        if (!this.$refs.detail.isCou) {
+          this.$toast('输入记字有误，请重新输入！')
+          return
+        }
+      }
       console.log(data)
       this.submit(data)
     },
@@ -815,7 +827,6 @@ export default {
       } else {
       }
       this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
-      console.log(this.nextSelectOpts)
       this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
     },
     handleContent (data) {},

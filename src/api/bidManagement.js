@@ -2,7 +2,8 @@ import request from '@/utils/request'
 const api = {
   projptenderletterList: '/app/form/projptenderletter/detail',
   projptenderpreqList: '/app/form/projptenderpreq/detail/pay',
-  projptenderpreqpayList: '/app/form/projptenderpreq/detail'
+  projptenderpreqpayList: '/app/form/projptenderpreq/detail',
+  projpchanceformList: '/app/form/projpchanceform/detail'
 }
 // 投标保证金
 export async function projptenderpreqList (data) {
@@ -22,6 +23,13 @@ export async function projptenderpreqpayList (data) {
 export async function projptenderletterList (data) {
   return request({
     url: api.projptenderletterList + '/' + data,
+    method: 'get'
+  })
+}
+// 商机修订
+export async function projpchanceformList (data) {
+  return request({
+    url: api.projpchanceformList + '/' + data,
     method: 'get'
   })
 }

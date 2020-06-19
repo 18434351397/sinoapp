@@ -8,7 +8,8 @@ const api = {
   bizfeestransferform: '/app/form/bizfeestransferform/detail', // 内部收益划转
   bizfeesreimbursementform: '/app/form/bizfeesreimbursementform/detail', // 分摊报销
   bizfeesspecialtransferform: '/app/form/bizfeesspecialtransferform/detail', // 特殊收益划转
-  SubCodes: '/app/admin/dictionary/getBySubCodes' // 特殊收益划转
+  SubCodes: '/app/admin/dictionary/getBySubCodes', // 特殊收益划转
+  fessCheckInoId: '/app/form/bizfeesreimbursementform/fessCheckInoId' // 检查记字号接口地址
 }
 
 // 客户属性
@@ -22,6 +23,13 @@ export async function getBySubCodes (code) {
 export async function bizfeesreimbursementformList (data) {
   return request({
     url: api.bizfeesreimbursementformList + '/' + data,
+    method: 'get'
+  })
+}
+// 报销发起
+export async function fessCheckInoId (data) {
+  return request({
+    url: api.fessCheckInoId + '/' + data.cou + '/' + data.company,
     method: 'get'
   })
 }

@@ -347,7 +347,6 @@ export default {
         }
         // 计算 报销总金额 清借款总金额 应付款金额 的字段
         res.data.feesReimbursementDetailVOList.forEach(item => {
-          debugger
           this.reimbursementAmount = (Number(this.reimbursementAmount) + Number(item.amount)).toFixed(2)
           this.cleranloanAmount = (Number(this.cleranloanAmount + Number(item.loanAmount))).toFixed(2)
           this.payAmount = (Number(this.reimbursementAmount) - Number(this.cleranloanAmount)).toFixed(2)

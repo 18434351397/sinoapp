@@ -162,11 +162,13 @@
         <div style="text-align: left;margin: 0;">{{contractList.operationEndTime}}</div>
       </template>
     </van-field>
-    <van-field type="text" v-model="contractList.endCustName" label="最终客户" colon readonly>
-      <template #input>
-        <div style="text-align: left;margin: 0;">{{contractList.endCustName}}</div>
-      </template>
-    </van-field>
+    <!-- <div v-if="contractList.isEndCust==='0'">
+      <van-field type="text"  v-model="contractList.endCustName" label="最终客户" colon readonly>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{contractList.endCustName}}</div>
+        </template>
+      </van-field>
+    </div> -->
     <div>
       <div class="table-title">收入明细</div>
       <el-table border :data="incomeList" style="width: 100%">
@@ -606,11 +608,7 @@
       placeholder="请输入税金"
       label="税金"
       colon
-    >
-      <template #input>
-        <div style="text-align: left;margin: 0;">{{contractList.tax}}</div>
-      </template>
-    </van-field>
+    />
     <van-field type="text" v-if="!isCustPro" v-model="contractList.tax" label="税金" colon readonly>
       <template #input>
         <div style="text-align: left;margin: 0;">{{contractList.tax}}</div>
@@ -654,8 +652,7 @@
         <div style="text-align: left;margin: 0;">{{contractList.netProfitRate}}</div>
       </template>
     </van-field>
-    <div style="padding: 8px 36px 16px;
-    background: #fff;" v-if="isCustPro">
+    <div class="taxes-btn" v-if="isCustPro">
       <van-button round block type="primary" @click="taxes($event, contractList.tax)">计算</van-button>
     </div>
     <div class="title title-content">其他</div>
@@ -992,3 +989,14 @@ export default {
   }
 }
 </script>
+<style lang="less">
+  .taxes-btn {
+    padding: 8px 36px 16px;
+    background: #fff;
+      button.van-button {
+        background: rgba(25, 137, 250, 0.65);
+        box-shadow: 0px 0px 2px 1px #1989faa6;
+        border: none;
+    }
+  }
+</style>

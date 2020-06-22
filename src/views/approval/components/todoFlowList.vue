@@ -150,7 +150,7 @@ export default {
       // 判断是否是第一次加载
       if (scrollTop !== 0) {
         // 是否滚动到底部的判断
-        if ((scrollTop + windowHeight) >= scrollHeight) {
+        if (Math.ceil((scrollTop + windowHeight)) >= scrollHeight) {
           if (this.currentPage <= this.totalPage) {
             this.loadData()
           } else {

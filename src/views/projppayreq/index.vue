@@ -117,7 +117,7 @@
       readonly
     >
      <template #input>
-        <div style="text-align: left;margin: 0;">{{projppayreq.contractAmount}}</div>
+        <div style="text-align: left;margin: 0;">{{projpcontractpayment.contractAmount}}</div>
       </template>
     </van-field>
     <van-field
@@ -129,7 +129,7 @@
       readonly
     >
      <template #input>
-        <div style="text-align: left;margin: 0;">{{projppayreq.receiveAmount}}</div>
+        <div style="text-align: left;margin: 0;">{{projpcontractpayment.receiveAmount}}</div>
       </template>
     </van-field>
     <van-field
@@ -141,7 +141,7 @@
       readonly
     >
      <template #input>
-        <div style="text-align: left;margin: 0;">{{projppayreq.contractPayAmount}}</div>
+        <div style="text-align: left;margin: 0;">{{projpcontractpayment.contractPayAmount}}</div>
       </template>
     </van-field>
     <van-field
@@ -336,6 +336,7 @@ export default {
       if (res.data) {
         // 合同付款金额
         projpcontractpaymentApi(res.data.contractNo).then(resp => {
+          console.log(resp.data)
           if (resp.data) {
             this.projpcontractpayment = resp.data
           } else { }

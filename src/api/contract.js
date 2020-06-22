@@ -21,6 +21,7 @@ const api = {
   cashStatus: '/app/form/projppayreq/contract/cash/status/', // 现金流状态
   bizperformbondform: '/app/form/bizperformbondform/detail', // 履约保证金
   projpbidservicefee: '/app/form/projpbidservicefee/detail', // 中标服务费
+  projpcontractreviewcancel: '/app/form/projpcontractreview/cancel/detail', //合同取消
   projpcontractreviewupdateform: '/app/form/projpcontractreviewupdateform/detail' // 销售合同变更
 }
 
@@ -189,5 +190,13 @@ export async function updateAttachApi (data) {
     url: api.updateAttach,
     method: 'POST',
     data
+  })
+}
+
+// 销售合同取消
+export async function projpcontractreviewcancelApi (data) {
+  return request({
+    url: api.projpcontractreviewcancel + '/' + data,
+    method: 'get',
   })
 }

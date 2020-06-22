@@ -7,6 +7,11 @@ const contractRouter = [
     name: 'projpcontractreview'
   },
   {
+    path: '/projpcontractreviewcancel',
+    component: () => import('../views/projpcontractreviewcancel'), // 取消合同
+    name: 'projpcontractreviewcancel'
+  },
+  {
     path: '/projpriskbond',
     component: () => import('../views/projpriskbond'), // 风险保证金
     name: 'projpriskbond'
@@ -56,11 +61,11 @@ const contractRouter = [
     component: () => import('../views/projpbidservicefee'), // 中标服务费
     name: 'projpbidservicefee'
   },
-  {
-    path: '/projpcontractreviewupdateform',
-    component: () => import('../views/projpcontractreviewupdateform'), // 销售合同变更
-    name: 'projpcontractreviewupdateform'
-  },
+  // {
+  //   path: '/projpcontractreviewupdateform',
+  //   component: () => import('../views/projpcontractreviewupdateform'), // 销售合同变更
+  //   name: 'projpcontractreviewupdateform'
+  // },
   {
     path: '/projpprojectupdateform',
     component: () => import('../views/projpprojectupdateform'), // 项目变更-预算变更

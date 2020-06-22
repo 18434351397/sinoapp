@@ -201,6 +201,13 @@ export default {
             console.log(err)
           })
         }
+      } else if (data.url === '/app/form/projpcontractreview/cancel/detail/page') {  // 销售合同取消
+        this.$router.push({
+            name: 'projpcontractreviewcancel',
+            query: data
+          }).catch(err => {
+            console.log(err)
+          })
       } else if (path) {
         this.$router.push({
           name: path,

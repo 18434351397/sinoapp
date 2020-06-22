@@ -688,6 +688,11 @@ export default {
         this.dataList.currTaskDefinitionKey !== 'RiskRuleCreditCommissioner'
       ) {
         this.url = this.url.slice(0, -12) + '/comit/task'
+      } else if (  // 销售合同取消
+        this.dataList.currFlowName === '合同取消' &&
+        this.dataList.currFlowId === 'JusticeApprove'
+      ) {
+        this.url = this.url.slice(0, -12) + '/comit/task'
       } else {
         // 投标保证金接口的特殊处理
         if (this.url.includes('cashier')) {

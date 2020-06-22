@@ -179,7 +179,7 @@
         <el-table-column label="单价" prop="price"></el-table-column>
         <el-table-column label="金额" prop="amount"></el-table-column>
         <el-table-column label="税率" prop="taxRateText"></el-table-column>
-        <el-table-column label="缴税类型" prop="invoiceTypeText"></el-table-column>
+        <el-table-column label="缴费种类" prop="invoiceTypeText"></el-table-column>
         <el-table-column label="备注" prop="remark"></el-table-column>
       </el-table>
     </div>
@@ -194,7 +194,7 @@
         <el-table-column label="单价" prop="price"></el-table-column>
         <el-table-column label="金额" prop="amount"></el-table-column>
         <el-table-column label="税率" prop="taxRateText"></el-table-column>
-        <el-table-column label="缴税类型" prop="costInvoiceTypeText"></el-table-column>
+        <el-table-column label="缴费种类" prop="costInvoiceTypeText"></el-table-column>
         <el-table-column label="备注" prop="remark"></el-table-column>
       </el-table>
     </div>

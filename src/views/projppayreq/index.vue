@@ -151,11 +151,7 @@
       label="现金流状态"
       colon
       readonly
-    >
-     <template #input>
-        <div style="text-align: left;margin: 0;">{{projppayreq.companyq}}</div>
-      </template>
-    </van-field>
+     />
     <van-field
       type="text"
       name="purchaseNo"
@@ -336,18 +332,17 @@ export default {
       if (res.data) {
         // 合同付款金额
         projpcontractpaymentApi(res.data.contractNo).then(resp => {
-          console.log(resp.data)
           if (resp.data) {
             this.projpcontractpayment = resp.data
           } else { }
         })
         // 现金流状态
-        cashStatusApi(this.dataList.dataId).then(res => {
-          if (res.data) {
-            if (res.data === '0') {
-              this.projppayreq.companyq = '负现金流'
-            } else if (res.data === '1') {
-              this.projppayreq.companyq = '正现金流'
+        cashStatusApi(this.dataList.dataId).then(resq => {
+          if (resq.data) {
+            if (resq.data === '0') {
+              res.data.companyq = '负现金流'
+            } else if (resq.data === '1') {
+              res.data.companyq = '正现金流'
             }
           } else { }
         })

@@ -339,7 +339,6 @@ export default {
         // 现金流状态
         cashStatusApi(this.dataList.dataId).then(resq => {
           if (resq.data) {
-            console.log(resq.data)
             if (resq.data === '0') {
               res.data.companyq = '负现金流'
             } else if (resq.data === '1') {
@@ -358,7 +357,6 @@ export default {
           res.data.payMoneyTypeDesc = '美元'
         }
         this.projppayreq = res.data
-        console.log(this.projppayreq)
         this.projpPayDetailList = res.data.projpPayDetailList
         res.data.fileList.forEach(item => {
           this.fileIdList = this.fileIdList.concat(item.fileId)

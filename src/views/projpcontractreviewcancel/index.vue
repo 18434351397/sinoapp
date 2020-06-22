@@ -165,7 +165,12 @@
         <el-table-column label="计入科目" prop="accountSubjectText"></el-table-column>
         <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
         <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
-        <el-table-column label="是否有验收报告" prop="hasReport"></el-table-column>
+        <el-table-column label="是否有验收报告" prop="hasReport">
+          <template slot-scope="scope">
+            <div v-if="scope.row.hasReport === '1'">是</div>
+            <div v-if="scope.row.hasReport === '0'">否</div>
+          </template>
+        </el-table-column>
         <el-table-column label="预计验收报告时间" prop="reportDate"></el-table-column>
         <el-table-column label="款项名称" prop="paymentName"></el-table-column>
         <el-table-column label="资金占用时间" prop="occupyTime"></el-table-column>

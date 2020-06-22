@@ -214,7 +214,8 @@
     <van-field label="是否中标" v-model="custList.ishit" readonly colon>
       <template #input>
         <div v-if="custList.ishit === '1'" style="margin: 0;">是</div>
-        <div v-else style="margin: 0;">否</div>
+        <div v-if="custList.ishit === '0'" style="margin: 0;">否</div>
+        <div v-else style="margin: 0;"></div>
       </template>
     </van-field>
     <van-field

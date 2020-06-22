@@ -161,19 +161,6 @@
     </van-field>
     <van-field
       type="text"
-      v-if="isContractNo"
-      name="projectName"
-      v-model="bizfeesspecialtransferform.projectName"
-      label="项目名称"
-      colon
-      readonly
-    >
-      <template #input>
-        <div style="text-align: left;margin: 0;">{{bizfeesspecialtransferform.projectName}}</div>
-      </template>
-    </van-field>
-    <van-field
-      type="text"
       name="transferDate"
       v-model="bizfeesspecialtransferform.transferDate"
       label="划转日期"

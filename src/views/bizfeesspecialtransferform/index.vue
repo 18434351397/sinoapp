@@ -49,6 +49,15 @@
       readonly
     />
     <van-field
+      style="display: none;"
+      type="text"
+      name="codeType"
+      v-model="bizfeesspecialtransferform.codeType"
+      colon
+      readonly
+    />
+
+    <van-field
       type="text"
       name="transFerTypeDesc"
       v-model="bizfeesspecialtransferform.transFerTypeDesc"
@@ -110,7 +119,6 @@
     </van-field>
     <van-field
       type="text"
-      name="codeType"
       v-model="bizfeesspecialtransferform.codeTypeName"
       label="编号类型"
       colon

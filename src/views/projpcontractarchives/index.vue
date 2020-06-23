@@ -185,92 +185,86 @@
     </van-field>
     <div v-if="isCheck" id="table-tr">
       <div class="table-title">验收报告相关信息</div>
-      <el-table border :data="selectReportByRequestNo" :row-class-name="tableRowClassName" style="width: 100%" @row-click="handleClickTable">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
-        <el-table-column label="预计收款时间" prop="paymentDate"></el-table-column>
-        <el-table-column label="预计收款金额" prop="notInvoicedAmount"></el-table-column>
-        <el-table-column label="预计收款条件" prop="paymentCondition"></el-table-column>
-        <el-table-column label="计入科目" prop="accountSubjectText"></el-table-column>
-        <el-table-column label="预计验收报告名称" prop="reportName"></el-table-column>
-        <el-table-column label="实际验收报告名称" prop="rReportName"></el-table-column>
-        <el-table-column label="是否有验收报告" prop="hasReportText"></el-table-column>
-        <el-table-column label="预计验收报告时间" prop="reportDate"></el-table-column>
-        <el-table-column label="确认业绩时间" prop="rReportDate"></el-table-column>
-        <el-table-column label="款项名称" prop="paymentName"></el-table-column>
-        <el-table-column fixed="right" width="50">
-          <template slot-scope="scope">
+      <vxe-table border resizable highlight-hover-row :row-class-name="tableRowClassName" @cell-click="handleClickTable" :data="selectReportByRequestNo" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="prTypeText" title="收付类型" width="21%"></vxe-table-column>
+        <vxe-table-column field="paymentDate" title="预计收款时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="notInvoicedAmount" title="预计收款金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="paymentCondition" title="预计收款条件" width="30%"></vxe-table-column>
+        <vxe-table-column field="accountSubjectText" title="计入科目" width="21%"></vxe-table-column>
+        <vxe-table-column field="reportName" title="预计验收报告名称" width="20%"></vxe-table-column>
+        <vxe-table-column field="rReportName" title="实际验收报告名称" width="20%"></vxe-table-column>
+        <vxe-table-column field="hasReportText" title="是否有验收报告" width="21%"></vxe-table-column>
+        <vxe-table-column field="reportDate" title="预计验收报告时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="rReportDate" title="确认业绩时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="paymentName" title="款项名称" width="25%"></vxe-table-column>
+        <vxe-table-column fixed="right" width="15%">
+           <template slot-scope="scope">
             <div>
-              <el-button @click.native.stop="handleClickTable(scope.row)" type="text" size="small">查看</el-button>
+              <el-button @click.native.stop="handleClickTable(scope)" type="text" size="small">查看</el-button>
             </div>
           </template>
-        </el-table-column>
-      </el-table>
+        </vxe-table-column>
+      </vxe-table>
     </div>
     <div v-if="isTable">
       <div class="table-title">预计现金流量表（收/付款情况）</div>
-      <el-table border :data="paymentArchivesList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
-        <el-table-column label="预计收/付款时间" prop="paymentDate"></el-table-column>
-        <el-table-column label="采购合同号" prop="purchaseNo"></el-table-column>
-        <el-table-column label="对方单位" prop="opposingUnit"></el-table-column>
-        <el-table-column label="我方单位" prop="ourUnit"></el-table-column>
-        <el-table-column label="预计收/付款金额" prop="paymentAmount"></el-table-column>
-        <el-table-column label="税率" prop="paymentRateText"></el-table-column>
-        <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
-        <el-table-column label="计入科目" prop="accountSubjectText"></el-table-column>
-        <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
-        <el-table-column label="是否有验收报告" prop="hasReportText"></el-table-column>
-        <el-table-column label="预计验收报告时间" prop="reportDate"></el-table-column>
-        <el-table-column label="款项名称" prop="paymentName"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="paymentArchivesList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="prTypeText" title="收付类型" width="21%"></vxe-table-column>
+        <vxe-table-column field="paymentDate" title="预计收/付款时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="purchaseNo" title="采购合同号" width="25%"></vxe-table-column>
+        <vxe-table-column field="opposingUnit" title="对方单位" width="25%"></vxe-table-column>
+        <vxe-table-column field="ourUnit" title="我方单位" width="25%"></vxe-table-column>
+        <vxe-table-column field="paymentAmount" width="100" title="预计收/付款金额"></vxe-table-column>
+        <vxe-table-column field="paymentRateText" width="100" title="税率"></vxe-table-column>
+        <vxe-table-column field="paymentCondition" width="200" title="预计收/付款条件"></vxe-table-column>
+        <vxe-table-column field="accountSubjectText" width="100" title="计入科目"></vxe-table-column>
+        <vxe-table-column field="reportName" width="100" title="验收报告名称"></vxe-table-column>
+        <vxe-table-column field="hasReportText" width="100" title="是否有验收报告"></vxe-table-column>
+        <vxe-table-column field="reportDate" width="100" title="预计验收报告时间"></vxe-table-column>
+        <vxe-table-column field="paymentName" width="100" title="款项名称"></vxe-table-column>
+      </vxe-table>
     </div>
     <div v-if="isTable">
       <div class="table-title">附件列表</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
     <!-- 表格数据弹出框 -->
     <el-dialog title="验收报告记录" class="dialog-report" :visible.sync="dialogTableVisible">
-      <el-table :data="gridData" height="80vh">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column
-          property="attName"
-          label="验收报告名称"
-        ></el-table-column>
-        <el-table-column
-          property="percent"
-          label="确认业绩比例"
-        ></el-table-column>
-        <el-table-column property="reportSigningDate" label="验收实际签订时间"></el-table-column>
-        <el-table-column property="aRReportDate" label="验收实际收到日期"></el-table-column>
-        <el-table-column property="reportReceivedDate" label="确认业绩时间"></el-table-column>
-        <el-table-column property="remark" label="状态"></el-table-column>
-        <el-table-column fixed="right" width="50">
-          <template slot-scope="scope">
+      <vxe-table border resizable highlight-hover-row :data="gridData" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="attName" title="验收报告名称" width="21%"></vxe-table-column>
+        <vxe-table-column field="percent" title="确认业绩比例" width="21%"></vxe-table-column>
+        <vxe-table-column field="reportSigningDate" title="验收实际签订时间" width="21%"></vxe-table-column>
+        <vxe-table-column field="aRReportDate" title="验收实际收到日期" width="21%"></vxe-table-column>
+        <vxe-table-column field="reportReceivedDate" title="确认业绩时间" width="21%"></vxe-table-column>
+        <vxe-table-column field="remark" title="状态" width="17%"></vxe-table-column>
+        <vxe-table-column fixed="right" width="15%">
+           <template slot-scope="scope">
             <div v-if="scope.row.remark === ''? false : true">
               <el-button @click.native.stop="handleClickFile(scope.row)" v-if="!fileBtn" type="text" size="small">查看</el-button>
               <el-button @click.native.stop="handleEditFile(scope.row)" v-if="fileBtn" type="text" size="small">修改</el-button>
             </div>
           </template>
-        </el-table-column>
-      </el-table>
+        </vxe-table-column>
+      </vxe-table>
       <div slot="footer" class="dialog-footer close-btn">
           <el-button type="primary" @click="dialogTableVisible = false" size="small">确 定</el-button>
       </div>
     </el-dialog>
-    <!-- 附件弹出框 -->
+    <!-- 普通附件弹出框 -->
     <el-dialog title="查看附件" class="dialog-report" :visible.sync="dialogFileVisible">
       <van-field
         type="text"
@@ -321,23 +315,23 @@
         </template>
       </van-field>
       <div class="table-title">附件列表</div>
-      <el-table border :data="selectAttnameFile" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="selectAttnameFile">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
       <div slot="footer" class="dialog-footer close-btn">
         <el-button type="primary" @click="dialogFileVisible = false" size="small">关 闭</el-button>
       </div>
     </el-dialog>
-    <!-- 运管的弹窗 -->
+    <!-- 运管附件的弹窗 -->
     <el-dialog title="查看附件" class="dialog-report edit-dialog" :visible.sync="dialogFileEdit">
       <van-form @submit="onSubmitEdit">
         <van-field
@@ -395,18 +389,18 @@
         </van-field>
       </van-form>
       <div class="table-title">附件列表</div>
-      <el-table border :data="selectAttnameFile" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="selectAttnameFile">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
       <div slot="footer" class="dialog-footer close-btn">
         <el-button type="primary" @click="onSubmitEdit(selectAttname,'ok')" size="small">同 意</el-button>
         <el-button type="info" @click="onSubmitEdit(selectAttname,'noOk')" size="small">不同意</el-button>
@@ -651,7 +645,7 @@ export default {
     },
     // 表格
     handleClickTable (table) {
-      this.tableList = table
+      this.tableList = table.row
       this.dialogTableVisible = true
       const data = {
         asc: false,
@@ -679,15 +673,15 @@ export default {
 </script>
 <style lang="less">
 #table-tr {
-.el-table .acceptance {
+.vxe-table .acceptance {
   background: yellow;
 }
-.el-table .isAcceptance {
+.vxe-table .isAcceptance {
   background: white;
 }
-.el-table__body tr.hover-row>td {
-    background: yellow;
-}
+// .el-table__body tr.hover-row>td {
+//     background: yellow;
+// }
 }
 .dialog-report {
   .el-dialog {

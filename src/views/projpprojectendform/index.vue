@@ -92,50 +92,48 @@
     </van-field>
     <div>
       <div class="table-title">项目文档列表</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="attname"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">
-            {{
-            (scope.row.attsize / 1024).toFixed(2) + 'KB'
-            }}
-          </template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="attname" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.attsize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">项目人员打分</div>
-      <el-table border :data="personData" style="width: 100%">
-        <el-table-column label="人员姓名" prop="reqUserName"></el-table-column>
-        <el-table-column label="评分" prop="score"></el-table-column>
-        <el-table-column label="优点" prop="good"></el-table-column>
-        <el-table-column label="缺点" prop="bad"></el-table-column>
-        <el-table-column label="备注" prop="remark"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="personData" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="paymentMattersText" title="人员姓名" width="21%"></vxe-table-column>
+        <vxe-table-column field="detailPayNoText" title="评分" width="21%"></vxe-table-column>
+        <vxe-table-column field="mustPayAmount" title="优点" width="21%"></vxe-table-column>
+        <vxe-table-column field="cPayAmount" title="缺点" width="21%"></vxe-table-column>
+        <vxe-table-column field="tPayAmount" title="备注" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">供应商打分</div>
-      <el-table border :data="supplierData" style="width: 100%">
-        <el-table-column label="供应商名称" prop="supplierName"></el-table-column>
-        <el-table-column label="合同金额" prop="contractAmount"></el-table-column>
-        <el-table-column label="总评分" prop="score"></el-table-column>
-        <el-table-column label="产品质量" prop="productQualityScore"></el-table-column>
-        <el-table-column label="产品价格" prop="productPriceScore"></el-table-column>
-        <el-table-column label="到货时间" prop="arrivalDateScore"></el-table-column>
-        <el-table-column label="账期支持" prop="accountsScore"></el-table-column>
-        <el-table-column label="客户满意度" prop="satisfactionScore"></el-table-column>
-        <el-table-column label="售前支持" prop="preSaleScore"></el-table-column>
-        <el-table-column label="售后支持" prop="afterSaleScore"></el-table-column>
-        <el-table-column label="违约处理能力" prop="breakContractScore"></el-table-column>
-        <el-table-column label="是否有行业内处罚" prop="hasIndustryPublish" :formatter="hasPublish"></el-table-column>
-        <el-table-column label="是否有行业内奖励" prop="hasIndustryReward" :formatter="hasReward"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="supplierData" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="supplierName" title="供应商名称" width="21%"></vxe-table-column>
+        <vxe-table-column field="contractAmount" title="合同金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="score" title="总评分" width="17%"></vxe-table-column>
+        <vxe-table-column field="productQualityScore" title="产品质量" width="21%"></vxe-table-column>
+        <vxe-table-column field="productPriceScore" title="产品价格" width="21%"></vxe-table-column>
+        <vxe-table-column field="arrivalDateScore" title="到货时间" width="21%"></vxe-table-column>
+        <vxe-table-column field="accountsScore" title="账期支持" width="21%"></vxe-table-column>
+        <vxe-table-column field="satisfactionScore" title="客户满意度" width="21%"></vxe-table-column>
+        <vxe-table-column field="preSaleScore" title="售前支持" width="21%"></vxe-table-column>
+        <vxe-table-column field="afterSaleScore" title="售后支持" width="21%"></vxe-table-column>
+        <vxe-table-column field="breakContractScore" title="违约处理能力" width="21%"></vxe-table-column>
+        <vxe-table-column field="hasIndustryPublish" title="是否有行业内处罚" width="21%"></vxe-table-column>
+        <vxe-table-column field="hasIndustryReward" title="是否有行业内奖励" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

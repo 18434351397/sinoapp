@@ -293,42 +293,42 @@
     </van-field>
     <div>
       <div class="table-title">采购明细</div>
-      <el-table border :data="goodsList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="成本类型" prop="costTypeName"></el-table-column>
-        <el-table-column label="产品名称" prop="name"></el-table-column>
-        <el-table-column label="规格型号" prop="model"></el-table-column>
-        <el-table-column label="品牌" prop="brandName"></el-table-column>
-        <el-table-column label="产品单价" prop="price"></el-table-column>
-        <el-table-column label="产品数量" prop="num"></el-table-column>
-        <el-table-column label="发票类型" prop="invoiceTypeName"></el-table-column>
-        <el-table-column label="税率" prop="invoiceTaxName"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="goodsList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="costTypeName" title="成本类型" width="21%"></vxe-table-column>
+        <vxe-table-column field="name" title="产品名称" width="21%"></vxe-table-column>
+        <vxe-table-column field="model" title="规格型号" width="21%"></vxe-table-column>
+        <vxe-table-column field="brandName" title="品牌" width="25%"></vxe-table-column>
+        <vxe-table-column field="price" title="产品单价" width="21%"></vxe-table-column>
+        <vxe-table-column field="num" title="产品数量" width="21%"></vxe-table-column>
+        <vxe-table-column field="invoiceTypeName" title="发票类型" width="21%"></vxe-table-column>
+        <vxe-table-column field="invoiceTaxName" title="税率" width="17%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">付款条件</div>
-      <el-table border :data="payforList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="预计付款时间" prop="receiveDate"></el-table-column>
-        <el-table-column label="预计付款条件" prop="content"></el-table-column>
-        <el-table-column label="付款金额" prop="receiveAmount"></el-table-column>
-        <el-table-column label="备注" prop="remark"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="payforList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="receiveDate" title="预计付款时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="content" title="预计付款条件" width="20%"></vxe-table-column>
+        <vxe-table-column field="receiveAmount" title="付款金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="remark" title="备注" width="19%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">附件列表</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

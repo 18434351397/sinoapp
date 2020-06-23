@@ -284,29 +284,30 @@
     </van-field>
     <div>
       <div class="table-title">付款明细</div>
-      <el-table border :data="projpPayDetailList" style="width: 100%">
-        <el-table-column label="付款条件" prop="paymentMattersText"></el-table-column>
-        <el-table-column label="付款条件编号" prop="detailPayNoText"></el-table-column>
-        <el-table-column label="应付款金额" prop="mustPayAmount"></el-table-column>
-        <el-table-column label="已付款金额" prop="cPayAmount"></el-table-column>
-        <el-table-column label="本次付款金额" prop="tPayAmount"></el-table-column>
-        <el-table-column label="采购合同付款条件" prop="purchaseId"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="projpPayDetailList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="paymentMattersText" title="付款条件" width="21%"></vxe-table-column>
+        <vxe-table-column field="detailPayNoText" title="付款条件编号" width="21%"></vxe-table-column>
+        <vxe-table-column field="mustPayAmount" title="应付款金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="cPayAmount" title="已付款金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="tPayAmount" title="本次付款金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="purchaseId" title="采购合同付款条件" width="20%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">附件列表</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

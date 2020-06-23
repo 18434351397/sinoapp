@@ -9965,6 +9965,11 @@ vuex@^3.1.2:
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
   integrity sha512-ajtqwEW/QhnrBZQsZxCLHThZZaa+Db45c92Asf46ZDXu6uHXgbfVuBaJ4gzD2r4UX0oMJHstFwd2r2HM4l8umg==
 
+vxe-table@^2.9.13:
+  version "2.9.13"
+  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.13.tgz#619cd585160dde9b526b90ce552a358ecb3a6060"
+  integrity sha512-MOaJLLJtdgVbiZX8netLqG8+daB7IbjBM9+5Ppt+seyjBrNV2C4dd8JkGpGX5zPThSzkYPGz66vo404Yu5Q/EA==
+
 w3c-hr-time@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz#0a89cdf5cc15822df9c360543676963e0cc308cd"
@@ -10293,6 +10298,11 @@ ws@^7.0.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.3.0.tgz#4b2f7f219b3d3737bc1a2fbf145d825b94d38ffd"
   integrity sha512-iFtXzngZVXPGgpTlP1rBqsUK82p9tKqsWRPg5L56egiljujJT3vGAYnHANvFxBieXrTFavhzhxW52jnaWV+w2w==
+
+xe-utils@^2.4.8:
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-2.4.8.tgz#0efda3ca81f6b55f68a8a31e276fb17da59c98b3"
+  integrity sha512-/95ZaQK9GJE/EYrpMv9lgKdkEMQwWv4a4TF4dddi4gSzZ33vp/rZvzJNNV9XknaOkMizK9IBSX8CB/nL+SAk0Q==
 
 xml-name-validator@^3.0.0:
   version "3.0.0"

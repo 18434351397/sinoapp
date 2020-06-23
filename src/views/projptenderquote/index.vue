@@ -137,54 +137,54 @@
 </van-field>
     <div>
       <div class="table-title">收入明细</div>
-      <el-table border :data="incomeList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="收入类型" prop="feesTypeText"></el-table-column>
-        <el-table-column label="名称" prop="name"></el-table-column>
-        <el-table-column label="数量" prop="num"></el-table-column>
-        <el-table-column label="单价" prop="price"></el-table-column>
-        <el-table-column label="金额" prop="amount"></el-table-column>
-        <el-table-column label="税率" prop="taxRateText"></el-table-column>
-        <el-table-column label="缴税类型" prop="invoiceTypeText"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="incomeList">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="feesTypeText" title="收入类型" width="21%"></vxe-table-column>
+       <vxe-table-column field="name" title="名称" width="21%"></vxe-table-column>
+       <vxe-table-column field="num" title="数量" width="21%"></vxe-table-column>
+       <vxe-table-column field="price" title="单价" width="21%"></vxe-table-column>
+       <vxe-table-column field="amount" title="金额" width="21%"></vxe-table-column>
+       <vxe-table-column field="taxRateText" title="税率" width="21%"></vxe-table-column>
+       <vxe-table-column field="invoiceTypeText" title="缴费种类" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">成本明细</div>
-      <el-table border :data="costList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="成本明细" prop="costFeesTypeText"></el-table-column>
-        <el-table-column label="名称" prop="name"></el-table-column>
-        <el-table-column label="金额" prop="amount"></el-table-column>
-        <el-table-column label="税率" prop="taxRateText"></el-table-column>
-        <el-table-column label="缴税类型" prop="costInvoiceTypeText"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="costList">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="costFeesTypeText" title="成本明细" width="21%"></vxe-table-column>
+       <vxe-table-column field="name" title="名称" width="21%"></vxe-table-column>
+       <vxe-table-column field="amount" title="金额" width="21%"></vxe-table-column>
+       <vxe-table-column field="taxRateText" title="税率" width="17%"></vxe-table-column>
+       <vxe-table-column field="costInvoiceTypeText" title="缴费种类" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">业绩切分</div>
-      <el-table border :data="achievementList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="切分部门" prop="segmentDeptText"></el-table-column>
-        <el-table-column label="负责人" prop="leadUserText"></el-table-column>
-        <el-table-column label="切分比例" prop="segmentP"></el-table-column>
-        <el-table-column label="切分金额" prop="segmentAmount"></el-table-column>
-        <el-table-column label="部门类型" prop="deptTypeDesc"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="achievementList" >
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="segmentDeptText" title="切分部门" width="21%"></vxe-table-column>
+       <vxe-table-column field="leadUserText" title="负责人" width="17%"></vxe-table-column>
+       <vxe-table-column field="segmentP" title="切分比例" width="21%"></vxe-table-column>
+       <vxe-table-column field="segmentAmount" title="切分金额" width="21%"></vxe-table-column>
+       <vxe-table-column field="deptTypeDesc" title="部门类型" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">预计现金流量表（收/付款情况）</div>
-      <el-table border :data="projpContractPaymentList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="收付类型" prop="prTypeText"></el-table-column>
-        <el-table-column label="预计收/付款时间" prop="paymentDate"></el-table-column>
-        <el-table-column label="预计收/付款金额" prop="paymentAmount"></el-table-column>
-        <el-table-column label="预计收/付款条件" prop="paymentCondition"></el-table-column>
-        <el-table-column label="计入科目" prop="accountSubjectText"></el-table-column>
-        <el-table-column label="验收报告名称" prop="reportName"></el-table-column>
-        <el-table-column label="现金流量金额" prop="confirmAmount"></el-table-column>
-        <el-table-column label="款项名称" prop="paymentName"></el-table-column>
-        <el-table-column label="资金占用时间" prop="occupyTime"></el-table-column>
-        <el-table-column label="资金占用成本" prop="occupyAmount"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="projpContractPaymentList">
+        <vxe-table-column type="seq" title="序号" width="60"></vxe-table-column>
+        <vxe-table-column field="prTypeText" width="80" title="收付类型"></vxe-table-column>
+        <vxe-table-column field="paymentDate" width="100" title="预计收/付款时间"></vxe-table-column>
+        <vxe-table-column field="paymentAmount" width="100" title="预计收/付款金额"></vxe-table-column>
+        <vxe-table-column field="paymentCondition" width="200" title="预计收/付款条件"></vxe-table-column>
+        <vxe-table-column field="accountSubjectText" width="100" title="计入科目"></vxe-table-column>
+        <vxe-table-column field="reportName" width="100" title="验收报告名称"></vxe-table-column>
+        <vxe-table-column field="confirmAmount" width="100" title="现金流量金额"></vxe-table-column>
+        <vxe-table-column field="paymentName" width="100" title="款项名称"></vxe-table-column>
+        <vxe-table-column field="occupyTime" width="100" title="资金占用时间"></vxe-table-column>
+        <vxe-table-column field="occupyAmount" width="100" title="资金占用成本"></vxe-table-column>
+      </vxe-table>
       <van-field
         type="text"
         name="occupy"
@@ -193,10 +193,10 @@
         colon
         readonly
       >
-<template #input>
-        <div style="text-align: left;margin: 0;">{{tenderOfferList.occupy}}</div>
-      </template>
-</van-field>
+        <template #input>
+          <div style="text-align: left;margin: 0;">{{tenderOfferList.occupy}}</div>
+        </template>
+      </van-field>
     </div>
     <div class="title title-content">金额计算</div>
     <van-field
@@ -357,18 +357,18 @@
 </van-field>
     <div>
       <div class="table-title">其他</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

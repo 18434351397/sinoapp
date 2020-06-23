@@ -120,16 +120,16 @@
 </van-field>
     <div>
       <div class="table-title">报销明细详情</div>
-      <el-table border :data="feesReimbursementDetailVOList" style="width: 100%">
-        <el-table-column label="报销人员姓名" prop="reimbursementUserName" width="100"></el-table-column>
-        <el-table-column label="科目" prop="subjectName"></el-table-column>
-        <el-table-column label="金额" prop="amount"></el-table-column>
-        <el-table-column label="立项号" prop="projectNo"></el-table-column>
-        <el-table-column label="费用归属部门编码" prop="ownDeptCode"></el-table-column>
-        <el-table-column label="费用归属部门名称" prop="ownDeptName"></el-table-column>
-        <el-table-column label="费用归属部门经理" prop="ownDeptManager"></el-table-column>
-        <el-table-column label="计入项目" prop="projectName"></el-table-column>
-      </el-table>
+       <vxe-table border resizable highlight-hover-row :data="feesReimbursementDetailVOList" >
+        <vxe-table-column field="reimbursementUserName" title="报销人员姓名" width="21%"></vxe-table-column>
+        <vxe-table-column field="subjectName" title="科目" width="21%"></vxe-table-column>
+        <vxe-table-column field="amount" title="金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="projectNo" title="立项号" width="21%"></vxe-table-column>
+        <vxe-table-column field="ownDeptCode" title="费用归属部门编码" width="21%"></vxe-table-column>
+        <vxe-table-column field="ownDeptName" title="费用归属部门名称" width="21%"></vxe-table-column>
+        <vxe-table-column field="ownDeptManager" title="费用归属部门经理" width="21%"></vxe-table-column>
+        <vxe-table-column field="projectName" title="计入项目" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
     <van-field
       type="text"
@@ -139,10 +139,10 @@
       colon
       readonly
     >
-<template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{bizfeesreimbursementform.reimbursementAmount}}</div>
       </template>
-</van-field>
+  </van-field>
   </div>
 </template>
 

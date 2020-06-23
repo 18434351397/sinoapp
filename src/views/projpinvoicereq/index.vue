@@ -249,32 +249,33 @@
     </van-field>
     <div>
       <div class="table-title">填开内容</div>
-      <el-table border :data="invoiceDetail" style="width: 100%">
-        <el-table-column label="税收分类编码" prop="taxCode"></el-table-column>
-        <el-table-column label="品名" prop="name"></el-table-column>
-        <el-table-column label="型号规格" prop="reqNo"></el-table-column>
-        <el-table-column label="单位" prop="unit"></el-table-column>
-        <el-table-column label="数量" prop="num"></el-table-column>
-        <el-table-column label="单价" prop="price"></el-table-column>
-        <el-table-column label="金额" prop="amount"></el-table-column>
-        <el-table-column label="税率" prop="invoiceRateDesc"></el-table-column>
-        <el-table-column label="备注" prop="remark"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="invoiceDetail" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="taxCode" title="税收分类编码" width="25%"></vxe-table-column>
+        <vxe-table-column field="name" title="品名" width="21%"></vxe-table-column>
+        <vxe-table-column field="reqNo" title="型号规格" width="21%"></vxe-table-column>
+        <vxe-table-column field="unit" title="单位" width="15%"></vxe-table-column>
+        <vxe-table-column field="num" title="数量" width="17%"></vxe-table-column>
+        <vxe-table-column field="price" title="单价" width="21%"></vxe-table-column>
+        <vxe-table-column field="amount" title="金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="invoiceRateDesc" title="税率" width="15%"></vxe-table-column>
+        <vxe-table-column field="remark" title="备注" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">附件列表</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

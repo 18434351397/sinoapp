@@ -154,51 +154,47 @@
       </template>
     </van-field>
     <div>
-      <div
-        class="table-title"
-      >合作信息</div>
-      <el-table border :data="cooperativeList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="合作产品" prop="product"></el-table-column>
-        <el-table-column label="代理级别" prop="agentLevel"></el-table-column>
-        <el-table-column label="采购合同金额" prop="contractAmount"></el-table-column>
-      </el-table>
+      <div class="table-title">合作信息</div>
+      <vxe-table border resizable highlight-hover-row :data="cooperativeList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="product" title="合作产品" width="30%"></vxe-table-column>
+        <vxe-table-column field="agentLevel" title="代理级别" width="25%"></vxe-table-column>
+        <vxe-table-column field="contractAmount" title="采购合同金额" width="20%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div
         class="table-title"
         style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
       >资质详情</div>
-      <el-table border :data="qualificationsList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="资质名称" prop="qualificaName"></el-table-column>
-        <el-table-column label="代理类型" prop="agenttypeDesc"></el-table-column>
-        <el-table-column label="代理产品" prop="agentgoods"></el-table-column>
-        <el-table-column label="代理商级别" prop="agentlevelDesc"></el-table-column>
-        <el-table-column label="联系人" prop="linkman"></el-table-column>
-        <el-table-column label="电话" prop="phone"></el-table-column>
-        <el-table-column label="邮箱" prop="email"></el-table-column>
-        <el-table-column label="合作次数" prop="count"></el-table-column>
-        <el-table-column label="账期" prop="cycle"></el-table-column>
-        <el-table-column label="资质有效截止日期" prop="endDate"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="qualificationsList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="qualificaName" title="资质名称" width="21%"></vxe-table-column>
+        <vxe-table-column field="agenttypeDesc" title="代理类型" width="21%"></vxe-table-column>
+        <vxe-table-column field="agentgoods" title="代理产品" width="21%"></vxe-table-column>
+        <vxe-table-column field="agentlevelDesc" title="代理商级别" width="20%"></vxe-table-column>
+        <vxe-table-column field="linkman" title="联系人" width="17%"></vxe-table-column>
+        <vxe-table-column field="phone" title="电话" width="20%"></vxe-table-column>
+        <vxe-table-column field="email" title="邮箱" width="20%"></vxe-table-column>
+        <vxe-table-column field="count" title="合作次数" width="21%"></vxe-table-column>
+        <vxe-table-column field="cycle" title="账期" width="20%"></vxe-table-column>
+        <vxe-table-column field="endDate" title="资质有效截止日期" width="25%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
-      <div
-        class="table-title"
-      >附件列表</div>
-      <el-table border :data="attachmentVOList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{(scope.row.fileSize/1024).toFixed(2) + 'KB'}}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <div class="table-title">附件列表</div>
+      <vxe-table border resizable highlight-hover-row :data="attachmentVOList">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

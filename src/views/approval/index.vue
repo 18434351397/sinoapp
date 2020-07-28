@@ -69,7 +69,7 @@ export default {
   data () {
     return {
       searchValue: '',
-      sort: true, // 待办默认属性
+      sort: false, // 待办默认属性
       sort2: false, // 已办默认属性
       sort3: false, // 发起默认属性
       sortValue: true, // 默认值

@@ -482,13 +482,18 @@ export default {
         values.stageData = this.$refs.detail.projpprojectstageinfo
       } else {
       }
-      // 判断是否是开发票/收据
+      // 判断是否是开收据
       if (
         this.dataList.currFlowId === 'ReceiptApprove' &&
-        this.dataList.currFlowName === '开发票/收据'
+        this.dataList.currFlowName === '收据'
       ) {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
       } else {
+      }
+      // 判断是否是开发票
+      if(this.dataList.currFlowId === 'BillApprove' &&
+        this.dataList.currFlowName === '开发票') {
+        values.invoiceDetail = this.$refs.detail.invoiceDetail
       }
       // 判断是否是采购合同流程
       if (this.dataList.currFlowId === 'PurchaseApprove') {

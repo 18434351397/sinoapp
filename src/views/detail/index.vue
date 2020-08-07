@@ -482,13 +482,18 @@ export default {
         values.stageData = this.$refs.detail.projpprojectstageinfo
       } else {
       }
-      // 判断是否是开发票/收据
+      // 判断是否是开收据
       if (
         this.dataList.currFlowId === 'ReceiptApprove' &&
-        this.dataList.currFlowName === '开发票/收据'
+        this.dataList.currFlowName === '收据'
       ) {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
       } else {
+      }
+      // 判断是否是开发票
+      if(this.dataList.currFlowId === 'BillApprove' &&
+        this.dataList.currFlowName === '开发票') {
+        values.invoiceDetail = this.$refs.detail.invoiceDetail
       }
       // 判断是否是采购合同流程
       if (this.dataList.currFlowId === 'PurchaseApprove') {
@@ -558,6 +563,7 @@ export default {
       })
         .then(() => {
           this.openFullScreen2()
+          console.log(values)
           // 提交时，展示加载效果，防止接口响应过慢，用户重复点击提交按钮
           flowFormUpdate(values).then((res) => {
             if (res.resultCode === '200') {

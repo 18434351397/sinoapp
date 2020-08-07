@@ -563,7 +563,6 @@ export default {
       })
         .then(() => {
           this.openFullScreen2()
-          console.log(values)
           // 提交时，展示加载效果，防止接口响应过慢，用户重复点击提交按钮
           flowFormUpdate(values).then((res) => {
             if (res.resultCode === '200') {

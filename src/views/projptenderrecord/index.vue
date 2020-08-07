@@ -233,51 +233,29 @@
       label="备注:"
       readonly
     >
-<template #input>
+      <template #input>
         <div style="text-align: left;margin: 0;">{{custList.remark}}</div>
       </template>
-</van-field>
+  </van-field>
     <div>
       <div class="table-title">保证金收付情况</div>
-      <el-table
-        border
-        :data="situation"
-        style="width: 100%">
-        <el-table-column
-          type="index"
-          label="序号"
-          width="50"
-          :index="indexMethods">
-        </el-table-column>
-        <el-table-column
-          label="预计收款日期">
-          <template slot-scope="scope">
+      <vxe-table border resizable highlight-hover-row :data="situation">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column title="预计收款日期" width="25%">
+         <template slot-scope="scope">
             {{scope.row.receivDate.split(' ')[0]}}
           </template>
-        </el-table-column>
-        <el-table-column
-          label="预计付款时间">
-          <template slot-scope="scope">
+       </vxe-table-column>
+       <vxe-table-column title="预计付款时间" width="25%">
+         <template slot-scope="scope">
             {{scope.row.paytime.split(' ')[0]}}
           </template>
-        </el-table-column>
-        <el-table-column
-          label="对方单位"
-          prop="payer">
-        </el-table-column>
-        <el-table-column
-          label="保证金金额"
-          prop="bailamount">
-        </el-table-column>
-        <el-table-column
-          label="保证金类型"
-          prop="bondTypeDesc">
-        </el-table-column>
-        <el-table-column
-          label="是否是投标保函"
-          prop="isTenderLetter">
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+       <vxe-table-column field="payer" title="对方单位" width="21%"></vxe-table-column>
+       <vxe-table-column field="bailamount" title="保证金金额" width="21%"></vxe-table-column>
+       <vxe-table-column field="bondTypeDesc" title="保证金类型" width="21%"></vxe-table-column>
+       <vxe-table-column field="isTenderLetter" title="是否是投标保函" width="21%"></vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

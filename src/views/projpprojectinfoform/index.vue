@@ -222,29 +222,30 @@
     </van-field>
     <div>
       <div class="table-title">项目阶段划分</div>
-      <el-table border :data="projpprojectstageinfo" style="width: 100%">
-        <el-table-column label="阶段名称" prop="stageName" width="100"></el-table-column>
-        <el-table-column label="阶段开始时间" prop="stageStartDate"></el-table-column>
-        <el-table-column label="阶段结束时间" prop="stageEndDate"></el-table-column>
-        <el-table-column label="本阶段需要的人天" prop="stageDayCount"></el-table-column>
-        <el-table-column label="与总人天数占比" prop="stageDayRatio"></el-table-column>
-        <el-table-column label="备注" prop="remark"></el-table-column>
-      </el-table>
+      <vxe-table border resizable highlight-hover-row :data="projpprojectstageinfo" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="stageName" title="阶段名称" width="21%"></vxe-table-column>
+        <vxe-table-column field="stageStartDate" title="阶段开始时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="stageEndDate" title="阶段结束时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="stageDayCount" title="本阶段需要的人天" width="21%"></vxe-table-column>
+        <vxe-table-column field="stageDayRatio" title="与总人天数占比" width="21%"></vxe-table-column>
+        <vxe-table-column field="remark" title="备注" width="17%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div>
       <div class="table-title">附件列表</div>
-      <el-table border :data="files" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="attname"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.attsize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+       <vxe-table border resizable highlight-hover-row :data="files">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="attname" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.attsize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

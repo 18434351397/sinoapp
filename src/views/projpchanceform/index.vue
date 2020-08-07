@@ -200,15 +200,13 @@
       </template>
     </van-field>
     <div>
-      <div
-        class="table-title"
-      >客户拜访信息</div>
-      <el-table border :data="custList.projpVisitList" style="width: 100%">
-        <el-table-column label="被访人姓名" prop="linkmanName"></el-table-column>
-        <el-table-column label="职务" prop="jobtitle"></el-table-column>
-        <el-table-column label="拜访时间" prop="visitdate"></el-table-column>
-        <el-table-column label="拜访结果" prop="visitresult"></el-table-column>
-      </el-table>
+      <div class="table-title">客户拜访信息</div>
+      <vxe-table border resizable highlight-hover-row :data="custList.projpVisitList" >
+        <vxe-table-column field="linkmanName" title="被访人姓名" width="25%"></vxe-table-column>
+        <vxe-table-column field="jobtitle" title="职务" width="25%"></vxe-table-column>
+        <vxe-table-column field="visitdate" title="拜访时间" width="25%"></vxe-table-column>
+        <vxe-table-column field="visitresult" title="拜访结果" width="25%"></vxe-table-column>
+      </vxe-table>
     </div>
     <div class="title">中标确认信息</div>
     <van-field label="是否中标" v-model="custList.ishit" readonly colon>

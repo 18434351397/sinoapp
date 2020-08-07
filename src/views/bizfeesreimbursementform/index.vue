@@ -175,43 +175,29 @@
       </template>
     </van-field>
     <div>
-      <div
-        class="table-title"
-      >报销明细详情</div>
-      <el-table border :data="costDetailList" style="width: 100%">
-        <!--        <el-table-column-->
-        <!--          label="预计收款日期">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            {{scope.row.receivDate.split(' ')[0]}}-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
-        <!--        <el-table-column-->
-        <!--          label="预计付款时间">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            {{scope.row.paytime.split(' ')[0]}}-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
-        <el-table-column label="报销人员姓名" width="120" prop="reimbursementUserName"></el-table-column>
-        <el-table-column label="科目" prop="subjectName"></el-table-column>
-        <el-table-column label="是否本地票">
+      <div class="table-title">报销明细详情</div>
+      <vxe-table border resizable highlight-hover-row :data="costDetailList" >
+        <vxe-table-column fixed="left" field="reimbursementUserName" title="报销人员姓名" width="17%"></vxe-table-column>
+        <vxe-table-column fixed="left" field="subjectName" title="科目" width="17%"></vxe-table-column>
+        <vxe-table-column title="是否本地票" width="17%">
           <template slot-scope="scope">
             <div v-if="scope.row.isLocal === '1'">是</div>
             <div v-if="scope.row.isLocal === '2'">否</div>
           </template>
-        </el-table-column>
-        <el-table-column label="金额" prop="amount"></el-table-column>
-        <el-table-column label="立项号" prop="projectNo"></el-table-column>
-        <el-table-column label="项目名称" width="200" prop="projectName"></el-table-column>
-        <el-table-column label="费用归属部门名称" prop="ownDeptName"></el-table-column>
-        <el-table-column label="费用归属部门编号" prop="ownDeptCode"></el-table-column>
-        <el-table-column label="应审批人" prop="aprUserIds"></el-table-column>
-        <el-table-column label="借款余额" width="120">
+        </vxe-table-column>
+        <vxe-table-column field="amount" title="金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="projectNo" title="立项号" width="21%"></vxe-table-column>
+        <vxe-table-column field="projectName" title="项目名称" width="20%"></vxe-table-column>
+        <vxe-table-column field="ownDeptName" title="费用归属部门名称" width="20%"></vxe-table-column>
+        <vxe-table-column field="ownDeptCode" title="费用归属部门编号" width="20%"></vxe-table-column>
+        <vxe-table-column field="aprUserIds" title="应审批人" width="20%"></vxe-table-column>
+        <vxe-table-column title="借款余额" width="20%">
           <template slot-scope="scope">{{totalLoanAmount}}</template>
-        </el-table-column>
-        <el-table-column label="清借款金额" prop="loanAmount"></el-table-column>
-        <el-table-column label="备注" prop="remark"></el-table-column>
-        <el-table-column label="查看明细"></el-table-column>
-      </el-table>
+        </vxe-table-column>
+        <vxe-table-column field="loanAmount" title="清借款金额" width="20%"></vxe-table-column>
+        <vxe-table-column field="remark" title="备注" width="20%"></vxe-table-column>
+        <vxe-table-column title="查看明细" width="20%"></vxe-table-column>
+      </vxe-table>
       <van-field
         name="reimbursementAmount"
         v-model="reimbursementAmount"
@@ -225,19 +211,17 @@
       </van-field>
     </div>
     <div>
-      <div
-        class="table-title"
-      >清借款列表</div>
-      <el-table border :data="feesReimbursementLoanVOList" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="借款人" prop="loanUserName"></el-table-column>
-        <el-table-column label="项目号" prop="projectNo"></el-table-column>
-        <el-table-column label="项目名" prop="projectName"></el-table-column>
-        <el-table-column label="待还金额" prop="waitReAmount"></el-table-column>
-        <el-table-column label="借款编号" prop="loanNo"></el-table-column>
-        <el-table-column label="科目" prop="subjectNames"></el-table-column>
-        <el-table-column label="清借款金额" prop="amounts"></el-table-column>
-      </el-table>
+      <div class="table-title">清借款列表</div>
+      <vxe-table border resizable highlight-hover-row :data="feesReimbursementLoanVOList" >
+        <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+        <vxe-table-column field="loanUserName" title="借款人" width="17%"></vxe-table-column>
+        <vxe-table-column field="projectNo" title="项目号" width="17%"></vxe-table-column>
+        <vxe-table-column field="projectName" title="项目名" width="17%"></vxe-table-column>
+        <vxe-table-column field="waitReAmount" title="待还金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="loanNo" title="借款编号" width="21%"></vxe-table-column>
+        <vxe-table-column field="subjectNames" title="科目" width="15%"></vxe-table-column>
+        <vxe-table-column field="amounts" title="清借款金额" width="20%"></vxe-table-column>
+      </vxe-table>
       <van-field
         name="cleranloanAmount"
         v-model="cleranloanAmount"
@@ -256,21 +240,19 @@
       </van-field>
     </div>
     <div>
-      <div
-        class="table-title"
-      >附件列表</div>
-      <el-table border :data="file" style="width: 100%">
-        <el-table-column type="index" label="序号" width="50" :index="indexMethods"></el-table-column>
-        <el-table-column label="附件名称" prop="fileName"></el-table-column>
-        <el-table-column label="大小" width="80">
-          <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+      <div class="table-title" >附件列表</div>
+      <vxe-table border resizable highlight-hover-row :data="file">
+       <vxe-table-column type="seq" title="序号" width="15%"></vxe-table-column>
+       <vxe-table-column field="fileName" title="附件名称" width="50%"></vxe-table-column>
+       <vxe-table-column title="大小" width="20%">
+         <template slot-scope="scope">{{ (scope.row.fileSize / 1024).toFixed(2) + 'KB' }}</template>
+       </vxe-table-column>
+       <vxe-table-column title="操作" width="15%">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
           </template>
-        </el-table-column>
-      </el-table>
+       </vxe-table-column>
+      </vxe-table>
     </div>
   </div>
 </template>

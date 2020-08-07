@@ -7,8 +7,12 @@ import 'vant/lib/index.css'
 import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button, Dialog } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
+import 'xe-utils'
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/index.css'
 // import './mock/index'
 
+Vue.use(VXETable)
 Vue.use(Vant)
 Vue.use(Dialog)
 Vue.use(Select)

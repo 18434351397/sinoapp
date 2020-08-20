@@ -114,7 +114,7 @@ export default {
         data.condition.asc = 'true' 
         data.current = 1
       } else {
-        data.condition.asc = 'true'
+        data.condition.asc = 'false'
       }
       this.loading = true
       search(data).then(res => {

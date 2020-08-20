@@ -599,11 +599,19 @@ export default {
         user.currFlowId === 'ContrReviewApprove'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
+      } else if ( user.currTaskDefinitionName === '运营管理部经理' &&
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.currFlowId === 'ContrReviewApprove' &&
+        user.statusDes === '会签中') {
+          console.log('会签中')
+           this.url = this.url.slice(0, 29) + '/mobileUpdate'
       } else if (
         user.currTaskDefinitionName === '运营管理部经理' &&
         user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'ContrReviewApprove'
+        user.currFlowId === 'ContrReviewApprove' &&
+        user.statusDes !== '会签中'
       ) {
+        console.log('不会签')
         this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
       } else if (
         this.dataList.currFlowId === 'SealKeepApprove' &&

@@ -111,7 +111,7 @@ export default {
         data.condition.asc = sort.toString()
         data.current = 1
       } else if (sort === true) {
-        data.condition.asc = 'true'
+        data.condition.asc = 'true' 
         data.current = 1
       } else {
         data.condition.asc = 'false'

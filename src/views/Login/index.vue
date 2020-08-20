@@ -4,11 +4,11 @@
       <div class="form_box">
         <div class="official_box">
           <img style="width: 80px; height: 50px;" src="@/assets/image/twodevelopment/logo-light-large.png">
-          <img style="width: 180px; height: 55px;" src="@/assets/image/twodevelopment/logo-light-text-large.png">
+<!--          <img style="width: 180px; height: 55px;" src="@/assets/image/twodevelopment/logo-light-text-large.png">-->
         </div>
         <div class="formtitle">
-          <p class="chiness">中科金财运营管理系统</p>
-          <p class="english">Sinodata Operation Management System</p>
+          <p class="chiness">运营管理系统</p>
+          <p class="english">Operation Management System</p>
         </div>
         <div class="sendform_box">
           <div class="sendform">
@@ -201,7 +201,7 @@ export default {
 </style>
 <style lang="less">
 div.formtitle {
-  padding-top: 1.6em !important;
+  padding-top: 0.6em !important;
   padding-bottom: 0px !important;
 }
 </style>

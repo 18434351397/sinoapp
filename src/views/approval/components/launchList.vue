@@ -1,5 +1,5 @@
 <template>
-  <div id="launchList">
+ <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
     <div class="todoListBox" v-show="dataList.length">
       <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
@@ -43,7 +43,7 @@
     <div style="height: 100%;" v-show="!dataList.length && !loading">
       <NoData />
     </div>
-  </div>
+  </van-pull-refresh>
 </template>
 
 <script>
@@ -65,6 +65,7 @@ export default {
       currentPage: 1,
       totalPage: null,
       loading: false,
+      isLoading:false,
       searchType: '3',
       searchCondition: '',
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
@@ -88,6 +89,12 @@ export default {
     ...mapGetters(['searchValue'])
   },
   methods: {
+    // 下拉刷新
+    onRefresh() {
+      this.currentPage = 1
+      this.isLoading= true
+      this.loadData()
+    },
     loadData (sort) {
       const data = {
         asc: false,
@@ -112,6 +119,7 @@ export default {
       }
       this.loading = true
       search(data).then(res => {
+        this.isLoading = false // 关闭下拉刷新
         this.loading = false
         if (res) {
           if (res.data) {

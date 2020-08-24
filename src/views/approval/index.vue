@@ -20,10 +20,10 @@
       <van-tab title="待我处理">
         <todolist ref="todolist" v-if="active === 0"></todolist>
       </van-tab>
-      <van-tab title="我已办的">
+      <van-tab title="我发起的">
         <donelist ref="donelist" v-if="active === 1"></donelist>
       </van-tab>
-      <van-tab title="我发起的">
+      <van-tab title="我已办的">
         <launchlist ref="launchlist" v-if="active === 2"></launchlist>
       </van-tab>
     </van-tabs>
@@ -69,7 +69,7 @@ export default {
   data () {
     return {
       searchValue: '',
-      sort: true, // 待办默认属性 
+      sort: true, // 待办默认属性
       sort2: false, // 已办默认属性
       sort3: false, // 发起默认属性
       sortValue: true, // 默认值

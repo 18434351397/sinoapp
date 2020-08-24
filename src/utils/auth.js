@@ -118,6 +118,68 @@ Vue.prototype.downLoad = function (data) {
   }
 }
 
+// 全局封装的打印方法
+Vue.prototype.print = function (data) {
+  const url = data.url || data.atturl
+  const id = data.id
+  const u = navigator.userAgent
+  // android终端或者uc浏览器
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+  if (url) {
+    if (isAndroid) {
+      var dtask = plus.downloader.createDownload(url, { id })
+      dtask.addEventListener('statechanged', (d, status) => {
+        switch (d.state) {
+          case 1: // 开始
+            Toast('加载中...');
+            break;
+          case 2: // 已连接到服务器
+            Toast('链接到服务器...');
+            break;
+          case 3: // 已接收到数据
+            var a = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
+            Toast(a);
+            break;
+          case 4: // 下载完成
+            // 下载保存路径到图库
+            plus.gallery.save(
+              d.filename,
+              () => {
+                Toast.success('下载完成！');
+                plus.nativeUI.closeWaiting()
+                plus.runtime.openFile(d.filename);
+              })
+            break;
+        }
+      })
+      dtask.start();
+    } else {
+      var dtaskIos = plus.downloader.createDownload(url, {});
+      dtaskIos.addEventListener('statechanged', (d, status) => {
+        switch (d.state) {
+          case 1: // 开始
+            Toast('加载中...');
+            break;
+          case 2: // 已连接到服务器
+            Toast('链接到服务器...');
+            break;
+          case 3: // 已接收到数据
+            var aIos = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
+            Toast.loading({ message : aIos });
+            break;
+          case 4: // 下载完成
+            Toast.success('下载完成！')
+            plus.nativeUI.closeWaiting()
+            plus.runtime.openFile(d.filename)
+            break
+        }
+      })
+      dtaskIos.start();
+    }
+  } else {
+    Toast.fail('附件路径不存在');
+  }
+}
 // 转换大小写方法
 Vue.prototype.intToChinese = function intToChinese (n) {
   var fraction = ['角', '分']

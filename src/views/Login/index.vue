@@ -1,9 +1,9 @@
 <template>
   <div class="login_box">
-    <div class="value_box">
+    <div class="value_box" style="width: 80%;">
       <div class="form_box">
-        <div class="official_box">
-          <img style="width: 80px; height: 50px;" src="@/assets/image/twodevelopment/logo-light-large.png">
+        <div class="official_box" style="margin-top: -5.2em;">
+          <img style="width: 110px;height: 70px;" src="@/assets/image/twodevelopment/logo.png">
 <!--          <img style="width: 180px; height: 55px;" src="@/assets/image/twodevelopment/logo-light-text-large.png">-->
         </div>
         <div class="formtitle">
@@ -18,15 +18,15 @@
             </div>
             <div class="form_val">
               <ul>
-                <li class="form_val_box">
-                  <p class="form_val_title">账号</p>
+                <li class="form_val_box" style="padding-bottom: 40px;">
+                  <p class="form_val_title" style="font-size: 17px;">账号</p>
                   <div>
                     <p class="username"></p>
                     <input style="caret-color:#fff;" v-focus @focus="userFocus(1)" @blur="userBlur(1)" type="text" :placeholder="userAccount ? '' :userToast"  v-model="userAccount" id="userAccount" class="inputs">
                   </div>
                 </li>
-                <li>
-                  <p class="form_val_title">密码</p>
+                <li style="">
+                  <p class="form_val_title" style="font-size: 17px;">密码</p>
                   <div>
                     <p class="pasword"></p>
                     <input style="caret-color:#fff;" type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
@@ -37,7 +37,7 @@
                 </li> -->
                 <li>
                   <!--<input class="login_btn" type="button" id="btnSubmit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">-->
-                  <span class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登录</span>
+                  <span style="position: fixed;left: 0;width: 80%;bottom: 4em;right: 0;font-size: 20px;" class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登录</span>
                 </li>
               </ul>
             </div>
@@ -153,8 +153,8 @@ export default {
             }
           }).catch(err => {
             console.log(err)
-          }
-          )
+            this.$toast('我走丢了，请稍后再试！')
+          })
         } else {
           this.errMsg = '密码不能为空'
         }
@@ -198,10 +198,15 @@ export default {
     background-color: rgba(241, 239, 239, 0.8);
     /* rgba(210, 199, 199, 0.3); */
   }
+  input::-webkit-input-placeholder {
+    /* placeholder颜色 */
+    /* placeholder字体大小 */
+    font-size: 16px;
+  }
 </style>
 <style lang="less">
 div.formtitle {
-  padding-top: 0.6em !important;
+  /*padding-top: 0.2em !important;*/
   padding-bottom: 0px !important;
 }
 </style>

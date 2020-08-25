@@ -220,3 +220,16 @@ Vue.directive('focus', {
     el.focus()
   }
 })
+
+// 流程的状态岁颜色改变
+Vue.prototype.changeColor = function (status) {
+  if (status === '1') { // 审核中
+    return '#0b57f0'
+  } else if (status === '9') { // 废弃
+    return '#7d7d7d'
+  } else if (status === '2') { // 审核通过
+    return 'green'
+  } else if (status === '3') { // 会签中
+    return '#457df2'
+  }
+}

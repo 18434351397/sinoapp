@@ -4,7 +4,7 @@
       <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
           <div class="titleBox_content_title" style>{{item.formTitle}}</div>
-          <div style="width: 64px;text-align: right;">{{item.statusDes}}</div>
+          <div :style="{color: changeColor(item.status)}" style="width: 64px;text-align: right;">{{item.statusDes}}</div>
         </div>
         <div class="flowMessage">
           <div class="flowMessage_box">
@@ -91,7 +91,7 @@ export default {
     this.tabScroll()
   },
   methods: {
-     // 下拉刷新
+    // 下拉刷新
     onRefresh() {
       this.currentPage = 1
       this.isLoading= true
@@ -118,7 +118,7 @@ export default {
         data.condition.asc = sort.toString()
         data.current = 1
       } else if (sort === true) {
-        data.condition.asc = 'true' 
+        data.condition.asc = 'true'
         data.current = 1
       } else {
         data.condition.asc = 'false'

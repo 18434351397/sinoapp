@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
     <div class="todoListBox" v-show="dataList.length">
       <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
@@ -43,7 +43,7 @@
     <div style="height: 100%;" v-show="!dataList.length && !loading">
       <NoData />
     </div>
-  </div>
+</van-pull-refresh>
 </template>
 
 <script>
@@ -79,6 +79,7 @@ export default {
     return {
       loading: false,
       totalPage: null,
+      isLoading:false,
       currentPage: 1,
       searchType: '2',
       searchCondition1: '',
@@ -96,6 +97,12 @@ export default {
     }
   },
   methods: {
+    // 下拉刷新
+    onRefresh() {
+      this.currentPage = 1
+      this.isLoading= true
+      this.loadData()
+    },
     tabScroll () {
       window.addEventListener('scroll', this.handleScroll)
     },
@@ -125,6 +132,7 @@ export default {
       this.loading = true
       search(data).then(res => {
         this.loading = false
+        this.isLoading = false
         if (res) {
           if (res.data) {
             if (res.data.current === '1') {

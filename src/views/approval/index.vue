@@ -1,6 +1,6 @@
 <template>
   <div class="header-top">
-    <van-tabs @change="change" :active="active" sticky color="#1989fa">
+    <van-tabs @change="change" :active="active" swipeable sticky color="#1989fa">
       <van-sticky offset-top="78">
         <van-search v-model="searchValue" placeholder="请输入搜索关键词">
           <!--              <van-button style="line-height: 30px;height: 30px;" type="info" slot="action" @click="onClick">搜索</van-button>-->

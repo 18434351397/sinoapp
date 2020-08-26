@@ -4,7 +4,7 @@
       <div class="titleBox" :key="index" v-for="(item, index) in dataList" @click="toDetail(item)">
         <div class="titleBox_content">
           <div class="titleBox_content_title" style>{{item.formTitle}}</div>
-          <div :style="{color: changeColor(item.status)}" style="width: 64px;text-align: right;">{{item.statusDes}}</div>
+          <div :style="{color: changeColor(item.status)}" style="width: 80px;text-align: right;">{{item.statusDes}}</div>
         </div>
         <div class="flowMessage">
           <div class="flowMessage_box">

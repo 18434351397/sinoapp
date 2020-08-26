@@ -37,11 +37,12 @@
             class="process-title"
             v-model="flowList.formTitle"
             type="text"
-            label="流程标题:"
+            label=""
             readonly
           >
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.formTitle }}</div>
+              <div style="text-align: left;margin: 0;display: flex;align-items: center;">
+                <div style="width: 14px;height: 14px; border-radius: 50%;background-color: #000;margin-right: 10px;"></div>{{ flowList.formTitle }}</div>
             </template>
           </van-field>
           <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly>
@@ -127,8 +128,9 @@
         <div class="approval" v-if="isShowAgree">
           <div v-if="isApproval" class="approval-select">
             <div
-              style="border-top: 1px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;"
-            >审批</div>
+              style="border-top: 2px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;display: flex;align-items: center;"
+            ><div style="width: 14px;height: 14px; border-radius: 50%;background-color: #1989fa;margin: 0 5px 0 0;"></div>
+              <span style="margin: 0;">审批</span></div>
             <van-field name="radio" label="审批结果">
               <template #input>
                 <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
@@ -959,7 +961,9 @@ export default {
   padding: 16px 0 20px;
   background: #fff;
 }
-
+>>>.van-field__value {
+  padding-left: 0;
+}
 .van-radio-group--horizontal {
   margin: 0;
 }
@@ -1003,7 +1007,7 @@ div.public-title {
   bottom: -6px;
   width: 100%;
   z-index: 999;
-  box-shadow: 0px 1px 1px 2px #1989fa;
+  border-top: 2px solid #1989fa;
   .approval-select {
     padding-bottom: 86px;
     width: 100%;
@@ -1011,7 +1015,7 @@ div.public-title {
 }
 .detail-header-title {
   position: relative;
-  border-bottom: 1px solid #1989fa;
+  border-bottom: 2px solid #1989fa;
   .process-title {
     font-weight: bold;
   }
@@ -1035,12 +1039,25 @@ div.public-title {
 }
 div.history-detail {
   background: #fff;
-  border-top: 1px solid #1989fa;
+  border-top: 2px solid #1989fa;
   .title {
     border-top: 1px dashed #f8f8f8;
     padding: 10px 15px;
     text-align: left;
     background-color: #fff;
+    position: relative;
+  }
+  .title::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    margin: auto 0;
+    content: "";
+    width: 4px;
+    height: 12px;
+    border-radius: 2px;
+    background-color: #1989fa;
   }
 }
 .historyButton {

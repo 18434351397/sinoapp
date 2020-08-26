@@ -25,6 +25,19 @@ div.app-title {
     background-color: #fff;
     font-size: 16px;
     padding: 10px 15px;
+    position: relative;
+  }
+  div.title::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    margin: auto 0;
+    content: "";
+    width: 4px;
+    height: 12px;
+    border-radius: 2px;
+    background-color: #1989fa;
   }
   div.title-content {
     border-top: 1px solid #e8e4e4;
@@ -35,6 +48,19 @@ div.app-title {
     padding: 10px 15px;
     text-align: left;
     background-color: #fff;
+    position: relative;
+  }
+  div.table-title::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    margin: auto 0;
+    content: "";
+    width: 4px;
+    height: 12px;
+    border-radius: 2px;
+    background-color: #1989fa;
   }
   // 在可编辑中有下划线
   div.tax.van-cell:not(:last-child)::after {

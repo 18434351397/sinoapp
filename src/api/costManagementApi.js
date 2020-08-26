@@ -9,9 +9,18 @@ const api = {
   bizfeesreimbursementform: '/app/form/bizfeesreimbursementform/detail', // 分摊报销
   bizfeesspecialtransferform: '/app/form/bizfeesspecialtransferform/detail', // 特殊收益划转
   SubCodes: '/app/admin/dictionary/getBySubCodes', // 特殊收益划转
-  fessCheckInoId: '/app/form/bizfeesreimbursementform/fessCheckInoId' // 检查记字号接口地址
+  fessCheckInoId: '/app/form/bizfeesreimbursementform/fessCheckInoId', // 检查记字号接口地址
+  printMethod: '/app/form/bizfeesreimbursementform/export' // 打印方法
 }
+export { api }
 
+// 打印方法
+export async function printMethod () {
+  return request({
+    url: api.printMethod,
+    method: 'post'
+  })
+}
 // 客户属性
 export async function getBySubCodes (code) {
   return request({

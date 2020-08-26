@@ -254,11 +254,14 @@
        </vxe-table-column>
       </vxe-table>
     </div>
+    <div style="background-color: #fff;padding: 10px 0;">
+      <el-button type="primary" @click="Print()" style="background-color: #1989fa;" round>打印</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { bizfeesreimbursementformList, selectByUserIdLoanList, getBySubCodes, fessCheckInoId } from '../../api/costManagementApi'
+import { bizfeesreimbursementformList, selectByUserIdLoanList, getBySubCodes, fessCheckInoId, api } from '../../api/costManagementApi'
 import { mapGetters } from 'vuex'
 export default {
   name: 'index',
@@ -295,6 +298,14 @@ export default {
     this.getBySubCodesList()
   },
   methods: {
+    // 打印方法
+    Print () {
+      const data = {
+        url: api.printMethod,
+        id: this.custList.id
+      }
+      this.print(data)
+    },
     // 检查记字号
     checkCou () {
       const data = {

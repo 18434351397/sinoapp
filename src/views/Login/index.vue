@@ -13,11 +13,9 @@
         <div class="sendform_box">
           <div class="sendform">
 
-            <div class="errlog_box">
-              <p class="errlog" id="errMsg" v-show="errMsg">{{errMsg}}</p>
-            </div>
+
             <div class="form_val">
-              <ul>
+              <ul style="margin-top: 4em;">
                 <li class="form_val_box" style="padding-bottom: 40px;">
                   <p class="form_val_title" style="font-size: 17px;">账号</p>
                   <div>
@@ -32,6 +30,9 @@
                     <input style="caret-color:#fff;" type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
                   </div>
                 </li>
+                <div class="errlog_box">
+                  <p class="errlog" id="errMsg" v-show="errMsg">{{errMsg}}</p>
+                </div>
                 <!-- <li>
                   <span class="forget_pwd" @click="forgetpwd()" style="visibility: hidden;">忘记密码</span>
                 </li> -->
@@ -153,13 +154,13 @@ export default {
             }
           }).catch(err => {
             console.log(err)
-            this.$toast('我走丢了，请稍后再试！')
+            this.$toast('(╥﹏╥) 我走丢了，请稍后再试！')
           })
         } else {
-          this.errMsg = '密码不能为空'
+          this.errMsg = '密码不能为空！'
         }
       } else {
-        this.errMsg = '用户名不能为空'
+        this.errMsg = '用户名不能为空！'
       }
     },
     forgetpwd () {

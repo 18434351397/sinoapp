@@ -657,7 +657,7 @@
       </template>
     </van-field>
     <div class="taxes-btn" v-if="isCustPro">
-      <van-button  type="primary" @click="taxes($event, contractList.tax)">计算</van-button>
+      <van-button  type="primary" @click="taxes($event, contractList.tax)">计&emsp;算</van-button>
     </div>
     <div class="title title-content">其他</div>
     <van-field type="text" v-model="contractList.linkman" label="客户联系人" colon readonly>
@@ -998,7 +998,9 @@ export default {
     padding: 16px;
     background: #fff;
       button.van-button {
-        width: 30%;
+        width: 20%;
+        height: 30px;
+        line-height: 30px;
         border-radius: 3px;
         background: rgba(25, 137, 250, 0.65);
         box-shadow: 0px 0px 2px 1px #1989faa6;

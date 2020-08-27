@@ -78,7 +78,7 @@ export default {
   data () {
     return {
       loading: false,
-      totalPage: null,
+      totalPage: 1,
       isLoading:false,
       currentPage: 1,
       searchType: '2',

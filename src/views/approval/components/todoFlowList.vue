@@ -82,7 +82,7 @@ export default {
       currentPage: 1,
       searchCondition: '',
       isLoading:false,
-      totalPage: null,
+      totalPage: 1,
       loading: false,
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }

@@ -85,6 +85,7 @@ serve.interceptors.response.use(
     // 返回错误信息
     if (response.data.resultCode === 500) {
       this.$toast(response.data.resultMessage)
+      this.$toast('(╥﹏╥) 我走丢了，请稍后再试！')
     }
     // config.data = qs.stringify(config.data)
     const res = response.data

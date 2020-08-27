@@ -41,7 +41,7 @@
             readonly
           >
             <template #input>
-              <div style="text-align: left;margin: 0;display: flex;align-items: center;">
+              <div style="text-align: left;margin: 0;display: flex;align-items: center;font-size: 16px;">
                 <div style="width: 14px;height: 14px; border-radius: 50%;background-color: #000;margin-right: 10px;"></div>{{ flowList.formTitle }}</div>
             </template>
           </van-field>
@@ -1007,7 +1007,7 @@ div.public-title {
   bottom: -6px;
   width: 100%;
   z-index: 999;
-  border-top: 2px solid #1989fa;
+  border-top: 2px solid rgba(25, 137, 250, 0.65);
   .approval-select {
     padding-bottom: 86px;
     width: 100%;
@@ -1015,7 +1015,7 @@ div.public-title {
 }
 .detail-header-title {
   position: relative;
-  border-bottom: 2px solid #1989fa;
+  border-bottom: 3px solid rgba(25, 137, 250, 0.65);
   .process-title {
     font-weight: bold;
   }
@@ -1039,7 +1039,7 @@ div.public-title {
 }
 div.history-detail {
   background: #fff;
-  border-top: 2px solid #1989fa;
+  border-top: 3px solid rgba(25, 137, 250, 0.65);
   .title {
     border-top: 1px dashed #f8f8f8;
     padding: 10px 15px;

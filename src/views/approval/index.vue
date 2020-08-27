@@ -21,10 +21,10 @@
         <todolist ref="todolist" v-if="active === 0"></todolist>
       </van-tab>
       <van-tab title="我发起的">
-        <donelist ref="donelist" v-if="active === 1"></donelist>
+        <launchlist ref="launchlist" v-if="active === 1"></launchlist>
       </van-tab>
       <van-tab title="我已办的">
-        <launchlist ref="launchlist" v-if="active === 2"></launchlist>
+        <donelist ref="donelist" v-if="active === 2"></donelist>
       </van-tab>
     </van-tabs>
   </div>

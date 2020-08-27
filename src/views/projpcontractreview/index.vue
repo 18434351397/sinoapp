@@ -1002,8 +1002,8 @@ export default {
         height: 30px;
         line-height: 30px;
         border-radius: 3px;
-        background: rgba(25, 137, 250, 0.65);
-        box-shadow: 0px 0px 2px 1px #1989faa6;
+        background:#1989fa;
+        // box-shadow: 0px 0px 2px 1px #1989faa6;
         border: none;
     }
   }

@@ -6,7 +6,7 @@
           <img style="width: 110px;height: 70px;" src="@/assets/image/twodevelopment/logo.png">
 <!--          <img style="width: 180px; height: 55px;" src="@/assets/image/twodevelopment/logo-light-text-large.png">-->
         </div>
-        <div class="formtitle">
+        <div class="formtitle" style="margin-bottom: 2em;">
           <p class="chiness">运营管理系统</p>
           <p class="english">Operation Management System</p>
         </div>
@@ -15,7 +15,7 @@
 
 
             <div class="form_val">
-              <ul style="margin-top: 4em;">
+              <ul style="margin-top: 1em;">
                 <li class="form_val_box" style="padding-bottom: 40px;">
                   <p class="form_val_title" style="font-size: 17px;">账号</p>
                   <div>
@@ -38,7 +38,7 @@
                 </li> -->
                 <li>
                   <!--<input class="login_btn" type="button" id="btnSubmit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">-->
-                  <span style="position: fixed;left: 0;width: 80%;bottom: 4em;right: 0;font-size: 20px;" class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登录</span>
+                  <span v-if="isShow" style="position: absolute;left: 0;width: 80%;bottom: 5.5em;right: 0;font-size: 20px;border-radius: 25px;" class="login_btn" id="btnSubmit" @keyup.enter="login()" @click="login()">登录</span>
                 </li>
               </ul>
             </div>
@@ -102,7 +102,9 @@ export default {
       status: 'edit',
       isLogin: false,
       userToast: '请输入账号',
-      passToast: '请输入密码'
+      passToast: '请输入密码',
+      isShow: true,
+      height: window.innerHeight
     }
   },
   created () {
@@ -110,10 +112,54 @@ export default {
   },
   destroyed () {
     this.enterKeyupDestroyed()
+    window.onresize = null
+  },
+  mounted () {
+    var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1
+    if (isAndroid) { // 如果是安卓手机的浏览器
+      window.onresize = () => {
+        if (this.height > window.innerHeight) {
+          this.isShow = false
+        } else {
+          this.isShow = true
+        }
+      }
+    }
   },
   methods: {
+    // 处理按钮被顶的问题
+    // handleLoginBtn () {
+    //   console.log(window.innerHeight)
+    //   var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+    //   if (isAndroid) { // 如果是安卓手机的浏览器
+    //     window.onresize = () => {
+    //       if (this.height > window.innerHeight) {
+    //         this.isShow = false
+    //       } else {
+    //         this.isShow = true
+    //       }
+    //     }
+    //   }
+    //   //   var win_h = $(window).height(); // 关键代码
+    //   //   $("body").height(win_h); // 关键代码
+    //   //   window.addEventListener('resize', function () {
+    //   //     // Document 对象的activeElement 属性返回文档中当前获得焦点的元素。
+    //   //     if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+    //   //       if ($('.footerText').is(':visible')) {
+    //   //         $('.footerText').hide()
+    //   //       }else{
+    //   //         $('.footerText').show();
+    //   //       }
+    //   //     }
+    //   //   });
+    //   // }
+    // },
     // 处理输入状态不明显
     userFocus (val) {
+      // var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+      // if (isAndroid) { // 如果是安卓手机的浏览器
+      //   this.isShow = false
+      // }
       if (val === 1) {
         this.userToast = ''
       } else {
@@ -121,6 +167,10 @@ export default {
       }
     },
     userBlur (val) {
+      // var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+      // if (isAndroid) { // 如果是安卓手机的浏览器
+      //   this.isShow = true
+      // }
       if (val === 1) {
         this.userToast = this.userAccount ? '' : '请输入账号'
       } else {

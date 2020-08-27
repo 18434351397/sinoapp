@@ -63,7 +63,7 @@ export default {
     return {
       dataList: [],
       currentPage: 1,
-      totalPage: null,
+      totalPage: 1,
       loading: false,
       isLoading:false,
       searchType: '3',

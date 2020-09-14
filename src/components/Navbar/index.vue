@@ -21,7 +21,12 @@ export default {
   },
   methods: {
     onClickLeft () {
-      this.$router.go(-1)
+      const currentPage = window.location.hash.split('/')[1]
+      if (currentPage === 'my' || currentPage === 'approval') {
+        return null
+      } else {
+        this.$router.go(-1)
+      }
     }
   },
   mounted () {

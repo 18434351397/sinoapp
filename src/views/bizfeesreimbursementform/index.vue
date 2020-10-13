@@ -254,9 +254,9 @@
        </vxe-table-column>
       </vxe-table>
     </div>
-    <div style="background-color: #fff;padding: 10px 0;">
-      <el-button type="primary" @click="Print()" style="background-color: #1989fa;" round>打印</el-button>
-    </div>
+<!--    <div style="background-color: #fff;padding: 10px 0;">-->
+<!--      <el-button type="primary" @click="Print()" style="background-color: #1989fa;" round>打印</el-button>-->
+<!--    </div>-->
   </div>
 </template>
 

@@ -41,8 +41,10 @@
             readonly
           >
             <template #input>
-              <div style="text-align: left;margin: 0;display: flex;align-items: center;font-size: 16px;">
-                <div style="width: 14px;height: 14px; border-radius: 50%;background-color: #000;margin-right: 10px;"></div>{{ flowList.formTitle }}</div>
+              <div style="text-align: left;margin: 0;display: flex;font-size: 16px;">
+                <div style="width: 14px;height: 14px; border-radius: 50%;background-color: #000;margin-top: 0.3em;"></div>
+                <p style="width: 94%;margin-left: 6px;">{{ flowList.formTitle }}</p>
+              </div>
             </template>
           </van-field>
           <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly>
@@ -1007,7 +1009,7 @@ div.public-title {
   bottom: -6px;
   width: 100%;
   z-index: 999;
-  border-top: 2px solid rgba(25, 137, 250, 0.65);
+  border-top: 2px solid rgba(25, 137, 250, 0.5);
   .approval-select {
     padding-bottom: 86px;
     width: 100%;
@@ -1015,7 +1017,7 @@ div.public-title {
 }
 .detail-header-title {
   position: relative;
-  border-bottom: 3px solid rgba(25, 137, 250, 0.65);
+  border-bottom: 3px solid rgba(25, 137, 250, 0.5);
   .process-title {
     font-weight: bold;
   }
@@ -1039,7 +1041,7 @@ div.public-title {
 }
 div.history-detail {
   background: #fff;
-  border-top: 3px solid rgba(25, 137, 250, 0.65);
+  border-top: 3px solid rgba(25, 137, 250, 0.5);
   .title {
     border-top: 1px dashed #f8f8f8;
     padding: 10px 15px;

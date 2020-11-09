@@ -2,6 +2,7 @@ import request from '@/utils/request'
 const api = {
   projpriskbond: '/app/form/projpriskbond/detail', // 风险保证金
   projpcontractpurchaseform: '/app/form/projpcontractpurchaseform/detail', // 采购合同
+  selectPurchaseNo: '/app/form/projpcontractpurchaseform/selectPurchaseNo', // 采购合同 - 判断是否已有采购合同号
   projpriskbondthaw: '/app/form/projpriskbondthaw/detail', // 解冻风险保证金
   projpcontractprotocolform: '/app/form/projpcontractprotocolform/detail', // 合作协议
   projpprojectinfoform: '/app/form/projpprojectinfoform/detail', // 项目立项
@@ -26,7 +27,7 @@ const api = {
 }
 
 // 风险保证金
-export async function projpriskbondList (data) {
+export async function projpriskbondList(data) {
   return request({
     url: api.projpriskbond + '/' + data,
     method: 'get'
@@ -34,15 +35,22 @@ export async function projpriskbondList (data) {
 }
 
 // 采购合同
-export async function projpcontractpurchaseformList (data) {
+export async function projpcontractpurchaseformList(data) {
   return request({
     url: api.projpcontractpurchaseform + '/' + data,
     method: 'get'
   })
 }
+//  采购合同 - 判断是否已有采购合同号
+export async function selectPurchaseNoApi(data) {
+  return request({
+    url: api.selectPurchaseNo + '/' + data,
+    method: 'get'
+  })
+}
 
 // 风险保证金解冻
-export async function projpriskbondthawList (data) {
+export async function projpriskbondthawList(data) {
   return request({
     url: api.projpriskbondthaw + '/' + data,
     method: 'get'
@@ -50,7 +58,7 @@ export async function projpriskbondthawList (data) {
 }
 
 // 合作协议
-export async function projpcontractprotocolformApi (data) {
+export async function projpcontractprotocolformApi(data) {
   return request({
     url: api.projpcontractprotocolform + '/' + data,
     method: 'get'
@@ -58,7 +66,7 @@ export async function projpcontractprotocolformApi (data) {
 }
 
 // 项目立项
-export async function projpprojectinfoformApi (data) {
+export async function projpprojectinfoformApi(data) {
   return request({
     url: api.projpprojectinfoform + '/' + data,
     method: 'get'
@@ -66,7 +74,7 @@ export async function projpprojectinfoformApi (data) {
 }
 
 // 项目立项 --- 阶段列表
-export async function projpprojectstageinfoApi (data) {
+export async function projpprojectstageinfoApi(data) {
   return request({
     url: api.projpprojectstageinfo + '/?projectKey=' + data,
     method: 'get'
@@ -74,7 +82,7 @@ export async function projpprojectstageinfoApi (data) {
 }
 
 // 项目立项 --- 阶段列表
-export async function attachmentApi (data) {
+export async function attachmentApi(data) {
   return request({
     url: api.attachment + '?bizId=' + data,
     method: 'get'
@@ -82,42 +90,42 @@ export async function attachmentApi (data) {
 }
 
 // 履约保函
-export async function bizperformdenoteformApi (data) {
+export async function bizperformdenoteformApi(data) {
   return request({
     url: api.bizperformdenoteform + '/' + data,
     method: 'get'
   })
 }
 // 合同存档
-export async function projpcontractarchivesApi (data) {
+export async function projpcontractarchivesApi(data) {
   return request({
     url: api.projpcontractarchives + '/' + data,
     method: 'get'
   })
 }
 // 验收报告相关信息
-export async function selectReportByRequestNoApi (data) {
+export async function selectReportByRequestNoApi(data) {
   return request({
     url: api.selectReportByRequestNo + '/' + data,
     method: 'get'
   })
 }
 // 合同付款
-export async function projppayreqApi (data) {
+export async function projppayreqApi(data) {
   return request({
     url: api.projppayreq + '/' + data,
     method: 'get'
   })
 }
 // 合同付款金额
-export async function projpcontractpaymentApi (data) {
+export async function projpcontractpaymentApi(data) {
   return request({
     url: api.projpcontractpayment + '/' + data,
     method: 'get'
   })
 }
 // 现金流状态
-export async function cashStatusApi (data) {
+export async function cashStatusApi(data) {
   return request({
     url: api.cashStatus + '/' + data,
     method: 'get'
@@ -125,14 +133,14 @@ export async function cashStatusApi (data) {
 }
 
 // 履约保证金
-export async function bizperformbondformApi (data) {
+export async function bizperformbondformApi(data) {
   return request({
     url: api.bizperformbondform + '/' + data,
     method: 'get'
   })
 }
 // 中标服务费
-export async function projpbidservicefeeApi (data) {
+export async function projpbidservicefeeApi(data) {
   return request({
     url: api.projpbidservicefee + '/' + data,
     method: 'get'
@@ -140,7 +148,7 @@ export async function projpbidservicefeeApi (data) {
 }
 
 // 销售合同变更
-export async function projpcontractreviewupdateformApi (data) {
+export async function projpcontractreviewupdateformApi(data) {
   return request({
     url: api.projpcontractreviewupdateform + '/' + data,
     method: 'get'
@@ -148,7 +156,7 @@ export async function projpcontractreviewupdateformApi (data) {
 }
 
 // 项目变更 --- 预算变更
-export async function projpprojectupdateformApi (data) {
+export async function projpprojectupdateformApi(data) {
   return request({
     url: api.projpprojectupdateform + '/' + data,
     method: 'get'
@@ -156,20 +164,20 @@ export async function projpprojectupdateformApi (data) {
 }
 
 // 项目结项
-export async function projpprojectendformApi (data) {
+export async function projpprojectendformApi(data) {
   return request({
     url: api.projpprojectendform + '/' + data,
     method: 'get'
   })
 }
-export async function getOtherInfoApi (projectNo, contractNo) {
+export async function getOtherInfoApi(projectNo, contractNo) {
   return request({
     url: api.getOtherInfo + '?projectNo=' + projectNo + '&contractNo=' + contractNo,
     method: 'get'
   })
 }
 // 验收报告列表记录
-export async function passedAndFormApi (data) {
+export async function passedAndFormApi(data) {
   return request({
     url: api.passedAndForm,
     method: 'put',
@@ -177,15 +185,15 @@ export async function passedAndFormApi (data) {
   })
 }
 // 验收报告附件
-export async function selectAttnameApi (data) {
+export async function selectAttnameApi(data) {
   return request({
     url: api.selectAttname + '/' + data,
-    method: 'get',
+    method: 'get'
   })
 }
 
 // 验收报告附件审核
-export async function updateAttachApi (data) {
+export async function updateAttachApi(data) {
   return request({
     url: api.updateAttach,
     method: 'POST',
@@ -194,9 +202,9 @@ export async function updateAttachApi (data) {
 }
 
 // 销售合同取消
-export async function projpcontractreviewcancelApi (data) {
+export async function projpcontractreviewcancelApi(data) {
   return request({
     url: api.projpcontractreviewcancel + '/' + data,
-    method: 'get',
+    method: 'get'
   })
 }

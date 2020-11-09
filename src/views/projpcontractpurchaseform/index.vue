@@ -329,12 +329,32 @@
           </template>
        </vxe-table-column>
       </vxe-table>
+      <van-field
+        v-if="isCover"
+        name="isCover"
+        clickable
+        right-icon="arrow-down"
+        label="存在相同采购号数据，是否覆盖"
+        colon
+        :value="value"
+        placeholder="请选择"
+        :rules="[{ required: true, message: '存在相同采购号数据，是否覆盖是必选字段' }]"
+        @click="showPicker = true"
+      />
+      <van-popup v-model="showPicker" round position="bottom">
+        <van-picker
+          show-toolbar
+          :columns="custProList"
+          @cancel="showPicker = false"
+          @confirm="onConfirm"
+        />
+      </van-popup>
     </div>
   </div>
 </template>
 
 <script>
-import { projpcontractpurchaseformList } from '../../api/contract'
+import { projpcontractpurchaseformList, selectPurchaseNoApi } from '../../api/contract'
 
 export default {
   name: 'index',
@@ -342,7 +362,11 @@ export default {
     return {
       dataList: this.$route.query,
       fileList: [],
+      value: null,
+      isCover: false,
       isShow: false,
+      showPicker: false,
+      custProList:[{text:'覆盖',value:'1'}, {text:'不覆盖',value:'2'}],
       files: [], // 循环附件
       goodsList: [], // 采购
       payforList: [], // 付款
@@ -351,6 +375,7 @@ export default {
     }
   },
   created () {
+    // 调用采购详情接口
     projpcontractpurchaseformList(this.dataList.dataId).then(res => {
       if (res.data) {
         // 判断bool值类型
@@ -385,9 +410,30 @@ export default {
       } else {
         throw new '数据异常'()
       }
+       // 判断是否是总办
+      if(this.dataList.currTaskDefinitionKey ==='ManagerOffice' &&  this.dataList.currFlowId==='PurchaseApprove') {
+        if(res.data.purchaseNo) {
+          selectPurchaseNoApi(res.data.purchaseNo).then(res => {
+              if (res.data === 'true') {
+                this.isCover = true
+              } else {
+                this.isCover = false
+              }
+          })
+        } else {
+          this.isCover = false
+          res.data.isCover = '0'
+          this.projpcontractpurchaseList = res.data
+        }
+      }
     })
   },
   methods: {
+    onConfirm (value) {
+      this.value = value.text
+      this.projpcontractpurchaseList.isCover = value.value
+      this.showPicker = false
+    },
     // 下载调用方法
     handleClick (data) {
       console.log(data.url)

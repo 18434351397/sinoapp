@@ -465,6 +465,27 @@ export default {
           : []
       } else {
       }
+
+      // 判断是否是总经理办公室节点
+       if (
+       this.dataList.currTaskDefinitionKey ==='ManagerOffice' &&
+       this.dataList.currFlowId==='PurchaseApprove'
+      ) {
+        if(this.$refs.detail.isCover === false) {
+          values.isCover = '0'
+          values.isGeneratorPno = 'true'
+        } else {
+          if(values.isCover === '覆盖') {
+            values.isGeneratorPno = 'false'
+            values.isCover = '1'
+          } else {
+            values.isGeneratorPno = 'false'
+            values.isCover ='2'
+          }
+        }
+      } else {
+      }
+
       // 判断是否是项目结项
       if (
         this.dataList.currFlowId === 'ProjectEndApprove' &&
@@ -597,7 +618,10 @@ export default {
     },
     specialFun (values) {
       const user = this.dataList
-      if (
+     if(this.dataList.currTaskDefinitionKey ==='ManagerOffice' &&
+       this.dataList.currFlowId==='PurchaseApprove') {
+        this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
+     } else if (
         user.currTaskDefinitionName === '运营管理部' &&
         user.currTaskDefinitionKey === 'BusiAnalysis' &&
         user.currFlowId === 'ContrReviewApprove'

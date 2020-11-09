@@ -432,7 +432,7 @@ export default {
         delete values.undefined
         values.submitTask = this.region.id ? this.region.id : '【下一步】'
         if (values.meetingUsers) {
-          values.content = '【发起会签】' + this.signText
+          values.content = values.content + ' >>>>【发起会签】' + this.signText
         } else if (values.commitType === 'terminate') {
           values.content = this.message
         } else {
@@ -467,20 +467,19 @@ export default {
       }
 
       // 判断是否是总经理办公室节点
-       if (
-       this.dataList.currTaskDefinitionKey ==='ManagerOffice' &&
-       this.dataList.currFlowId==='PurchaseApprove'
+      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' &&
+         this.dataList.currFlowId === 'PurchaseApprove'
       ) {
-        if(this.$refs.detail.isCover === false) {
+        if (this.$refs.detail.isCover === false) {
           values.isCover = '0'
           values.isGeneratorPno = 'true'
         } else {
-          if(values.isCover === '覆盖') {
+          if (values.isCover === '覆盖') {
             values.isGeneratorPno = 'false'
             values.isCover = '1'
           } else {
             values.isGeneratorPno = 'false'
-            values.isCover ='2'
+            values.isCover = '2'
           }
         }
       } else {
@@ -516,7 +515,7 @@ export default {
       } else {
       }
       // 判断是否是开发票
-      if(this.dataList.currFlowId === 'BillApprove' &&
+      if (this.dataList.currFlowId === 'BillApprove' &&
         this.dataList.currFlowName === '开发票') {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
       }
@@ -602,7 +601,7 @@ export default {
                   this.$router.push('/approval')
                 }
               })
-            } else if(res.resultCode === '409') {
+            } else if (res.resultCode === '409') {
               Toast.fail(res.bizResultMessage)
               this.url = this.submitUrl
             } else {
@@ -618,21 +617,21 @@ export default {
     },
     specialFun (values) {
       const user = this.dataList
-     if(this.dataList.currTaskDefinitionKey ==='ManagerOffice' &&
-       this.dataList.currFlowId==='PurchaseApprove') {
+      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' &&
+       this.dataList.currFlowId === 'PurchaseApprove') {
         this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
-     } else if (
+      } else if (
         user.currTaskDefinitionName === '运营管理部' &&
         user.currTaskDefinitionKey === 'BusiAnalysis' &&
         user.currFlowId === 'ContrReviewApprove'
       ) {
         this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
-      } else if ( user.currTaskDefinitionName === '运营管理部经理' &&
+      } else if (user.currTaskDefinitionName === '运营管理部经理' &&
         user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
         user.currFlowId === 'ContrReviewApprove' &&
         user.statusDes === '会签中') {
-          console.log('会签中')
-           this.url = this.url.slice(0, 29) + '/mobileUpdate'
+        console.log('会签中')
+        this.url = this.url.slice(0, 29) + '/mobileUpdate'
       } else if (
         user.currTaskDefinitionName === '运营管理部经理' &&
         user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
@@ -729,7 +728,8 @@ export default {
         this.dataList.currTaskDefinitionKey !== 'RiskRuleCreditCommissioner'
       ) {
         this.url = this.url.slice(0, -12) + '/comit/task'
-      } else if (  // 销售合同取消
+      } else if (
+        // 销售合同取消
         this.dataList.currFlowName === '合同取消' &&
         this.dataList.currFlowId === 'JusticeApprove'
       ) {

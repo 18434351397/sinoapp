@@ -960,35 +960,25 @@ export default {
       this.showPicker = false
     },
     // 税金
-    taxes (e, value) {
+    taxes(e, value) {
       e.preventDefault()
       const rate = this.contractList
       // 税前毛利润率
-      rate.pretaxGrossProfitRate = (
-        ((Number(rate.contractAmount) - Number(rate.costTotalAmount)) /
-          Number(rate.receiveTotalAmount)) *
-        100
-      ).toFixed(2)
+      let preGrossProfit = Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(rate.occupy)
+      rate.pretaxGrossProfitRate =
+        rate.contractAmount !== 0 && rate.contractAmount
+          ? (((Number(rate.contractAmount) - Number(rate.costTotalAmount)) / Number(rate.receiveTotalAmount)) * 100).toFixed(2)
+          : '0.00'
+      // 毛利润                      // 收入         // 成本            // 税金     // 资金占用
+      rate.grossProfit = (Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value) - Number(rate.occupy)).toFixed(2)
+
       // 税后毛利润率                              // 收入                           // 成本                  // 税金             // 收入
-      rate.aftertaxGrossProfitRate = (
-        ((Number(rate.contractAmount) -
-          Number(rate.costTotalAmount) -
-          Number(value)) /
-          Number(rate.receiveTotalAmount)) *
-        100
-      ).toFixed(2)
-      // 毛利润                      // 收入                           // 成本                  // 税金
-      rate.grossProfit = (
-        Number(rate.contractAmount) -
-        Number(rate.costTotalAmount) -
-        Number(value)
-      ).toFixed(2)
+      rate.aftertaxGrossProfitRate =
+        rate.contractAmount !== 0 && rate.contractAmount ? ((Number(rate.grossProfit) / Number(rate.contractAmount)) * 100).toFixed(2) : '0.00'
+
       // 净利润                     // 收入                           // 成本                  // 税金
-      rate.netProfit = (
-        Number(rate.contractAmount) -
-        Number(rate.costTotalAmount) -
-        Number(value)
-      ).toFixed(2)
+      rate.netProfit = rate.grossProfit
+      // rate.netProfit = (Number(rate.contractAmount) - Number(rate.costTotalAmount) - Number(value)).toFixed(2)
     }
   }
 }

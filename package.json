@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "xujintao": "vue-cli-service serve --host=172.169.1.79 --port=80",
+    "xujintao": "vue-cli-service serve --host=192.168.7.252 --port=80",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"

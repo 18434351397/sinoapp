@@ -145,6 +145,7 @@
               name="content"
               class="message-textarea"
               v-model="message"
+              @focus="changeFocus"
               rows="2"
               autosize
               label="办理意见"
@@ -349,6 +350,15 @@ export default {
         document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
       } else {
         document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
+      }
+    },
+    // 检测ios获取焦点时
+    changeFocus() {
+      let u = navigator.userAgent;
+      let isIOS =!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+      if(isIOS) {
+        document.documentElement.scrollTop = document.documentElement.scrollHeight
+        document.body.scrollTop = document.body.scrollHeight
       }
     },
     // 滚动检测

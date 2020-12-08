@@ -109,6 +109,9 @@ export default {
   },
   created () {
     this.enterKeyup()
+    if(localStorage.getItem('userAccount')) {
+      this.userAccount = localStorage.getItem('userAccount')
+    }
   },
   destroyed () {
     this.enterKeyupDestroyed()
@@ -196,6 +199,7 @@ export default {
                 forbidClick: true,
                 message: '登录成功',
                 onClose: () => {
+                  localStorage.setItem('userAccount', data.userAccount)
                   this.$store.dispatch('getInfo')
                 }
               })

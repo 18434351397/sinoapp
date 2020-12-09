@@ -871,29 +871,29 @@ export default {
                   continue
                 } else {
                   // 非会签、回退办理人，展示到回退列表中
-                  data.historyList[i].userIds = 'back_' + data.historyList[i].taskDefinitionKey + '_' + data.historyList[i].createdBy
-                  data.historyList[i].text = '【退回】' + data.historyList[i].taskName + '-' + data.historyList[i].userName
-                  // 初始化加载的数据 进行数据的去重处理
-                  if (!this.map.has(data.historyList[i].createdBy) && data.historyList[i].userIds) {
-                    this.map.set(data.historyList[i].createdBy, data.historyList[i]) // 为了判断是否唯一
-                    this.mapData.push(data.historyList[i]) // 最终展示的数据
-                  }
-                  this.backSelectOpts = this.mapData
-                  // 非会签、回退办理人，展示到回退列表中
-                  // var item = {
-                  //   id:
-                  //     'back_' +
-                  //     data.historyList[i].taskDefinitionKey +
-                  //     '_' +
-                  //     data.historyList[i].createdBy,
-                  //   text:
-                  //     '【退回】' +
-                  //     data.historyList[i].taskName +
-                  //     '-' +
-                  //     data.historyList[i].userName
+                  // data.historyList[i].userIds = 'back_' + data.historyList[i].taskDefinitionKey + '_' + data.historyList[i].createdBy
+                  // data.historyList[i].text = '【退回】' + data.historyList[i].taskName + '-' + data.historyList[i].userName
+                  // // 初始化加载的数据 进行数据的去重处理
+                  // if (!this.map.has(data.historyList[i].createdBy) && data.historyList[i].userIds) {
+                  //   this.map.set(data.historyList[i].createdBy, data.historyList[i]) // 为了判断是否唯一
+                  //   this.mapData.push(data.historyList[i]) // 最终展示的数据
                   // }
-                  // this.backSelectOpts.push(item)
-                  // this.backSelectOpts = Array.from(new Set(this.backSelectOpts))
+                  // this.backSelectOpts = this.mapData
+                  // 非会签、回退办理人，展示到回退列表中
+                  var item = {
+                    id:
+                      'back_' +
+                      data.historyList[i].taskDefinitionKey +
+                      '_' +
+                      data.historyList[i].createdBy,
+                    text:
+                      '【退回】' +
+                      data.historyList[i].taskName +
+                      '-' +
+                      data.historyList[i].userName
+                  }
+                  this.backSelectOpts.push(item)
+                  this.backSelectOpts = Array.from(new Set(this.backSelectOpts))
                 }
               } else {
                 // 如果历史审批中出现当前节点则说明目前处于退回后提交，则后续审批意见是在当前节点之后，不能展示在退回列表中

@@ -15,11 +15,6 @@ const biddingRouter = [
     name: 'projptenderrecord'
   },
   {
-    path: '/projpcontractreview', // 合同评审
-    component: () => import('../views/projpcontractreview'),
-    name: 'projpcontractreview'
-  },
-  {
     path: '/projptenderpreq', // 投标保证金
     component: () => import('../views/projptenderpreq'),
     name: 'projptenderpreq'
@@ -43,6 +38,11 @@ const biddingRouter = [
     path: '/projpchanceform', // 商机修订
     component: () => import('../views/projpchanceform'),
     name: 'projpchanceform'
+  },
+  {
+    path: '/projpcreditcertificateform', // 资信证明
+    component: () => import('../views/projpcreditcertificateform'),
+    name: 'projpcreditcertificateform'
   }
 ]
 export default biddingRouter

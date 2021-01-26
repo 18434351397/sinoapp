@@ -3,6 +3,7 @@ const api = {
   projptenderletterList: '/app/form/projptenderletter/detail',
   projptenderpreqList: '/app/form/projptenderpreq/detail/pay',
   projptenderpreqpayList: '/app/form/projptenderpreq/detail',
+  projpcreditcertificateformList: '/app/form/projpcreditcertificateform/detail',
   projpchanceformList: '/app/form/projpchanceform/detail'
 }
 // 投标保证金
@@ -30,6 +31,14 @@ export async function projptenderletterList (data) {
 export async function projpchanceformList (data) {
   return request({
     url: api.projpchanceformList + '/' + data,
+    method: 'get'
+  })
+}
+
+// 资信证明
+export async function projpcreditcertificateformList (data) {
+  return request({
+    url: api.projpcreditcertificateformList + '/' + data,
     method: 'get'
   })
 }

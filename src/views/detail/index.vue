@@ -353,10 +353,10 @@ export default {
       }
     },
     // 检测ios获取焦点时
-    changeFocus() {
-      let u = navigator.userAgent;
-      let isIOS =!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-      if(isIOS) {
+    changeFocus () {
+      const u = navigator.userAgent
+      const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+      if (isIOS) {
         document.documentElement.scrollTop = document.documentElement.scrollHeight
         document.body.scrollTop = document.body.scrollHeight
       }
@@ -447,7 +447,7 @@ export default {
           values.content = values.content + ' >>>>【发起会签】' + this.signText
           this.message = values.content
         } else if (values.commitType === 'terminate') {
-          values.content =  this.message
+          values.content = this.message
         } else {
           if (values.submitTask !== '【下一步】') {
             values.content =
@@ -766,6 +766,8 @@ export default {
           this.url = this.url.slice(0, -20) + '/mobileUpdate'
         } else if (this.url === '/app/form/projpcontractreview/acceptUpload/page') { // 合同受理上传文本特殊处理
           this.url = this.url.slice(0, -18) + '/mobileUpdate'
+        } else if (this.url.includes('projpcreditcertificateform')) { // 资信证明特殊处理
+          this.url = this.url.slice(0, -12) + '/commit/task'
         } else {
           // 公共提交接口
           this.url = this.url.slice(0, -12) + '/mobileUpdate'

@@ -30,7 +30,7 @@
           ></el-tree>
         </div>
       </van-dialog>
-      <van-form id="editPwdForm" @submit="onSubmit">
+      <van-form id="editPwdForm" @submit="onSubmit" @failed="onFailed" validate-first show-error show-error-message>
         <div class="detail-header-title">
           <van-field
             name="formTitle"
@@ -434,6 +434,12 @@ export default {
         console.log('提交')
       }
     },
+     onFailed(error) {
+       Toast.fail({
+        duration: 2500,
+        message:  error.errors[0].message
+      })
+     },
     // 点击提交按钮要进行的操作
     isSubmit (values) {
       if (this.flowList.status === '3' && this.flowList.statusDes === '会签中') {
@@ -926,10 +932,18 @@ export default {
       }
     },
     // 会签弹框显示
-    counterSign () {
-      this.show = true
-      if (this.show) {
-        this.commitType = 'meeting'
+     counterSign() {
+       console.log('12')
+      if (this.$refs.detail.hasRequired && !this.$refs.detail.value) {
+       Toast.fail({
+          duration: 2500,
+          message: this.hasMessageText
+        })
+      } else {
+        this.show = true
+        if (this.show) {
+          this.commitType = 'meeting'
+        }
       }
     },
     // 关闭弹窗

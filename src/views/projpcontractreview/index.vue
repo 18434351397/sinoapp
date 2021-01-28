@@ -723,7 +723,7 @@
       colon
       :value="value"
       placeholder="请选择"
-      :rules="[{ required: true, message: '客户属性是必选字段' }]"
+      :rules="[{ required: hasRequired, message: '客户属性是必选字段' }]"
       @click="showPicker = true"
     />
     <van-popup v-model="showPicker" round position="bottom">
@@ -840,6 +840,7 @@ export default {
     return {
       isCustPro: false, // 默认不显示客户选择属性 -- 部门
       isCustProShow: false, // 默认不显示--经理
+      hasRequired: true,  // 客户属性是否必填
       value: null,
       showPicker: false,
       custProList: [],
@@ -859,6 +860,14 @@ export default {
     }
   },
   created () {
+    // 判断当前节点是否是会签中的节点
+    if(
+      this.dataList.currTaskDefinitionKey === 'BusiAnalysis' && 
+      this.dataList.statusDes === '会签中' &&
+      this.dataList.currFlowName === '合同评审审批') {
+      this.hasRequired = false
+    }
+ 
     projpcontractreviewList(this.dataList.dataId).then(res => {
       if (res.data) {
         const resData = res.data.projpContractFeesList

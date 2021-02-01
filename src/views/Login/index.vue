@@ -12,8 +12,6 @@
         </div>
         <div class="sendform_box">
           <div class="sendform">
-
-
             <div class="form_val">
               <ul style="margin-top: 1em;">
                 <li class="form_val_box" style="padding-bottom: 40px;">
@@ -27,7 +25,7 @@
                   <p class="form_val_title" style="font-size: 17px;">密码</p>
                   <div>
                     <p class="pasword"></p>
-                    <input style="caret-color:#fff;" type="password" @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
+                    <input style="caret-color:#fff;" type="password"  @focus="userFocus(2)" @blur="userBlur(2)" :placeholder="passToast" v-model="password" id="password" class="inputs">
                   </div>
                 </li>
                 <div class="errlog_box">
@@ -129,6 +127,22 @@ export default {
       }
     }
   },
+  watch:{
+    password (e){
+     if(e) {
+      this.errMsg = false 
+     } else {
+       this.errMsg = '密码不能为空！'
+     }
+    },
+    userAccount(e) {
+       if(e) {
+      this.errMsg = false 
+     } else {
+       this.errMsg = '用户名不能为空！'
+     }
+    }
+  },
   methods: {
     // 处理按钮被顶的问题
     // handleLoginBtn () {
@@ -168,6 +182,10 @@ export default {
       } else {
         this.passToast = ''
       }
+    },
+    handlePassWord(e){
+      console.log('123123')
+      console.log(e)
     },
     userBlur (val) {
       // var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;

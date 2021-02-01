@@ -183,10 +183,6 @@ export default {
         this.passToast = ''
       }
     },
-    handlePassWord(e){
-      console.log('123123')
-      console.log(e)
-    },
     userBlur (val) {
       // var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
       // if (isAndroid) { // 如果是安卓手机的浏览器

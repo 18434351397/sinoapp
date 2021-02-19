@@ -57,8 +57,8 @@ Vue.prototype.debounce = function debounce (fn, wait) {
 
 // 全局封装的下载方法
 Vue.prototype.downLoad = function (data) {
-  const url = data.url || data.atturl
-  const eLink= window.location.href.split('/#').splice(0,1).join('')
+  let url = data.url || data.atturl
+  const eLink= window.location.href.split('/mobile/#').splice(0,1).join('')
   const u = navigator.userAgent
   //android终端或者uc浏览器
   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1

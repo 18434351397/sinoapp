@@ -62,7 +62,7 @@ Vue.prototype.downLoad = function (data) {
   const u = navigator.userAgent
   //android终端或者uc浏览器
   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
-  if (url) {
+  if (url && eLink) {
     url = eLink + url
     if (isAndroid) {
       var dtask = plus.downloader.createDownload(url, {})

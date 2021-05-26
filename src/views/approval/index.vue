@@ -8,13 +8,8 @@
         <!-- <div>
           时间 <van-button class="sort" @click="sortFnc(active)" type="info" size="small">{{sortValue}}</van-button>
         </div> -->
-        <el-select v-model="sortValue" @change="sortFnc($event,active)">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
+        <el-select v-model="sortValue" @change="sortFnc($event, active)">
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
         </el-select>
       </van-sticky>
       <van-tab title="待我处理">
@@ -44,12 +39,9 @@ export default {
     launchlist
   },
   computed: {
-    ...mapGetters([
-      'userinfo',
-      'active'
-    ])
+    ...mapGetters(['userinfo', 'active'])
   },
-  created () {
+  created() {
     if (this.active === 0) {
       this.sortValue = this.sort ? true : false
     } else if (this.active === 1) {
@@ -58,15 +50,14 @@ export default {
       this.sortValue = this.sort3 ? true : false
     }
   },
-  mounted () {
-  },
+  mounted() {},
   watch: {
-    searchValue (old, newV) {
-      this.ththrottle(this.handleSearch(), 1000)
+    searchValue(old, newV) {
+      // this.ththrottle(this.handleSearch(), 1000)
       this.$store.dispatch('setsearchValue', this.searchValue)
     }
   },
-  data () {
+  data() {
     return {
       searchValue: '',
       sort: true, // 待办默认属性
@@ -74,143 +65,61 @@ export default {
       sort3: false, // 发起默认属性
       sortValue: true, // 默认值
       current: 1,
-      options: [{
-        value: true,
-        label: '时间正序排列'
-      }, {
-        value: false,
-        label: '时间倒序排列'
-      }],
+      options: [
+        {
+          value: true,
+          label: '时间正序排列'
+        },
+        {
+          value: false,
+          label: '时间倒序排列'
+        }
+      ],
       // active: 0,
       tabIndex: 0,
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }
   },
   methods: {
-    change (event) {
+    change(event) {
       this.$store.dispatch('setactive', event)
       this.tabIndex = event
       this.searchValue = ''
       if (event === 0) {
         this.sortValue = this.sort ? true : false
-        // this.$refs.todolist.loadData(sort)
-        // if (this.$refs.todolist) {
-        //   // this.$refs.todolist.searchType = this.tabIndex + 1 + ''
-        //   // this.$refs.todolist.currentPage = 1
-        //   // this.$refs.todolist.loadData()
-        // }
       }
       if (event === 1) {
         this.sortValue = this.sort2 ? true : false
-        // this.$refs.donelist.loadData(sort2)
-        // if (this.$refs.donelist) {
-        //   // this.$refs.donelist.searchType = this.tabIndex + 1 + ''
-        //   // this.$refs.donelist.searchType = '3'
-        //   // this.$refs.launchlist.currentPage = 1
-        //   // this.$refs.launchlist.loadData()
-        // }
       }
       if (event === 2) {
         this.sortValue = this.sort3 ? true : false
-        // this.$refs.launchlist.loadData(sort3)
-        // if (this.$refs.launchlist) {
-        //   // this.$refs.launchlist.searchType = this.tabIndex + 1
-        //   // this.$refs.launchlist.currentPage = 1
-        //   // this.$refs.launchlist.loadData()
-        // }
       }
     },
     // 排序
-    sortFnc (item, event) {
+    sortFnc(item, event) {
       if (event === 0) {
         this.sortValue = item ? true : false
         this.$refs.todolist.loadData(item)
       } else if (event === 1) {
         this.sortValue = item ? true : false
-        this.$refs.donelist.loadData(item)
+        this.$refs.launchlist.loadData(item)
       } else if (event === 2) {
         this.sortValue = item ? true : false
-        this.$refs.launchlist.loadData(item)
+        this.$refs.donelist.loadData(item)
       }
     },
-    handleSearch () {
-      // console.log(this.tabIndex)
-      // if (this.tabIndex === 0) {
-      //   console.log(this.searchValue)
-      //   console.log('开始搜索待办了')
-      //   const data = {
-      //     asc: false,
-      //     current: this.current,
-      //     openSort: true,
-      //     searchCount: true,
-      //     size: 10,
-      //     condition: {
-      //       searchType: this.tabIndex ? this.tabIndex : '1',
-      //       currUseerId: this.id,
-      //       searchCondition: this.searchValue
-      //     }
-      //   }
-      //   search(data).then(res => {
-      //     if (res) {
-      //       if (res.data) {
-      //         res.data.records.forEach(item => {
-      //           item.createdDate = item.createdDate.split('.')[0]
-      //           item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
-      //         })
-      //         this.$refs.todolist.dataList = res.data.records ? res.data.records : []
-      //       }
-      //     }
-      //   }).catch(err => {
-      //     console.log(err)
-      //   })
-      //   // this.$refs.todolist.loadData()
-      // }
-      // else if (this.tabIndex === 1) {
-      //   console.log(this.searchValue)
-      //   const data = {
-      //     asc: false,
-      //     current: this.current,
-      //     openSort: true,
-      //     searchCount: true,
-      //     size: 10,
-      //     condition: {
-      //       searchType: '2',
-      //       currUseerId: this.id,
-      //       searchCondition: this.searchValue
-      //     }
-      //   }
-      //   search(data).then(res => {
-      //     if (res) {
-      //       if (res.data) {
-      //         res.data.records.forEach(item => {
-      //           item.createdDate = item.createdDate.split('.')[0]
-      //           item.lastModifiedDate = item.lastModifiedDate.split('.')[0]
-      //         })
-      //         this.$refs.todolist.dataList = res.data.records ? res.data.records : []
-      //       }
-      //     }
-      //   }).catch(err => {
-      //     console.log(err)
-      //   })
-      // }
-      // if (this.tabIndex === 1) {
-      //   console.log('开始搜索已办了')
-      //   data.condition.searchType = this.tabIndex
-      //   data.condition.searchCondition = this.searchValue
-      //   // this.$refs.todolist.loadData()
-      // }
-    },
-    onClick () {
+
+    onClick() {
       if (this.searchValue) {
         this.searchValue = ''
       }
     },
-    beforeDestroy () {
+    beforeDestroy() {
       window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
       this.searchValue = ''
     }
   },
-  destroyed () {
+  destroyed() {
     window.removeEventListener('scroll', this.ththrottle(this.handleScroll, 1000))
   }
 }
@@ -232,7 +141,7 @@ export default {
 </style>
 <style lang="less">
 .header-top {
- .van-tabs__content .van-sticky {
+  .van-tabs__content .van-sticky {
     display: flex;
     background: #fff;
     line-height: 54px;
@@ -251,7 +160,7 @@ export default {
     line-height: 36px;
   }
 }
-div .sort{
+div .sort {
   background: rgba(25, 137, 250, 0.65);
   box-shadow: 0px 0px 3px 1px #1989faa6;
   border: 1px solid #f5f5f5;

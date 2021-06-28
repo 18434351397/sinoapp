@@ -63,9 +63,9 @@ Vue.prototype.downLoad = function (data) {
   //android终端或者uc浏览器
   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
   if (url && eLink) {
-    url = eLink + url
+    const newUrl = eLink + url
     if (isAndroid) {
-      var dtask = plus.downloader.createDownload(url, {})
+      var dtask = plus.downloader.createDownload(newUrl, {})
       dtask.addEventListener('statechanged', (d, status) => {
         switch (d.state) {
           case 1: // 开始
@@ -92,7 +92,7 @@ Vue.prototype.downLoad = function (data) {
       })
       dtask.start();
     } else {
-      var dtaskIos = plus.downloader.createDownload(url, {});
+      var dtaskIos = plus.downloader.createDownload(newUrl, {});
       dtaskIos.addEventListener('statechanged', (d, status) => {
         switch (d.state) {
           case 1: // 开始

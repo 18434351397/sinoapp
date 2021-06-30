@@ -248,6 +248,7 @@ export default {
       radio: '1',
       message: '',
       nextSelectOpts: [],
+      oldNextSelectOpts: [],
       filterText: '',
       data: [],
       map: new Map(), // 初始化下拉框数据 - 回退
@@ -772,6 +773,8 @@ export default {
           this.url = this.url.slice(0, -20) + '/mobileUpdate'
         } else if (this.url === '/app/form/projpcontractreview/acceptUpload/page') { // 合同受理上传文本特殊处理
           this.url = this.url.slice(0, -18) + '/mobileUpdate'
+        } else if (this.url === '/app/form/sealpreservationform/edit/page') { // 印章保管登记 特殊处理
+          this.url = this.url.slice(0, -10) + '/mobileUpdate'
         } else if (this.url.includes('projpcreditcertificateform')) { // 资信证明特殊处理
           this.url = this.url.slice(0, -12) + '/commit/task'
         } else {
@@ -793,7 +796,23 @@ export default {
       }
     },
     onchange () {
+      this.nextSelectOpts = []
       this.message = this.radio === '1' ? '同意' : '不同意'
+      if (this.radio === '1') {
+        this.oldNextSelectOpts.forEach(item => {
+          if (item.text.includes('下一步')) {
+            this.nextSelectOpts.push(item)
+          }
+        })
+        this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
+      } else {
+        this.oldNextSelectOpts.forEach(item => {
+          if (item.text.includes('退回')) {
+            this.nextSelectOpts.push(item)
+          }
+        })
+        this.region.id = this.nextSelectOpts[this.nextSelectOpts.length - 1].id ? this.nextSelectOpts[this.nextSelectOpts.length - 1].id : ''
+      }
     },
     //  处理下一步节点的方法
     handleNextSelectOpts (data) {
@@ -920,6 +939,7 @@ export default {
       } else {
       }
       this.nextSelectOpts = this.nextSelectOpts.concat(this.backSelectOpts)
+      this.oldNextSelectOpts = this.nextSelectOpts
       this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
     },
     handleContent (data) {},

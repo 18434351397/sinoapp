@@ -43,6 +43,19 @@
     <div style="height: 100%;" v-show="!dataList.length && !loading">
       <NoData />
     </div>
+<!--    <van-popup-->
+<!--      v-model="bottomPop"-->
+<!--      round-->
+<!--      position="bottom"-->
+<!--      :style="{ height: '30%' }"-->
+<!--    >-->
+<!--      <van-picker-->
+<!--        confirm-button-text="废弃"-->
+
+<!--        @cancel="bottomPop = false"-->
+<!--        @confirm="onConfirm"-->
+<!--      />-->
+<!--    </van-popup>-->
 </van-pull-refresh>
 </template>
 
@@ -81,9 +94,10 @@ export default {
       searchType: '1',
       currentPage: 1,
       searchCondition: '',
-      isLoading:false,
+      isLoading: false,
       totalPage: 1,
       loading: false,
+      bottomPop: false,
       id: JSON.parse(sessionStorage.getItem('userinfo')).id
     }
   },
@@ -91,6 +105,9 @@ export default {
     this.tabScroll()
   },
   methods: {
+    onConfirm () {
+
+    },
     // 下拉刷新
     onRefresh() {
       this.currentPage = 1
@@ -177,54 +194,68 @@ export default {
       const path = data.url.split('/')[3]
       // 处理投标保证金和付业务往来款相同name
       console.log(data.url)
-      if (data.url.includes('pay')) {
-        if (data.url === '/app/form/projptenderpreq/cashier/pay/page' || data.url === '/app/form/projptenderpreq/busiAnalysisManager/pay/page' || data.url === '/app/form/projptenderpreq/detail/pay/page') { // 处理付业务往来款路由一样的问题
+      if (data.currTaskDefinitionName === '受理退回') {
+        Toast.fail({
+          message: '该流程被退回，app暂不支持修改，请登录PC端进行修改',
+          closeOnClick: true,
+          closeOnClickOverlay: true,
+          duration: 10000
+        })
+      } else {
+        if (data.url.includes('pay')) {
+          if (data.url === '/app/form/projptenderpreq/cashier/pay/page' || data.url === '/app/form/projptenderpreq/busiAnalysisManager/pay/page' || data.url === '/app/form/projptenderpreq/detail/pay/page') { // 处理付业务往来款路由一样的问题
+            this.$router.push({
+              name: 'projptenderpreqpay',
+              query: data
+            }).catch(err => {
+              console.log(err)
+            })
+          } else { // 处理合同付款地址与付业务往来款里都有pay字段
+            this.$router.push({
+              name: 'projppayreq',
+              query: data
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+        } else if (data.url.includes('bizfeesreimbursementform')) {
+          debugger
+          if (data.url === '/app/form/bizfeesreimbursementform/detailFinancia/page'
+            || data.url === '/app/form/bizfeesreimbursementform/detail/page'
+            || data.url === '/app/form/bizfeesreimbursementform/edit/page'
+            || data.url === '/app/form/bizfeesreimbursementform/cashier/page') { // 处理报销发起和分摊费用路由一样的问题
+            this.$router.push({
+              name: 'bizfeesreimbursementform',
+              query: data
+            }).catch(err => {
+              console.log(err)
+            })
+          } else { // 处理都有报销发起和分摊费用都有bizfeesreimbursementform字段
+            this.$router.push({
+              name: 'sharebizfeesreimbursementform',
+              query: data
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+        } else if (data.url === '/app/form/projpcontractreview/cancel/detail/page') {  // 销售合同取消
           this.$router.push({
-            name: 'projptenderpreqpay',
-            query: data
-          }).catch(err => {
-            console.log(err)
-          })
-        } else { // 处理合同付款地址与付业务往来款里都有pay字段
-          this.$router.push({
-            name: 'projppayreq',
-            query: data
-          }).catch(err => {
-            console.log(err)
-          })
-        }
-      } else if (data.url.includes('bizfeesreimbursementform')) {
-        if (data.url === '/app/form/bizfeesreimbursementform/detailFinancia/page' || data.url === '/app/form/bizfeesreimbursementform/detail/page' || data.url === '/app/form/bizfeesreimbursementform/cashier/page') { // 处理报销发起和分摊费用路由一样的问题
-          this.$router.push({
-            name: 'bizfeesreimbursementform',
-            query: data
-          }).catch(err => {
-            console.log(err)
-          })
-        } else { // 处理都有报销发起和分摊费用都有bizfeesreimbursementform字段
-          this.$router.push({
-            name: 'sharebizfeesreimbursementform',
-            query: data
-          }).catch(err => {
-            console.log(err)
-          })
-        }
-      } else if (data.url === '/app/form/projpcontractreview/cancel/detail/page') {  // 销售合同取消
-        this.$router.push({
             name: 'projpcontractreviewcancel',
             query: data
           }).catch(err => {
             console.log(err)
           })
-      } else if (path) {
-        this.$router.push({
-          name: path,
-          query: data
-        }).catch(err => {
-          console.log(err)
-        })
+        } else if (path) {
+          this.$router.push({
+            name: path,
+            query: data
+          }).catch(err => {
+            console.log(err)
+          })
+        }
       }
-    }
+      }
+
   },
   beforeDestroy () {
     this.currentPage = 1

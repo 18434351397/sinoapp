@@ -8,8 +8,6 @@
       </el-checkbox-group>
     </div>
 
-    <div class="title">{{ title }}</div>
-
     <!-- 基本信息 -->
     <van-tabs
       v-model="active"
@@ -17,10 +15,16 @@
       v-if="checkedCities.indexOf('1') !== -1 || checkedCities.indexOf('2') !== -1 || checkedCities.indexOf('8') !== -1"
     >
       <van-tab title="变更后">
-        <seeBasicCard :oldContractList="oldContractList" :contractList="contractList" :isCustPro="isCustPro" :isCustProShow="isCustProShow" />
+        <seeBasicCard
+          :oldContractList="oldContractList"
+          :bizId="contractList.bizId"
+          :contractList="contractList"
+          :isCustPro="isCustPro"
+          :isCustProShow="isCustProShow"
+        />
       </van-tab>
       <van-tab title="变更前">
-        <seeBasicCard :contractList="oldContractList" :isCustPro="isCustPro" :isCustProShow="isCustProShow" />
+        <seeBasicCard :contractList="oldContractList" :bizId="contractList.bizId" :isCustPro="isCustPro" :isCustProShow="isCustProShow" />
       </van-tab>
     </van-tabs>
 
@@ -160,7 +164,6 @@ export default {
       value: null,
       custProList: [],
       dataList: this.$route.query,
-      title: '销售合同评审信息',
       contractList: [], // 整体信息
       oldContractList: [], // 变更前 整体信息
       incomeList: [], // 收入

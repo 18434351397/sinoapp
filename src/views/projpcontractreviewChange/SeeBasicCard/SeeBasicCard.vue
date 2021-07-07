@@ -1,8 +1,9 @@
 <template>
   <div>
-    <van-field type="text" v-model="contractList.bizId" label="合同号" colon readonly>
+    <div class="title">{{ title }}</div>
+    <van-field type="text" v-model="bizId" label="合同号" colon readonly>
       <template #input>
-        <div style="text-align: left; margin: 0">{{ oldContractList ? oldContractList.bizId : contractList.bizId }}</div>
+        <div style="text-align: left; margin: 0">{{ bizId }}</div>
       </template>
     </van-field>
     <van-field
@@ -257,6 +258,11 @@
 <script>
 export default {
   name: 'index',
-  props: ['contractList', 'oldContractList', 'isCustPro', 'isCustProShow']
+  props: ['contractList', 'oldContractList', 'isCustPro', 'bizId', 'isCustProShow'],
+  data() {
+    return {
+      title: '销售合同变更评审信息'
+    }
+  }
 }
 </script>

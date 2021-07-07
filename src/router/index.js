@@ -61,7 +61,7 @@ const routes = [
 ]
 
 const routerPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push (location) {
+VueRouter.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error => error)
 }
 const router = new VueRouter({
@@ -69,9 +69,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
 router.beforeEach((to, from, next) => {
   console.log(to)
-  if (to.matched.length === 0) { // 如果未匹配到路由
+  if (to.matched.length === 0) {
+    // 如果未匹配到路由
     Toast.fail({
       message: '手机端不支持，请到pc端办理',
       closeOnClick: true,

@@ -1,0 +1,15 @@
+.app-sino-check-sales div.el-checkbox-group {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-gap: 12px;
+  margin: 8px 0;
+}
+
+.app-sino-check-sales div.el-checkbox-group .el-checkbox {
+  margin: 0 12px;
+}
+
+.app-sino-change-back {
+  background: yellow;
+}

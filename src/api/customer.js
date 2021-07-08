@@ -47,7 +47,7 @@ export async function projptenderquoteList (data) {
 // 客户属性
 export async function custPro () {
   return request({
-    url: api.custPro + '?subCodes=custPro-&_=1589012445450',
+    url: api.custPro + '?subCodes=custPro-PRE_ORDER-MARGIN_MONEY&_=1589012445450',
     method: 'get'
   })
 }

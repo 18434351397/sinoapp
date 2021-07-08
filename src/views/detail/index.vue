@@ -538,20 +538,34 @@ export default {
       const user = this.dataList
       if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' && this.dataList.currFlowId === 'PurchaseApprove') {
         this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
-      } else if (user.currTaskDefinitionName === '运营管理部' && user.currTaskDefinitionKey === 'BusiAnalysis') {
+      } else if (
+        (user.currFlowId === 'ContrReviewApprove' || user.currFlowId === 'ContractModifyApprove') &&
+        user.currTaskDefinitionName === '运营管理部' &&
+        user.currTaskDefinitionKey === 'BusiAnalysis'
+      ) {
         if (user.currFlowId === 'ContrReviewApprove') {
           this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
         } else if (user.currFlowId === 'ContractModifyApprove') {
           this.url = '/app/form/projpcontractreviewupdateform/busi/commit'
         }
-      } else if (user.currTaskDefinitionName === '运营管理部经理' && user.currTaskDefinitionKey === 'BusiAnalysisManager' && user.statusDes === '会签中') {
+      } else if (
+        (user.currFlowId === 'ContrReviewApprove' || user.currFlowId === 'ContractModifyApprove') &&
+        user.currTaskDefinitionName === '运营管理部经理' &&
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.statusDes === '会签中'
+      ) {
         console.log('会签中')
         if (user.currFlowId === 'ContrReviewApprove') {
           this.url = this.url.slice(0, 29) + '/mobileUpdate'
         } else if (user.currFlowId === 'ContractModifyApprove') {
           this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
         }
-      } else if (user.currTaskDefinitionName === '运营管理部经理' && user.currTaskDefinitionKey === 'BusiAnalysisManager' && user.statusDes !== '会签中') {
+      } else if (
+        (user.currFlowId === 'ContrReviewApprove' || user.currFlowId === 'ContractModifyApprove') &&
+        user.currTaskDefinitionName === '运营管理部经理' &&
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.statusDes !== '会签中'
+      ) {
         console.log('不会签')
         if (user.currFlowId === 'ContrReviewApprove') {
           this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
@@ -650,8 +664,6 @@ export default {
         } else if (this.url === '/app/form/projpcontractreview/acceptUpload/page') {
           // 合同受理上传文本特殊处理
           this.url = this.url.slice(0, -18) + '/mobileUpdate'
-        } else if (this.url.includes('projpcreditcertificateform')) {
-          // 资信证明特殊处理
         } else if (this.url === '/app/form/sealpreservationform/edit/page') {
           // 印章保管登记 特殊处理
           this.url = this.url.slice(0, -10) + '/mobileUpdate'

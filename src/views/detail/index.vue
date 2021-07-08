@@ -652,27 +652,43 @@ export default {
         this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
         values.changePurchaseId = this.$refs.detail.changePurchaseId
         values.isCover = 0
-      } else if (
-        user.currTaskDefinitionName === '运营管理部' &&
-        user.currTaskDefinitionKey === 'BusiAnalysis' &&
-        user.currFlowId === 'ContrReviewApprove'
-      ) {
-        this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
-      } else if (user.currTaskDefinitionName === '运营管理部经理' &&
-        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'ContrReviewApprove' &&
-        user.statusDes === '会签中') {
+      }  else if (
+        (user.currFlowId === 'ContrReviewApprove' || user.currFlowId === 'ContractModifyApprove') &&
+        user.currTaskDefinitionName === '运营管理部' &&
+        user.currTaskDefinitionKey === 'BusiAnalysis'
+      ) {
+        if (user.currFlowId === 'ContrReviewApprove') {
+          this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
+        } else if (user.currFlowId === 'ContractModifyApprove') {
+          this.url = '/app/form/projpcontractreviewupdateform/busi/commit'
+        }
+      } else if (
+        (user.currFlowId === 'ContrReviewApprove' || user.currFlowId === 'ContractModifyApprove') &&
+        user.currTaskDefinitionName === '运营管理部经理' &&
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.statusDes === '会签中'
+      ) {
         console.log('会签中')
-        this.url = this.url.slice(0, 29) + '/mobileUpdate'
-      } else if (
-        user.currTaskDefinitionName === '运营管理部经理' &&
-        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'ContrReviewApprove' &&
-        user.statusDes !== '会签中'
-      ) {
+        if (user.currFlowId === 'ContrReviewApprove') {
+          this.url = this.url.slice(0, 29) + '/mobileUpdate'
+        } else if (user.currFlowId === 'ContractModifyApprove') {
+          this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
+        }
+      } else if (
+        (user.currFlowId === 'ContrReviewApprove' || user.currFlowId === 'ContractModifyApprove') &&
+        user.currTaskDefinitionName === '运营管理部经理' &&
+        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
+        user.statusDes !== '会签中'
+      ) {
         console.log('不会签')
-        this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
-      } else if (
+        if (user.currFlowId === 'ContrReviewApprove') {
+          this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+        } else if (user.currFlowId === 'ContractModifyApprove') {
+          this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
+        }
+      } else if (user.currFlowId === 'ContractModifyApprove' && user.currFlowName === '销售合同变更') {
+        this.url = '/app/form/projpcontractreviewupdateform/update/task'
+      }  else if (
         this.dataList.currFlowId === 'SealKeepApprove' &&
         this.dataList.currUserName === '白建平' &&
         this.dataList.currTaskDefinitionKey === 'SealManager' &&

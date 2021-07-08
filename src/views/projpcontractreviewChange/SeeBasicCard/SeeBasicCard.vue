@@ -31,15 +31,6 @@
         <div style="text-align: left; margin: 0">{{ contractList.chanceId }}</div>
       </template>
     </van-field>
-    <van-field style="display: none" v-if="isCustPro" name="occupy" v-model="contractList.occupy" type="text" readonly />
-    <van-field style="display: none" v-if="isCustPro" name="hasReceiveUpdate" v-model="contractList.hasReceiveUpdate" type="text" readonly />
-    <van-field style="display: none" v-if="!isCustProShow" name="cbxAchievementFlow" type="text" readonly />
-    <van-field style="display: none" name="cbxCashFlow" type="text" readonly />
-    <van-field style="display: none" name="cbxCostDetail" type="text" readonly />
-    <van-field style="display: none" v-if="!isCustProShow" name="cbxIncomeDetail" type="text" readonly />
-    <van-field style="display: none" name="meetingUsers" v-model="contractList.meetingUsers" type="text" readonly />
-    <van-field style="display: none" name="id" v-model="contractList.id" type="text" readonly />
-    <van-field style="display: none" name="hasUpdate" v-model="contractList.hasUpdate" type="text" readonly />
     <van-field
       type="text"
       v-model="contractList.name"
@@ -261,6 +252,7 @@ export default {
   props: ['contractList', 'oldContractList', 'isCustPro', 'bizId', 'isCustProShow'],
   data() {
     return {
+      dataList: this.$route.query,
       title: '销售合同变更评审信息'
     }
   }

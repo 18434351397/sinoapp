@@ -538,8 +538,6 @@ export default {
       const user = this.dataList
       if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' && this.dataList.currFlowId === 'PurchaseApprove') {
         this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
-      } else if (user.currFlowId === 'ContractModifyApprove' && user.currFlowName === '销售合同变更') {
-        this.url = '/app/form/projpcontractreviewupdateform/update/task'
       } else if (user.currTaskDefinitionName === '运营管理部' && user.currTaskDefinitionKey === 'BusiAnalysis') {
         if (user.currFlowId === 'ContrReviewApprove') {
           this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
@@ -560,6 +558,8 @@ export default {
         } else if (user.currFlowId === 'ContractModifyApprove') {
           this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
         }
+      } else if (user.currFlowId === 'ContractModifyApprove' && user.currFlowName === '销售合同变更') {
+        this.url = '/app/form/projpcontractreviewupdateform/update/task'
       } else if (
         this.dataList.currFlowId === 'SealKeepApprove' &&
         this.dataList.currUserName === '白建平' &&
@@ -652,9 +652,11 @@ export default {
           this.url = this.url.slice(0, -18) + '/mobileUpdate'
         } else if (this.url.includes('projpcreditcertificateform')) {
           // 资信证明特殊处理
-        } else if (this.url === '/app/form/sealpreservationform/edit/page') { // 印章保管登记 特殊处理
+        } else if (this.url === '/app/form/sealpreservationform/edit/page') {
+          // 印章保管登记 特殊处理
           this.url = this.url.slice(0, -10) + '/mobileUpdate'
-        } else if (this.url.includes('projpcreditcertificateform')) { // 资信证明特殊处理
+        } else if (this.url.includes('projpcreditcertificateform')) {
+          // 资信证明特殊处理
           this.url = this.url.slice(0, -12) + '/commit/task'
         } else {
           // 公共提交接口
@@ -674,7 +676,7 @@ export default {
         }
       }
     },
-    onchange () {
+    onchange() {
       this.nextSelectOpts = []
       this.message = this.radio === '1' ? '同意' : '不同意'
       if (this.radio === '1') {

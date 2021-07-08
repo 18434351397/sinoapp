@@ -1,6 +1,17 @@
 /** *@author XuJinTao *@date 2020/5/8 9:11 *@title index */
 <template>
   <div class="app-title">
+    <van-field style="display: none" name="taskId" v-model="dataList.taskId" type="text" readonly />
+    <van-field style="display: none" name="updateType" v-model="contractList.updateType" type="text" readonly />
+    <van-field style="display: none" v-if="isCustPro" name="occupy" v-model="contractList.occupy" type="text" readonly />
+    <van-field style="display: none" v-if="isCustPro" name="hasReceiveUpdate" v-model="contractList.hasReceiveUpdate" type="text" readonly />
+    <van-field style="display: none" v-if="!isCustProShow" name="cbxAchievementFlow" type="text" readonly />
+    <van-field style="display: none" name="cbxCashFlow" type="text" readonly />
+    <van-field style="display: none" name="cbxCostDetail" type="text" readonly />
+    <van-field style="display: none" v-if="!isCustProShow" name="cbxIncomeDetail" type="text" readonly />
+    <van-field style="display: none" name="meetingUsers" v-model="contractList.meetingUsers" type="text" readonly />
+    <van-field style="display: none" name="id" v-model="contractList.id" type="text" readonly />
+    <van-field style="display: none" name="hasUpdate" v-model="contractList.hasUpdate" type="text" readonly />
     <div class="app-sino-check-sales">
       <div class="table-title">变更内容</div>
       <el-checkbox-group v-model="checkedCities">

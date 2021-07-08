@@ -28,6 +28,14 @@ export async function projpcontractreviewList (data) {
   })
 }
 
+// 合同评审 变更
+export async function projpcontractreviewupdateformApi (data) {
+  return request({
+    url: api.projpcontractreviewupdateform + '/' + data,
+    method: 'get'
+  })
+}
+
 // 投标报价
 export async function projptenderquoteList (data) {
   return request({

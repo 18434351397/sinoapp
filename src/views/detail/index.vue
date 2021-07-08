@@ -1,18 +1,12 @@
 /** *@author CheYongJi *@date 2020/4/15 12:51 *@title index */
 <template>
-  <div style="height: 100%;" id="detailBox">
+  <div style="height: 100%" id="detailBox">
     <van-sticky>
       <NavBar />
     </van-sticky>
-    <div style="background-color: #f8f8f8;">
-      <van-dialog
-        v-model="show"
-        @confirm="confirmCounterSign"
-        @close="closeDialog"
-        title="会签"
-        show-cancel-button
-      >
-        <div style="margin: 0;padding: 10px;height: 300px;overflow: scroll;">
+    <div style="background-color: #f8f8f8">
+      <van-dialog v-model="show" @confirm="confirmCounterSign" @close="closeDialog" title="会签" show-cancel-button>
+        <div style="margin: 0; padding: 10px; height: 300px; overflow: scroll">
           <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
           <el-tree
             accordion
@@ -21,7 +15,7 @@
             @check-change="handleCheckChange"
             @current-change="handleCurrentChange"
             show-checkbox
-            style="margin: 0;"
+            style="margin: 0"
             class="filter-tree"
             :data="treeList"
             :props="defaultProps"
@@ -32,70 +26,45 @@
       </van-dialog>
       <van-form id="editPwdForm" @submit="onSubmit" @failed="onFailed" validate-first show-error show-error-message>
         <div class="detail-header-title">
-          <van-field
-            name="formTitle"
-            class="process-title"
-            v-model="flowList.formTitle"
-            type="text"
-            label=""
-            readonly
-          >
+          <van-field name="formTitle" class="process-title" v-model="flowList.formTitle" type="text" label="" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;display: flex;font-size: 16px;">
-                <div style="width: 14px;height: 14px; border-radius: 50%;background-color: #000;margin-top: 0.3em;"></div>
-                <p style="width: 94%;margin-left: 6px;">{{ flowList.formTitle }}</p>
+              <div style="text-align: left; margin: 0; display: flex; font-size: 16px">
+                <div style="width: 14px; height: 14px; border-radius: 50%; background-color: #000; margin-top: 0.3em"></div>
+                <p style="width: 94%; margin-left: 6px">{{ flowList.formTitle }}</p>
               </div>
             </template>
           </van-field>
           <van-field v-model="flowList.currFlowName" type="text" label="流程名称:" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.currFlowName }}</div>
+              <div style="text-align: left; margin: 0">{{ flowList.currFlowName }}</div>
             </template>
           </van-field>
-          <van-field
-            style="display: none;"
-            name="commitType"
-            v-model="commitType"
-            type="text"
-            readonly
-          />
-          <van-field
-            style="display: none;"
-            name="objName"
-            v-model="flowList.objName"
-            type="text"
-            readonly
-          />
-          <van-field
-            style="display: none;"
-            name="currTaskDefinitionKey"
-            v-model="flowList.currTaskDefinitionKey"
-            type="text"
-            readonly
-          />
+          <van-field style="display: none" name="commitType" v-model="commitType" type="text" readonly />
+          <van-field style="display: none" name="objName" v-model="flowList.objName" type="text" readonly />
+          <van-field style="display: none" name="currTaskDefinitionKey" v-model="flowList.currTaskDefinitionKey" type="text" readonly />
           <van-field v-model="flowList.statusDes" type="text" label="流程状态:" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.statusDes }}</div>
+              <div style="text-align: left; margin: 0">{{ flowList.statusDes }}</div>
             </template>
           </van-field>
           <van-field v-model="flowList.currTaskDefinitionName" type="text" label="当前节点:" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.currTaskDefinitionName }}</div>
+              <div style="text-align: left; margin: 0">{{ flowList.currTaskDefinitionName }}</div>
             </template>
           </van-field>
           <van-field v-model="flowList.currUserName" type="text" label="当前处理人:" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.currUserName }}</div>
+              <div style="text-align: left; margin: 0">{{ flowList.currUserName }}</div>
             </template>
           </van-field>
           <van-field v-model="flowList.userName" type="text" label="发起人:" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.userName }}</div>
+              <div style="text-align: left; margin: 0">{{ flowList.userName }}</div>
             </template>
           </van-field>
           <van-field v-model="flowList.createdDate" type="text" label="发起时间:" readonly>
             <template #input>
-              <div style="text-align: left;margin: 0;">{{ flowList.createdDate }}</div>
+              <div style="text-align: left; margin: 0">{{ flowList.createdDate }}</div>
             </template>
           </van-field>
         </div>
@@ -127,76 +96,43 @@
           </van-steps>
         </div>
         <transition name="fade">
-        <div class="approval" v-if="isShowAgree">
-          <div v-if="isApproval" class="approval-select">
-            <div
-              style="border-top: 2px dashed #f8f8f8;padding: 10px 15px;text-align: left;background-color: #fff;display: flex;align-items: center;"
-            ><div style="width: 14px;height: 14px; border-radius: 50%;background-color: #1989fa;margin: 0 5px 0 0;"></div>
-              <span style="margin: 0;">审批</span></div>
-            <van-field name="radio" label="审批结果">
-              <template #input>
-                <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
-                  <van-radio name="1">同意</van-radio>
-                  <van-radio name="2">不同意</van-radio>
-                </van-radio-group>
-              </template>
-            </van-field>
-            <van-field
-              name="content"
-              class="message-textarea"
-              v-model="message"
-              @focus="changeFocus"
-              rows="2"
-              autosize
-              label="办理意见"
-              type="textarea"
-              maxlength="2000"
-              placeholder="请输入办理意见"
-              show-word-limit
-            />
-            <el-select
-              v-if="isStatusDes"
-              class="region-select"
-              @change="pullSelect"
-              v-model="region.id"
-              placeholder="请选择步骤"
-            >
-              <el-option
-                :value="item.id"
-                :label="item.text"
-                :key="index"
-                v-for="(item, index) in nextSelectOpts"
-              ></el-option>
-            </el-select>
-            <div class="submitBox">
-              <van-button
-                style="width: 30%"
-                v-if="!isSBtn"
-                round
-                block
-                type="info"
-                native-type="submit"
-              >提交</van-button>
-              <van-button
-                v-if="!isSBtn && isStatusDes"
-                style="width: 30%"
-                @click="counterSign"
-                round
-                block
-                type="info"
-                native-type="submit"
-              >会签</van-button>
-              <van-button
-                style="width: 30%"
-                @click="back"
-                round
-                block
-                type="default"
-                native-type="button"
-              >取消</van-button>
+          <div class="approval" v-if="isShowAgree">
+            <div v-if="isApproval" class="approval-select">
+              <div style="border-top: 2px dashed #f8f8f8; padding: 10px 15px; text-align: left; background-color: #fff; display: flex; align-items: center">
+                <div style="width: 14px; height: 14px; border-radius: 50%; background-color: #1989fa; margin: 0 5px 0 0"></div>
+                <span style="margin: 0">审批</span>
+              </div>
+              <van-field name="radio" label="审批结果">
+                <template #input>
+                  <van-radio-group @change="onchange" v-model="radio" direction="horizontal">
+                    <van-radio name="1">同意</van-radio>
+                    <van-radio name="2">不同意</van-radio>
+                  </van-radio-group>
+                </template>
+              </van-field>
+              <van-field
+                name="content"
+                class="message-textarea"
+                v-model="message"
+                @focus="changeFocus"
+                rows="2"
+                autosize
+                label="办理意见"
+                type="textarea"
+                maxlength="2000"
+                placeholder="请输入办理意见"
+                show-word-limit
+              />
+              <el-select v-if="isStatusDes" class="region-select" @change="pullSelect" v-model="region.id" placeholder="请选择步骤">
+                <el-option :value="item.id" :label="item.text" :key="index" v-for="(item, index) in nextSelectOpts"></el-option>
+              </el-select>
+              <div class="submitBox">
+                <van-button style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
+                <van-button v-if="!isSBtn && isStatusDes" style="width: 30%" @click="counterSign" round block type="info" native-type="submit">会签</van-button>
+                <van-button style="width: 30%" @click="back" round block type="default" native-type="button">取消</van-button>
+              </div>
             </div>
           </div>
-        </div>
         </transition>
         <footer class="footer"></footer>
       </van-form>
@@ -205,7 +141,7 @@
     <!-- 固钉 -->
     <div class="affix">
       <van-button v-if="isShow" @click="approvalFnc" class="affix-approval" type="default">审批</van-button>
-      <i class="el-icon-download affix-anchor" v-if="isToEnd"  @click="inserted"></i>
+      <i class="el-icon-download affix-anchor" v-if="isToEnd" @click="inserted"></i>
     </div>
   </div>
 </template>
@@ -223,7 +159,7 @@ export default {
   computed: {
     ...mapGetters(['active'])
   },
-  data () {
+  data() {
     return {
       commitType: '',
       signData: {}, // 会签数据
@@ -263,16 +199,13 @@ export default {
       loading: true
     }
   },
-  created () {
+  created() {
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
     if (this.dataList.statusDes === '会签中') {
       this.isStatusDes = false
     }
-    if (
-      this.dataList.currTaskDefinitionName === '受理退回' &&
-      this.dataList.currUserName === this.dataList.userName
-    ) {
+    if (this.dataList.currTaskDefinitionName === '受理退回' && this.dataList.currUserName === this.dataList.userName) {
       // 判断当前节点是受理退回并且当前处理人=== 当前发起人
       // 废弃功能
       this.isSBtn = true
@@ -285,23 +218,21 @@ export default {
     } else {
       this.isShow = false
     }
-    flowForm(url).then((res) => {
+    flowForm(url).then(res => {
       if (this.isShow) {
         let us = sessionStorage.getItem('userinfo')
         us = JSON.parse(us)
         if (res.data.status === '3') {
           // 会签中
-          if (
-            res.data.meetingUserIds.indexOf(us.id) < 0 &&
-            res.data.proxyUserIds.indexOf(us.id) < 0
-          ) {
+          if (res.data.meetingUserIds.indexOf(us.id) < 0 && res.data.proxyUserIds.indexOf(us.id) < 0) {
             Dialog.alert({
               message: `当前任务等待【${res.data.currUserName}】会签中，您无法处理该任务！`
             }).then(() => {
               // on close
               this.$router.push('/approval')
             })
-          } else {}
+          } else {
+          }
         } else {
           if (res.data.currUseerId !== us.id && res.data.proxyUserIds.indexOf(us.id) < 0) {
             Dialog.alert({
@@ -310,7 +241,8 @@ export default {
               // on close
               this.$router.push('/approval')
             })
-          } else {}
+          } else {
+          }
         }
       }
       if (res) {
@@ -323,7 +255,7 @@ export default {
         this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
       }
     })
-    getOrgTree().then((res) => {
+    getOrgTree().then(res => {
       if (res) {
         this.treeList = res.data ? res.data : []
       }
@@ -331,21 +263,21 @@ export default {
     })
   },
   watch: {
-    filterText (val) {
+    filterText(val) {
       this.$refs.tree.filter(val)
     },
-    show (val) {
+    show(val) {
       if (!val) {
         this.$refs.tree.setCheckedKeys([])
       }
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
     // 一键到底
-    inserted () {
+    inserted() {
       if (this.active === 0) {
         document.querySelector('.history-detail').className = 'history-detail historyDetail'
         document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' })
@@ -354,7 +286,7 @@ export default {
       }
     },
     // 检测ios获取焦点时
-    changeFocus () {
+    changeFocus() {
       const u = navigator.userAgent
       const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
       if (isIOS) {
@@ -363,7 +295,7 @@ export default {
       }
     },
     // 滚动检测
-    handleScroll () {
+    handleScroll() {
       if (this.active === 0) {
         this.scroll = document.documentElement.scrollTop || document.body.scrollTop
         const offsetY = document.querySelector('.history-detail').offsetTop
@@ -394,12 +326,12 @@ export default {
       }
     },
     // 显示审批
-    approvalFnc () {
+    approvalFnc() {
       this.isApproval = !this.isApproval
       this.isShowAgree = !this.isShowAgree
     },
     // 处理树的数据
-    toTree (data) {
+    toTree(data) {
       // 删除 所有 children,以防止多次调用
       data.forEach(function (item) {
         delete item.children
@@ -425,7 +357,7 @@ export default {
       return val
     },
 
-    onSubmit (values) {
+    onSubmit(values) {
       this.signData = values
       if (values.commitType === 'meeting') {
         this.signData = values
@@ -435,14 +367,14 @@ export default {
         console.log('提交')
       }
     },
-     onFailed(error) {
-       Toast.fail({
+    onFailed(error) {
+      Toast.fail({
         duration: 2500,
-        message:  error.errors[0].message
+        message: error.errors[0].message
       })
-     },
+    },
     // 点击提交按钮要进行的操作
-    isSubmit (values) {
+    isSubmit(values) {
       if (this.flowList.status === '3' && this.flowList.statusDes === '会签中') {
         values.content = values.content + ' >>>>' + '【下一步】'
       } else {
@@ -457,10 +389,7 @@ export default {
           values.content = this.message
         } else {
           if (values.submitTask !== '【下一步】') {
-            values.content =
-              values.content +
-              ' >>>>' +
-              document.querySelector('.el-select').children[0].children[0].value
+            values.content = values.content + ' >>>>' + document.querySelector('.el-select').children[0].children[0].value
           } else {
             values.content = values.content + ' >>>>' + '【下一步】'
           }
@@ -472,24 +401,15 @@ export default {
       // 调用接口判断方法
       this.specialFun(values)
       values.file = this.$refs.detail.fileList ? this.$refs.detail.fileList : []
-      values.fileIdList = this.$refs.detail.fileIdList
-        ? this.$refs.detail.fileIdList
-        : []
+      values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
       // 判断是否是印章保管登记
-      if (
-        this.dataList.currFlowId === 'SealKeepApprove' ||
-        this.dataList.currFlowId === 'PurchaseApprove'
-      ) {
-        values.fileIdList = this.$refs.detail.fileIdList
-          ? this.$refs.detail.fileIdList
-          : []
+      if (this.dataList.currFlowId === 'SealKeepApprove' || this.dataList.currFlowId === 'PurchaseApprove') {
+        values.fileIdList = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
       } else {
       }
 
       // 判断是否是总经理办公室节点
-      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' &&
-         this.dataList.currFlowId === 'PurchaseApprove'
-      ) {
+      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' && this.dataList.currFlowId === 'PurchaseApprove') {
         if (this.$refs.detail.isCover === false) {
           values.isCover = '0'
           values.isGeneratorPno = 'true'
@@ -506,19 +426,10 @@ export default {
       }
 
       // 判断是否是项目结项
-      if (
-        this.dataList.currFlowId === 'ProjectEndApprove' &&
-        this.dataList.currFlowName === '项目结项'
-      ) {
-        values.attachIds = this.$refs.detail.fileIdList
-          ? this.$refs.detail.fileIdList
-          : []
-        values.personData = this.$refs.detail.personData
-          ? this.$refs.detail.personData
-          : []
-        values.supplierData = this.$refs.detail.supplierData
-          ? this.$refs.detail.supplierData
-          : []
+      if (this.dataList.currFlowId === 'ProjectEndApprove' && this.dataList.currFlowName === '项目结项') {
+        values.attachIds = this.$refs.detail.fileIdList ? this.$refs.detail.fileIdList : []
+        values.personData = this.$refs.detail.personData ? this.$refs.detail.personData : []
+        values.supplierData = this.$refs.detail.supplierData ? this.$refs.detail.supplierData : []
       } else {
       }
       // 判断是否是项目立项流程
@@ -527,26 +438,18 @@ export default {
       } else {
       }
       // 判断是否是开收据
-      if (
-        this.dataList.currFlowId === 'ReceiptApprove' &&
-        this.dataList.currFlowName === '收据'
-      ) {
+      if (this.dataList.currFlowId === 'ReceiptApprove' && this.dataList.currFlowName === '收据') {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
       } else {
       }
       // 判断是否是开发票
-      if (this.dataList.currFlowId === 'BillApprove' &&
-        this.dataList.currFlowName === '开发票') {
+      if (this.dataList.currFlowId === 'BillApprove' && this.dataList.currFlowName === '开发票') {
         values.invoiceDetail = this.$refs.detail.invoiceDetail
       }
       // 判断是否是采购合同流程
       if (this.dataList.currFlowId === 'PurchaseApprove') {
-        values.payforList = this.$refs.detail.payforList
-          ? this.$refs.detail.payforList
-          : []
-        values.goodsList = this.$refs.detail.goodsList
-          ? this.$refs.detail.goodsList
-          : []
+        values.payforList = this.$refs.detail.payforList ? this.$refs.detail.payforList : []
+        values.goodsList = this.$refs.detail.goodsList ? this.$refs.detail.goodsList : []
       } else {
       }
       // 判断印章管理员
@@ -556,9 +459,7 @@ export default {
         this.dataList.currTaskDefinitionKey === 'SealManager' &&
         this.dataList.currTaskDefinitionName === '印章管理员'
       ) {
-        values.sealTypes = this.$refs.detail.sealTypes
-          ? this.$refs.detail.sealTypes
-          : []
+        values.sealTypes = this.$refs.detail.sealTypes ? this.$refs.detail.sealTypes : []
       } else {
       }
       if (values.file.length <= 0) {
@@ -582,9 +483,7 @@ export default {
         }
       }
       // 商机变更--处理
-      if (
-        this.dataList.currFlowId === 'DeptGradApprove'
-      ) {
+      if (this.dataList.currFlowId === 'DeptGradApprove') {
         delete values.fileList
         delete values.fileIdList
         values.projpVisitList = this.$refs.detail.custList.projpVisitList
@@ -593,7 +492,7 @@ export default {
       this.submit(data)
     },
     // 全屏遮罩加载方法
-    openFullScreen2 () {
+    openFullScreen2() {
       Toast.loading({
         duration: 0, // 持续展示 toast
         forbidClick: false,
@@ -601,14 +500,14 @@ export default {
       })
     },
     // 提交方法-->调接口进行提交
-    submit (values) {
+    submit(values) {
       Dialog.confirm({
         message: '你确定要提交吗？'
       })
         .then(() => {
           this.openFullScreen2()
           // 提交时，展示加载效果，防止接口响应过慢，用户重复点击提交按钮
-          flowFormUpdate(values).then((res) => {
+          flowFormUpdate(values).then(res => {
             if (res.resultCode === '200') {
               Toast.clear()
               Toast.loading({
@@ -635,31 +534,32 @@ export default {
           this.url = this.submitUrl
         })
     },
-    specialFun (values) {
+    specialFun(values) {
       const user = this.dataList
-      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' &&
-       this.dataList.currFlowId === 'PurchaseApprove') {
+      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' && this.dataList.currFlowId === 'PurchaseApprove') {
         this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
-      } else if (
-        user.currTaskDefinitionName === '运营管理部' &&
-        user.currTaskDefinitionKey === 'BusiAnalysis' &&
-        user.currFlowId === 'ContrReviewApprove'
-      ) {
-        this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
-      } else if (user.currTaskDefinitionName === '运营管理部经理' &&
-        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'ContrReviewApprove' &&
-        user.statusDes === '会签中') {
+      } else if (user.currTaskDefinitionName === '运营管理部' && user.currTaskDefinitionKey === 'BusiAnalysis') {
+        if (user.currFlowId === 'ContrReviewApprove') {
+          this.url = this.url.slice(0, 29) + '/busiAnalysisApproval'
+        } else if (user.currFlowId === 'ContractModifyApprove') {
+          this.url = '/app/form/projpcontractreviewupdateform/busi/commit'
+        }
+      } else if (user.currTaskDefinitionName === '运营管理部经理' && user.currTaskDefinitionKey === 'BusiAnalysisManager' && user.statusDes === '会签中') {
         console.log('会签中')
-        this.url = this.url.slice(0, 29) + '/mobileUpdate'
-      } else if (
-        user.currTaskDefinitionName === '运营管理部经理' &&
-        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'ContrReviewApprove' &&
-        user.statusDes !== '会签中'
-      ) {
+        if (user.currFlowId === 'ContrReviewApprove') {
+          this.url = this.url.slice(0, 29) + '/mobileUpdate'
+        } else if (user.currFlowId === 'ContractModifyApprove') {
+          this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
+        }
+      } else if (user.currTaskDefinitionName === '运营管理部经理' && user.currTaskDefinitionKey === 'BusiAnalysisManager' && user.statusDes !== '会签中') {
         console.log('不会签')
-        this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+        if (user.currFlowId === 'ContrReviewApprove') {
+          this.url = this.url.slice(0, 29) + '/busiAnalysisManagerApproval'
+        } else if (user.currFlowId === 'ContractModifyApprove') {
+          this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
+        }
+      } else if (user.currFlowId === 'ContractModifyApprove' && user.currFlowName === '销售合同变更') {
+        this.url = '/app/form/projpcontractreviewupdateform/update/task'
       } else if (
         this.dataList.currFlowId === 'SealKeepApprove' &&
         this.dataList.currUserName === '白建平' &&
@@ -667,22 +567,12 @@ export default {
         this.dataList.currTaskDefinitionName === '印章管理员'
       ) {
         this.url = this.url.slice(0, -10) + '/update' // 白建平并且是印章保管流程
-      } else if (
-        this.dataList.currTaskDefinitionName === '受理退回' &&
-        this.dataList.currUserName === this.dataList.userName
-      ) {
+      } else if (this.dataList.currTaskDefinitionName === '受理退回' && this.dataList.currUserName === this.dataList.userName) {
         // 判断当前节点是受理退回并且当前处理人=== 当前发起人
         this.url = this.url.slice(0, -10) + '/update'
-      } else if (
-        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'FinanceApprove' &&
-        user.currFlowName === '履约保证金'
-      ) {
+      } else if (user.currTaskDefinitionKey === 'BusiAnalysisManager' && user.currFlowId === 'FinanceApprove' && user.currFlowName === '履约保证金') {
         this.url = this.url.slice(0, -12) + '/update' // 履约保证金
-      } else if (
-        user.currTaskDefinitionKey === 'BusiAnalysisManager' &&
-        user.currFlowId === 'FinanceApprove'
-      ) {
+      } else if (user.currTaskDefinitionKey === 'BusiAnalysisManager' && user.currFlowId === 'FinanceApprove') {
         // 投标保证金
         this.url = this.url.split('b')[0] + 'update/busiAnalysisManager'
       } else if (
@@ -691,10 +581,7 @@ export default {
         this.dataList.currUserName === this.dataList.userName
       ) {
         this.url = this.url.slice(0, -10) + '/updateProject' // 项目立项 特殊处理-->判断当前节点是受理退回并且当前处理人=== 当前发起人
-      } else if (
-        this.dataList.currFlowId === 'CommonApprove' &&
-        this.dataList.currFlowName === '项目立项'
-      ) {
+      } else if (this.dataList.currFlowId === 'CommonApprove' && this.dataList.currFlowName === '项目立项') {
         this.url = this.url.slice(0, -10) + '/updateProject' // 项目立项接口
       } else if (
         this.dataList.currFlowId === 'CommonApprove' &&
@@ -703,15 +590,9 @@ export default {
           this.dataList.currFlowName === '项目变更-项目完成时间变更')
       ) {
         this.url = this.url.slice(0, -12) + '/updateForm' // 项目变更接口
-      } else if (
-        this.dataList.currFlowId === 'ProjectEndApprove' &&
-        this.dataList.currFlowName === '项目结项'
-      ) {
+      } else if (this.dataList.currFlowId === 'ProjectEndApprove' && this.dataList.currFlowName === '项目结项') {
         this.url = this.url.slice(0, -12) + '/updateEndForm' // 项目结项接口
-      } else if (
-        this.dataList.currFlowId === 'ChangeApprove' &&
-        this.dataList.currFlowName === '项目变更-项目归属变更'
-      ) {
+      } else if (this.dataList.currFlowId === 'ChangeApprove' && this.dataList.currFlowName === '项目变更-项目归属变更') {
         this.url = this.url.slice(0, -12) + '/updateForm' // 项目变更-项目归属变更接口
       } else if (
         this.dataList.currFlowId === 'ContractFileApprove' &&
@@ -719,10 +600,7 @@ export default {
         this.dataList.currTaskDefinitionName !== '库管'
       ) {
         this.url = this.url.slice(0, -10) + '/busi/comit/task' // 合同存档
-      } else if (
-        this.dataList.currFlowId === 'PaymentApprove' &&
-        this.dataList.currFlowName === '付款申请'
-      ) {
+      } else if (this.dataList.currFlowId === 'PaymentApprove' && this.dataList.currFlowName === '付款申请') {
         this.url = this.url.slice(0, -12) + '/comit/task' // 合同付款接口
       } else if (
         this.dataList.currFlowId === 'TransferApprove' &&
@@ -730,10 +608,7 @@ export default {
         this.dataList.currTaskDefinitionKey === 'BusiAnalysis'
       ) {
         this.url = this.url.slice(0, -22) + '/mobileUpdate' // 内部收益划转在运管节 点特殊处理
-      } else if (
-        this.dataList.currFlowId === 'CustApprove' &&
-        this.dataList.currFlowName === '分摊费用'
-      ) {
+      } else if (this.dataList.currFlowId === 'CustApprove' && this.dataList.currFlowName === '分摊费用') {
         this.url = this.url.slice(0, -16) + '/update/task' // 费用分摊
       } else if (
         this.dataList.currFlowName === '解冻风险保证金' &&
@@ -769,13 +644,19 @@ export default {
         } else if (this.url.includes('pay')) {
           // 付业务往来款的最后一个审批人的特殊处理
           this.url = this.url.slice(0, -16) + '/mobileUpdate'
-        } else if (this.url === '/app/form/bizfeesreimbursementform/detailFinancia/page') { // 财务资金特殊处理
+        } else if (this.url === '/app/form/bizfeesreimbursementform/detailFinancia/page') {
+          // 财务资金特殊处理
           this.url = this.url.slice(0, -20) + '/mobileUpdate'
-        } else if (this.url === '/app/form/projpcontractreview/acceptUpload/page') { // 合同受理上传文本特殊处理
+        } else if (this.url === '/app/form/projpcontractreview/acceptUpload/page') {
+          // 合同受理上传文本特殊处理
           this.url = this.url.slice(0, -18) + '/mobileUpdate'
-        } else if (this.url === '/app/form/sealpreservationform/edit/page') { // 印章保管登记 特殊处理
+        } else if (this.url.includes('projpcreditcertificateform')) {
+          // 资信证明特殊处理
+        } else if (this.url === '/app/form/sealpreservationform/edit/page') {
+          // 印章保管登记 特殊处理
           this.url = this.url.slice(0, -10) + '/mobileUpdate'
-        } else if (this.url.includes('projpcreditcertificateform')) { // 资信证明特殊处理
+        } else if (this.url.includes('projpcreditcertificateform')) {
+          // 资信证明特殊处理
           this.url = this.url.slice(0, -12) + '/commit/task'
         } else {
           // 公共提交接口
@@ -795,7 +676,7 @@ export default {
         }
       }
     },
-    onchange () {
+    onchange() {
       this.nextSelectOpts = []
       this.message = this.radio === '1' ? '同意' : '不同意'
       if (this.radio === '1') {
@@ -815,13 +696,9 @@ export default {
       }
     },
     //  处理下一步节点的方法
-    handleNextSelectOpts (data) {
-      data.nextTaskList.forEach((item) => {
-        if (
-          data.nextTaskList.length === 1 ||
-          !data.nextTaskIsBranch ||
-          data.nextTaskIsBranch === 'false'
-        ) {
+    handleNextSelectOpts(data) {
+      data.nextTaskList.forEach(item => {
+        if (data.nextTaskList.length === 1 || !data.nextTaskIsBranch || data.nextTaskIsBranch === 'false') {
           const arr = {
             id: 'next__' + item.userId,
             text: '【下一步】' + item.nextTaskName + '-' + item.nextUserName
@@ -835,10 +712,7 @@ export default {
           this.nextSelectOpts.push(arr)
         }
       })
-      if (
-        this.nextSelectOpts.length > 0 ||
-        this.flowList.currTaskDefinitionKey === 'Todo'
-      ) {
+      if (this.nextSelectOpts.length > 0 || this.flowList.currTaskDefinitionKey === 'Todo') {
       } else {
         var item = {
           id: '',
@@ -846,21 +720,10 @@ export default {
         }
         if (data.nextTaskList.length > 0) {
           for (var i = 0; i < data.nextTaskList.length; i++) {
-            if (
-              i === data.nextTaskList.length - 1 ||
-              data.nextTaskList[i].nextTaskDefinitionKey === 'CauseGroup'
-            ) {
+            if (i === data.nextTaskList.length - 1 || data.nextTaskList[i].nextTaskDefinitionKey === 'CauseGroup') {
               item = {
-                id:
-                  'next_' +
-                  data.nextTaskList[i].nextTaskDefinitionKey +
-                  '_' +
-                  data.nextTaskList[i].userId,
-                text:
-                  '【下一步】' +
-                  data.nextTaskList[i].nextTaskName +
-                  '-' +
-                  data.nextTaskList[i].nextUserName
+                id: 'next_' + data.nextTaskList[i].nextTaskDefinitionKey + '_' + data.nextTaskList[i].userId,
+                text: '【下一步】' + data.nextTaskList[i].nextTaskName + '-' + data.nextTaskList[i].nextUserName
               }
               break
             }
@@ -869,32 +732,15 @@ export default {
         this.nextSelectOpts.push(item)
       }
     },
-    handleBackSelectOpts (data) {
-      if (
-        data.currTaskDefinitionKey !== 'AcceptBack' &&
-        data.currTaskDefinitionKey !== 'Todo'
-      ) {
+    handleBackSelectOpts(data) {
+      if (data.currTaskDefinitionKey !== 'AcceptBack' && data.currTaskDefinitionKey !== 'Todo') {
         for (var i = 0; i < data.historyList.length; i++) {
-          if (
-            data.historyList[i].status !== 3 &&
-            data.historyList[i].status !== -1 &&
-            data.historyList[i].taskDefinitionKey !== 'AcceptBack'
-          ) {
+          if (data.historyList[i].status !== 3 && data.historyList[i].status !== -1 && data.historyList[i].taskDefinitionKey !== 'AcceptBack') {
             // 回退列表中只展现同一流程实例的历史审批，避免主、子流程间退回异常的问题
-            if (
-              data.processInstanceId ===
-                data.historyList[i].processInstanceId ||
-              data.historyList[i].taskDefinitionKey === 'Accept'
-            ) {
-              if (
-                data.historyList[i].taskDefinitionKey !==
-                data.currTaskDefinitionKey
-              ) {
+            if (data.processInstanceId === data.historyList[i].processInstanceId || data.historyList[i].taskDefinitionKey === 'Accept') {
+              if (data.historyList[i].taskDefinitionKey !== data.currTaskDefinitionKey) {
                 // 判断是否是合同存档 同时节点是不是库管 不能退回
-                if (
-                  data.currFlowId === 'ContractFileApprove' &&
-                  data.currTaskDefinitionKey === 'DepotManager'
-                ) {
+                if (data.currFlowId === 'ContractFileApprove' && data.currTaskDefinitionKey === 'DepotManager') {
                   continue
                 } else {
                   // 非会签、回退办理人，展示到回退列表中
@@ -908,16 +754,8 @@ export default {
                   // this.backSelectOpts = this.mapData
                   // 非会签、回退办理人，展示到回退列表中
                   var item = {
-                    id:
-                      'back_' +
-                      data.historyList[i].taskDefinitionKey +
-                      '_' +
-                      data.historyList[i].createdBy,
-                    text:
-                      '【退回】' +
-                      data.historyList[i].taskName +
-                      '-' +
-                      data.historyList[i].userName
+                    id: 'back_' + data.historyList[i].taskDefinitionKey + '_' + data.historyList[i].createdBy,
+                    text: '【退回】' + data.historyList[i].taskName + '-' + data.historyList[i].userName
                   }
                   this.backSelectOpts.push(item)
                   this.backSelectOpts = Array.from(new Set(this.backSelectOpts))
@@ -942,9 +780,9 @@ export default {
       this.oldNextSelectOpts = this.nextSelectOpts
       this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
     },
-    handleContent (data) {},
+    handleContent(data) {},
     // 下拉框选择值发生变化时，调用方法
-    pullSelect (data) {
+    pullSelect(data) {
       if (this.region.id.includes('back')) {
         this.commitType = 'return'
       } else {
@@ -952,10 +790,10 @@ export default {
       }
     },
     // 会签弹框显示
-     counterSign() {
-       console.log('12')
+    counterSign() {
+      console.log('12')
       if (this.$refs.detail.hasRequired && !this.$refs.detail.value) {
-       Toast.fail({
+        Toast.fail({
           duration: 2500,
           message: this.hasMessageText
         })
@@ -967,11 +805,11 @@ export default {
       }
     },
     // 关闭弹窗
-    closeDialog () {
+    closeDialog() {
       this.commitType = ''
     },
     // 会签方法提交
-    confirmCounterSign () {
+    confirmCounterSign() {
       // 人员名字
       const signData = this.$refs.tree.getCheckedNodes()
       const signDataId = this.$refs.tree.getCheckedNodes()
@@ -983,9 +821,9 @@ export default {
       this.isSubmit(this.signData)
     },
     // 递归获取数据信息
-    recursion (signData, newSign = []) {
+    recursion(signData, newSign = []) {
       if (Array.isArray(signData) && signData.length > 0) {
-        signData.forEach((item) => {
+        signData.forEach(item => {
           if (item.issub) {
             // 对名字进行去重处理
             if (newSign.indexOf(item.label) === -1) {
@@ -994,40 +832,44 @@ export default {
           }
           if (item.children) {
             this.recursion(item.children, newSign)
-          } else {}
+          } else {
+          }
         })
       }
       this.signText = newSign.toString()
       this.message = newSign.toString()
     },
     // 递归id
-    recursionId (signDataId, newSignId = []) {
+    recursionId(signDataId, newSignId = []) {
       if (Array.isArray(signDataId) && signDataId.length > 0) {
-        signDataId.forEach((item) => {
+        signDataId.forEach(item => {
           if (item.issub) {
             // 对id进行去重处理
             if (newSignId.indexOf(item.id) === -1) {
               newSignId = newSignId.concat(item.id)
-            } else {}
-          } else {}
+            } else {
+            }
+          } else {
+          }
           if (item.children) {
             this.recursionId(item.children, newSignId)
-          } else {}
+          } else {
+          }
         })
       }
       this.signIds = newSignId
     },
-    filterNode (value, data) {
+    filterNode(value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     },
-    handleCheckChange (data, checked, indeterminate) {},
-    handleCurrentChange (data, node) {},
-    back () {
+    handleCheckChange(data, checked, indeterminate) {},
+    handleCurrentChange(data, node) {},
+    back() {
       this.$router.go(-1)
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
   }
 }
@@ -1045,7 +887,7 @@ export default {
   padding: 16px 0 20px;
   background: #fff;
 }
->>>.van-field__value {
+>>> .van-field__value {
   padding-left: 0;
 }
 .van-radio-group--horizontal {
@@ -1137,7 +979,7 @@ div.history-detail {
     bottom: 0;
     left: 6px;
     margin: auto 0;
-    content: "";
+    content: '';
     width: 4px;
     height: 12px;
     border-radius: 2px;

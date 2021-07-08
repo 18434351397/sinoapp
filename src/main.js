@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button, Dialog } from 'element-ui'
+import { Select, Option, Table, TableColumn, Form, FormItem, Input, Tree, Button, Dialog, Checkbox, CheckboxGroup } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './utils/appback'
 import 'xe-utils'
@@ -24,6 +24,8 @@ Vue.use(TableColumn)
   .use(Input)
   .use(Tree)
   .use(Button)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
 Vue.config.productionTip = false
 
 new Vue({

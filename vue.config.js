@@ -4,8 +4,10 @@ module.exports = {
   outputDir: 'dist', // 运行时生成的生产环境构建文件的目录(默认''dist''，构建之前会被清除)
   assetsDir: '', // 放置生成的静态资源(s、css、img、fonts)的(相对于 outputDir 的)目录(默认'')
   indexPath: 'index.html', // 指定生成的 index.html 的输出路径(相对于 outputDir)也可以是一个绝对路径
-  pages: { // pages 里配置的路径和文件名在你的文档目录必须存在 否则启动服务会报错
-    index: { // 除了 entry 之外都是可选的
+  pages: {
+    // pages 里配置的路径和文件名在你的文档目录必须存在 否则启动服务会报错
+    index: {
+      // 除了 entry 之外都是可选的
       entry: 'src/main.js', // page 的入口,每个“page”应该有一个对应的 JavaScript 入口文件
       template: 'public/index.html', // 模板来源
       filename: 'index.html', // 在 dist/index.html 的输出
@@ -20,22 +22,20 @@ module.exports = {
     extract: true, // 是否使用css分离插件 ExtractTextPlugin
     sourceMap: false, // 开启 CSS source maps
     loaderOptions: {}, // css预设器配置项
-    requireModuleExtension: true// 启用 CSS modules for all css / pre-processor files.
+    requireModuleExtension: true // 启用 CSS modules for all css / pre-processor files.
   },
-  devServer: { // 环境配置
+  devServer: {
+    // 环境配置
     host: '',
     port: 8080,
     https: false,
     hotOnly: false,
     open: true, // 配置自动启动浏览器
-    proxy: { // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
+    proxy: {
+      // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
 
       '/admin': {
-        // target: 'http://172.169.1.42:8095',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -43,13 +43,7 @@ module.exports = {
         // }
       },
       '///fileupload': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.100.121:8082',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://218.241.175.243:8082',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -57,13 +51,7 @@ module.exports = {
         // }
       },
       '/group1': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.100.121:8082',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://218.241.175.246:8082',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -71,35 +59,24 @@ module.exports = {
         // }
       },
       '/app': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
-        target: 'http://182.168.12.192:8082',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
       },
       '/toLogin': {
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://192.168.18.26:8095',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://172.169.1.42:8095',
-        target: 'http://182.168.12.192:8082',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
       }
     }
   },
-  pluginOptions: {// 第三方插件配置
+  pluginOptions: {
+    // 第三方插件配置
     // ...
   }
 }

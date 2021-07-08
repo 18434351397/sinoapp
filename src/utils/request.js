@@ -9,7 +9,7 @@ const serve = axios.create({
     // contentType: 'application/json; charset=utf-8',
     // AccessControlAllowOrigin: 'http://172.169.100.121:8082',
     // 'Access-Control-Allow-Headers': 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderField, Origin',
-    'Access-Control-Allow-Origin': 'http://182.168.12.192:8082',
+    'Access-Control-Allow-Origin': 'http://192.168.21.23:8082',
     // 'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Credentials': true,
@@ -102,57 +102,43 @@ serve.interceptors.response.use(
     Promise.reject(error)
   }
 )
-serve.post = function (url, data = {}) {
-  return new Promise(
-    (resolve, reject) => {
-      axios.post(url, data)
-        .then(
-          response => {
-            resolve(response.data)
-          }
-        )
-        .catch(
-          err => {
-            reject(err)
-          }
-        )
-    }
-  )
+serve.post = function(url, data = {}) {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, data)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
 }
 
-serve.get = function (url, param = {}) {
-  return new Promise(
-    (resolve, reject) => {
-      axios.get(url, param)
-        .then(
-          response => {
-            resolve(response.data)
-          })
-        .catch(
-          err => {
-            reject(err)
-          }
-        )
-    }
-  )
+serve.get = function(url, param = {}) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, param)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
 }
 
-serve.uploadFile = function (url, data = {}) {
-  return new Promise(
-    (resolve, reject) => {
-      instance.post(url, data)
-        .then(
-          response => {
-            resolve(response.data)
-          }
-        )
-        .catch(
-          err => {
-            reject(err)
-          }
-        )
-    }
-  )
+serve.uploadFile = function(url, data = {}) {
+  return new Promise((resolve, reject) => {
+    instance
+      .post(url, data)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
 }
 
 export default serve

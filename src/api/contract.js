@@ -1,5 +1,7 @@
 import request from '@/utils/request'
 const api = {
+  formProjpprojectinfoform: '/app/form/projpprojectinfoform/select/projectNo', // 销售合同 查询项目号
+  proProjpprojectinfo: '/app/pro/projpprojectinfo/projpProjectDetail', // 销售合同 当立项流程未已完成时则查询项目业务数据
   projpriskbond: '/app/form/projpriskbond/detail', // 风险保证金
   projpcontractpurchaseform: '/app/form/projpcontractpurchaseform/detail', // 采购合同
   selectPurchaseNo: '/app/form/projpcontractpurchaseform/selectPurchaseNo', // 采购合同 - 判断是否已有采购合同号
@@ -22,8 +24,23 @@ const api = {
   cashStatus: '/app/form/projppayreq/contract/cash/status/', // 现金流状态
   bizperformbondform: '/app/form/bizperformbondform/detail', // 履约保证金
   projpbidservicefee: '/app/form/projpbidservicefee/detail', // 中标服务费
-  projpcontractreviewcancel: '/app/form/projpcontractreview/cancel/detail', //合同取消
+  projpcontractreviewcancel: '/app/form/projpcontractreview/cancel/detail', // 合同取消
   projpcontractreviewupdateform: '/app/form/projpcontractreviewupdateform/detail' // 销售合同变更
+}
+
+// 销售合同 查询项目号
+export async function formProjpprojectinfoformApi(id) {
+  return request({
+    url: api.formProjpprojectinfoform + '/' + id,
+    method: 'get'
+  })
+}
+// 销售合同 当立项流程未已完成时则查询项目业务数据
+export async function proProjpprojectinfoApi(id) {
+  return request({
+    url: api.proProjpprojectinfo + '/' + id,
+    method: 'get'
+  })
 }
 
 // 风险保证金

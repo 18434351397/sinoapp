@@ -428,7 +428,7 @@ export default {
     onSubmit (values) {
       this.signData = values
       if (values.commitType === 'meeting') {
-        this.signData = values
+        this.isSubmit(values)
         console.log('会签')
       } else {
         this.isSubmit(values)
@@ -465,6 +465,9 @@ export default {
             values.content = values.content + ' >>>>' + '【下一步】'
           }
         }
+      }
+      if (values.submitTask.includes('back')) {
+        values.commitType = 'return'
       }
       // 接口调用
       // this.url = this.url.slice(0, -11) + 'updateVOs'
@@ -637,9 +640,18 @@ export default {
     },
     specialFun (values) {
       const user = this.dataList
-      if (this.dataList.currTaskDefinitionKey === 'ManagerOffice' &&
-       this.dataList.currFlowId === 'PurchaseApprove') {
+      if ((this.dataList.currTaskDefinitionKey === 'SealManager' &&
+       this.dataList.currFlowId === 'PurchaseApprove'
+        ) // 采购 印章管理员-最终节点
+      ||
+        (this.dataList.currTaskDefinitionKey === 'Dept'
+          && this.$refs.detail.changePurchaseId
+        && (this.$refs.detail.hasNew.length <= 0 || this.$refs.detail.isSeal.indexOf('1') === -1)
+        ) // 采购-变更-不传附件-事业部经理审批-最终节点
+      ) {
         this.url = '/app/form/projpcontractpurchaseform/updateByOffice'
+        values.changePurchaseId = this.$refs.detail.changePurchaseId
+        values.isCover = 0
       } else if (
         user.currTaskDefinitionName === '运营管理部' &&
         user.currTaskDefinitionKey === 'BusiAnalysis' &&
@@ -806,9 +818,13 @@ export default {
         })
         this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
       } else {
+        let map = new Map()
         this.oldNextSelectOpts.forEach(item => {
           if (item.text.includes('退回')) {
-            this.nextSelectOpts.push(item)
+            if (!map.has(item.id)){
+              map.set(item.id, item)
+              this.nextSelectOpts.push(item)
+            }
           }
         })
         this.region.id = this.nextSelectOpts[this.nextSelectOpts.length - 1].id ? this.nextSelectOpts[this.nextSelectOpts.length - 1].id : ''

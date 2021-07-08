@@ -265,6 +265,13 @@
         <div style="text-align: left; margin: 0">{{ contractList.grossProfit }}</div>
       </template>
     </van-field>
+
+    <van-field type="text" v-model="beGrossProfit" label="毛利润差值" colon readonly>
+      <template #input>
+        <div style="text-align: left; margin: 0">{{ beGrossProfit }}</div>
+      </template>
+    </van-field>
+
     <van-field
       type="text"
       v-if="!isCustPro"
@@ -386,10 +393,17 @@
         <div style="text-align: left; margin: 0">{{ contractList.netProfit }}</div>
       </template>
     </van-field>
+
+    <van-field type="text" v-model="beNetProfit" label="净利润差值" colon readonly>
+      <template #input>
+        <div style="text-align: left; margin: 0">{{ beNetProfit }}</div>
+      </template>
+    </van-field>
+
     <van-field class="tax" type="text" v-if="isCustPro && oldContractList" name="tax" v-model="contractList.tax" placeholder="请输入税金" label="税金" colon />
     <van-field
       type="text"
-      v-if="!isCustPro && oldContractList"
+      v-if="!isCustPro || !oldContractList"
       v-model="contractList.tax"
       :class="oldContractList && contractList.tax !== oldContractList.tax ? 'app-sino-change-back' : ''"
       label="税金"
@@ -413,7 +427,7 @@
     />
     <van-field
       type="text"
-      v-if="!isCustPro && oldContractList"
+      v-if="!isCustPro || !oldContractList"
       v-model="contractList.adjustTax"
       :class="oldContractList && contractList.adjustTax !== oldContractList.adjustTax ? 'app-sino-change-back' : ''"
       label="税金调减"
@@ -425,13 +439,7 @@
       </template>
     </van-field>
 
-    <van-field type="text" v-model="beNetProfit" label="净利润差值" colon readonly>
-      <template #input>
-        <div style="text-align: left; margin: 0">{{ beNetProfit }}</div>
-      </template>
-    </van-field>
-
-    <van-field
+    <!-- <van-field
       type="text"
       v-if="isCustPro"
       name="contractAmount"
@@ -457,7 +465,7 @@
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.contractAmount }}</div>
       </template>
-    </van-field>
+    </van-field> -->
     <van-field
       type="text"
       v-if="isCustPro"
@@ -487,12 +495,14 @@ export default {
   props: ['contractList', 'oldContractList', 'isCustPro'],
   data() {
     return {
-      beNetProfit: 0
+      beNetProfit: 0, // 净利润差值
+      beGrossProfit: 0 // 毛利润差值
     }
   },
   created() {
     if (this.oldContractList) {
       this.beNetProfit = (Number(this.contractList.netProfit) - Number(this.oldContractList.netProfit)).toFixed(2)
+      this.beGrossProfit = (Number(this.contractList.grossProfit) - Number(this.oldContractList.grossProfit)).toFixed(2)
     }
   },
   methods: {

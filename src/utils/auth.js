@@ -68,29 +68,35 @@ Vue.prototype.downLoad = function(data) {
   if (url && eLink) {
     const newUrl = eLink + url
     if (isAndroid) {
-      var dtask = plus.downloader.createDownload(newUrl, {})
-      dtask.addEventListener('statechanged', (d, status) => {
-        switch (d.state) {
-          case 1: // 开始
-            Toast('加载中...')
-            break
-          case 2: // 已连接到服务器
-            Toast('链接到服务器...')
-            break
-          case 3: // 已接收到数据
-            var a = Math.floor((d.downloadedSize / d.totalSize) * 100) + '%'
-            Toast(a)
-            break
-          case 4: // 下载完成
-            // 下载保存路径到图库
-            plus.gallery.save(d.filename, () => {
-              Toast.success('下载完成！')
-              plus.nativeUI.closeWaiting()
-              plus.runtime.openFile(d.filename)
-            })
-            break
+      var dtask = plus.downloader.createDownload(newUrl, {}, (d, status) => {
+        if (status === 200) {
+          Toast.success('下载完成！')
+          plus.nativeUI.closeWaiting()
+          plus.runtime.openFile(d.filename)
         }
       })
+      // dtask.addEventListener('statechanged', (d, status) => {
+      //   switch (d.state) {
+      //     case 1: // 开始
+      //       Toast('加载中...')
+      //       break
+      //     case 2: // 已连接到服务器
+      //       Toast('链接到服务器...')
+      //       break
+      //     case 3: // 已接收到数据
+      //       var a = Math.floor((d.downloadedSize / d.totalSize) * 100) + '%'
+      //       Toast(a)
+      //       break
+      //     case 4: // 下载完成
+      //       // 下载保存路径到图库
+      //       plus.gallery.save(d.filename, () => {
+      //         Toast.success('下载完成！')
+      //         plus.nativeUI.closeWaiting()
+      //         plus.runtime.openFile(d.filename)
+      //       })
+      //       break
+      //   }
+      // })
       dtask.start()
     } else {
       var dtaskIos = plus.downloader.createDownload(newUrl, {})

@@ -428,7 +428,6 @@ export default {
     onSubmit (values) {
       this.signData = values
       if (values.commitType === 'meeting') {
-        this.isSubmit(values)
         console.log('会签')
       } else {
         this.isSubmit(values)
@@ -466,7 +465,8 @@ export default {
           }
         }
       }
-      if (values.submitTask.includes('back')) {
+      debugger
+      if (values.submitTask && values.submitTask.includes('back')) {
         values.commitType = 'return'
       }
       // 接口调用

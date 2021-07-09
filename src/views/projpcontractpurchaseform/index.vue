@@ -320,7 +320,9 @@
     </van-field>
     <van-field
       type="text"
-      v-if="projpcontractpurchaseList.projectNo === '' && dataList.currTaskDefinitionName !== '风控法规部'"
+      v-if="dataList.onlyId === 'Done'
+       && projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'"
       name="isPreOrderDesc"
       v-model="projpcontractpurchaseList.isPreOrderDesc"
       label="未签合同提前下单承诺"
@@ -334,8 +336,10 @@
     <van-field
       type="text"
       v-if="projpcontractpurchaseList.projectNo === ''
-       && dataList.currTaskDefinitionName !== '风控法规部'
-       && projpcontractpurchaseList.isPreOrderDesc === '冻结现金流'"
+       && dataList.currTaskDefinitionName === '风控法规部'
+       && projpcontractpurchaseList.isPreOrderDesc === '冻结现金流'
+       && dataList.onlyId === 'Done'
+"
       name="cashMoney"
       v-model="projpcontractpurchaseList.cashMoney"
       label="冻结现金流金额"
@@ -347,6 +351,129 @@
       </template>
     </van-field>
     <van-field
+      type="text"
+      v-if="dataList.onlyId === 'Done'
+       && projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'"
+      v-model="isPrePayMoreDesc"
+      label="是否预付超30%"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{isPrePayMoreDesc}}</div>
+      </template>
+    </van-field>
+    <van-field
+      type="text"
+      v-if="projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'
+       && projpcontractpurchaseList.prePayMore === '1'
+       && dataList.onlyId === 'Done'
+"
+      v-model="projpcontractpurchaseList.prePayMoreNum"
+      label="预付超30%金额"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.cashMoney}}</div>
+      </template>
+    </van-field>
+
+    <van-field
+      type="text"
+      v-if="dataList.onlyId === 'Done'
+       && projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'"
+      v-model="isHaveRebatesDesc"
+      label="是否有保证金"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{isHaveRebatesDesc}}</div>
+      </template>
+    </van-field>
+    <van-field
+      type="text"
+      v-if="projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'
+       && projpcontractpurchaseList.isHaveRebates === '1'
+       && dataList.onlyId === 'Done'
+"
+      v-model="projpcontractpurchaseList.marginMoney"
+      label="保证金冻结方式"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.marginMoney}}</div>
+      </template>
+    </van-field>
+    <van-field
+      type="text"
+      v-if="projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'
+       && projpcontractpurchaseList.isHaveRebates === '1'
+       && dataList.onlyId === 'Done'
+"
+      v-model="projpcontractpurchaseList.numRebates"
+      label="保证金金额"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.numRebates}}</div>
+      </template>
+    </van-field>
+
+    <van-field
+      type="text"
+      v-if="dataList.onlyId === 'Done'
+       && projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'"
+      v-model="isHaveGuaranteesDesc"
+      label="是否有担保"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{isHaveGuaranteesDesc}}</div>
+      </template>
+    </van-field>
+    <van-field
+      type="text"
+      v-if="projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'
+       && projpcontractpurchaseList.isHaveGuarantees === '1'
+       && dataList.onlyId === 'Done'
+"
+      v-model="projpcontractpurchaseList.remarkGuarantees"
+      label="担保说明"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.remarkGuarantees}}</div>
+      </template>
+    </van-field>
+    <van-field
+      type="text"
+      v-if="dataList.onlyId === 'Done'
+       && projpcontractpurchaseList.projectNo === ''
+       && dataList.currTaskDefinitionName === '风控法规部'"
+      v-model="isRiskBasedDesc"
+      label="是否存在厂商审计风险"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left;margin: 0;">{{isRiskBasedDesc}}</div>
+      </template>
+    </van-field>
+
+    <van-field
       v-if="!projpcontractpurchaseList.projectNo
       && dataList.currTaskDefinitionName === '风控法规部'"
       name="isCheckQuality"
@@ -356,7 +483,9 @@
     />
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
-      && dataList.currTaskDefinitionName === '风控法规部'"
+      && dataList.currTaskDefinitionName === '风控法规部'
+      && dataList.onlyId !== 'Done'
+      "
       clickable
       right-icon="arrow-down"
       label="是否需复核质保差"
@@ -385,7 +514,8 @@
 
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
-      && dataList.currTaskDefinitionName === '风控法规部'"
+      && dataList.currTaskDefinitionName === '风控法规部' && dataList.onlyId !== 'Done'"
+
       clickable
       right-icon="arrow-down"
       label="未签合同提前下单承诺"
@@ -406,7 +536,7 @@
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
       && dataList.currTaskDefinitionName === '风控法规部'
-      && isPreOrderDesc === '冻结现金流'
+      && isPreOrderDesc === '冻结现金流' && dataList.onlyId !== 'Done'
       "
       v-model="cashMoney"
       name="cashMoney"
@@ -425,7 +555,7 @@
     />
 
     <van-field
-      v-if="dataList.currTaskDefinitionName === '风控法规部'"
+      v-if="dataList.currTaskDefinitionName === '风控法规部' && dataList.onlyId !== 'Done'"
       clickable
       right-icon="arrow-down"
       label="是否预付超30%"
@@ -445,7 +575,7 @@
     </van-popup>
 
     <van-field
-      v-if="dataList.currTaskDefinitionName === '风控法规部' && isPrePayMore === '1'"
+      v-if="dataList.currTaskDefinitionName === '风控法规部' && isPrePayMore === '1' && dataList.onlyId !== 'Done'"
       v-model="prePayMoreNum"
       name="prePayMoreNum"
       label="预付超30%金额"
@@ -466,7 +596,7 @@
 
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
-      && dataList.currTaskDefinitionName === '风控法规部'"
+      && dataList.currTaskDefinitionName === '风控法规部' && dataList.onlyId !== 'Done'"
       clickable
       right-icon="arrow-down"
       label="是否有保证金"
@@ -487,7 +617,7 @@
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
       && dataList.currTaskDefinitionName === '风控法规部'
-      && isHaveRebatesDesc === '是'
+      && isHaveRebatesDesc === '是' && dataList.onlyId !== 'Done'
       "
       name="marginMoney"
       clickable
@@ -510,7 +640,7 @@
     <van-field
       v-if="
       !projpcontractpurchaseList.projectNo &&
-      dataList.currTaskDefinitionName === '风控法规部' && isHaveRebatesDesc === '是'"
+      dataList.currTaskDefinitionName === '风控法规部' && isHaveRebatesDesc === '是' && dataList.onlyId !== 'Done'"
       v-model="numRebates"
       name="numRebates"
       label="保证金金额"
@@ -529,7 +659,7 @@
 
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
-      && dataList.currTaskDefinitionName === '风控法规部'"
+      && dataList.currTaskDefinitionName === '风控法规部' && dataList.onlyId !== 'Done'"
       clickable
       right-icon="arrow-down"
       label="是否有担保"
@@ -550,7 +680,7 @@
     <van-field
       v-if="
       !projpcontractpurchaseList.projectNo &&
-      dataList.currTaskDefinitionName === '风控法规部' && isHaveGuaranteesDesc === '是'"
+      dataList.currTaskDefinitionName === '风控法规部' && isHaveGuaranteesDesc === '是' && dataList.onlyId !== 'Done'"
       v-model="remarkGuarantees"
       name="remarkGuarantees"
       label="担保说明"
@@ -568,7 +698,7 @@
 
     <van-field
       v-if="!projpcontractpurchaseList.projectNo
-      && dataList.currTaskDefinitionName === '风控法规部'"
+      && dataList.currTaskDefinitionName === '风控法规部' && dataList.onlyId !== 'Done'"
       clickable
       right-icon="arrow-down"
       label="是否存在厂商审计风险"

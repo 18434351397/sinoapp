@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">{{ title }}</div>
-    <van-field type="text" v-model="bizId" label="合同号" colon readonly>
+    <van-field type="text" v-model="bizId" label="销售合同编号" colon readonly>
       <template #input>
         <div style="text-align: left; margin: 0">{{ bizId }}</div>
       </template>
@@ -104,6 +104,20 @@
         <div style="text-align: left; margin: 0">{{ contractList.leadOrgName }}</div>
       </template>
     </van-field>
+
+    <van-field
+      type="text"
+      v-model="contractList.hasChangeCashAchievement"
+      :class="oldContractList && contractList.hasChangeCashAchievement !== oldContractList.hasChangeCashAchievement ? 'app-sino-change-back' : ''"
+      label="是否调整年初到变更期间现金流和业绩"
+      colon
+      readonly
+    >
+      <template #input>
+        <div style="text-align: left; margin: 0">{{ contractList.hasChangeCashAchievement }}</div>
+      </template>
+    </van-field>
+
     <van-field
       type="text"
       v-model="contractList.projectName"
@@ -128,7 +142,7 @@
         <div style="text-align: left; margin: 0">{{ contractList.companyText }}</div>
       </template>
     </van-field>
-    <van-field
+    <!-- <van-field
       type="text"
       v-model="contractList.projectNum"
       :class="oldContractList && contractList.projectNum !== oldContractList.projectNum ? 'app-sino-change-back' : ''"
@@ -139,7 +153,7 @@
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.projectNum }}</div>
       </template>
-    </van-field>
+    </van-field> -->
     <van-field
       type="text"
       v-model="contractList.customerName"

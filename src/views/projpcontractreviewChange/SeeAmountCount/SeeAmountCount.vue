@@ -433,6 +433,7 @@
 
     <van-field
       type="text"
+      style="display: none"
       v-if="isCustPro"
       name="contractAmount"
       :class="oldContractList && contractList.contractAmount !== oldContractList.contractAmount ? 'app-sino-change-back' : ''"
@@ -447,6 +448,7 @@
     </van-field>
     <van-field
       type="text"
+      style="display: none"
       v-if="!isCustPro"
       v-model="contractList.contractAmount"
       :class="oldContractList && contractList.contractAmount !== oldContractList.contractAmount ? 'app-sino-change-back' : ''"

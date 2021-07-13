@@ -2,7 +2,7 @@
 <template>
   <div class="app-title">
     <div class="title">{{ title }}</div>
-    <van-field type="text" v-model="contractList.bizId" label="合同号" colon readonly>
+    <van-field type="text" v-model="contractList.bizId" label="销售合同编号" colon readonly>
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.bizId }}</div>
       </template>
@@ -68,11 +68,11 @@
         <div style="text-align: left; margin: 0">{{ contractList.companyText }}</div>
       </template>
     </van-field>
-    <van-field type="text" v-model="contractList.projectNum" label="项目编号" colon readonly>
+    <!-- <van-field type="text" v-model="contractList.projectNum" label="项目编号" colon readonly>
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.projectNum }}</div>
       </template>
-    </van-field>
+    </van-field> -->
     <van-field type="text" v-model="contractList.customerName" label="客户名称" colon readonly>
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.customerName }}</div>
@@ -129,7 +129,7 @@
       <div class="table-title">成本明细</div>
       <vxe-table border resizable highlight-hover-row :data="costList">
         <vxe-table-column type="seq" title="序号" width="60"></vxe-table-column>
-        <vxe-table-column field="costFeesTypeText" title="成本明细" width="21%"></vxe-table-column>
+        <vxe-table-column field="costFeesTypeText" title="成本类型" width="21%"></vxe-table-column>
         <vxe-table-column field="name" title="名称" width="21%"></vxe-table-column>
         <vxe-table-column field="num" title="数量" width="21%"></vxe-table-column>
         <vxe-table-column field="price" title="单价" width="21%"></vxe-table-column>
@@ -177,9 +177,11 @@
         <vxe-table-column field="occupyAmount" width="100" title="资金占用成本"></vxe-table-column>
         <vxe-table-column field="remark" width="100" title="备注"></vxe-table-column>
       </vxe-table>
-      <van-field type="text" v-model="contractList.occupy" label="资金占用情况" colon readonly>
+      <van-field type="text" v-model="occupy" label="资金占用情况" colon readonly>
         <template #input>
-          <div style="text-align: left; margin: 0">{{ contractList.occupy }}</div>
+          <div style="text-align: left; margin: 0">
+            {{ contractList.occupy ? (contractList.occupy >= 0 ? contractList.occupy : -contractList.occupy) : '0.00' }}
+          </div>
         </template>
       </van-field>
     </div>
@@ -353,12 +355,12 @@
       </template>
     </van-field>
 
-    <van-field type="text" v-if="isCustPro" name="contractAmount" v-model="contractList.contractAmount" label="合同总金额" colon readonly>
+    <van-field type="text" style="display: none" v-if="isCustPro" name="contractAmount" v-model="contractList.contractAmount" label="合同总金额" colon readonly>
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.contractAmount }}</div>
       </template>
     </van-field>
-    <van-field type="text" v-if="!isCustPro" v-model="contractList.contractAmount" label="合同总金额" colon readonly>
+    <van-field type="text" v-if="!isCustPro" style="display: none" v-model="contractList.contractAmount" label="合同总金额" colon readonly>
       <template #input>
         <div style="text-align: left; margin: 0">{{ contractList.contractAmount }}</div>
       </template>
@@ -446,9 +448,9 @@
         <div v-else style="margin: 0">否</div>
       </template>
     </van-field>
-    <van-field type="text" v-model="contractList.signDate" label="预计签订时间" colon readonly>
+    <van-field type="text" v-model="contractList.expectedSignDate" label="预计签订时间" colon readonly>
       <template #input>
-        <div style="text-align: left; margin: 0">{{ contractList.signDate }}</div>
+        <div style="text-align: left; margin: 0">{{ contractList.expectedSignDate }}</div>
       </template>
     </van-field>
     <van-field v-model="contractList.remark" rows="2" name="remark" autosize label="备注" type="textarea" readonly>
@@ -551,7 +553,8 @@ export default {
       noSignFileList: [], // 不签名合同说明
       explainFileList: [], // 未签合同说明
       fileConcat: [], // 整合所有的 file
-      fileList: [] // 提交 file 处理 ,去除 null , 最后的结果
+      fileList: [], // 提交 file 处理 ,去除 null , 最后的结果
+      occupy: '0.00'
     }
   },
   created() {
@@ -564,6 +567,7 @@ export default {
       if (res.data) {
         const resData = res.data.projpContractFeesList
         this.contractList = res.data // 合同信息
+        this.occupy = res.data.occupy ? (res.data.occupy >= 0 ? res.data.occupy : -res.data.occupy) : '0.00'
         this.achievementList = res.data.projpContractAchievementList // 业绩切分
         this.paymentCondition = res.data.paymentCondition // 预计现金流量表
         this.contractFileList = res.data.contractFileList

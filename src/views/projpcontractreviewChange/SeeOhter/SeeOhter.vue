@@ -134,14 +134,14 @@
     </van-field>
     <van-field
       type="text"
-      v-model="contractList.signDate"
-      :class="oldContractList && contractList.signDate !== oldContractList.signDate ? 'app-sino-change-back' : ''"
+      v-model="contractList.expectedSignDate"
+      :class="oldContractList && contractList.expectedSignDate !== oldContractList.expectedSignDate ? 'app-sino-change-back' : ''"
       label="预计签订时间"
       colon
       readonly
     >
       <template #input>
-        <div style="text-align: left; margin: 0">{{ contractList.signDate }}</div>
+        <div style="text-align: left; margin: 0">{{ contractList.expectedSignDate }}</div>
       </template>
     </van-field>
     <van-field

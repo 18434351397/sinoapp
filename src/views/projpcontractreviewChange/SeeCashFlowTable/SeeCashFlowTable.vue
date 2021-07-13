@@ -26,9 +26,11 @@
       <vxe-table-column field="occupyAmount" width="160" title="资金占用成本"></vxe-table-column>
       <vxe-table-column field="remark" width="100" title="备注"></vxe-table-column>
     </vxe-table>
-    <van-field type="text" v-model="contractList.occupy" label="资金占用情况" colon readonly>
+    <van-field type="text" v-model="occupy" label="资金占用情况" colon readonly>
       <template #input>
-        <div style="text-align: left; margin: 0">{{ contractList.occupy }}</div>
+        <div style="text-align: left; margin: 0">
+          {{ contractList.occupy ? (contractList.occupy >= 0 ? contractList.occupy : -contractList.occupy) : '0.00' }}
+        </div>
       </template>
     </van-field>
   </div>
@@ -38,6 +40,11 @@
 export default {
   name: 'index',
   props: ['paymentCondition', 'contractList'],
+  data() {
+    return {
+      occupy: this.contractList.occupy ? (this.contractList.occupy >= 0 ? this.contractList.occupy : -this.contractList.occupy) : '0.00'
+    }
+  },
   methods: {
     cellStyle({ row }) {
       if (row.hasModify === '1') {

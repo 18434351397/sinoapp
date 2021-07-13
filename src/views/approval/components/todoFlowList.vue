@@ -198,7 +198,15 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      } else if (data.currTaskDefinitionKey === 'AcceptUpload' || data.currTaskDefinitionKey === 'BusiAnalysisManagerUpload') {
+      } else if (data.statusDes === '会签中' && (data.currUserName === data.userName)) {
+        Toast.fail({
+          message: '该流程被会签给发起人，app暂不支持修改，请登录PC端进行修改',
+          closeOnClick: true,
+          closeOnClickOverlay: true,
+          duration: 10000
+        })
+      }
+      else if (data.currTaskDefinitionKey === 'AcceptUpload' || data.currTaskDefinitionKey === 'BusiAnalysisManagerUpload') {
         Toast.fail({
           message: '该流程需上传文本，app暂不支持附件上传，请登录PC端进行操作',
           closeOnClick: true,

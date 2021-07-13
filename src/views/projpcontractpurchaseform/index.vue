@@ -318,7 +318,8 @@
         <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.remarkChange}}</div>
       </template>
     </van-field>
-    <van-field
+    <!--风控法规部的所有信息-->
+    <!--<van-field
       type="text"
       v-if="dataList.onlyId === 'Done'
        && projpcontractpurchaseList.projectNo === ''
@@ -471,7 +472,7 @@
       <template #input>
         <div style="text-align: left;margin: 0;">{{isRiskBasedDesc}}</div>
       </template>
-    </van-field>
+    </van-field>-->
 
     <van-field
       v-if="!projpcontractpurchaseList.projectNo

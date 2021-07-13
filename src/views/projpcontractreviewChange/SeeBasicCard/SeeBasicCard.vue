@@ -107,14 +107,14 @@
 
     <van-field
       type="text"
-      v-model="contractList.hasChangeCashAchievement"
+      v-model="hasChangeCashAchievement"
       :class="oldContractList && contractList.hasChangeCashAchievement !== oldContractList.hasChangeCashAchievement ? 'app-sino-change-back' : ''"
       label="是否调整年初到变更期间现金流和业绩"
       colon
       readonly
     >
       <template #input>
-        <div style="text-align: left; margin: 0">{{ contractList.hasChangeCashAchievement }}</div>
+        <div style="text-align: left; margin: 0">{{ hasChangeCashAchievement }}</div>
       </template>
     </van-field>
 
@@ -267,6 +267,7 @@ export default {
   data() {
     return {
       dataList: this.$route.query,
+      hasChangeCashAchievement: this.contractList.hasChangeCashAchievement === '0' ? '否' : '是',
       title: '销售合同变更评审信息'
     }
   }

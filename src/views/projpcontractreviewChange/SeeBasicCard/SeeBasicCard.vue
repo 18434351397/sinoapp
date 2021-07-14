@@ -243,7 +243,7 @@
         <div v-else style="margin: 0">否</div>
       </template>
     </van-field>
-    <div v-if="oldContractList ? oldContractList.isEndCust === '0' : contractList.isEndCust === '0'">
+    <div v-if="contractList && contractList.isEndCust !== '1'">
       <van-field
         type="text"
         v-model="contractList.endCustName"

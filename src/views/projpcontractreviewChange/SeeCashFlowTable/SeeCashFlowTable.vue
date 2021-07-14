@@ -14,7 +14,6 @@
       <vxe-table-column field="paymentCondition" width="200" title="预计收/付款条件"></vxe-table-column>
       <vxe-table-column field="accountSubjectText" width="100" title="计入科目"></vxe-table-column>
       <vxe-table-column field="reportName" width="160" title="验收报告名称"></vxe-table-column>
-      <vxe-table-column field="confirmAmount" width="160" title="现金流量金额"></vxe-table-column>
       <vxe-table-column field="hasReport" width="160" title="是否有验收报告">
         <template slot-scope="scope">
           <div v-if="scope.row.hasReport === '1'">是</div>
@@ -23,6 +22,7 @@
       </vxe-table-column>
       <vxe-table-column field="reportDate" width="160" title="预计验收报告时间"></vxe-table-column>
       <vxe-table-column field="paymentName" width="100" title="款项名称"></vxe-table-column>
+      <vxe-table-column field="confirmAmount" width="160" title="现金流量金额"></vxe-table-column>
       <vxe-table-column field="occupyTime" width="160" title="资金占用时间"></vxe-table-column>
       <vxe-table-column field="occupyAmount" width="160" title="资金占用成本"></vxe-table-column>
       <vxe-table-column field="remark" width="100" title="备注"></vxe-table-column>

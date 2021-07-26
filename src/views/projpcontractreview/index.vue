@@ -158,7 +158,6 @@
         <vxe-table-column field="onlyNum" width="160" title="唯一编号"></vxe-table-column>
         <vxe-table-column field="prTypeText" width="80" title="收付类型"></vxe-table-column>
         <vxe-table-column field="paymentDate" width="160" title="预计收/付款时间"></vxe-table-column>
-        <vxe-table-column field="purchaseNo" width="100" title="采购合同号"></vxe-table-column>
         <vxe-table-column field="opposingUnit" width="100" title="对方单位"></vxe-table-column>
         <vxe-table-column field="ourUnit" width="100" title="我方单位"></vxe-table-column>
         <vxe-table-column field="paymentAmount" width="160" title="预计收/付款金额"></vxe-table-column>

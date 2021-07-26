@@ -33,10 +33,10 @@
         <div style="text-align: left; margin: 0">{{ tenderOfferList.reqDeptName }}</div>
       </template>
     </van-field>
-    <van-field type="text" name="isCooperate" v-model="tenderOfferList.isCooperate" label="是否合作项目" colon readonly>
+    <van-field type="text" name="isCooperate" v-model="tenderOfferList.isCooperate" label="中标率" colon readonly>
       <template #input>
-        <div v-if="tenderOfferList.isCooperate === '1'" style="margin: 0">是</div>
-        <div v-else style="margin: 0">否</div>
+        <div v-if="tenderOfferList.isCooperate === '1'" style="margin: 0">高</div>
+        <div v-else style="margin: 0">低</div>
       </template>
     </van-field>
     <van-field type="text" name="assureAmount" v-model="tenderOfferList.assureAmount" label="质保金金额(元)" colon readonly>

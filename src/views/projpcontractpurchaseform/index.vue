@@ -280,19 +280,19 @@
     </van-field>
 
 
-    <van-field
-      type="text"
-      name="contractPay"
-      v-if="!projpcontractpurchaseList.projectNo"
-      v-model="projpcontractpurchaseList.contractPay"
-      label="合同付款条件"
-      colon
-      readonly
-    >
-      <template #input>
-        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.contractPay}}</div>
-      </template>
-    </van-field>
+<!--    <van-field-->
+<!--      type="text"-->
+<!--      name="contractPay"-->
+<!--      v-if="!projpcontractpurchaseList.projectNo"-->
+<!--      v-model="projpcontractpurchaseList.contractPay"-->
+<!--      label="合同付款条件"-->
+<!--      colon-->
+<!--      readonly-->
+<!--    >-->
+<!--      <template #input>-->
+<!--        <div style="text-align: left;margin: 0;">{{projpcontractpurchaseList.contractPay}}</div>-->
+<!--      </template>-->
+<!--    </van-field>-->
     <van-field
       type="text"
       name="remark"
@@ -747,6 +747,8 @@
         <vxe-table-column field="receiveDate" title="预计付款时间" width="25%"></vxe-table-column>
         <vxe-table-column field="content" title="预计付款条件" width="20%"></vxe-table-column>
         <vxe-table-column field="receiveAmount" title="付款金额" width="21%"></vxe-table-column>
+        <vxe-table-column field="accountSubjectDesc" title="计入科目" width="21%"></vxe-table-column>
+        <vxe-table-column field="paymentRate" title="税率" width="21%"></vxe-table-column>
         <vxe-table-column field="remark" title="备注" width="19%"></vxe-table-column>
       </vxe-table>
     </div>

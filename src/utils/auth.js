@@ -59,7 +59,7 @@ Vue.prototype.debounce = function debounce (fn, wait) {
 Vue.prototype.downLoad = function (data) {
   const url = data.url || data.atturl
   console.log(url)
-  const u = navigator.userAgent
+  const u = navigator.userAgent 
   //android终端或者uc浏览器
   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
   if (url) {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
@@ -13,10 +13,11 @@ export default {
   width: 100%;
   height: 100%;
 }
-.van-field--error .van-field__control, .van-field--error .van-field__control::placeholder {
+.van-field--error .van-field__control,
+.van-field--error .van-field__control::placeholder {
   color: #969799;
 }
-.van-cell:not(:last-child)::after{
+.van-cell:not(:last-child)::after {
   border-bottom: none;
 }
 // 设置字体大小
@@ -33,7 +34,7 @@ div.app-title {
     bottom: 0;
     left: 6px;
     margin: auto 0;
-    content: "";
+    content: '';
     width: 4px;
     height: 12px;
     border-radius: 2px;
@@ -56,7 +57,7 @@ div.app-title {
     bottom: 0;
     left: 6px;
     margin: auto 0;
-    content: "";
+    content: '';
     width: 4px;
     height: 12px;
     border-radius: 2px;
@@ -64,6 +65,9 @@ div.app-title {
   }
   // 在可编辑中有下划线
   div.tax.van-cell:not(:last-child)::after {
+    border-bottom: 1px solid #6c6c6c;
+  }
+  div.fileAmount.van-cell {
     border-bottom: 1px solid #6c6c6c;
   }
 }
@@ -74,14 +78,14 @@ div.app-title {
 .van-hairline--top-bottom::after {
   border-width: 0;
 }
-  // 表格字体颜色调整
-  .cell{
-    color: #000;
-    font-weight: normal;
-  }
+// 表格字体颜色调整
+.cell {
+  color: #000;
+  font-weight: normal;
+}
 
 .van-toast {
-    color: #000;
+  color: #000;
 }
 .van-toast__loading {
   color: #000;

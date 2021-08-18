@@ -61,50 +61,62 @@ Vue.prototype.downLoad = function (data) {
   const eLink= window.location.href.split('/mobile/#').splice(0,1).join('')
   const u = navigator.userAgent
   //android终端或者uc浏览器
-  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -10
+  let isXiaomi = u.toLowerCase().match(/mi\s/i) == "mi "
+  let isXiaomi2s = u.toLowerCase().match(/mix\s/i) == "mix "
+  let isRedmi = u.toLowerCase().match(/redmi/i) == "redmi"
   if (url && eLink) {
     const newUrl = eLink + url
     if (isAndroid) {
-      var dtask = plus.downloader.createDownload(newUrl, {})
-      dtask.addEventListener('statechanged', (d, status) => {
-        switch (d.state) {
-          case 1: // 开始
-            Toast('加载中...');
-            break;
-          case 2: // 已连接到服务器
-            Toast('链接到服务器...');
-            break;
-          case 3: // 已接收到数据
-            var a = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
-            Toast(a);
-            break;
-          case 4: // 下载完成
-            // 下载保存路径到图库
-            plus.gallery.save(
-              d.filename,
-              () => {
-                Toast.success('下载完成！');
+      // 小米机型兼容性处理
+      if (isXiaomi || isXiaomi2s || isRedmi) {
+        var dtask = plus.downloader.createDownload(newUrl, {}, (d, status) => {
+          if (status === 200) {
+            Toast.success('下载完成！')
+            plus.nativeUI.closeWaiting()
+            plus.runtime.openFile(d.filename)
+          }
+        })
+      } else {
+        var dtask = plus.downloader.createDownload(newUrl,{})
+        dtask.addEventListener('statechanged', (d) => {
+          switch (d.state) {
+            case 1: // 开始
+              Toast('加载中...')
+              break
+            case 2: // 已连接到服务器
+              Toast('链接到服务器...')
+              break
+            case 3: // 已接收到数据
+              var a = Math.floor((d.downloadedSize / d.totalSize) * 100) + '%'
+              Toast.loading({message: a, overlay: true})
+              break
+            case 4: // 下载完成
+              // 下载保存路径到图库
+              plus.gallery.save(d.filename, () => {
+                Toast.success('下载完成！')
                 plus.nativeUI.closeWaiting()
-                plus.runtime.openFile(d.filename);
+                plus.runtime.openFile(d.filename)
               })
-            break;
-        }
-      })
-      dtask.start();
+              break
+          }
+        })
+      }
+      dtask.start()
     } else {
-      var dtaskIos = plus.downloader.createDownload(newUrl, {});
+      var dtaskIos = plus.downloader.createDownload(newUrl, {})
       dtaskIos.addEventListener('statechanged', (d, status) => {
         switch (d.state) {
           case 1: // 开始
-            Toast('加载中...');
-            break;
+            Toast('加载中...')
+            break
           case 2: // 已连接到服务器
-            Toast('链接到服务器...');
-            break;
+            Toast('链接到服务器...')
+            break
           case 3: // 已接收到数据
-            var aIos = Math.floor(d.downloadedSize / d.totalSize * 100) + '%'
-            Toast.loading({ message : aIos });
-            break;
+            var aIos = Math.floor((d.downloadedSize / d.totalSize) * 100) + '%'
+            Toast.loading({message: aIos, overlay: true})
+            break
           case 4: // 下载完成
             Toast.success('下载完成！')
             plus.nativeUI.closeWaiting()
@@ -112,10 +124,10 @@ Vue.prototype.downLoad = function (data) {
             break
         }
       })
-      dtaskIos.start();
+      dtaskIos.start()
     }
   } else {
-    Toast.fail('附件路径不存在');
+    Toast.fail('附件路径不存在')
   }
 }
 

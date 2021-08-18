@@ -428,7 +428,6 @@ export default {
     onSubmit (values) {
       this.signData = values
       if (values.commitType === 'meeting') {
-        this.signData = values
         console.log('会签')
       } else {
         this.isSubmit(values)
@@ -465,6 +464,10 @@ export default {
             values.content = values.content + ' >>>>' + '【下一步】'
           }
         }
+      }
+      debugger
+      if (values.submitTask && values.submitTask.includes('back')) {
+        values.commitType = 'return'
       }
       // 接口调用
       // this.url = this.url.slice(0, -11) + 'updateVOs'
@@ -806,9 +809,13 @@ export default {
         })
         this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
       } else {
+        let map = new Map()
         this.oldNextSelectOpts.forEach(item => {
           if (item.text.includes('退回')) {
-            this.nextSelectOpts.push(item)
+            if (!map.has(item.id)){
+              map.set(item.id, item)
+              this.nextSelectOpts.push(item)
+            }
           }
         })
         this.region.id = this.nextSelectOpts[this.nextSelectOpts.length - 1].id ? this.nextSelectOpts[this.nextSelectOpts.length - 1].id : ''

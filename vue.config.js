@@ -31,11 +31,7 @@ module.exports = {
     proxy: { // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
 
       '/admin': {
-        // target: 'http://172.169.1.42:8095',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -43,13 +39,7 @@ module.exports = {
         // }
       },
       '///fileupload': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.100.121:8082',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://218.241.175.243:8082',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -57,13 +47,7 @@ module.exports = {
         // }
       },
       '/group1': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.100.121:8082',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://218.241.175.246:8082',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -71,35 +55,24 @@ module.exports = {
         // }
       },
       '/app': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        target: 'http://182.168.12.192:8082',
-        // target: 'http://192.168.18.26:8095',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
-        // target: 'http://172.169.1.42:8095',
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://192.168.18.26:8095',
-        target: 'http://182.168.12.192:8082',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
       },
       '/toLogin': {
-        // target: 'http://172.169.200.207:8082',
-        // target: 'http://192.168.18.26:8095',
-        // target: 'http://172.169.2.235:8095',
-        // target: 'http://172.169.1.42:8095',
-        target: 'http://182.168.12.192:8082',
+        target: 'http://192.168.21.23:8082',
         // ws: true,
         changeOrigin: true
       }
     }
   },
-  pluginOptions: {// 第三方插件配置
+  pluginOptions: {
+    // 第三方插件配置
     // ...
   }
 }

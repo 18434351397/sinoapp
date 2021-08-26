@@ -7,6 +7,11 @@ const contractRouter = [
     name: 'projpcontractreview'
   },
   {
+    path: '/projpcontractreviewChange',
+    component: () => import('../views/projpcontractreviewChange'), // 销售合同
+    name: 'projpcontractreviewupdateform'
+  },
+  {
     path: '/projpcontractreviewcancel',
     component: () => import('../views/projpcontractreviewcancel'), // 取消合同
     name: 'projpcontractreviewcancel'
@@ -75,7 +80,8 @@ const contractRouter = [
     path: '/projpprojectendform',
     component: () => import('../views/projpprojectendform'), // 项目结算
     name: 'projpprojectendform'
-  },
+  }
 ]
+
 // 导出router，方便在index里引用
 export default contractRouter

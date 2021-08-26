@@ -14,7 +14,8 @@ const api = {
   projptenderrecordList: '/app/form/projptenderrecord/detail',
   orgTree: '/app/admin/user/mobileOrgUserTree',
   downLoadUrl: '/app/file/download',
-  projpcontractreviewList: '/app/form/projpcontractreview/detail',
+  projpcontractreviewList: '/app/form/projpcontractreview/detail', // 合同评审
+  projpcontractreviewupdateform: '/app/form/projpcontractreviewupdateform/detail', // 销售合同变更 详情接口
   custPro: '/app/admin/dictionary/getBySubCodes', // 客户属性
   projptenderquoteList: '/app/form/projptenderquote/detail' // 投标报价
 }

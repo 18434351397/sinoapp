@@ -686,7 +686,7 @@ export default {
         } else if (user.currFlowId === 'ContractModifyApprove') {
           this.url = '/app/form/projpcontractreviewupdateform/busi/manager/commit'
         }
-      } else if (user.currFlowId === 'ContractModifyApprove' && user.currFlowName === '销售合同变更') {
+      } else if (user.currFlowId === 'ContractModifyApprove' && user.currFlowName === '合同评审变更审批') {
         this.url = '/app/form/projpcontractreviewupdateform/update/task'
       }  else if (
         this.dataList.currFlowId === 'SealKeepApprove' &&

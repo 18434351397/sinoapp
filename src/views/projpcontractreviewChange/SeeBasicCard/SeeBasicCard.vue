@@ -269,7 +269,7 @@ export default {
     return {
       dataList: this.$route.query,
       hasChangeCashAchievement: this.contractList.hasChangeCashAchievement === '0' ? '否' : '是',
-      title: '销售合同变更评审信息'
+      title: '合同评审变更审批信息'
     }
   }
 }

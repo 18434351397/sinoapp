@@ -64,13 +64,14 @@ Vue.prototype.downLoad = function(data) {
     .join('')
   const u = navigator.userAgent
   //android终端或者uc浏览器
-  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -10
-  let isXiaomi = u.toLowerCase().match(/mi\s/i) == "mi "
-  let isXiaomi2s = u.toLowerCase().match(/mix\s/i) == "mix "
-  let isRedmi = u.toLowerCase().match(/redmi/i) == "redmi"
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+
   if (url && eLink) {
     const newUrl = eLink + url
     if (isAndroid) {
+      let isXiaomi = u.toLowerCase().match(/mi\s/i) == "mi "
+      let isXiaomi2s = u.toLowerCase().match(/mix\s/i) == "mix "
+      let isRedmi = u.toLowerCase().match(/redmi/i) == "redmi"
       // 小米机型兼容性处理
       if (isXiaomi || isXiaomi2s || isRedmi) {
         var dtask = plus.downloader.createDownload(newUrl, {}, (d, status) => {

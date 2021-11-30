@@ -68,7 +68,7 @@ const contractRouter = [
   },
   // {
   //   path: '/projpcontractreviewupdateform',
-  //   component: () => import('../views/projpcontractreviewupdateform'), // 销售合同变更
+  //   component: () => import('../views/projpcontractreviewupdateform'), // 合同评审变更审批
   //   name: 'projpcontractreviewupdateform'
   // },
   {

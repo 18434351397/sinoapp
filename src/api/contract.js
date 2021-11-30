@@ -25,7 +25,7 @@ const api = {
   bizperformbondform: '/app/form/bizperformbondform/detail', // 履约保证金
   projpbidservicefee: '/app/form/projpbidservicefee/detail', // 中标服务费
   projpcontractreviewcancel: '/app/form/projpcontractreview/cancel/detail', // 合同取消
-  projpcontractreviewupdateform: '/app/form/projpcontractreviewupdateform/detail' // 销售合同变更
+  projpcontractreviewupdateform: '/app/form/projpcontractreviewupdateform/detail' // 合同评审变更审批
 }
 
 // 销售合同 查询项目号
@@ -164,7 +164,7 @@ export async function projpbidservicefeeApi(data) {
   })
 }
 
-// 销售合同变更
+// 合同评审变更审批
 export async function projpcontractreviewupdateformApi(data) {
   return request({
     url: api.projpcontractreviewupdateform + '/' + data,

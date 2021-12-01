@@ -209,7 +209,16 @@ export default {
           }).catch(err => {
             console.log(err)
           })
-      } else if (path) {
+      }
+      else if (data.currFlowId === 'SupplierApprove') {
+        Toast.fail({
+          message: '该流程暂不支持手机端查看，请登录PC端进行操作',
+          closeOnClick: true,
+          closeOnClickOverlay: true,
+          duration: 10000
+        })
+      }
+      else if (path) {
         this.$router.push({
           name: path,
           query: data

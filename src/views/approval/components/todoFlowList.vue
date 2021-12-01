@@ -206,6 +206,14 @@ export default {
           duration: 10000
         })
       }
+      else if (data.currFlowId === 'SupplierApprove') {
+        Toast.fail({
+          message: '该流程暂不支持手机端审批，请登录PC端进行操作',
+          closeOnClick: true,
+          closeOnClickOverlay: true,
+          duration: 10000
+        })
+      }
       else if (data.currTaskDefinitionKey === 'AcceptUpload' || data.currTaskDefinitionKey === 'BusiAnalysisManagerUpload') {
         Toast.fail({
           message: '该流程需上传文本，app暂不支持附件上传，请登录PC端进行操作',
@@ -213,7 +221,8 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      } else {
+      }
+      else {
         if (data.url.includes('pay')) {
           if (
             data.url === '/app/form/projptenderpreq/cashier/pay/page' ||

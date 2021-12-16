@@ -188,6 +188,7 @@ export default {
     toDetail(data) {
       this.$store.dispatch('setsearchValue', '')
       data.searchType = this.searchType
+      data.onlyId = 'Todo'
       const path = data.url.split('/')[3]
       // 处理投标保证金和付业务往来款相同name
       console.log(data)
@@ -198,7 +199,7 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      } else if (data.statusDes === '会签中' && (data.currUserName === data.userName)) {
+      } else if (data.statusDes === '会签中' && (data.currUserName === data.userName) && (data.currFlowId !== 'SupplierApprove')) {
         Toast.fail({
           message: '该流程被会签给发起人，app暂不支持修改，请登录PC端进行修改',
           closeOnClick: true,
@@ -206,14 +207,14 @@ export default {
           duration: 10000
         })
       }
-      else if (data.currFlowId === 'SupplierApprove') {
-        Toast.fail({
-          message: '该流程暂不支持手机端审批，请登录PC端进行操作',
-          closeOnClick: true,
-          closeOnClickOverlay: true,
-          duration: 10000
-        })
-      }
+      // else if (data.currFlowId === 'SupplierApprove') {
+      //   Toast.fail({
+      //     message: '该流程暂不支持手机端审批，请登录PC端进行操作',
+      //     closeOnClick: true,
+      //     closeOnClickOverlay: true,
+      //     duration: 10000
+      //   })
+      // }
       else if (data.currTaskDefinitionKey === 'AcceptUpload' || data.currTaskDefinitionKey === 'BusiAnalysisManagerUpload') {
         Toast.fail({
           message: '该流程需上传文本，app暂不支持附件上传，请登录PC端进行操作',

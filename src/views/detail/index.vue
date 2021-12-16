@@ -155,6 +155,7 @@
               show-word-limit
             />
             <el-select
+              id="approvalMessage"
               v-if="isStatusDes"
               class="region-select"
               @change="pullSelect"
@@ -456,10 +457,13 @@ export default {
           values.content = this.message
         } else {
           if (values.submitTask !== '【下一步】') {
+            console.log(document.querySelector('#approvalMessage'))
             values.content =
               values.content +
               ' >>>>' +
-              document.querySelector('.el-select').children[0].children[0].value
+              (this.flowList.currFlowId === 'SupplierApprove'
+                ? document.querySelector('#approvalMessage').value
+                : document.querySelector('.el-select').children[0].children[0].value)
           } else {
             values.content = values.content + ' >>>>' + '【下一步】'
           }
@@ -591,6 +595,19 @@ export default {
         delete values.fileList
         delete values.fileIdList
         values.projpVisitList = this.$refs.detail.custList.projpVisitList
+      }
+
+      // 供应商入库--处理
+      if (
+        this.dataList.currFlowId === 'SupplierApprove'
+      ) {
+        console.log(this.$refs.detail.specialReasonValue)
+        delete values.file
+        delete values.fileList
+        delete values.fileIdList
+        values.qualificationsList = this.$refs.detail.custList.qualificationsList
+        values.serverCaseList = this.$refs.detail.custList.serverCaseList
+        values.purchaseConmentList = this.$refs.detail.custList.purchaseConmentList
       }
       console.log(data)
       this.submit(data)
@@ -805,7 +822,10 @@ export default {
           this.url = this.url.slice(0, -10) + '/mobileUpdate'
         } else if (this.url.includes('projpcreditcertificateform')) { // 资信证明特殊处理
           this.url = this.url.slice(0, -12) + '/commit/task'
-        } else {
+        } else if (this.url.includes('bizsupplierinfoform')) { // 供应商特殊处理
+          this.url = '/app/form/bizsuppliernewinfoform/updateVOs'
+        }
+        else {
           // 公共提交接口
           this.url = this.url.slice(0, -12) + '/mobileUpdate'
           // 供应商接口

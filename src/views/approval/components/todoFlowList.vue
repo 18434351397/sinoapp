@@ -63,6 +63,7 @@
 import NoData from './NoDataShow'
 import Loading from './loading'
 import { search } from '../../../api/flowfrom'
+import { getInfo } from '../../../api/user'
 import { mapGetters } from 'vuex'
 import { Toast } from 'vant'
 import * as noMoreHei from '../../../assets/image/noMoreHei.png'
@@ -76,6 +77,16 @@ export default {
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
     this.loadData()
+
+    // 获取当前登录人的 id
+    getInfo().then(response => {
+      if (response) {
+        const { data } = response
+        if (data) {
+          this.userId = data.id
+        }
+      }
+    })
   },
   watch: {
     searchValue: function (old, newV) {
@@ -90,6 +101,7 @@ export default {
   },
   data() {
     return {
+      userId: '',
       dataList: [],
       searchType: '1',
       currentPage: 1,
@@ -192,6 +204,7 @@ export default {
       const path = data.url.split('/')[3]
       // 处理投标保证金和付业务往来款相同name
       console.log(data)
+      console.log(this.userId)
       if (data.currTaskDefinitionName === '受理退回') {
         Toast.fail({
           message: '该流程被退回，app暂不支持修改，请登录PC端进行修改',
@@ -199,23 +212,14 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      } else if (data.statusDes === '会签中' && (data.currUserName === data.userName) && (data.currFlowId !== 'SupplierApprove')) {
+      } else if (data.statusDes === '会签中' && data.createdBy === this.userId) {
         Toast.fail({
           message: '该流程被会签给发起人，app暂不支持修改，请登录PC端进行修改',
           closeOnClick: true,
           closeOnClickOverlay: true,
           duration: 10000
         })
-      }
-      // else if (data.currFlowId === 'SupplierApprove') {
-      //   Toast.fail({
-      //     message: '该流程暂不支持手机端审批，请登录PC端进行操作',
-      //     closeOnClick: true,
-      //     closeOnClickOverlay: true,
-      //     duration: 10000
-      //   })
-      // }
-      else if (data.currTaskDefinitionKey === 'AcceptUpload' || data.currTaskDefinitionKey === 'BusiAnalysisManagerUpload') {
+      } else if (data.currTaskDefinitionKey === 'AcceptUpload' || data.currTaskDefinitionKey === 'BusiAnalysisManagerUpload') {
         Toast.fail({
           message: '该流程需上传文本，app暂不支持附件上传，请登录PC端进行操作',
           closeOnClick: true,

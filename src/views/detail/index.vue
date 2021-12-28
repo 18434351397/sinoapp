@@ -491,6 +491,19 @@ export default {
         delete values.fileIdList
         values.projpVisitList = this.$refs.detail.custList.projpVisitList
       }
+
+      // 供应商入库--处理
+      if (
+        this.dataList.currFlowId === 'SupplierApprove'
+      ) {
+        console.log(this.$refs.detail.specialReasonValue)
+        delete values.file
+        delete values.fileList
+        delete values.fileIdList
+        values.qualificationsList = this.$refs.detail.custList.qualificationsList
+        values.serverCaseList = this.$refs.detail.custList.serverCaseList
+        values.purchaseConmentList = this.$refs.detail.custList.purchaseConmentList
+      }
       console.log(data)
       this.submit(data)
     },
@@ -680,7 +693,10 @@ export default {
         } else if (this.url.includes('projpcreditcertificateform')) {
           // 资信证明特殊处理
           this.url = this.url.slice(0, -12) + '/commit/task'
-        } else {
+        } else if (this.url.includes('bizsupplierinfoform')) { // 供应商特殊处理
+          this.url = '/app/form/bizsuppliernewinfoform/updateVOs'
+        }
+        else {
           // 公共提交接口
           this.url = this.url.slice(0, -12) + '/mobileUpdate'
           // 供应商接口

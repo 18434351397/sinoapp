@@ -200,6 +200,7 @@ export default {
     toDetail(data) {
       this.$store.dispatch('setsearchValue', '')
       data.searchType = this.searchType
+      data.onlyId = 'Todo'
       const path = data.url.split('/')[3]
       // 处理投标保证金和付业务往来款相同name
       console.log(data)
@@ -225,7 +226,8 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      } else {
+      }
+      else {
         if (data.url.includes('pay')) {
           if (
             data.url === '/app/form/projptenderpreq/cashier/pay/page' ||

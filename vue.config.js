@@ -36,6 +36,7 @@ module.exports = {
 
       '/admin': {
         target: 'http://192.168.21.23:8082',
+        // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -44,6 +45,7 @@ module.exports = {
       },
       '///fileupload': {
         target: 'http://192.168.21.23:8082',
+        // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -52,6 +54,7 @@ module.exports = {
       },
       '/group1': {
         target: 'http://192.168.21.23:8082',
+        // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -60,16 +63,19 @@ module.exports = {
       },
       '/app': {
         target: 'http://192.168.21.23:8082',
+        // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
         target: 'http://192.168.21.23:8082',
+        // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
       },
       '/toLogin': {
         target: 'http://192.168.21.23:8082',
+        // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
       }

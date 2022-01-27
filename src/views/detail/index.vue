@@ -375,8 +375,12 @@ export default {
     },
     // 点击提交按钮要进行的操作
     isSubmit(values) {
+      console.log('公共提交方法', values)
+      if (!values.content) values.content = values.radio === '1' ? '同意' : '不同意'
       if (this.flowList.status === '3' && this.flowList.statusDes === '会签中') {
         values.content = values.content + ' >>>>' + '【下一步】'
+        delete values.undefined
+        delete values.radio
       } else {
         values.meetingUsers = this.signIds.toString()
         delete values.radio
@@ -493,9 +497,7 @@ export default {
       }
 
       // 供应商入库--处理
-      if (
-        this.dataList.currFlowId === 'SupplierApprove'
-      ) {
+      if (this.dataList.currFlowId === 'SupplierApprove') {
         console.log(this.$refs.detail.specialReasonValue)
         delete values.file
         delete values.fileList
@@ -693,10 +695,10 @@ export default {
         } else if (this.url.includes('projpcreditcertificateform')) {
           // 资信证明特殊处理
           this.url = this.url.slice(0, -12) + '/commit/task'
-        } else if (this.url.includes('bizsupplierinfoform')) { // 供应商特殊处理
+        } else if (this.url.includes('bizsupplierinfoform')) {
+          // 供应商特殊处理
           this.url = '/app/form/bizsuppliernewinfoform/updateVOs'
-        }
-        else {
+        } else {
           // 公共提交接口
           this.url = this.url.slice(0, -12) + '/mobileUpdate'
           // 供应商接口

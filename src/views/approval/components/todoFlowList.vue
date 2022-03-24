@@ -226,8 +226,7 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      }
-      else {
+      } else {
         if (data.url.includes('pay')) {
           if (
             data.url === '/app/form/projptenderpreq/cashier/pay/page' ||

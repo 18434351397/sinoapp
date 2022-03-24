@@ -127,8 +127,8 @@
                 <el-option :value="item.id" :label="item.text" :key="index" v-for="(item, index) in nextSelectOpts"></el-option>
               </el-select>
               <div class="submitBox">
-                <van-button style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
-                <van-button v-if="!isSBtn && isStatusDes" style="width: 30%" @click="counterSign" round block type="info" native-type="submit">会签</van-button>
+                <van-button :disabled="!mountStatus" style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
+                <van-button :disabled="!mountStatus" v-if="!isSBtn && isStatusDes" style="width: 30%" @click="counterSign" round block type="info" native-type="submit">会签</van-button>
                 <van-button style="width: 30%" @click="back" round block type="default" native-type="button">取消</van-button>
               </div>
             </div>
@@ -161,6 +161,7 @@ export default {
   },
   data() {
     return {
+      mountStatus: false,
       commitType: '',
       signData: {}, // 会签数据
       signIds: [], // 会签id
@@ -187,7 +188,7 @@ export default {
       oldNextSelectOpts: [],
       filterText: '',
       data: [],
-      map: new Map(), // 初始化下拉框数据 - 回退
+      // map: new Map(), // 初始化下拉框数据 - 回退
       mapData: [], // 最终填充的数据
       defaultProps: {
         children: 'children',
@@ -253,6 +254,7 @@ export default {
         this.handleNextSelectOpts(res.data)
         this.handleBackSelectOpts(res.data)
         this.flowList.createdDate = this.flowList.createdDate.split('.')[0]
+        this.mountStatus = true
       }
     })
 
@@ -727,7 +729,7 @@ export default {
         })
         this.region.id = this.nextSelectOpts[0].id ? this.nextSelectOpts[0].id : ''
       } else {
-        let map = new Map()
+        const map = new Map()
         this.oldNextSelectOpts.forEach(item => {
           if (item.text.includes('退回')) {
             if (!map.has(item.id)) {

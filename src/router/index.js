@@ -12,47 +12,69 @@ const routes = [
     component: Login
   },
   {
-    path: '/index',
-    name: 'index',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../layout'),
-    children: [
-      {
-        path: '/approval',
-        component: () => import('../views/approval'),
-        name: 'approval'
-      },
-      {
-        path: '/my',
-        component: () => import('../views/my'),
-        name: 'my',
-        children: []
-      },
-      {
-        path: '/personCenter',
-        component: () => import('../views/personCenter'),
-        name: 'personCenter'
-      }
-    ]
+    path: '/todoList',
+    name: 'todoList',
+    component: () => import('../views/todoList'),
+    children: []
+  },{
+    path: '/doneList',
+    name: 'todoList',
+    component: () => import('../views/todoList'),
+    children: []
+  },{
+    path: '/LaunchList',
+    name: 'todoList',
+    component: () => import('../views/todoList'),
+    children: []
+  },{
+    path: '/saveList',
+    name: 'todoList',
+    component: () => import('../views/todoList'),
+    children: []
   },
-  {
-    path: '/forgetPassword',
-    component: () => import('../views/forgetPassword'),
-    name: 'forgetPassword'
-  },
-  {
-    path: '/editPassword',
-    component: () => import('../views/editPassword'),
-    name: 'editPassword'
-  },
+  // {
+  //   path: '/index',
+  //   name: 'index',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../layout'),
+  //   children: [
+  //     {
+  //       path: '/approval',
+  //       component: () => import('../views/approval'),
+  //       name: 'approval'
+  //     },
+  //     {
+  //       path: '/my',
+  //       component: () => import('../views/my'),
+  //       name: 'my',
+  //       children: []
+  //     },
+  //     {
+  //       path: '/personCenter',
+  //       component: () => import('../views/personCenter'),
+  //       name: 'personCenter'
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/forgetPassword',
+  //   component: () => import('../views/forgetPassword'),
+  //   name: 'forgetPassword'
+  // },
+  // {
+  //   path: '/editPassword',
+  //   component: () => import('../views/editPassword'),
+  //   name: 'editPassword'
+  // },
   {
     path: '/detail',
     component: () => import('../views/detail'),
     name: 'detail',
     children: RouterList
-  }
+  },
+
   // {
   //   path: '/preview',
   //   component: () => import('../views/preview'),
@@ -71,6 +93,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  debugger
+  console.log(to)
   console.log(to)
   if (to.matched.length === 0) {
     // 如果未匹配到路由

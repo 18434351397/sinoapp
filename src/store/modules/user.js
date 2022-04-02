@@ -6,9 +6,11 @@ const state = {
 }
 const mutations = {
   SET_USERINFO: (state, userinfo) => {
-    state.userinfo = userinfo
+
+    state.userinfo = userinfo.data
+    console.log(state.userinfo)
     setSession('userinfo', userinfo.data)
-    router.push('/approval')
+    router.push('/index')
   },
   CLEAR_SESSION: (state) => {
     removeSession('userinfo')

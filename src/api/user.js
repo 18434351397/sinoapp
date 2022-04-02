@@ -4,8 +4,8 @@ import api from './api'
 export function Login (data) {
   return request({
     url: api.loginUrl,
-    method: 'get',
-    params: data
+    method: 'post',
+    data
   })
 }
 export function LoginOut (data) {

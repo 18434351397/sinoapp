@@ -64,7 +64,7 @@ import NoData from './NoDataShow'
 import Loading from './loading'
 import { search } from '../../../api/flowfrom'
 import { getInfo } from '../../../api/user'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import { Toast } from 'vant'
 import * as noMoreHei from '../../../assets/image/noMoreHei.png'
 export default {
@@ -97,7 +97,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['searchValue'])
+    ...mapGetters(['searchValue']),
+    ...mapState(['userinfo'])
   },
   data() {
     return {
@@ -110,7 +111,7 @@ export default {
       totalPage: 1,
       loading: false,
       bottomPop: false,
-      id: JSON.parse(sessionStorage.getItem('userinfo')).id
+      id: this.userinfo ? this.userinfo.id : ''
     }
   },
   mounted() {
@@ -226,8 +227,7 @@ export default {
           closeOnClickOverlay: true,
           duration: 10000
         })
-      }
-      else {
+      } else {
         if (data.url.includes('pay')) {
           if (
             data.url === '/app/form/projptenderpreq/cashier/pay/page' ||

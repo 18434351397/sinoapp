@@ -35,7 +35,7 @@ module.exports = {
       // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
 
       '/admin': {
-        target: 'http://192.168.21.23:8082',
+        target: 'https://oms.sinodata.net.cn',
         // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
@@ -44,7 +44,7 @@ module.exports = {
         // }
       },
       '///fileupload': {
-        target: 'http://192.168.21.23:8082',
+        target: 'https://oms.sinodata.net.cn',
         // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
@@ -53,7 +53,7 @@ module.exports = {
         // }
       },
       '/group1': {
-        target: 'http://192.168.21.23:8082',
+        target: 'https://oms.sinodata.net.cn',
         // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
@@ -62,19 +62,19 @@ module.exports = {
         // }
       },
       '/app': {
-        target: 'http://192.168.21.23:8082',
+        target: 'https://oms.sinodata.net.cn',
         // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
       },
       '/logout': {
-        target: 'http://192.168.21.23:8082',
+        target: 'https://oms.sinodata.net.cn',
         // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true
       },
       '/toLogin': {
-        target: 'http://192.168.21.23:8082',
+        target: 'https://oms.sinodata.net.cn',
         // target: 'http://192.168.7.248:8090',
         // ws: true,
         changeOrigin: true

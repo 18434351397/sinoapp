@@ -107,7 +107,7 @@ export default {
   },
   created () {
     this.enterKeyup()
-    if(localStorage.getItem('userAccount')) {
+    if (localStorage.getItem('userAccount')) {
       this.userAccount = localStorage.getItem('userAccount')
     }
   },
@@ -127,20 +127,20 @@ export default {
       }
     }
   },
-  watch:{
-    password (e){
-     if(e) {
-      this.errMsg = false 
-     } else {
-       this.errMsg = '密码不能为空！'
-     }
+  watch: {
+    password (e) {
+      if (e) {
+        this.errMsg = false
+      } else {
+        this.errMsg = '密码不能为空！'
+      }
     },
     userAccount(e) {
-       if(e) {
-      this.errMsg = false 
-     } else {
-       this.errMsg = '用户名不能为空！'
-     }
+      if (e) {
+        this.errMsg = false
+      } else {
+        this.errMsg = '用户名不能为空！'
+      }
     }
   },
   methods: {

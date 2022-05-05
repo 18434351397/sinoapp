@@ -2,13 +2,31 @@ import { getInfo, LoginOut } from '../../api/user'
 import { setSession, removeSession } from '../../utils/auth'
 import router from '../../router'
 const state = {
-  userinfo: {}
+  userinfo: {},
+  openBankInfo: {
+    isOpenBankMark: '0',
+    ishowWhitchPageMark: '0'
+  }
+
 }
 const mutations = {
   SET_USERINFO: (state, userinfo) => {
     state.userinfo = userinfo
     setSession('userinfo', userinfo.data)
-    router.push('/approval')
+    if (state.openBankInfo.isOpenBankMark === '1') {
+      router.push({
+        path: '/openBankInfo',
+        query: {
+          isOpenBankMark: state.openBankInfo.isOpenBankMark,
+          ishowWhitchPageMark: state.openBankInfo.ishowWhitchPageMark
+        }
+      })
+    } else {
+      router.push('/approval')
+    }
+  },
+  SET_OPENBANINFO: (state, openBankInfo) => {
+    state.openBankInfo = openBankInfo
   },
   CLEAR_SESSION: (state) => {
     removeSession('userinfo')
@@ -28,6 +46,7 @@ const actions = {
         // if (!roles || roles.length <= 0) {
         //   reject('getInfo: roles must be a non-null array!')
         // }
+
         commit('SET_USERINFO', response)
         resolve(response)
       }).catch(error => {

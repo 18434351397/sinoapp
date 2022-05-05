@@ -1,8 +1,8 @@
 # vuetest
 
-## Project setup 1111
+## Project setup
 ```
-yarn install 
+yarn install
 ```
 
 ### Compiles and hot-reloads for development

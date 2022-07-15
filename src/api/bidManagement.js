@@ -4,7 +4,9 @@ const api = {
   projptenderpreqList: '/app/form/projptenderpreq/detail/pay',
   projptenderpreqpayList: '/app/form/projptenderpreq/detail',
   projpcreditcertificateformList: '/app/form/projpcreditcertificateform/detail',
-  projpchanceformList: '/app/form/projpchanceform/detail'
+  projpcontractcaseList: '/app/form/projpcontractcaseform/detail', // 案例库
+  projpchanceformList: '/app/form/projpchanceform/detail',
+  caseBaseApprovalTask: '/app/form/projpcontractcaseform/updateTask', // 案例库 流程审批 特殊节点
 }
 // 投标保证金
 export async function projptenderpreqList (data) {
@@ -40,5 +42,22 @@ export async function projpcreditcertificateformList (data) {
   return request({
     url: api.projpcreditcertificateformList + '/' + data,
     method: 'get'
+  })
+}
+
+// 案例库详情
+export async function projpcontractcaseList (data) {
+  return request({
+    url: api.projpcontractcaseList + '/' + data,
+    method: 'get'
+  })
+}
+
+// 案例库 流程 特殊 审批
+export function caseBaseApprovalTaskApi(data) {
+  return request({
+    url: api.caseBaseApprovalTask,
+    method: 'post',
+    data
   })
 }

@@ -43,6 +43,12 @@ const biddingRouter = [
     path: '/projpcreditcertificateform', // 资信证明
     component: () => import('../views/projpcreditcertificateform'),
     name: 'projpcreditcertificateform'
-  }
+  },
+  {
+    path: '/projpcontractcase', // 案例库申请
+    component: () => import('../views/projpcontractcase'),
+    name: 'projpcontractcase'
+  },
+
 ]
 export default biddingRouter

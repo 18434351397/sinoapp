@@ -128,7 +128,7 @@
               </el-select>
               <div class="submitBox">
                 <van-button :disabled="!mountStatus" style="width: 30%" v-if="!isSBtn" round block type="info" native-type="submit">提交</van-button>
-                <van-button :disabled="!mountStatus" v-if="!isSBtn && isStatusDes" style="width: 30%" @click="counterSign" round block type="info" native-type="submit">会签</van-button>
+                <van-button :disabled="!mountStatus || (dataList.currFlowName === '案例库申请审批' && dataList.currTaskDefinitionKey !== 'Archivist' )" v-if="!isSBtn && isStatusDes" style="width: 30%" @click="counterSign" round block type="info" native-type="submit">会签</van-button>
                 <van-button style="width: 30%" @click="back" round block type="default" native-type="button">取消</van-button>
               </div>
             </div>
@@ -508,6 +508,14 @@ export default {
         values.serverCaseList = this.$refs.detail.custList.serverCaseList
         values.purchaseConmentList = this.$refs.detail.custList.purchaseConmentList
       }
+      // 案例库--处理
+      if (this.dataList.currFlowId === 'ContractCaseApprove') {
+        delete values.file
+        delete values.fileList
+        delete values.fileIdList
+        data.data = {...this.$refs.detail.custList, ...values}
+
+      }
       console.log(data)
       this.submit(data)
     },
@@ -700,6 +708,9 @@ export default {
         } else if (this.url.includes('bizsupplierinfoform')) {
           // 供应商特殊处理
           this.url = '/app/form/bizsuppliernewinfoform/updateVOs'
+        }else if (this.url.includes('projpcontractcase')) {
+          // 案例库特殊处理
+          this.url = '/app/form/projpcontractcaseform/updateTask'
         } else {
           // 公共提交接口
           this.url = this.url.slice(0, -12) + '/mobileUpdate'

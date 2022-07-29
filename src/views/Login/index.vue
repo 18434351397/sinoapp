@@ -107,6 +107,7 @@ export default {
   },
   created () {
     this.enterKeyup()
+    // 登录记住账号和密码的操作
     if(localStorage.getItem('userAccount')) {
       this.userAccount = localStorage.getItem('userAccount')
       this.password = localStorage.getItem('password')

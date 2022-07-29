@@ -109,6 +109,7 @@ export default {
     this.enterKeyup()
     if(localStorage.getItem('userAccount')) {
       this.userAccount = localStorage.getItem('userAccount')
+      this.password = localStorage.getItem('password')
     }
   },
   destroyed () {
@@ -130,14 +131,14 @@ export default {
   watch:{
     password (e){
      if(e) {
-      this.errMsg = false 
+      this.errMsg = false
      } else {
        this.errMsg = '密码不能为空！'
      }
     },
     userAccount(e) {
        if(e) {
-      this.errMsg = false 
+      this.errMsg = false
      } else {
        this.errMsg = '用户名不能为空！'
      }
@@ -214,6 +215,7 @@ export default {
                 message: '登录成功',
                 onClose: () => {
                   localStorage.setItem('userAccount', data.userAccount)
+                  localStorage.setItem('password', data.password)
                   this.$store.dispatch('getInfo')
                 }
               })
